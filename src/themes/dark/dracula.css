@@ -1,0 +1,93 @@
+/* Dracula Dark Palette */
+@define-color window_bg_color #282a36; /* background */
+@define-color window_fg_color #f8f8f2; /* foreground */
+
+/* View styling */
+@define-color view_bg_color #282a36;
+@define-color view_fg_color #f8f8f2;
+
+/* Header bar */
+@define-color headerbar_bg_color #21222c;
+@define-color headerbar_backdrop_color #21222c;
+@define-color headerbar_fg_color #f8f8f2;
+
+/* Popovers and dialogs */
+@define-color popover_bg_color #282a36;
+@define-color popover_fg_color #f8f8f2;
+
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+
+/* Cards and sidebars */
+@define-color card_bg_color #3d3f49;
+@define-color card_fg_color #f8f8f2;
+
+@define-color sidebar_bg_color #282a36;
+@define-color sidebar_fg_color #f8f8f2;
+@define-color sidebar_backdrop_color #282a36;
+@define-color sidebar_border_color #44475a;
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+/* Dracula accent colors */
+@define-color blue_1 #6272a4; /* comment */
+@define-color blue_2 #8be9fd; /* cyan */
+@define-color blue_3 #50fa7b; /* green */
+@define-color blue_4 #bd93f9; /* purple */
+@define-color blue_5 #ff79c6; /* pink */
+
+@define-color green_1 #50fa7b; /* green */
+@define-color green_2 #8be9fd; /* cyan */
+@define-color green_3 #f1fa8c; /* yellow */
+@define-color green_4 #ffb86c; /* orange */
+@define-color green_5 #ff79c6; /* pink */
+
+@define-color yellow_1 #f1fa8c; /* yellow */
+@define-color yellow_2 #ffb86c; /* orange */
+@define-color yellow_3 #ff5555; /* red */
+@define-color yellow_4 #bd93f9; /* purple */
+@define-color yellow_5 #6272a4; /* comment */
+
+@define-color orange_1 #ffb86c; /* orange */
+@define-color orange_2 #ff5555; /* red */
+@define-color orange_3 #ff79c6; /* pink */
+@define-color orange_4 #f1fa8c; /* yellow */
+@define-color orange_5 #50fa7b; /* green */
+
+@define-color red_1 #ff5555; /* red */
+@define-color red_2 #ff79c6; /* pink */
+@define-color red_3 #bd93f9; /* purple */
+@define-color red_4 #8be9fd; /* cyan */
+@define-color red_5 #50fa7b; /* green */
+
+@define-color purple_1 #bd93f9; /* purple */
+@define-color purple_2 #ff79c6; /* pink */
+@define-color purple_3 #ff5555; /* red */
+@define-color purple_4 #ffb86c; /* orange */
+@define-color purple_5 #f1fa8c; /* yellow */
+
+@define-color brown_1 #6272a4; /* comment */
+@define-color brown_2 #44475a; /* selection */
+@define-color brown_3 #343746;
+@define-color brown_4 #21222c;
+@define-color brown_5 #191a21;
+
+@define-color light_1 #f8f8f2; /* foreground */
+@define-color light_2 #e2e2dc;
+@define-color light_3 #cccccc;
+@define-color light_4 #bd93f9; /* purple */
+@define-color light_5 #6272a4; /* comment */
+
+@define-color dark_1 #44475a; /* selection */
+@define-color dark_2 #343746;
+@define-color dark_3 #282a36; /* background */
+@define-color dark_4 #21222c;
+@define-color dark_5 #191a21;
+
+toast {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}

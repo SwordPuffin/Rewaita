@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.swordpuffin.rewaita</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <name>Rewaita</name>
+  <summary>Bring Color to Adwaita</summary>
+  <description>
+    <p>Rewaita is a utility to recolor Adwaita apps to popular color schemes</p>
+    <p>Currently, Rewaita only changes GTK4 applications; QT, and Cosmic are NOT supported</p>
+  </description>
+
+  <developer id="io.github.swordpuffin.rewaita">
+    <name>Nathan Perlman</name>
+  </developer>
+
+  <url type="homepage">https://github.com/SwordPuffin/Rewaita</url>
+  <url type="vcs-browser">https://github.com/SwordPuffin/Rewaita</url>
+  <url type="bugtracker">https://github.com/SwordPuffin/Rewaita/issues</url>
+  <url type="contribute">https://github.com/SwordPuffin/Rewaita/pulls</url>
+
+  <translation type="gettext">rewaita</translation>
+  <launchable type="desktop-id">io.github.swordpuffin.rewaita.desktop</launchable>
+  <content_rating type="oars-1.1" />
+
+  <branding>
+    <color type="primary" scheme_preference="light">#a0a36c</color>
+    <color type="primary" scheme_preference="dark">#303475</color>
+  </branding>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://raw.githubusercontent.com/SwordPuffin/Rewaita/main/data/screenshots/Screenshot1.png</image>
+      <caption>Browsing through dark themes</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/SwordPuffin/Rewaita/main/data/screenshots/Screenshot2.png</image>
+      <caption>Browsing through light themes</caption>
+    </screenshot>
+  </screenshots>
+
+  <releases>
+    <release version="1.0.0" date="2025-07-26">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.0</url>
+      <description translate="no">
+        <p>Rewaita v1.0.0</p>
+        <ul>
+          <li>First release</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+
+</component>

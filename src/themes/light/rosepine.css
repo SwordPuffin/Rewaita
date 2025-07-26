@@ -1,0 +1,93 @@
+/* Rose Pine Light Palette */
+@define-color window_bg_color #faf4ed; /* base */
+@define-color window_fg_color #575279; /* text */
+
+/* View styling */
+@define-color view_bg_color #faf4ed;
+@define-color view_fg_color #575279;
+
+/* Header bar */
+@define-color headerbar_bg_color #f2e9e1;
+@define-color headerbar_backdrop_color #f2e9e1;
+@define-color headerbar_fg_color #575279;
+
+/* Popovers and dialogs */
+@define-color popover_bg_color #faf4ed;
+@define-color popover_fg_color #575279;
+
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+
+/* Cards and sidebars */
+@define-color card_bg_color #e9e3e0;
+@define-color card_fg_color #575279;
+
+@define-color sidebar_bg_color #faf4ed;
+@define-color sidebar_fg_color #575279;
+@define-color sidebar_backdrop_color #faf4ed;
+@define-color sidebar_border_color #dfdad9;
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+/* Rose Pine accent colors */
+@define-color blue_1 #286983;
+@define-color blue_2 #569fba;
+@define-color blue_3 #9ccfd8;
+@define-color blue_4 #c4a7e7;
+@define-color blue_5 #6c77bb;
+
+@define-color green_1 #d7827e;
+@define-color green_2 #ea9a97;
+@define-color green_3 #286983;
+@define-color green_4 #569fba;
+@define-color green_5 #9ccfd8;
+
+@define-color yellow_1 #ea9d34;
+@define-color yellow_2 #f6c177;
+@define-color yellow_3 #d7827e;
+@define-color yellow_4 #ea9a97;
+@define-color yellow_5 #ebbcba;
+
+@define-color orange_1 #d7827e;
+@define-color orange_2 #ea9a97;
+@define-color orange_3 #b4637a;
+@define-color orange_4 #ea9d34;
+@define-color orange_5 #f6c177;
+
+@define-color red_1 #b4637a;
+@define-color red_2 #d7827e;
+@define-color red_3 #ea9a97;
+@define-color red_4 #eb6f92;
+@define-color red_5 #c4a7e7;
+
+@define-color purple_1 #907aa9;
+@define-color purple_2 #6e6a86;
+@define-color purple_3 #9893a5;
+@define-color purple_4 #569fba;
+@define-color purple_5 #286983;
+
+@define-color brown_1 #9893a5;
+@define-color brown_2 #6e6a86;
+@define-color brown_3 #575279;
+@define-color brown_4 #907aa9;
+@define-color brown_5 #555169;
+
+@define-color light_1 #faf4ed;
+@define-color light_2 #f2e9e1;
+@define-color light_3 #dfdad9;
+@define-color light_4 #cecacd;
+@define-color light_5 #9893a5;
+
+@define-color dark_1 #cecacd;
+@define-color dark_2 #dfdad9;
+@define-color dark_3 #f2e9e1;
+@define-color dark_4 #faf4ed;
+@define-color dark_5 #fffaf3;
+
+toast {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}

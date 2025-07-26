@@ -1,0 +1,93 @@
+/* Dawnfox Palette */
+@define-color window_bg_color #faf4ed; /* base */
+@define-color window_fg_color #575279; /* text */
+
+/* View styling */
+@define-color view_bg_color #faf4ed;
+@define-color view_fg_color #575279;
+
+/* Header bar */
+@define-color headerbar_bg_color #f2e9e1;
+@define-color headerbar_backdrop_color #f2e9e1;
+@define-color headerbar_fg_color #575279;
+
+/* Popovers and dialogs */
+@define-color popover_bg_color #faf4ed;
+@define-color popover_fg_color #575279;
+
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+
+/* Cards and sidebars */
+@define-color card_bg_color #eae4e1;
+@define-color card_fg_color #575279;
+
+@define-color sidebar_bg_color #eee8e3;
+@define-color sidebar_fg_color #575279;
+@define-color sidebar_backdrop_color #faf4ed;
+@define-color sidebar_border_color #dfdad9;
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+/* Dawnfox accent colors */
+@define-color blue_1 #286983; /* blue */
+@define-color blue_2 #569fba; /* cyan */
+@define-color blue_3 #9ccfd8; /* sky */
+@define-color blue_4 #c4a7e7; /* purple */
+@define-color blue_5 #6c77bb; /* iris */
+
+@define-color green_1 #d7827e; /* rose */
+@define-color green_2 #ea9a97; /* foam */
+@define-color green_3 #286983; /* pine */
+@define-color green_4 #569fba; /* teal */
+@define-color green_5 #9ccfd8; /* subtle */
+
+@define-color yellow_1 #ea9d34; /* gold */
+@define-color yellow_2 #f6c177; /* sand */
+@define-color yellow_3 #d7827e; /* rose */
+@define-color yellow_4 #ea9a97; /* foam */
+@define-color yellow_5 #ebbcba; /* muted */
+
+@define-color orange_1 #d7827e; /* rose */
+@define-color orange_2 #ea9a97; /* foam */
+@define-color orange_3 #b4637a; /* love */
+@define-color orange_4 #ea9d34; /* gold */
+@define-color orange_5 #f6c177; /* sand */
+
+@define-color red_1 #b4637a; /* love */
+@define-color red_2 #d7827e; /* rose */
+@define-color red_3 #ea9a97; /* foam */
+@define-color red_4 #eb6f92; /* pink */
+@define-color red_5 #c4a7e7; /* purple */
+
+@define-color purple_1 #907aa9; /* muted */
+@define-color purple_2 #6e6a86; /* subtle */
+@define-color purple_3 #9893a5; /* overlay */
+@define-color purple_4 #569fba; /* teal */
+@define-color purple_5 #286983; /* pine */
+
+@define-color brown_1 #9893a5; /* overlay */
+@define-color brown_2 #6e6a86; /* subtle */
+@define-color brown_3 #575279; /* text */
+@define-color brown_4 #907aa9; /* muted */
+@define-color brown_5 #555169; /* base */
+
+@define-color light_1 #faf4ed; /* base */
+@define-color light_2 #f2e9e1; /* surface */
+@define-color light_3 #dfdad9; /* overlay */
+@define-color light_4 #cecacd; /* subtle */
+@define-color light_5 #9893a5; /* muted */
+
+@define-color dark_1 #cecacd; /* subtle */
+@define-color dark_2 #dfdad9; /* overlay */
+@define-color dark_3 #f2e9e1; /* surface */
+@define-color dark_4 #faf4ed; /* base */
+@define-color dark_5 #fffaf3; /* cream */
+
+toast {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
