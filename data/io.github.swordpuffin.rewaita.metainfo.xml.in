@@ -41,6 +41,15 @@
   </screenshots>
 
   <releases>
+    <release version="1.0.1" date="2025-07-26">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.1</url>
+      <description translate="no">
+        <p>Rewaita v1.0.1</p>
+        <ul>
+          <li>Fixed issue with ~/.config permissions</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.0" date="2025-07-26">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.0</url>
       <description translate="no">
