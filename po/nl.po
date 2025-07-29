@@ -1,0 +1,135 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the rewaita package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: rewaita\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-26 19:53+0200\n"
+"PO-Revision-Date: 2025-07-28 21:35+0200\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#: data/io.github.swordpuffin.rewaita.desktop.in:2
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:7
+msgid "Rewaita"
+msgstr "Rewaita"
+
+#: data/io.github.swordpuffin.rewaita.desktop.in:8
+msgid "gtk;adwaita;gnome;shell;theme"
+msgstr "gtk;adwaita;gnome;shell;thema"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:8
+msgid "Bring Color to Adwaita"
+msgstr "Breng kleur in Adwaita's leven"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:10
+msgid "Rewaita is a utility to recolor Adwaita apps to popular color schemes"
+msgstr ""
+"Rewaita is een hulpmiddel voor het aanbrengen van kleuren in Adwaita-"
+"toepassingen"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:11
+msgid ""
+"Currently, Rewaita only changes GTK4 applications; QT, and Cosmic are NOT "
+"supported"
+msgstr ""
+"Let op: momenteel ondersteunt Rewaita alléén GTK4-toepassingen, dus geen "
+"Qt- en Cosmic-toepassingen"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:15
+msgid "Nathan Perlman"
+msgstr "Nathan Perlman"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:35
+msgid "Browsing through dark themes"
+msgstr "Pagina met donkere thema's"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:39
+msgid "Browsing through light themes"
+msgstr "Pagina met lichte thema's"
+
+#. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
+#: src/main.py:52
+msgid "translator-credits"
+msgstr "Heimen Stoffels <vistausss@fastmail.com>"
+
+#: src/window.py:104 src/window.py:109
+msgid "Light"
+msgstr "Licht"
+
+#: src/window.py:105 src/window.py:110
+msgid "Dark"
+msgstr "Donker"
+
+#: src/window.py:118
+msgid "Help"
+msgstr "Hulp"
+
+#: src/window.py:120
+msgid ""
+"After setting a color scheme, go to Gnome-Tweaks (or similar) and set "
+"'Rewaita' as your Shell theme. It contains the same colors as the active "
+"scheme for continuity\n"
+"\n"
+"Rewaita also does not style parts of apps like Gnome Builder and BlackBox "
+"which have their own syntax highlighting system\n"
+"\n"
+"If you find a problem with any theme, would like to suggest another be "
+"added, or want to submit your own to be included, please make an issue or a "
+"pull request @ https://github.com/SwordPuffin/Rewaita"
+msgstr ""
+"Kies een kleurenschema en open Afstellingen (gnome-tweaks) of een "
+"vergelijkbare toepassing. Stel daar ‘Rewaita’ in als Shell-thema.\n"
+"\n"
+"Rewaita kan niet alle toepassingen van een nieuwe kleur voorzien; GNOME "
+"Builder en Blackbox gebruiken bijvoorbeeld eigen syntaxiskleuren.\n"
+"\n"
+"Als u een probleem ondervindt, ideeën hebt voor thema's die u graag terug "
+"zou willen zien in Rewaita of een eigen thema wilt integreren, open dan een "
+"‘pull request’ op https://github.com/SwordPuffin/Rewaita"
+
+#: src/window.py:121
+msgid ""
+"**Rewaita will only style GTK4 applications; GTK3 support may come later, "
+"but any other UI libraries are altogether NOT supported**"
+msgstr ""
+"**Rewaita kan alleen GTK4-toepassingen van andere kleuren voorzien. "
+"Ondersteuning voor GTK3 volgt mogelijk op een later moment, maar andere "
+"toolkits worden NIET ondersteund**"
+
+#: src/window.py:129
+msgid "For Flatpak application support, run:"
+msgstr "Flatpakondersteuning kan worden ingeschakeld door middel van:"
+
+#: src/window.py:158
+msgid "Reset"
+msgstr "Standaardwaarden"
+
+#: src/window.py:208
+msgid "Set Rewaita as shell theme and reboot for full changes"
+msgstr "Stel Rewaita in als Shell-thema en herstart de computer"
+
+#: src/window.ui:22
+msgid "Main Menu"
+msgstr "Hoofdmenu"
+
+#: src/window.ui:44
+msgid "_Keyboard Shortcuts"
+msgstr "_Sneltoetsen"
+
+#: src/window.ui:48
+msgid "_About Rewaita"
+msgstr "Over Rew_aita"
+
+#: src/window.ui:52
+msgid "_Help"
+msgstr "_Hulp"
