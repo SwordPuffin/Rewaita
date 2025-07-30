@@ -1,4 +1,4 @@
-/* Rose Pine Dark Palette */
+/* Rosé Pine Dark Palette */
 @define-color window_bg_color #232136; /* base */
 @define-color window_fg_color #e0def4; /* text */
 
@@ -32,7 +32,7 @@
 @define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
 @define-color secondary_sidebar_border_color @sidebar_border_color;
 
-/* Rose Pine accent colors */
+/* Rosé Pine accent colors */
 @define-color blue_1 #9ccfd8;
 @define-color blue_2 #c4a7e7;
 @define-color blue_3 #3e8fb0;
@@ -88,6 +88,6 @@
 @define-color dark_5 #16141f;
 
 toast {
-  background-color: @window_bg_color;
-  color: @window_fg_color;
+    background-color: @window_bg_color;
+    color: @window_fg_color;
 }

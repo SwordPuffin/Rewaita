@@ -17,9 +17,14 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk, Gdk, Gio, GLib
+import os
+import random
+import re
+import shutil
 from gettext import gettext as _
-import os, shutil, re, random
+
+from gi.repository import Adw, Gdk, Gio, GLib, Gtk
+
 from .interface_to_shell_theme import parse_gtk_theme
 
 bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
@@ -108,7 +113,8 @@ class RewaitaWindow(Adw.ApplicationWindow):
         self.switcher.set_stack(stack)
         stack.add_titled(self.light_page, "light", _("Light"))
         stack.add_titled(self.dark_page, "dark", _("Dark"))
-        for titled in self.switcher: titled.add_css_class("circular")
+        for titled in self.switcher:
+            titled.add_css_class("circular")
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         box.append(stack)
@@ -168,17 +174,30 @@ class RewaitaWindow(Adw.ApplicationWindow):
             self.dark_flowbox = Gtk.FlowBox(column_spacing=12, row_spacing=12, max_children_per_line=3, homogeneous=True, margin_start=12, margin_end=12, selection_mode=Gtk.SelectionMode.NONE)
             flowbox = self.dark_flowbox
         theme_type = theme_type.lower()
-        emojis = { "Catppuccin-latte": " 🌻", "Catppuccin-frappe": " 🪴", "Catppuccin-mocha": " 🌿", "Dawnfox": " 🦊", "Dracula": " 🧛🏻‍♂️", "Everforest": " 🌲",
-                   "Gruvbox-medium": " 🌴", "Gruvbox-soft": " 🌱", "Kanagawa": " 🌊", "Nord": " 🏔️", "Rosepine": " 🌹", "Nightfox": " 🦊",
-                   "Solarized": " ☀️", "Tokyonight": " 🗼", "Tokyonight-storm": " 🌪️", "Material-deepocean": " 🐚", "Material-palenight": " 🌙"
+        emojis = { "Catppuccin Latte": " 🌻", "Catppuccin Frappe": " 🪴", "Catppuccin Mocha": " 🌿", "Dawnfox": " 🦊", "Dracula": " 🧛🏻‍♂️", "Everforest": " 🌲",
+                   "Gruvbox Medium": " 🌴", "Gruvbox Soft": " 🌱", "Kanagawa": " 🌊", "Nord": " 🏔️", "Rosé Pine": " 🌹", "Rosé Pine Moon": " 🌒", "Rosé Pine Dawn": " 🌄",
+                   "Nightfox": " 🦊", "Solarized": " ☀️", "Tokyonight": " 🗼", "Tokyonight Storm": " 🌪️", "Material Deepocean": " 🐚", "Material Palenight": " 🌙"
         }
+        theme_data = []
         for theme in themes:
+            filename_base = theme.replace(".css", "")
+            display_name = filename_base.replace("-", " ").title()
+            for emoji_name, emoji in emojis.items():
+                normalized_emoji_name = emoji_name.lower().replace(" ", "-").replace("é", "e")
+                if normalized_emoji_name == filename_base:
+                    display_name = emoji_name
+                    break
+
+            theme_data.append((theme, display_name))
+        theme_data.sort(key=lambda x: x[1])
+
+        for theme, display_name in theme_data:
             colors = load_colors_from_css(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), theme_type, theme)))
             btn = create_color_thumbnail_button(colors)
             btn.connect("clicked", self.on_theme_selected, theme, theme_type)
             btn.set_css_classes(["title-4", "monospace"])
-            text = theme.replace(".css", "").capitalize()
-            btn.get_first_child().append(Gtk.Label(margin_bottom=12, margin_top=12, label=text + emojis[text]))
+            emoji = emojis.get(display_name, "")
+            btn.get_first_child().append(Gtk.Label(margin_bottom=12, margin_top=12, label=display_name + emoji))
             flowbox.append(btn)
 
         page.append(Adw.Clamp(maximum_size=850, child=flowbox))
@@ -187,13 +206,14 @@ class RewaitaWindow(Adw.ApplicationWindow):
     def on_theme_selected(self, button, theme_name, theme_type):
         print(f"Theme selected: {theme_name}")
         for flowbox in [self.light_flowbox, self.dark_flowbox]:
-            for theme in flowbox: theme.remove_css_class("success")
+            for theme in flowbox:
+                theme.remove_css_class("success")
         config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-4.0")
         try:
-            if(theme_name == None):
+            if theme_name is None:
                 os.remove(os.path.join(config_dir, "gtk.css"))
                 return
-        except:
+        except FileNotFoundError:
             print("File already deleted")
             return
 
@@ -208,6 +228,3 @@ class RewaitaWindow(Adw.ApplicationWindow):
         self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Set Rewaita as shell theme and reboot for full changes"))))
         parse_gtk_theme(gtk_file.read(), self.template_file_content, os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css"))
         reset_shell()
-
-
-

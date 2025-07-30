@@ -51,7 +51,8 @@ dark_themes = [
     'themes/dark/material-palenight.css',
     'themes/dark/nightfox.css',
     'themes/dark/nord.css',
-    'themes/dark/rosepine.css',
+    'themes/dark/rose-pine.css',
+    'themes/dark/rose-pine-moon.css',
     'themes/dark/solarized.css',
     'themes/dark/tokyonight.css',
     'themes/dark/tokyonight-storm.css'
@@ -68,7 +69,7 @@ light_themes = [
     'themes/light/gruvbox-soft.css',
     'themes/light/kanagawa.css',
     'themes/light/nord.css',
-    'themes/light/rosepine.css',
+    'themes/light/rose-pine-dawn.css',
     'themes/light/solarized.css',
     'themes/light/tokyonight.css'
 ]
