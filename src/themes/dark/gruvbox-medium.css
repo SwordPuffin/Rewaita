@@ -87,7 +87,15 @@
 @define-color dark_4 #1d2021; /* bg0_hard */
 @define-color dark_5 #32302f; /* bg0_soft */
 
+@define-color accent_bg_color @blue_1;
+@define-color accent_fg_color @window_bg_color;
+
 toast {
   background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+toggle:checked {
+  background-color: @card_bg_color;
   color: @window_fg_color;
 }

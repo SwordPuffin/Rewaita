@@ -214,6 +214,10 @@ StEntry:focus {
   color: window_bg_color !important;
 }
 
+.device-subtitle:insensitive {
+  color: window_fg_color;
+}
+
 .slider {
   color: window_fg_color;
   -barlevel-background-color: card_bg_color;
@@ -412,6 +416,31 @@ StEntry:focus {
 .date-menu .notification-icon,
 .date-menu .system-status-icon {
     color: window_fg_color;
+}
+
+.notification-button {
+    background-color: card_bg_color;
+    color: window_fg_color;
+}
+
+.notification-button:hover {
+    background-color: blue_1;
+    color: window_bg_color;
+}
+
+.message-list-clear-button {
+    color: window_fg_color;
+    background-color: window_bg_color;
+}
+
+.message-expand-button {
+    color: window_fg_color;
+    background-color: card_bg_color;
+}
+
+.message-expand-button:hover {
+    color: window_bg_color;
+    background-color: blue_1;
 }
 
 .datemenu-today-button {

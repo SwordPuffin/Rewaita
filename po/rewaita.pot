@@ -1,18 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the rewaita package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Translation template for Rewaita
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: rewaita\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-26 19:53+0200\n"
-"PO-Revision-Date: 2025-07-28 21:35+0200\n"
-"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"POT-Creation-Date: 2025-08-05 21:08+0400\n"
+"PO-Revision-Date: 2025-08-28 21:08+0400\n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"Language: nl\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,25 +21,25 @@ msgstr "Rewaita"
 
 #: data/io.github.swordpuffin.rewaita.desktop.in:8
 msgid "gtk;adwaita;gnome;shell;theme"
-msgstr "gtk;adwaita;gnome;shell;thema"
+msgstr ""
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:8
 msgid "Bring color to Adwaita"
-msgstr "Breng kleur in Adwaita's leven"
+msgstr ""
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:10
 msgid "Rewaita is a utility to recolor Adwaita apps to popular color schemes"
 msgstr ""
-"Rewaita is een hulpmiddel voor het aanbrengen van kleuren in Adwaita-"
-"toepassingen"
+""
+""
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:11
 msgid ""
 "Currently, Rewaita only changes GTK4 applications; QT, and Cosmic are NOT "
 "supported"
 msgstr ""
-"Let op: momenteel ondersteunt Rewaita alléén GTK4-toepassingen, dus geen "
-"Qt- en Cosmic-toepassingen"
+""
+""
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:15
 msgid "Nathan Perlman"
@@ -51,28 +47,28 @@ msgstr "Nathan Perlman"
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:35
 msgid "Browsing through dark themes"
-msgstr "Pagina met donkere thema's"
+msgstr ""
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:39
 msgid "Browsing through light themes"
-msgstr "Pagina met lichte thema's"
+msgstr ""
 
 #. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
 #: src/main.py:52
 msgid "translator-credits"
-msgstr "Heimen Stoffels <vistausss@fastmail.com>"
+msgstr ""
 
 #: src/window.py:104 src/window.py:109
 msgid "Light"
-msgstr "Licht"
+msgstr ""
 
 #: src/window.py:105 src/window.py:110
 msgid "Dark"
-msgstr "Donker"
+msgstr ""
 
 #: src/window.py:118
 msgid "Help"
-msgstr "Hulp"
+msgstr ""
 
 #: src/window.py:120
 msgid ""
@@ -87,49 +83,48 @@ msgid ""
 "added, or want to submit your own to be included, please make an issue or a "
 "pull request @ https://github.com/SwordPuffin/Rewaita"
 msgstr ""
-"Kies een kleurenschema en open Afstellingen (gnome-tweaks) of een "
-"vergelijkbare toepassing. Stel daar ‘Rewaita’ in als Shell-thema.\n"
+""
+""
+""
 "\n"
-"Rewaita kan niet alle toepassingen van een nieuwe kleur voorzien; GNOME "
-"Builder en Blackbox gebruiken bijvoorbeeld eigen syntaxiskleuren.\n"
+""
+""
 "\n"
-"Als u een probleem ondervindt, ideeën hebt voor thema's die u graag terug "
-"zou willen zien in Rewaita of een eigen thema wilt integreren, open dan een "
-"‘pull request’ op https://github.com/SwordPuffin/Rewaita"
+""
+""
+""
 
 #: src/window.py:121
 msgid ""
 "**Rewaita will only style GTK4 applications; GTK3 support may come later, "
 "but any other UI libraries are altogether NOT supported**"
 msgstr ""
-"**Rewaita kan alleen GTK4-toepassingen van andere kleuren voorzien. "
-"Ondersteuning voor GTK3 volgt mogelijk op een later moment, maar andere "
-"toolkits worden NIET ondersteund**"
+""
 
 #: src/window.py:129
 msgid "For Flatpak application support, run:"
-msgstr "Flatpakondersteuning kan worden ingeschakeld door middel van:"
+msgstr ""
 
 #: src/window.py:158
 msgid "Reset"
-msgstr "Standaardwaarden"
+msgstr ""
 
 #: src/window.py:208
 msgid "Change GNOME shell theme to 'Rewaita' and reboot for full changes"
-msgstr "Stel Rewaita in als Shell-thema en herstart de computer"
+msgstr ""
 
 #: src/window.ui:22
 msgid "Main Menu"
-msgstr "Hoofdmenu"
+msgstr ""
 
 #: src/window.ui:44
 msgid "_Keyboard Shortcuts"
-msgstr "_Sneltoetsen"
+msgstr ""
 
 #: src/window.ui:48
 msgid "_About Rewaita"
-msgstr "Over Rew_aita"
+msgstr ""
 
 #: src/window.ui:52
 msgid "_Help"
-msgstr "_Hulp"
+msgstr ""

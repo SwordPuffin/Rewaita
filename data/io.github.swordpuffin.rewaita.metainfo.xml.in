@@ -5,9 +5,9 @@
   <project_license>GPL-3.0-or-later</project_license>
 
   <name>Rewaita</name>
-  <summary>Bring Color to Adwaita</summary>
+  <summary>Bring color to Adwaita</summary>
   <description>
-    <p>Rewaita is a utility to recolor Adwaita apps to popular color schemes</p>
+    <p>Rewaita is a utility that adds life to Adwaita apps by tinting them to popular color schemes</p>
     <p>Currently, Rewaita only changes GTK4 applications; QT, and Cosmic are NOT supported</p>
   </description>
 
@@ -41,6 +41,19 @@
   </screenshots>
 
   <releases>
+    <release version="1.0.2" date="2025-08-08">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.2</url>
+      <description translate="no">
+        <p>Rewaita v1.0.2</p>
+        <ul>
+          <li>Added Dutch language support + Rosé Pine Moon</li>
+          <li>Fixed bug that prevented running the app on non-Gnome systems</li>
+          <li>Help instructions more clearly displayed as 'read me'</li>
+          <li>Now changes between light/dark mode automatically when the setting is altered</li>
+          <li>General continuity fixes with Gnome Shell integration</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.1" date="2025-07-26">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.1</url>
       <description translate="no">

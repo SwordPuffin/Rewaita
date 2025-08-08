@@ -23,9 +23,8 @@ import gi
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
-from gi.repository import Gtk, Gio, Adw
+from gi.repository import Gtk, Gio, Adw, GLib
 from .window import RewaitaWindow
-
 
 class RewaitaApplication(Adw.Application):
     def __init__(self):
@@ -40,6 +39,22 @@ class RewaitaApplication(Adw.Application):
         if not win:
             win = RewaitaWindow(application=self)
         win.present()
+        GLib.timeout_add_seconds(1, self.background_tick, win)
+        loop = GLib.MainLoop()
+        loop.run()
+
+    def background_tick(self, win):
+        win.background_service()
+        return True
+
+    # def do_command_line(self, command_line):
+    #     args = command_line.get_arguments()
+    #     win = self.props.active_window
+    #     if(not win):
+    #         win = RewaitaWindow(application=self)
+    #     if("--background" not in args):
+    #         self.activate()
+    #     return 0
 
     def on_about_action(self, *args):
         about = Adw.AboutDialog(application_name='Rewaita',

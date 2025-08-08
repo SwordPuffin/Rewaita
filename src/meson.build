@@ -30,7 +30,7 @@ rewaita_sources = [
   '__init__.py',
   'main.py',
   'window.py',
-  'interface_to_shell_theme.py'
+  'utils.py'
 ]
 
 install_data(rewaita_sources, install_dir: moduledir)

@@ -1,14 +1,12 @@
 # 🎨 Rewaita
 
-**Rewaita** is a tool for recoloring GTK4/LibAdwaita apps to popular color schemes.
+**Rewaita** is a utility that adds life to Adwaita apps by tinting them to popular color schemes.
 
-
-
-<!-- <p align="center"> -->
-<!--   <a href="https://flathub.org/apps/io.github.swordpuffin.rewaita"> -->
-<!--     <img width="200" alt="Get it on Flathub" src="https://flathub.org/api/badge?svg&locale=en"/> -->
-<!--   </a> -->
-<!-- </p> -->
+<p align="center"> 
+    <a href="https://flathub.org/apps/io.github.swordpuffin.rewaita"> 
+       <img width="200" alt="Get it on Flathub" src="https://flathub.org/api/badge?svg&locale=en"/> 
+    </a>
+</p>
 
 ---
 

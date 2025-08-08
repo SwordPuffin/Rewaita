@@ -17,26 +17,27 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os
-import random
-import re
-import shutil
-from gettext import gettext as _
+import os, random, re, shutil, json, gi, subprocess
+gi.require_version('Xdp', '1.0')
+from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
+from .utils import parse_gtk_theme
 
-from gi.repository import Adw, Gdk, Gio, GLib, Gtk
+on_gnome = True
 
-from .interface_to_shell_theme import parse_gtk_theme
-
-bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
-proxy = Gio.DBusProxy.new_sync(
-    bus,
-    Gio.DBusProxyFlags.NONE,
-    None,
-    'org.gnome.Shell.Extensions',
-    '/org/gnome/Shell/Extensions',
-    'org.gnome.Shell.Extensions',
-    None
-)
+try:
+    bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
+    proxy = Gio.DBusProxy.new_sync(
+        bus,
+        Gio.DBusProxyFlags.NONE,
+        None,
+        'org.gnome.Shell.Extensions',
+        '/org/gnome/Shell/Extensions',
+        'org.gnome.Shell.Extensions',
+        None
+    )
+except Exception:
+    print("Desktop environment is not Gnome, skip shell integration")
+    on_gnome = False
 
 def reset_shell():
     proxy.call_sync("DisableExtension",
@@ -99,15 +100,12 @@ class RewaitaWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        help = Gio.SimpleAction.new(name="help")
-        help.connect("activate", self.on_readme_clicked)
-        self.add_action(help)
-
+        self.grab_prefs()
         scroll_box = Gtk.ScrolledWindow(vexpand=True, hexpand=True)
         self.main_box.append(scroll_box)
 
-        self.light_page = self._create_theme_page(_("Light"))
-        self.dark_page = self._create_theme_page(_("Dark"))
+        self.light_page = self.create_theme_page(_("Light"))
+        self.dark_page = self.create_theme_page(_("Dark"))
 
         stack = Gtk.Stack(transition_type=Gtk.StackTransitionType.SLIDE_LEFT_RIGHT, transition_duration=200)
         self.switcher.set_stack(stack)
@@ -120,10 +118,56 @@ class RewaitaWindow(Adw.ApplicationWindow):
         box.append(stack)
         scroll_box.set_child(box)
 
+    light_theme = ""
+    dark_theme = ""
+    pref = 0
+    data_dir = GLib.get_user_data_dir()
+
+    def grab_prefs(self):
+        if(not os.path.exists(f"{self.data_dir}/prefs.json")):
+            with open(f"{self.data_dir}/prefs.json", "w") as file:
+                json.dump({"light_theme": "default", "dark_theme": "default"}, file, indent=4)
+
+        with open(f"{self.data_dir}/prefs.json", "r") as file:
+            data = json.load(file)
+            self.light_theme = data["light_theme"]
+            self.dark_theme = data["dark_theme"]
+
+        self.portal = Xdp.Portal()
+        self.settings = self.portal.get_settings()
+        self.pref = self.settings.read_uint("org.freedesktop.appearance", "color-scheme")
+        self.request_background()
+
+    def request_background(self):
+        self.portal.request_background(
+            None,
+            "Automatic transitions between light/dark mode",
+            None,
+            Xdp.BackgroundFlags.AUTOSTART | Xdp.BackgroundFlags.ACTIVATABLE,
+            None,
+            self.on_background_response
+        )
+
+    def on_background_response(self, portal, result):
+        success = portal.request_background_finish(result)
+        if(success):
+            print("Background permission granted")
+        else:
+            print("Background permission denied")
+
+    def background_service(self):
+        if(self.settings.read_uint("org.freedesktop.appearance", "color-scheme") != self.pref):
+            self.pref = self.settings.read_uint("org.freedesktop.appearance", "color-scheme")
+            if(self.pref == 1):
+                self.on_theme_selected(self.dark_theme, "dark")
+            elif(self.pref in [0, 2]):
+                self.on_theme_selected(self.light_theme, "light")
+        print(self.pref)
+
     def on_readme_clicked(self, button, args):
-        dialog = Gtk.MessageDialog(modal=True, buttons=Gtk.ButtonsType.CLOSE, transient_for=self, title=(_("Help")))
+        dialog = Gtk.MessageDialog(modal=True, buttons=Gtk.ButtonsType.CLOSE, transient_for=self, title=(_("Read Me")))
         dialog.set_default_size(480, 300)
-        info_box = Gtk.Label(margin_start=12, margin_end=12, justify=Gtk.Justification.CENTER, selectable=True, wrap=True, label=_("After setting a color scheme, go to Gnome-Tweaks (or similar) and set 'Rewaita' as your Shell theme. It contains the same colors as the active scheme for continuity\n\nRewaita also does not style parts of apps like Gnome Builder and BlackBox which have their own syntax highlighting system\n\nIf you find a problem with any theme, would like to suggest another be added, or want to submit your own to be included, please make an issue or a pull request @ https://github.com/SwordPuffin/Rewaita"))
+        info_box = Gtk.Label(margin_start=12, margin_end=12, justify=Gtk.Justification.CENTER, selectable=True, wrap=True, label=_("After setting a color scheme, go to Gnome-Tweaks (or similar) and set 'Rewaita' as your Shell theme. It contains the same colors as the active scheme for continuity\n\nRewaita will also run in the background to save the light/dark mode configuration, and will change styles automatically when the color preference is altered. Rewaita also does not style parts of applications like Gnome Builder and BlackBox which have their own syntax highlighting system\n\nIf you find a problem with any theme, would like to suggest another be added, or want to submit your own to be included, please make an issue or a pull request @ https://github.com/SwordPuffin/Rewaita"))
         warning_box = Gtk.Button(halign=Gtk.Align.CENTER, child=Gtk.Label(wrap=True, label=_("**Rewaita will only style GTK4 applications; GTK3 support may come later, but any other UI libraries are altogether NOT supported**")))
         warning_box.add_css_class("warning")
         dialog.get_content_area().append(info_box)
@@ -151,20 +195,24 @@ class RewaitaWindow(Adw.ApplicationWindow):
         text = self.entry.get_text()
         self.clipboard.set(text)
 
-        button.add_css_class("success")
+        button.add_css_class("suggested-action")
         def remove_success():
-            button.remove_css_class("success")
+            button.remove_css_class("suggested-action")
         GLib.timeout_add(1000, remove_success)
 
     template_file = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css"))
     template_file_content = template_file.read()
 
-    def _create_theme_page(self, theme_type):
+    def create_theme_page(self, theme_type):
         page = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
-        reset_button = Gtk.Button(label=_("Reset"), halign=Gtk.Align.CENTER, margin_top=16)
+        reset_button = Gtk.Button(label=_("Reset"), margin_end=16)
         reset_button.add_css_class("pill")
-        reset_button.connect("clicked", self.on_theme_selected, None, "light")
-        page.prepend(reset_button)
+        reset_button.connect("clicked", self.on_theme_button_clicked, None, theme_type.lower(), _("Default"))
+        help_button = Gtk.Button(label=_("Read Me"))
+        help_button.add_css_class("pill")
+        help_button.connect("clicked", self.on_readme_clicked, None)
+        button_box = Gtk.Box(margin_top=16, halign=Gtk.Align.CENTER); button_box.append(reset_button); button_box.append(help_button)
+        page.prepend(button_box)
         if(theme_type == "Light"):
             themes = os.listdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), "light"))
             self.light_flowbox = Gtk.FlowBox(column_spacing=12, row_spacing=12, max_children_per_line=3, homogeneous=True, margin_start=12, margin_end=12, selection_mode=Gtk.SelectionMode.NONE)
@@ -194,8 +242,10 @@ class RewaitaWindow(Adw.ApplicationWindow):
         for theme, display_name in theme_data:
             colors = load_colors_from_css(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), theme_type, theme)))
             btn = create_color_thumbnail_button(colors)
-            btn.connect("clicked", self.on_theme_selected, theme, theme_type)
             btn.set_css_classes(["title-4", "monospace"])
+            if(theme == self.dark_theme and theme_type == "dark"): btn.add_css_class("suggested-action")
+            elif(theme == self.light_theme and theme_type == "light"): btn.add_css_class("suggested-action")
+            btn.connect("clicked", self.on_theme_button_clicked, theme, theme_type, display_name)
             emoji = emojis.get(display_name, "")
             btn.get_first_child().append(Gtk.Label(margin_bottom=12, margin_top=12, label=display_name + emoji))
             flowbox.append(btn)
@@ -203,21 +253,46 @@ class RewaitaWindow(Adw.ApplicationWindow):
         page.append(Adw.Clamp(maximum_size=850, child=flowbox))
         return page
 
-    def on_theme_selected(self, button, theme_name, theme_type):
-        print(f"Theme selected: {theme_name}")
-        for flowbox in [self.light_flowbox, self.dark_flowbox]:
+    def on_theme_button_clicked(self, button, theme_name, theme_type, display_name):
+        if(theme_type == "dark" and theme_name is not None):
+            self.dark_theme = theme_name
+        elif(theme_type == "light" and theme_name is not None):
+            self.light_theme = theme_name
+        elif(theme_type == "dark" and theme_name is None):
+            self.dark_theme = "default"
+        elif(theme_type == "light" and theme_name is None):
+            self.light_theme = "default"
+
+        with open(f"{self.data_dir}/prefs.json", "w") as file:
+            json.dump({"light_theme": self.light_theme, "dark_theme": self.dark_theme}, file, indent=4)
+
+        if(theme_type == "light" and self.pref in [0, 2] or theme_type == "dark" and self.pref == 1):
+            self.on_theme_selected(theme_name, theme_type)
+        else:
+            self.toast_overlay.dismiss_all()
+            self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_(f"{theme_type.capitalize()} theme set to: {display_name}"))))
+
+        if(theme_type == "dark"):
+            flowbox_type = self.dark_flowbox
+        else:
+            flowbox_type = self.light_flowbox
+
+        for flowbox in flowbox_type:
             for theme in flowbox:
-                theme.remove_css_class("success")
+                theme.remove_css_class("suggested-action")
+
+        if(button.get_label() != "Reset"): button.add_css_class("suggested-action")
+
+    def on_theme_selected(self, theme_name, theme_type):
         config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-4.0")
         try:
-            if theme_name is None:
+            if(theme_name == "default"):
                 os.remove(os.path.join(config_dir, "gtk.css"))
                 return
         except FileNotFoundError:
             print("File already deleted")
             return
 
-        button.get_parent().add_css_class("success")
         theme_file = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), theme_type), theme_name)
         try:
             shutil.copy(theme_file, os.path.join(config_dir, "gtk.css"))
@@ -225,6 +300,8 @@ class RewaitaWindow(Adw.ApplicationWindow):
             print(f"Error moving file: {e}")
         gtk_file = open(theme_file)
         self.toast_overlay.dismiss_all()
-        self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Set Rewaita as shell theme and reboot for full changes"))))
+        self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Change GNOME shell theme to 'Rewaita' and reboot for full changes"))))
         parse_gtk_theme(gtk_file.read(), self.template_file_content, os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css"))
-        reset_shell()
+        if(on_gnome):
+            reset_shell()
+
