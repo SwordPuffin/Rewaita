@@ -20,7 +20,7 @@
 import os, random, re, shutil, json, gi, subprocess
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
-from .utils import parse_gtk_theme
+from .utils import parse_gtk_theme, set_to_default
 
 on_gnome = True
 
@@ -59,36 +59,6 @@ def load_colors_from_css(file_path):
                 colors[name] = color.strip()
     return colors
 
-def create_color_thumbnail_button(colors):
-    button = Gtk.Button(valign=Gtk.Align.START)
-    box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-    flowbox = Gtk.Frame()
-    box.append(flowbox)
-    color_box = Gtk.Box()
-
-    keys_to_show = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "dark_1", "light_1", "red_1", "green_1", "blue_1"]
-    for key in keys_to_show:
-        color = colors.get(key)
-        rand = random.randint(1, 100000)
-
-        if(color):
-            color_widget = Gtk.Box(hexpand=True, height_request=40)
-            color_widget.add_css_class(f"thumbnail-swatch-{rand}")
-            css_provider = Gtk.CssProvider()
-            css_provider.load_from_data(f"""
-                .thumbnail-swatch-{rand} {{
-                    background-color: {color};
-                }}
-            """.encode())
-            Gtk.StyleContext.add_provider_for_display(
-                Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-            )
-            color_box.append(color_widget)
-
-    button.set_child(box)
-    flowbox.set_child(color_box)
-    return button
-
 @Gtk.Template(resource_path='/io/github/swordpuffin/rewaita/window.ui')
 class RewaitaWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'RewaitaWindow'
@@ -122,6 +92,36 @@ class RewaitaWindow(Adw.ApplicationWindow):
     dark_theme = ""
     pref = 0
     data_dir = GLib.get_user_data_dir()
+
+    def create_color_thumbnail_button(self, colors):
+        button = Gtk.Button(valign=Gtk.Align.START)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        flowbox = Gtk.Frame()
+        box.append(flowbox)
+        color_box = Gtk.Box()
+
+        keys_to_show = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "dark_1", "light_1", "red_1", "green_1", "blue_1"]
+        for key in keys_to_show:
+            color = colors.get(key)
+            rand = random.randint(1, 100000)
+
+            if(color):
+                color_widget = Gtk.Box(hexpand=True, height_request=40)
+                color_widget.add_css_class(f"thumbnail-swatch-{rand}")
+                css_provider = Gtk.CssProvider()
+                css_provider.load_from_data(f"""
+                    .thumbnail-swatch-{rand} {{
+                        background-color: {color};
+                    }}
+                """.encode())
+                Gtk.StyleContext.add_provider_for_display(
+                    Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+                )
+                color_box.append(color_widget)
+
+        button.set_child(box)
+        flowbox.set_child(color_box)
+        return button
 
     def grab_prefs(self):
         if(not os.path.exists(f"{self.data_dir}/prefs.json")):
@@ -241,7 +241,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
         for theme, display_name in theme_data:
             colors = load_colors_from_css(os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), theme_type, theme)))
-            btn = create_color_thumbnail_button(colors)
+            btn = self.create_color_thumbnail_button(colors)
             btn.set_css_classes(["title-4", "monospace"])
             if(theme == self.dark_theme and theme_type == "dark"): btn.add_css_class("suggested-action")
             elif(theme == self.light_theme and theme_type == "light"): btn.add_css_class("suggested-action")
@@ -285,12 +285,10 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
     def on_theme_selected(self, theme_name, theme_type):
         config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-4.0")
-        try:
-            if(theme_name == "default"):
-                os.remove(os.path.join(config_dir, "gtk.css"))
-                return
-        except FileNotFoundError:
-            print("File already deleted")
+        print(theme_name)
+
+        if(theme_name in [None, "default"]):
+            set_to_default(config_dir, theme_type, reset_shell)
             return
 
         theme_file = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), theme_type), theme_name)

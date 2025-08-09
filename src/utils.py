@@ -2,10 +2,20 @@ import re, gi, os, shutil
 from collections import defaultdict
 from gi.repository import Gtk, Gdk, GLib
 
+def add_css_provider(css):
+    css_provider = Gtk.CssProvider()
+    css_provider.load_from_data(f"""
+        {css}
+    """.encode())
+    Gtk.StyleContext.add_provider_for_display(
+        Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
+    )
+
 def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file):
     color_pattern = r'@define-color\s+([a-z0-9_]+)\s+(#[a-fA-F0-9]+|@[a-z0-9_]+);'
     colors = dict()
     references = defaultdict(list)
+    add_css_provider(gtk_css)
 
     for match in re.finditer(color_pattern, gtk_css):
         name, value = match.groups()
@@ -34,5 +44,17 @@ def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file):
     with open(file, "w") as f:
         f.write(gnome_shell_css)
 
+def set_to_default(config_dir, theme_type, reset_func):
+    if(os.path.exists(os.path.join(config_dir, "gtk.css"))):
+        os.remove(os.path.join(config_dir, "gtk.css"))
+
+    gnome_shell_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
+    if(os.path.exists(os.path.join(gnome_shell_path, "gnome-shell.css"))):
+        os.remove(os.path.join(gnome_shell_path, "gnome-shell.css"))
+
+    gtk_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"default-{theme_type}.css")
+    gtk_css = open(gtk_file).read()
+    add_css_provider(gtk_css)
+    reset_func()
 
 
