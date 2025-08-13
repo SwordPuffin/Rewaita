@@ -1,0 +1,100 @@
+/* One Dark Cool Palette */
+@define-color window_bg_color #232b39;  /* Background */
+@define-color window_fg_color #ABB2BF;  /* Text */
+
+/* View styling */
+@define-color view_bg_color #282C34;
+@define-color view_fg_color #ABB2BF;
+
+/* Header bar */
+@define-color headerbar_bg_color #21252B;  
+@define-color headerbar_backdrop_color #21252B;
+@define-color headerbar_fg_color #ABB2BF;
+@define-color headerbar_border_color #2c3344;  /* Border color */
+
+/* Popovers and dialogs */
+@define-color popover_bg_color #282C34;
+@define-color popover_fg_color #ABB2BF;
+
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+
+/* Cards and sidebars */
+@define-color card_bg_color #2c3344;  
+@define-color card_fg_color #ABB2BF;
+
+@define-color sidebar_bg_color #1d242f;
+@define-color sidebar_fg_color #ABB2BF;
+@define-color sidebar_backdrop_color #1B1F23;  
+@define-color sidebar_border_color #2c3344;
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+/* One Dark Cool accent colors */
+@define-color blue_1 #61AFEF;  /* Blue */
+@define-color blue_2 #528BCC;
+@define-color blue_3 #3D85D6;
+@define-color blue_4 #2B6CAD;
+@define-color blue_5 #1A568F;
+
+@define-color green_1 #98C379;  /* Green */
+@define-color green_2 #83A75C;
+@define-color green_3 #6D8B4F;
+@define-color green_4 #577042;
+@define-color green_5 #415534;
+
+@define-color yellow_1 #E5C07B;  /* Yellow */
+@define-color yellow_2 #D1A766;
+@define-color yellow_3 #BD8E51;
+@define-color yellow_4 #A9753C;
+@define-color yellow_5 #955C27;
+
+@define-color orange_1 #D19A66;  /* Orange */
+@define-color orange_2 #BB814F;
+@define-color orange_3 #A56838;
+@define-color orange_4 #8F4F21;
+@define-color orange_5 #79360A;
+
+@define-color red_1 #E06C75;  /* Red */
+@define-color red_2 #C8555D;
+@define-color red_3 #B03E45;
+@define-color red_4 #98272D;
+@define-color red_5 #801015;
+
+@define-color purple_1 #C678DD;  /* Purple */
+@define-color purple_2 #B05FC9;
+@define-color purple_3 #9A46B5;
+@define-color purple_4 #842DA1;
+@define-color purple_5 #6E148D;
+
+@define-color brown_1 #5C6370;  /* Grayish */
+@define-color brown_2 #4A515D;
+@define-color brown_3 #383F4A;
+@define-color brown_4 #262D37;
+@define-color brown_5 #141B24;
+
+@define-color light_1 #ABB2BF;  /* Text */
+@define-color light_2 #9198A5;
+@define-color light_3 #777E8B;
+@define-color light_4 #5D6471;
+@define-color light_5 #abb2bf;
+
+@define-color dark_1 #2c3344;  /* Borders */
+@define-color dark_2 #343B48;
+@define-color dark_3 #2A313E;
+@define-color dark_4 #202734;
+@define-color dark_5 #161D2A;
+
+toast {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+toggle:checked {
+  background-color: @card_bg_color;
+  color: @window_fg_color;
+}
+

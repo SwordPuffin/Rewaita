@@ -1,0 +1,98 @@
+/* Rosé Pine Moon Palette */
+@define-color window_bg_color #232136; /* base */
+@define-color window_fg_color #e0def4; /* text */
+
+/* View styling */
+@define-color view_bg_color #232136;
+@define-color view_fg_color #e0def4;
+
+/* Header bar */
+@define-color headerbar_bg_color #2a273f; /* surface */
+@define-color headerbar_backdrop_color #2a273f;
+@define-color headerbar_fg_color #e0def4;
+
+/* Popovers and dialogs */
+@define-color popover_bg_color #232136;
+@define-color popover_fg_color #e0def4;
+
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+
+/* Cards and sidebars */
+@define-color card_bg_color #393552; /* overlay */
+@define-color card_fg_color #e0def4;
+
+@define-color sidebar_bg_color #232136;
+@define-color sidebar_fg_color #e0def4;
+@define-color sidebar_backdrop_color #232136;
+@define-color sidebar_border_color #393552; /* overlay */
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+/* Rosé Pine Moon accent colors */
+@define-color blue_1 #9ccfd8; /* foam */
+@define-color blue_2 #c4a7e7; /* iris */
+@define-color blue_3 #3e8fb0; /* pine */
+@define-color blue_4 #3e8fb0; /* pine */
+@define-color blue_5 #3e8fb0; /* pine */
+
+@define-color green_1 #3e8fb0; /* pine */
+@define-color green_2 #9ccfd8; /* foam */
+@define-color green_3 #3e8fb0; /* pine */
+@define-color green_4 #9ccfd8; /* foam */
+@define-color green_5 #3e8fb0; /* pine */
+
+@define-color yellow_1 #f6c177; /* gold */
+@define-color yellow_2 #f6c177; /* gold */
+@define-color yellow_3 #ea9a97; /* rose */
+@define-color yellow_4 #ea9a97; /* rose */
+@define-color yellow_5 #ea9a97; /* rose */
+
+@define-color orange_1 #ea9a97; /* rose */
+@define-color orange_2 #ea9a97; /* rose */
+@define-color orange_3 #eb6f92; /* love */
+@define-color orange_4 #f6c177; /* gold */
+@define-color orange_5 #f6c177; /* gold */
+
+@define-color red_1 #eb6f92; /* love */
+@define-color red_2 #eb6f92; /* love */
+@define-color red_3 #eb6f92; /* love */
+@define-color red_4 #ea9a97; /* rose */
+@define-color red_5 #ea9a97; /* rose */
+
+@define-color purple_1 #c4a7e7; /* iris */
+@define-color purple_2 #908caa; /* subtle */
+@define-color purple_3 #6e6a86; /* muted */
+@define-color purple_4 #9ccfd8; /* foam */
+@define-color purple_5 #3e8fb0; /* pine */
+
+@define-color brown_1 #6e6a86; /* muted */
+@define-color brown_2 #6e6a86; /* muted */
+@define-color brown_3 #908caa; /* subtle */
+@define-color brown_4 #c4a7e7; /* iris */
+@define-color brown_5 #6e6a86; /* muted */
+
+@define-color light_1 #e0def4; /* text */
+@define-color light_2 #908caa; /* subtle */
+@define-color light_3 #6e6a86; /* muted */
+@define-color light_4 #c4a7e7; /* iris */
+@define-color light_5 #6e6a86; /* muted */
+
+@define-color dark_1 #393552; /* overlay */
+@define-color dark_2 #2a273f; /* surface */
+@define-color dark_3 #232136; /* base */
+@define-color dark_4 #232136; /* base */
+@define-color dark_5 #232136; /* base */
+
+toast {
+    background-color: @window_bg_color;
+    color: @window_fg_color;
+}
+
+toggle:checked {
+  background-color: @card_bg_color;
+  color: @window_fg_color;
+}

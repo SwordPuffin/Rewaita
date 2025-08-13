@@ -16,11 +16,22 @@
               </object>
             </child>
             <child type="end">
-              <object class="GtkMenuButton">
-                <property name="primary">True</property>
-                <property name="icon-name">open-menu-symbolic</property>
-                <property name="tooltip-text" translatable="yes">Main Menu</property>
-                <property name="menu-model">primary_menu</property>
+              <object class="GtkBox">
+                <child>
+                  <object class="GtkButton" id="delete_button">
+                    <property name="icon-name">user-trash-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Delete themes</property>
+                    <property name="action-name">win.trash</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkMenuButton">
+                    <property name="primary">True</property>
+                    <property name="icon-name">open-menu-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Main Menu</property>
+                    <property name="menu-model">primary_menu</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

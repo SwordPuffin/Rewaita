@@ -1,0 +1,98 @@
+/* Catppuccin Mocha Palette */
+@define-color window_bg_color #1e1e2e; /* base */
+@define-color window_fg_color #cdd6f4; /* text */
+
+/* View styling */
+@define-color view_bg_color #1e1e2e;
+@define-color view_fg_color #cdd6f4;
+
+/* Header bar */
+@define-color headerbar_bg_color #181825; /* mantle */
+@define-color headerbar_backdrop_color #181825;
+@define-color headerbar_fg_color #cdd6f4;
+
+/* Popovers and dialogs */
+@define-color popover_bg_color #1e1e2e;
+@define-color popover_fg_color #cdd6f4;
+
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+
+/* Cards and sidebars */
+@define-color card_bg_color #2f3042;
+@define-color card_fg_color #cdd6f4;
+
+@define-color sidebar_bg_color #1e1e2e;
+@define-color sidebar_fg_color #cdd6f4;
+@define-color sidebar_backdrop_color #1e1e2e;
+@define-color sidebar_border_color #313244; /* surface0 */
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+/* Catppuccin accent colors */
+@define-color blue_1 #89b4fa; /* blue */
+@define-color blue_2 #74c7ec; /* sapphire */
+@define-color blue_3 #89dceb; /* sky */
+@define-color blue_4 #94e2d5; /* teal */
+@define-color blue_5 #b4befe; /* lavender */
+
+@define-color green_1 #a6e3a1; /* green */
+@define-color green_2 #94e2d5; /* teal */
+@define-color green_3 #89dceb; /* sky */
+@define-color green_4 #74c7ec; /* sapphire */
+@define-color green_5 #89b4fa; /* blue */
+
+@define-color yellow_1 #f9e2af; /* yellow */
+@define-color yellow_2 #fab387; /* peach */
+@define-color yellow_3 #f9e2af; /* yellow */
+@define-color yellow_4 #f38ba8; /* red */
+@define-color yellow_5 #eba0ac; /* maroon */
+
+@define-color orange_1 #fab387; /* peach */
+@define-color orange_2 #f38ba8; /* red */
+@define-color orange_3 #eba0ac; /* maroon */
+@define-color orange_4 #f9e2af; /* yellow */
+@define-color orange_5 #a6e3a1; /* green */
+
+@define-color red_1 #f38ba8; /* red */
+@define-color red_2 #eba0ac; /* maroon */
+@define-color red_3 #f5c2e7; /* pink */
+@define-color red_4 #f2cdcd; /* flamingo */
+@define-color red_5 #f5e0dc; /* rosewater */
+
+@define-color purple_1 #cba6f7; /* mauve */
+@define-color purple_2 #b4befe; /* lavender */
+@define-color purple_3 #f5c2e7; /* pink */
+@define-color purple_4 #f2cdcd; /* flamingo */
+@define-color purple_5 #f5e0dc; /* rosewater */
+
+@define-color brown_1 #585b70; /* surface2 */
+@define-color brown_2 #6c7086; /* overlay0 */
+@define-color brown_3 #7f849c; /* overlay1 */
+@define-color brown_4 #9399b2; /* overlay2 */
+@define-color brown_5 #bac2de; /* subtext1 */
+
+@define-color light_1 #cdd6f4; /* text */
+@define-color light_2 #a6adc8; /* subtext0 */
+@define-color light_3 #bac2de; /* subtext1 */
+@define-color light_4 #89b4fa; /* blue */
+@define-color light_5 #6c7086; /* overlay0 */
+
+@define-color dark_1 #313244; /* surface0 */
+@define-color dark_2 #45475a; /* surface1 */
+@define-color dark_3 #585b70; /* surface2 */
+@define-color dark_4 #181825; /* mantle */
+@define-color dark_5 #11111b; /* crust */
+
+toast {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+toggle:checked {
+  background-color: @card_bg_color;
+  color: @window_fg_color;
+}

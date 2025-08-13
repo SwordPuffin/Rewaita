@@ -58,16 +58,40 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: src/window.py:104 src/window.py:109
+#: src/utils.py:92
+msgid " has been deleted"
+msgstr ""
+
+#: src/utils.py:98
+msgid "Delete"
+msgstr ""
+
+#: src/utils.py:99
+msgid "Are you sure you want to delete that theme?\nThis cannot be undone."
+msgstr ""
+
+#: src/custom_theme.py:149
+msgid "Theme name (required)"
+msgstr ""
+
+#: src/custom_theme.py:153
+msgid "Emoji (optional)"
+msgstr ""
+
+#: src/custom_theme.py:157
+msgid "Theme Type"
+msgstr ""
+
+#: src/custom_theme.py:158 
 msgid "Light"
 msgstr ""
 
-#: src/window.py:105 src/window.py:110
+#: src/custom_theme.py:159
 msgid "Dark"
 msgstr ""
 
-#: src/window.py:118
-msgid "Help"
+#: src/window.py:92
+msgid "Theming"
 msgstr ""
 
 #: src/window.py:120
@@ -105,11 +129,15 @@ msgstr ""
 msgid "For Flatpak application support, run:"
 msgstr ""
 
-#: src/window.py:158
-msgid "Reset"
+#: src/window.py:201
+msgid "User Guide"
 msgstr ""
 
-#: src/window.py:208
+#: src/window.py:260
+msgid "Reset to default"
+msgstr ""
+
+#: src/window.py:328
 msgid "Change GNOME shell theme to 'Rewaita' and reboot for full changes"
 msgstr ""
 

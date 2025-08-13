@@ -1,0 +1,71 @@
+@define-color window_bg_color @window_bg_color;
+@define-color window_fg_color @window_fg_color;
+
+@define-color view_bg_color @view_bg_color;
+@define-color view_fg_color @view_fg_color;
+
+@define-color success_color @success_color;
+@define-color success_bg_color @success_bg_color;
+@define-color success_fg_color @success_fg_color;
+
+@define-color warning_color @warning_color;
+@define-color warning_bg_color @warning_bg_color;
+@define-color warning_fg_color @warning_fg_color;
+
+@define-color destructive_color @destructive_color;
+@define-color destructive_bg_color @destructive_bg_color;
+@define-color destructive_fg_color @destructive_fg_color;
+
+@define-color error_color @destructive_color;
+@define-color error_bg_color @destructive_bg_color;
+@define-color errow_fg_color @destructive_fg_color;
+
+@define-color headerbar_bg_color @headerbar_bg_color;
+@define-color headerbar_fg_color @headerbar_fg_color;
+
+@define-color popover_bg_color @view_bg_color;
+@define-color popover_fg_color @view_fg_color;
+
+@define-color dialog_bg_color @view_bg_color;
+@define-color dialog_fg_color @view_fg_color;
+
+@define-color card_bg_color @card_bg_color;
+@define-color card_fg_color @card_bg_color;
+
+@define-color sidebar_bg_color @view_bg_color;
+@define-color sidebar_fg_color @view_fg_color;
+@define-color sidebar_backdrop_color @view_bg_color;
+@define-color sidebar_border_color @card_bg_color;
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+@define-color blue_1 @blue_1;
+@define-color blue_2 @blue_2;
+@define-color green_1 @green_1;
+@define-color yellow_1 @yellow_1;
+@define-color red_1 @red_1;
+@define-color purple_1 @purple_1;
+@define-color purple_2 @purple_2;
+@define-color orange_1 @orange_1;
+@define-color brown_1 @brown_1;
+@define-color light_1 @light_1;
+@define-color light_5 @light_5;
+@define-color dark_1 @dark_1;
+
+@define-color accent_color @accent_color;
+@define-color accent_bg_color @accent_bg_color;
+@define-color accent_fg_color @accent_fg_color;
+
+toast {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+toggle:checked {
+  background-color: @card_bg_color;
+  color: @window_fg_color;
+}
+

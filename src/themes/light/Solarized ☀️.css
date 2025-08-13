@@ -1,0 +1,98 @@
+/* Solarized Light Palette */
+@define-color window_bg_color #fdf6e3; /* base3 */
+@define-color window_fg_color #657b83; /* base00 */
+
+/* View styling */
+@define-color view_bg_color #fdf6e3;
+@define-color view_fg_color #657b83;
+
+/* Header bar */
+@define-color headerbar_bg_color #eee8d5; /* base2 */
+@define-color headerbar_backdrop_color #eee8d5;
+@define-color headerbar_fg_color #657b83;
+
+/* Popovers and dialogs */
+@define-color popover_bg_color #fdf6e3;
+@define-color popover_fg_color #657b83;
+
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+
+/* Cards and sidebars */
+@define-color card_bg_color #eeead9;
+@define-color card_fg_color #657b83;
+
+@define-color sidebar_bg_color #fdf6e3;
+@define-color sidebar_fg_color #657b83;
+@define-color sidebar_backdrop_color #fdf6e3;
+@define-color sidebar_border_color #93a1a1; /* base1 */
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+/* Solarized accent colors (same as dark) */
+@define-color blue_1 #268bd2; /* blue */
+@define-color blue_2 #2aa198; /* cyan */
+@define-color blue_3 #859900; /* green */
+@define-color blue_4 #6c71c4; /* violet */
+@define-color blue_5 #d33682; /* magenta */
+
+@define-color green_1 #859900; /* green */
+@define-color green_2 #2aa198; /* cyan */
+@define-color green_3 #b58900; /* yellow */
+@define-color green_4 #cb4b16; /* orange */
+@define-color green_5 #268bd2; /* blue */
+
+@define-color yellow_1 #b58900; /* yellow */
+@define-color yellow_2 #cb4b16; /* orange */
+@define-color yellow_3 #dc322f; /* red */
+@define-color yellow_4 #d33682; /* magenta */
+@define-color yellow_5 #6c71c4; /* violet */
+
+@define-color orange_1 #cb4b16; /* orange */
+@define-color orange_2 #dc322f; /* red */
+@define-color orange_3 #d33682; /* magenta */
+@define-color orange_4 #6c71c4; /* violet */
+@define-color orange_5 #268bd2; /* blue */
+
+@define-color red_1 #dc322f; /* red */
+@define-color red_2 #d33682; /* magenta */
+@define-color red_3 #6c71c4; /* violet */
+@define-color red_4 #268bd2; /* blue */
+@define-color red_5 #2aa198; /* cyan */
+
+@define-color purple_1 #6c71c4; /* violet */
+@define-color purple_2 #d33682; /* magenta */
+@define-color purple_3 #dc322f; /* red */
+@define-color purple_4 #cb4b16; /* orange */
+@define-color purple_5 #b58900; /* yellow */
+
+@define-color brown_1 #93a1a1; /* base1 */
+@define-color brown_2 #839496; /* base0 */
+@define-color brown_3 #eee8d5; /* base2 */
+@define-color brown_4 #fdf6e3; /* base3 */
+@define-color brown_5 #657b83; /* base00 */
+
+@define-color light_1 #586e75; /* base01 */
+@define-color light_2 #073642; /* base02 */
+@define-color light_3 #002b36; /* base03 */
+@define-color light_4 #268bd2; /* blue */
+@define-color light_5 #93a1a1; /* base1 */
+
+@define-color dark_1 #eee8d5; /* base2 */
+@define-color dark_2 #fdf6e3; /* base3 */
+@define-color dark_3 #ffffff;
+@define-color dark_4 #f5f0d9;
+@define-color dark_5 #f9f4e1;
+
+toast {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+toggle:checked {
+  background-color: @card_bg_color;
+  color: @window_fg_color;
+}

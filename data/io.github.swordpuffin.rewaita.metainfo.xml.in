@@ -38,9 +38,26 @@
       <image>https://raw.githubusercontent.com/SwordPuffin/Rewaita/main/data/screenshots/Screenshot2.png</image>
       <caption>Browsing through light themes</caption>
     </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/SwordPuffin/Rewaita/main/data/screenshots/Screenshot3.png</image>
+      <caption>Making a custom theme</caption>
+    </screenshot>
   </screenshots>
 
   <releases>
+    <release version="1.0.3" date="2025-08-12">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.3</url>
+      <description translate="no">
+        <p>Rewaita v1.0.3</p>
+        <ul>
+          <li>Users can now add their own themes in the 'Custom' tab as well as delete current ones</li>
+          <li>Will now sync with the system accent color</li>
+          <li>New included themes: One Dark and Synthwave '84</li>
+          <li>Combined light and dark mode onto one page</li>
+          <li>Minor changes in Gnome Shell integration</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.2" date="2025-08-08">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.2</url>
       <description translate="no">

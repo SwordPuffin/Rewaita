@@ -1,0 +1,99 @@
+/* Base Colors */
+@define-color window_bg_color #2b213a;  
+@define-color window_fg_color #f4eee4;  
+
+/* View Styling */
+@define-color view_bg_color #262335;
+@define-color view_fg_color #f4eee4;
+
+/* Header Bar */
+@define-color headerbar_bg_color #241b30; 
+@define-color headerbar_backdrop_color #1a1626;
+@define-color headerbar_fg_color #f4eee4;
+@define-color headerbar_border_color #241b30; 
+
+/* Popovers & Dialogs */
+@define-color popover_bg_color #2a2139; 
+@define-color popover_fg_color #f4eee4;
+
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+
+/* Cards & Sidebars */
+@define-color card_bg_color #3a2d52;  
+@define-color card_fg_color #f4eee4;
+
+@define-color sidebar_bg_color #1a1626;
+@define-color sidebar_fg_color #f4eee4;
+@define-color sidebar_backdrop_color #110d1c;  
+@define-color sidebar_border_color  #3a2d52;
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+/* Synthwave '84 Accent Colors */
+@define-color blue_1 #2c75e7;  /* Electric blue */
+@define-color blue_2 #5ed7ff;  /* Bright cyan */
+@define-color blue_3 #3e6af8;  /* Neon blue */
+@define-color blue_4 #7e57c2;  /* Purple */
+@define-color blue_5 #b399ff;  /* Lavender */
+
+@define-color green_1 #72f1b8;  /* Teal */
+@define-color green_2 #5ed7ff;  /* Cyan */
+@define-color green_3 #3e6af8;  /* Blue */
+@define-color green_4 #ff7edb;  /* Pink */
+@define-color green_5 #ff8b39;  /* Orange */
+
+@define-color yellow_1 #fede5d;  /* Bright yellow */
+@define-color yellow_2 #ff8b39;  /* Orange */
+@define-color yellow_3 #ff7edb;  /* Pink */
+@define-color yellow_4 #b399ff;  /* Lavender */
+@define-color yellow_5 #3e6af8;  /* Blue */
+
+@define-color orange_1 #ff8b39;  /* Neon orange */
+@define-color orange_2 #ff7edb;  /* Pink */
+@define-color orange_3 #fede5d;  /* Yellow */
+@define-color orange_4 #72f1b8;  /* Teal */
+@define-color orange_5 #5ed7ff;  /* Cyan */
+
+@define-color red_1 #d92c95;  /* Red */
+@define-color red_2 #ff4d9e;  /* Deeper pink */
+@define-color red_3 #ff2d7a;  /* Intense pink */
+@define-color red_4 #f92aad;  /* Magenta */
+@define-color red_5 #d926b6;  /* Purple-pink */
+
+@define-color purple_1 #b399ff;  /* Lavender */
+@define-color purple_2 #9e7cff;  /* Bright purple */
+@define-color purple_3 #7e57c2;  /* Synthwave purple */
+@define-color purple_4 #5e2d9c;  /* Deep purple */
+@define-color purple_5 #3e1a7a;  /* Dark purple */
+
+@define-color brown_1 #3a2d52;  /* Glow purple */
+@define-color brown_2 #2a2139;  /* Muted purple */
+@define-color brown_3 #1a1626;  /* Dark purple */
+@define-color brown_4 #110d1c;  /* Near-black */
+@define-color brown_5 #0a0812;  /* Full black */
+
+@define-color light_1 #f4eee4;  /* Off-white */
+@define-color light_2 #d8d0c0;  /* Light gray */
+@define-color light_3 #bcb4a4;  /* Medium gray */
+@define-color light_4 #a09888;  /* Dark gray */
+@define-color light_5 #847c6c;  /* Slate */
+
+@define-color dark_1 #3a2d52;  /* Glow purple */
+@define-color dark_2 #2a2139;  /* Muted purple */
+@define-color dark_3 #1a1626;  /* Dark purple */
+@define-color dark_4 #110d1c;  /* Near-black */
+@define-color dark_5 #0a0812;  /* Full black */
+
+toast {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+toggle:checked {
+  background-color: @card_bg_color;  
+  color: @window_fg_color;
+}

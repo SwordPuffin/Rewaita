@@ -126,13 +126,14 @@ StEntry:focus {
 .quick-settings .icon-button, .quick-settings .message-notification-group .message-collapse-button, .message-notification-group .quick-settings .message-collapse-button, .quick-settings .message .message-header .message-expand-button, .message .message-header .quick-settings .message-expand-button,
 .quick-settings .message .message-header .message-close-button,
 .message .message-header .quick-settings .message-close-button, .quick-settings .button {
-  background-color: window_fg_color;
+  background-color: card_bg_color;
+  color: window_fg_color;
 }
 
 .quick-settings .icon-button > StIcon, .quick-settings .message-notification-group .message-collapse-button > StIcon, .message-notification-group .quick-settings .message-collapse-button > StIcon, .quick-settings .message .message-header .message-expand-button > StIcon, .message .message-header .quick-settings .message-expand-button > StIcon,
 .quick-settings .message .message-header .message-close-button > StIcon,
 .message .message-header .quick-settings .message-close-button > StIcon {
-  color: window_bg_color;
+  color: window_fg_color;
 }
 
 .quick-toggle, .quick-toggle-has-menu {
@@ -151,12 +152,12 @@ StEntry:focus {
 }
 
 .quick-toggle:active {
-  background-color: blue_1 !important;
+  background-color: accent_color !important;
   color: window_bg_color !important;
 }
 
 .quick-toggle:checked {
-  background-color: blue_1 !important;
+  background-color: accent_color !important;
   color: window_bg_color !important;
 }
 
@@ -166,7 +167,7 @@ StEntry:focus {
 }
 
 .quick-toggle:checked:active {
-  background-color: blue_1 !important;
+  background-color: accent_color !important;
   color: window_bg_color !important;
 }
 
@@ -200,7 +201,7 @@ StEntry:focus {
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button:checked {
-  background-color: blue_1 !important;
+  background-color: accent_color !important;
   color: window_bg_color !important;
 }
 
@@ -210,7 +211,7 @@ StEntry:focus {
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button:checked:active {
-  background-color: blue_1 !important;
+  background-color: accent_color !important;
   color: window_bg_color !important;
 }
 
@@ -221,7 +222,7 @@ StEntry:focus {
 .slider {
   color: window_fg_color;
   -barlevel-background-color: card_bg_color;
-  -barlevel-active-background-color: #3584e4;
+  -barlevel-active-background-color: accent_color;
 }
 
 .quick-toggle-menu-button.icon-button:last-child > StIcon {
@@ -257,7 +258,7 @@ StEntry:focus {
 }
 
 .icon-button:hover {
-  background-color: card_bg_color !important;
+  background-color: headerbar_bg_color !important;
 }
 
 .icon-button:hover > StIcon {
@@ -276,11 +277,11 @@ StEntry:focus {
 }
 
 .quick-toggle-menu .popup-menu-item:active {
-  background-color: window_fg_color !important;
+  background-color: accent_color !important;
 }
 
 .quick-toggle-menu .header .icon.active {
-  background-color: blue_1 !important;
+  background-color: accent_color !important;
   color: window_bg_color !important;
 }
 
@@ -424,7 +425,7 @@ StEntry:focus {
 }
 
 .notification-button:hover {
-    background-color: blue_1;
+    background-color: accent_color;
     color: window_bg_color;
 }
 
@@ -440,7 +441,7 @@ StEntry:focus {
 
 .message-expand-button:hover {
     color: window_bg_color;
-    background-color: blue_1;
+    background-color: accent_color;
 }
 
 .datemenu-today-button {
@@ -486,7 +487,7 @@ StEntry:focus {
   color: window_fg_color;
   -barlevel-height: 2px;
   -barlevel-background-color: card_bg_color;
-  -barlevel-active-background-color: blue_1;
+  -barlevel-active-background-color: accent_color;
   -barlevel-overdrive-color: red_1;
   -barlevel-overdrive-separator-width: 2px;
   -barlevel-border-width: 0;
@@ -509,7 +510,7 @@ StEntry:focus {
 
 .message-list-controls .dnd-button {
   color: window_bg_color;
-  background-color: window_fg_color;
+  background-color: accent_color;
   border: none;
 }
 
@@ -528,7 +529,7 @@ StEntry:focus {
 }
 
 .message-close-button {
-  background-color: window_fg_color;
+  background-color: accent_color;
   color: card_bg_color;
 }
 
@@ -541,7 +542,7 @@ StEntry:focus {
 }
 
 .message-media-control:hover, .message-media-control:focus {
-  background-color: window_fg_color;
+  background-color: accent_color;
   color: window_bg_color;
 }
 
@@ -554,7 +555,7 @@ StEntry:focus {
 .modal-dialog .modal-dialog-button-box .modal-dialog-button:hover, .lg-obj-inspector-button:hover, #LookingGlassDialog > #Toolbar .lg-toolbar-button:hover, .candidate-page-button:hover, .icon-button.flat:hover, .message .message-header .flat.message-expand-button:hover,
 .message .message-header .flat.message-close-button:hover, .message-notification-group .flat.message-collapse-button:hover, .button.flat:hover, .popup-menu .button:hover {
   color: window_bg_color;
-  background-color: blue_1;
+  background-color: accent_color;
 }
 
 .modal-dialog {

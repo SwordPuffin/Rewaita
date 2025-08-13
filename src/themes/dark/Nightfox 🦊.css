@@ -1,0 +1,98 @@
+/* Nightfox Dark Palette */
+@define-color window_bg_color #192330; /* bg */
+@define-color window_fg_color #cdcecf; /* fg */
+
+/* View styling */
+@define-color view_bg_color #192330;
+@define-color view_fg_color #cdcecf;
+
+/* Header bar */
+@define-color headerbar_bg_color #131a24;
+@define-color headerbar_backdrop_color #131a24;
+@define-color headerbar_fg_color #cdcecf;
+
+/* Popovers and dialogs */
+@define-color popover_bg_color #192330;
+@define-color popover_fg_color #cdcecf;
+
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+
+/* Cards and sidebars */
+@define-color card_bg_color #2b3440;
+@define-color card_fg_color #cdcecf;
+
+@define-color sidebar_bg_color #101c29;
+@define-color sidebar_fg_color #cdcecf;
+@define-color sidebar_backdrop_color #192330;
+@define-color sidebar_border_color #25354a;
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+/* Nightfox accent colors */
+@define-color blue_1 #6a96d0; /* blue */
+@define-color blue_2 #5eb9ff; /* light blue */
+@define-color blue_3 #3d8fd1; /* dark blue */
+@define-color blue_4 #73d0ff; /* cyan */
+@define-color blue_5 #47b5ff; /* bright blue */
+
+@define-color green_1 #96d686; /* green */
+@define-color green_2 #58d6bf; /* teal */
+@define-color green_3 #85d3a8; /* light green */
+@define-color green_4 #2eb398; /* dark teal */
+@define-color green_5 #8ac379; /* bright green */
+
+@define-color yellow_1 #e7c664; /* yellow */
+@define-color yellow_2 #ffcc77; /* light yellow */
+@define-color yellow_3 #d9a35a; /* gold */
+@define-color yellow_4 #ffd386; /* pale yellow */
+@define-color yellow_5 #f0d56e; /* bright yellow */
+
+@define-color orange_1 #e57e43; /* orange */
+@define-color orange_2 #ff8e5d; /* light orange */
+@define-color orange_3 #d67a3d; /* dark orange */
+@define-color orange_4 #ff9d6e; /* peach */
+@define-color orange_5 #f2854a; /* bright orange */
+
+@define-color red_1 #e05f65; /* red */
+@define-color red_2 #ff6d7a; /* light red */
+@define-color red_3 #c74e55; /* dark red */
+@define-color red_4 #ff7d8a; /* pink */
+@define-color red_5 #ef5f67; /* bright red */
+
+@define-color purple_1 #c68aee; /* purple */
+@define-color purple_2 #d9a0ff; /* light purple */
+@define-color purple_3 #b77bdf; /* dark purple */
+@define-color purple_4 #e0b0ff; /* lavender */
+@define-color purple_5 #cf94ff; /* bright purple */
+
+@define-color brown_1 #a18d73; /* brown */
+@define-color brown_2 #b8a383; /* light brown */
+@define-color brown_3 #8d7a5c; /* dark brown */
+@define-color brown_4 #c5b08d; /* tan */
+@define-color brown_5 #9e8a6a; /* muted brown */
+
+@define-color light_1 #cdcecf; /* fg */
+@define-color light_2 #e0e1e3; /* bright fg */
+@define-color light_3 #b9bbc0; /* muted fg */
+@define-color light_4 #6a96d0; /* blue */
+@define-color light_5 #a1a5b0; /* gray */
+
+@define-color dark_1 #25354a; /* highlight */
+@define-color dark_2 #1c2a3d; /* dark bg */
+@define-color dark_3 #131a24; /* darker bg */
+@define-color dark_4 #0d121a; /* darkest bg */
+@define-color dark_5 #080b0f; /* black */
+
+toast {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+toggle:checked {
+  background-color: @card_bg_color;
+  color: @window_fg_color;
+}
