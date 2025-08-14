@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rewaita\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-26 19:53+0200\n"
-"PO-Revision-Date: 2025-07-28 21:35+0200\n"
+"POT-Creation-Date: 2025-08-05 21:08+0400\n"
+"PO-Revision-Date: 2025-08-14 13:26+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -42,8 +42,8 @@ msgid ""
 "Currently, Rewaita only changes GTK4 applications; QT, and Cosmic are NOT "
 "supported"
 msgstr ""
-"Let op: momenteel ondersteunt Rewaita alléén GTK4-toepassingen, dus geen "
-"Qt- en Cosmic-toepassingen"
+"Let op: momenteel ondersteunt Rewaita alléén GTK4-toepassingen, dus geen Qt- "
+"en Cosmic-toepassingen"
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:15
 msgid "Nathan Perlman"
@@ -62,17 +62,45 @@ msgstr "Pagina met lichte thema's"
 msgid "translator-credits"
 msgstr "Heimen Stoffels <vistausss@fastmail.com>"
 
-#: src/window.py:104 src/window.py:109
+#: src/utils.py:92
+msgid " has been deleted"
+msgstr " is verwijderd"
+
+#: src/utils.py:98
+msgid "Delete"
+msgstr "Verwĳderen"
+
+#: src/utils.py:99
+msgid ""
+"Are you sure you want to delete that theme?\n"
+"This cannot be undone."
+msgstr ""
+"Weet u zeker dat u dit thema wilt verwijderen?\n"
+"Herstel is niet mogelijk."
+
+#: src/custom_theme.py:149
+msgid "Theme name (required)"
+msgstr "Themanaam (vereist)"
+
+#: src/custom_theme.py:153
+msgid "Emoji (optional)"
+msgstr "Emoji (optioneel)"
+
+#: src/custom_theme.py:157
+msgid "Theme Type"
+msgstr "Soort thema"
+
+#: src/custom_theme.py:158
 msgid "Light"
 msgstr "Licht"
 
-#: src/window.py:105 src/window.py:110
+#: src/custom_theme.py:159
 msgid "Dark"
 msgstr "Donker"
 
-#: src/window.py:118
-msgid "Help"
-msgstr "Hulp"
+#: src/window.py:92
+msgid "Theming"
+msgstr "Thema"
 
 #: src/window.py:120
 msgid ""
@@ -110,11 +138,15 @@ msgstr ""
 msgid "For Flatpak application support, run:"
 msgstr "Flatpakondersteuning kan worden ingeschakeld door middel van:"
 
-#: src/window.py:158
-msgid "Reset"
-msgstr "Standaardwaarden"
+#: src/window.py:201
+msgid "User Guide"
+msgstr "Gebruikershandleiding"
 
-#: src/window.py:208
+#: src/window.py:260
+msgid "Reset to default"
+msgstr "Standaardwaarden herstellen"
+
+#: src/window.py:328
 msgid "Change GNOME shell theme to 'Rewaita' and reboot for full changes"
 msgstr "Stel Rewaita in als Shell-thema en herstart de computer"
 
@@ -133,3 +165,9 @@ msgstr "Over Rew_aita"
 #: src/window.ui:52
 msgid "_Help"
 msgstr "_Hulp"
+
+#~ msgid "Help"
+#~ msgstr "Hulp"
+
+#~ msgid "Reset"
+#~ msgstr "Standaardwaarden"
