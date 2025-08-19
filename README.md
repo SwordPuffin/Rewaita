@@ -1,7 +1,7 @@
 # 🎨 Rewaita
 
-**Rewaita** is a utility that adds life to Adwaita apps by tinting them to popular color schemes.
-
+<p align="center">**Rewaita** gives your Adwaita apps a fresh look by tinting them with popular color schemes.</p>
+<br>
 <p align="center"> 
     <a href="https://flathub.org/apps/io.github.swordpuffin.rewaita"> 
        <img width="200" alt="Get it on Flathub" src="https://flathub.org/api/badge?svg&locale=en"/> 
@@ -34,4 +34,3 @@ git clone https://github.com/SwordPuffin/Rewaita
 Then, in [Builder](https://apps.gnome.org/Builder/) you can add it to your projects.
 
 ---
-
