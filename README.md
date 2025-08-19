@@ -1,6 +1,6 @@
 # 🎨 Rewaita
 
-<p align="center">**Rewaita** gives your Adwaita apps a fresh look by tinting them with popular color schemes.</p>
+<p align="center">Rewaita gives your Adwaita apps a fresh look by tinting them with popular color schemes.</p>
 <br>
 <p align="center"> 
     <a href="https://flathub.org/apps/io.github.swordpuffin.rewaita"> 
