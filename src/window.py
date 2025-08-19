@@ -20,7 +20,7 @@
 import os, random, re, shutil, json, gi, subprocess
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
-from .utils import parse_gtk_theme, set_to_default, delete_items, css
+from .utils import parse_gtk_theme, set_to_default, delete_items, make_window_controls_page, css
 from .custom_theme import CustomPage
 
 on_gnome = True
@@ -57,6 +57,8 @@ class RewaitaWindow(Adw.ApplicationWindow):
     switcher = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     delete_button = Gtk.Template.Child()
+    endbox = Gtk.Template.Child()
+    window_control_css = ""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -68,12 +70,12 @@ class RewaitaWindow(Adw.ApplicationWindow):
         )
 
         #Moves the themes in the app sources to Rewaita's data directory
-        if(not os.path.exists(os.path.join(GLib.get_user_data_dir(), "prefs.json"))):
-            print("Refreshing themes")
-            if(not os.path.exists(os.path.join(GLib.get_user_data_dir(), "light"))):
-                shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), "light"), os.path.join(GLib.get_user_data_dir(), "light"))
-            if(not os.path.exists(os.path.join(GLib.get_user_data_dir(), "dark"))):
-                shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), "dark"), os.path.join(GLib.get_user_data_dir(), "dark"))
+        if(not os.path.exists(os.path.join(GLib.get_user_data_dir(), "light"))):
+            print("Refreshing light themes")
+            shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), "light"), os.path.join(GLib.get_user_data_dir(), "light"))
+        if(not os.path.exists(os.path.join(GLib.get_user_data_dir(), "dark"))):
+            print("Refreshing dark themes")
+            shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), "dark"), os.path.join(GLib.get_user_data_dir(), "dark"))
 
         delete = Gio.SimpleAction.new(name="trash")
         delete.connect("activate", delete_items, self.delete_button, self)
@@ -83,16 +85,17 @@ class RewaitaWindow(Adw.ApplicationWindow):
         scroll_box = Gtk.ScrolledWindow(vexpand=True, hexpand=True)
         self.main_box.append(scroll_box)
 
+        self.controls = self.endbox.get_parent().get_last_child() #Gets the window controls
+
         self.theme_page = self.create_theme_page()
+        make_window_controls_page(self.theme_page, self, self.window_control)
         self.custom_page = CustomPage(self)
 
-        stack = Gtk.Stack(transition_type=Gtk.StackTransitionType.SLIDE_LEFT_RIGHT, transition_duration=200)
+        stack = Adw.ViewStack(transition_duration=200)
         stack.connect("notify::visible-child", self.on_page_changed)
         self.switcher.set_stack(stack)
-        stack.add_titled(self.theme_page, "settings", _("Theming"))
-        stack.add_titled(Adw.Clamp(child=self.custom_page, maximum_size=850), "custom", _("Custom"))
-        for titled in self.switcher:
-            titled.add_css_class("circular")
+        stack.add_titled_with_icon(self.theme_page, "settings", _("Theming"), "brush-symbolic")
+        stack.add_titled_with_icon(Adw.Clamp(child=self.custom_page, maximum_size=850), "custom", _("Custom"), "hammer-symbolic")
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         box.append(stack)
@@ -131,14 +134,13 @@ class RewaitaWindow(Adw.ApplicationWindow):
         keys_to_show = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "dark_1", "light_1", "red_1", "green_1", "blue_1"]
         for key in keys_to_show:
             color = colors.get(key)
-            rand = random.randint(1, 100000)
-
+            rand = random.randint(0, 10000000)
             if(color):
                 color_widget = Gtk.Box(hexpand=True, height_request=40)
-                color_widget.add_css_class(f"thumbnail-swatch-{rand}")
+                color_widget.add_css_class(f"color-{rand}")
                 css_provider = Gtk.CssProvider()
                 css_provider.load_from_data(f"""
-                    .thumbnail-swatch-{rand} {{
+                    .color-{rand} {{
                         background-color: {color};
                     }}
                 """.encode())
@@ -147,7 +149,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
                 )
                 color_box.append(color_widget)
 
-        box.append(Gtk.Label(margin_bottom=12, margin_top=12, label=name.replace(".css", "")))
+        box.append(Gtk.Label(margin_bottom=12, margin_top=12, label=name))
         button.set_child(box)
         flowbox.set_child(color_box)
         return button
@@ -155,13 +157,20 @@ class RewaitaWindow(Adw.ApplicationWindow):
     def grab_prefs(self):
         if(not os.path.exists(f"{self.data_dir}/prefs.json")):
             with open(f"{self.data_dir}/prefs.json", "w") as file:
-                json.dump({"light_theme": "default", "dark_theme": "default"}, file, indent=4)
-
-        with open(f"{self.data_dir}/prefs.json", "r") as file:
-            data = json.load(file)
-            self.light_theme = data["light_theme"]
-            self.dark_theme = data["dark_theme"]
+                json.dump({"light_theme": "default", "dark_theme": "default", "window_controls": "default"}, file, indent=4)
+        try:
+            with open(f"{self.data_dir}/prefs.json", "r") as file:
+                data = json.load(file)
+                self.light_theme = data["light_theme"]
+                self.dark_theme = data["dark_theme"]
+                self.window_control = data["window_controls"]
+        except Exception:  # TODO: remove once all users have updated
+            with open(f"{self.data_dir}/prefs.json", "w") as file:
+                json.dump({"light_theme": self.light_theme, "dark_theme": self.dark_theme, "window_controls": "default"}, file, indent=4)
+            self.window_control = "default"
         
+        if(self.window_control != "default"):
+            self.window_control_css = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", f"{self.window_control}.css")).read()
         self.portal = Xdp.Portal()
         self.settings = self.portal.get_settings()
         self.pref = self.settings.read_uint("org.freedesktop.appearance", "color-scheme")
@@ -193,13 +202,9 @@ class RewaitaWindow(Adw.ApplicationWindow):
             check_accent_color = bool(self.settings.read_string("org.gnome.desktop.interface", "accent-color") != self.accent)
             
         if(self.settings.read_uint("org.freedesktop.appearance", "color-scheme") != self.pref or check_accent_color):
-            print("background")
             self.pref = self.settings.read_uint("org.freedesktop.appearance", "color-scheme")
             self.accent = self.settings.read_string("org.gnome.desktop.interface", "accent-color")
-            if(self.pref == 1):
-                self.on_theme_selected(self.dark_theme, "dark")
-            elif(self.pref in [0, 2]):
-                self.on_theme_selected(self.light_theme, "light")
+            self.on_theme_selected()
         print(self.pref)
 
     def on_readme_clicked(self, button, args):
@@ -272,7 +277,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
             for theme in sorted(themes):
                 colors = self.load_colors_from_css(os.path.join(self.data_dir, theme_type, theme), theme_type)
-                btn = self.create_color_thumbnail_button(colors, theme)
+                btn = self.create_color_thumbnail_button(colors, theme.replace(".css", ""))
                 btn.add_css_class("monospace")
                 if(theme == self.dark_theme and theme_type == "dark"): btn.add_css_class("suggested-action")
                 elif(theme == self.light_theme and theme_type == "light"): btn.add_css_class("suggested-action")
@@ -299,10 +304,10 @@ class RewaitaWindow(Adw.ApplicationWindow):
             self.light_theme = "default"
 
         with open(f"{self.data_dir}/prefs.json", "w") as file:
-            json.dump({"light_theme": self.light_theme, "dark_theme": self.dark_theme}, file, indent=4)
+            json.dump({"light_theme": self.light_theme, "dark_theme": self.dark_theme, "window_controls": self.window_control}, file, indent=4)
 
         if(theme_type == "light" and self.pref in [0, 2] or theme_type == "dark" and self.pref == 1):
-            self.on_theme_selected(theme_name, theme_type)
+            self.on_theme_selected()
         else:
             self.toast_overlay.dismiss_all()
             self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_(f"{theme_type.capitalize()} theme set to: {theme_name.replace('.css', '')}"))))
@@ -318,22 +323,47 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
         if(button.get_icon_name() != "reload-symbolic"): button.add_css_class("suggested-action")
 
-    def on_theme_selected(self, theme_name, theme_type):
+    def on_theme_selected(self):
         config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-4.0")
-        print(theme_name)
+        if(self.pref == 1):
+            theme_name = self.dark_theme
+            theme_type = "dark"
+        else:
+            theme_name = self.light_theme
+            theme_type = "light"
 
+        self.controls.set_css_classes([self.window_control])
         if(theme_name.lower() == "default"):
-            set_to_default(config_dir, theme_type, reset_shell)
+            set_to_default(config_dir, theme_type, reset_shell, self.window_control_css)
             return
         theme_file = os.path.join(self.data_dir, theme_type, theme_name)
         try:
             shutil.copy(theme_file, os.path.join(config_dir, "gtk.css"))
+            with open(os.path.join(config_dir, "gtk.css"), "a") as file:
+                file.write(self.window_control_css)
         except Exception as e:
             print(f"Error moving file: {e}")
+
         gtk_file = open(theme_file)
         self.toast_overlay.dismiss_all()
         self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Change GNOME shell theme to 'Rewaita' and reboot for full changes"))))
-        parse_gtk_theme(gtk_file.read(), self.template_file_content, os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css"))
+        parse_gtk_theme(gtk_file.read() + "\n\n" + self.window_control_css, self.template_file_content, os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css"))
         if(on_gnome):
             reset_shell()
+
+    def on_window_control_clicked(self, button, control_file, window, flowbox):
+        if(control_file != "default"):
+            self.window_control_css = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", f"{control_file}.css")).read()
+        else:
+            self.window_control_css = ""
+        for control in flowbox:
+            control_button = control.get_first_child()
+            control_button.remove_css_class("suggested-action")
+
+        with open(f"{self.data_dir}/prefs.json", "w") as file:
+            json.dump({"light_theme": self.light_theme, "dark_theme": self.dark_theme, "window_controls": control_file}, file, indent=4)
+
+        self.window_control = control_file
+        button.add_css_class("suggested-action")
+        self.on_theme_selected()
 

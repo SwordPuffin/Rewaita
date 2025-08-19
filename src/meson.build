@@ -41,6 +41,11 @@ template_source = [ 'themes/gnome-shell-template.css', 'themes/default-light.css
 install_data(template_source, install_dir: moduledir)
 
 install_subdir(
+  'themes/window-controls',
+  install_dir: moduledir
+)
+
+install_subdir(
   'themes/dark',
   install_dir: moduledir
 )

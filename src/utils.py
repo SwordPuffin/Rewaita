@@ -3,8 +3,37 @@ from collections import defaultdict
 gi.require_version('Xdp', '1.0')
 from gi.repository import Gtk, Gdk, GLib, Xdp, Adw
 
+extras_info = {
+    "Default": "default",
+    "Colored": "colored",
+    "MacOS style": "macos"
+}
+
+def make_window_controls_page(page, window, current_config):
+    page.append(Adw.Clamp(maximum_size=1200, child=Gtk.Separator(margin_start=20, margin_end=20, margin_top=25)))
+    title = Gtk.Label(label=_("Window Controls"), margin_bottom=12)
+    title.add_css_class("title-2")
+    page.append(title)
+    flowbox = Gtk.FlowBox(column_spacing=12, row_spacing=12, max_children_per_line=3, homogeneous=True, margin_start=12, margin_end=12, selection_mode=Gtk.SelectionMode.NONE)
+    for control in extras_info.keys():
+        button_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        window_controls = Gtk.WindowControls(side=Gtk.PackType.END, halign=Gtk.Align.CENTER)
+        window_controls.add_css_class(extras_info[control])
+        window_controls_frame = Gtk.Frame(child=window_controls, margin_bottom=12, margin_top=12, halign=Gtk.Align.CENTER)
+        window_controls_frame.add_css_class("card")
+        button_box.append(window_controls_frame)
+        title = Gtk.Label(label=_(control), margin_bottom=12)
+        button_box.append(title)
+        button = Gtk.Button(child=button_box, hexpand=True)
+        button.connect("clicked", window.on_window_control_clicked, extras_info[control], window, flowbox)
+        print(current_config)
+        if(extras_info[control] == current_config):
+            button.add_css_class("suggested-action")
+        flowbox.insert(button, -1)
+    page.append(Adw.Clamp(child=flowbox, maximum_size=1200))
+
 def add_css_provider(css):
-    from .window import on_gnome
+    from .window import on_gnome, RewaitaWindow
     if(on_gnome): #Would break on non-gnome system
         settings = Xdp.Portal().get_settings()
         accent = settings.read_string("org.gnome.desktop.interface", "accent-color")
@@ -72,9 +101,9 @@ def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file):
     with open(file, "w") as f:
         f.write(gnome_shell_css)
 
-def set_to_default(config_dir, theme_type, reset_func):
-    if(os.path.exists(os.path.join(config_dir, "gtk.css"))):
-        os.remove(os.path.join(config_dir, "gtk.css"))
+def set_to_default(config_dir, theme_type, reset_func, window_control_css):
+    with open(os.path.join(config_dir, "gtk.css"), "w") as file:
+        file.write(window_control_css)
 
     gnome_shell_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
     if(os.path.exists(os.path.join(gnome_shell_path, "gnome-shell.css"))):
@@ -145,5 +174,93 @@ css = """
       50%  { transform: rotate(-0.75deg); }
       75%  { transform: rotate(0.75deg); }
       100% { transform: rotate(-0.75deg); }
+    }
+
+    windowcontrols.colored > button.minimize > image {
+        color: @yellow_1;
+    }
+
+    windowcontrols.colored > button.maximize > image {
+        color: @green_1;
+    }
+
+    windowcontrols.colored > button.close > image {
+        color: @red_1;
+    }
+
+    windowcontrols.macos > button:not(.suggested-action):not(.destructive-action) {
+      min-height: 22px;
+      min-width: 22px;
+      padding: 0px;
+      margin-left: 0px;
+      margin-right: 0px;
+      margin-top: 6px;
+      margin-bottom: 2px;
+    }
+
+    windowcontrols.macos > button.minimize:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.maximize:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.close:not(.suggested-action):not(.destructive-action) {
+      color: transparent;
+      background: none;
+    }
+
+    windowcontrols.macos > button.minimize:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.minimize:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.maximize:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.maximize:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.close:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.close:active:not(.suggested-action):not(.destructive-action) {
+      box-shadow: none;
+    }
+
+    windowcontrols.macos > button.minimize:active:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos > button.maximize:active:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos> button.close:active:not(.suggested-action):not(.destructive-action) > image {
+      box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.25);
+    }
+
+    windowcontrols.macos > button.minimize:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.minimize:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.maximize:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.maximize:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.close:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.close:active:not(.suggested-action):not(.destructive-action) {
+      color: @window_bg_color;
+    }
+
+    windowcontrols.macos > button.minimize:not(.suggested-action):not(.destructive-action) > image {
+      background-color: @yellow_1;
+    }
+
+    windowcontrols.macos > button.minimize:active:not(.suggested-action):not(.destructive-action) > image {
+      background-color: @yellow_1;
+    }
+
+    windowcontrols.macos > button.maximize:not(.suggested-action):not(.destructive-action) > image {
+      background-color: @green_1;
+    }
+
+    windowcontrols.macos > button.maximize:active:not(.suggested-action):not(.destructive-action) > image {
+      background-color: @green_1;
+    }
+
+    windowcontrols.macos > button.close:not(.suggested-action):not(.destructive-action) > image {
+      background-color: @red_1;
+    }
+
+    windowcontrols.macos > button.close:active:not(.suggested-action):not(.destructive-action) > image {
+      background-color: @red_1;
+    }
+
+    windowcontrols.macos {
+      border-spacing: 6px;
+    }
+
+    windowcontrols.macos:not(.empty).start:dir(ltr), windowcontrols.macos:not(.empty).end:dir(rtl) {
+      margin-right: 6px;
+      margin-left: 6px;
+    }
+
+    windowcontrols.macos:not(.empty).start:dir(rtl), windowcontrols.macos:not(.empty).end:dir(ltr) {
+      margin-left: 6px;
+      margin-right: 6px;
+    }
+
+    windowcontrols.macos > button:not(.suggested-action):not(.destructive-action) > image {
+      border-radius: 100%;
+      min-width: 17px;
+      min-height: 17px;
+      padding: 0;
+    }
+
+    windowcontrols.macos > button.minimize:backdrop:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos > button.maximize:backdrop:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos > button.close:backdrop:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos > button.minimize:backdrop:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.minimize:backdrop:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.maximize:backdrop:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.maximize:backdrop:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.close:backdrop:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.close:backdrop:active:not(.suggested-action):not(.destructive-action) {
+        opacity: 0.7;
     }
 """

@@ -47,20 +47,11 @@ class RewaitaApplication(Adw.Application):
         win.background_service()
         return True
 
-    # def do_command_line(self, command_line):
-    #     args = command_line.get_arguments()
-    #     win = self.props.active_window
-    #     if(not win):
-    #         win = RewaitaWindow(application=self)
-    #     if("--background" not in args):
-    #         self.activate()
-    #     return 0
-
     def on_about_action(self, *args):
         about = Adw.AboutDialog(application_name='Rewaita',
                                 application_icon='io.github.swordpuffin.rewaita',
                                 developer_name='Nathan Perlman',
-                                version='1.0.2',
+                                version='1.0.4',
                                 developers=['Nathan Perlman'],
                                 copyright='© 2025 Nathan Perlman')
         # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.

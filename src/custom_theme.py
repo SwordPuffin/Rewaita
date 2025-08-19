@@ -201,7 +201,6 @@ class CustomPage(Gtk.Box):
             )
             src_file_text = src_file_text.replace("@" + color.variable, hex_color)
         os.makedirs(os.path.join(parent.data_dir, theme_type), exist_ok=True)
-        print(emoji_entry.get_label())
         if(emoji_entry.get_label() == "Emoji (optional)"):
             emoji = ""
         else:
@@ -212,8 +211,15 @@ class CustomPage(Gtk.Box):
             file.write(src_file_text)
 
         colors = parent.load_colors_from_css(theme_file, theme_type)
-        new_button = parent.create_color_thumbnail_button(colors, (entry.get_text() + " " + emoji + ".css"))
+        new_button = parent.create_color_thumbnail_button(colors, (entry.get_text() + " " + emoji))
         new_button.connect("clicked", parent.on_theme_button_clicked, (entry.get_text() + " " + emoji + ".css"), theme_type)
+
+        #Attributes
+        new_button.func = parent.on_theme_button_clicked
+        new_button.path = os.path.join(parent.data_dir, theme_type, (entry.get_text() + " " + emoji + ".css"))
+        new_button.theme_type = theme_type
+        new_button.theme = entry.get_text()
+
         match(theme_type):
             case("light"):
                 parent.light_flowbox.insert(new_button, -1)

@@ -15,6 +15,10 @@
     <name>Nathan Perlman</name>
   </developer>
 
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+
   <url type="homepage">https://github.com/SwordPuffin/Rewaita</url>
   <url type="vcs-browser">https://github.com/SwordPuffin/Rewaita</url>
   <url type="bugtracker">https://github.com/SwordPuffin/Rewaita/issues</url>
@@ -42,9 +46,25 @@
       <image>https://raw.githubusercontent.com/SwordPuffin/Rewaita/main/data/screenshots/Screenshot3.png</image>
       <caption>Making a custom theme</caption>
     </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/SwordPuffin/Rewaita/main/data/screenshots/Screenshot4.png</image>
+      <caption>Changing the window control scheme</caption>
+    </screenshot>
   </screenshots>
 
   <releases>
+    <release version="1.0.4" date="2025-08-18">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.4</url>
+      <description translate="no">
+        <p>Rewaita v1.0.4</p>
+        <ul>
+          <li>Now allows switching the window controls look</li>
+          <li>Mobile devices are now properly supported</li>
+          <li>More Adwaita-like quick settings popup</li>
+          <li>Minor bug fixes</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.3" date="2025-08-12">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.3</url>
       <description translate="no">
