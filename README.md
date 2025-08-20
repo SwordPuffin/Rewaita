@@ -1,4 +1,5 @@
 # 🎨 Rewaita
+---
 
 <p align="center">Rewaita gives your Adwaita apps a fresh look by tinting them with popular color schemes.</p>
 <br>
@@ -8,7 +9,22 @@
     </a>
 </p>
 
+# ⬇️ Installation 
 ---
+*The AUR and NIX packages are maintained by third-party developers and are not tested in production.
+<br/>
+<br/>
+**The Flatpak version is the only officially supported format and therefore is recommended for the best experience.**
+
+### Flatpak:
+```bash
+flatpak install io.github.swordpuffin.rewaita
+```
+### AUR
+```bash
+yay -s rewaita
+```
+
 
 ## 🖼️ Screenshots
 
