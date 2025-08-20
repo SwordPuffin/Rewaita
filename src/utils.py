@@ -97,7 +97,7 @@ def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file):
 
     gnome_shell_theme_dir = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
     os.makedirs(gnome_shell_theme_dir, exist_ok=True)
-    file = shutil.copy2(theme_file, os.path.join(gnome_shell_theme_dir, "gnome-shell.css"))
+    file = shutil.copyfile(theme_file, os.path.join(gnome_shell_theme_dir, "gnome-shell.css"))
     with open(file, "w") as f:
         f.write(gnome_shell_css)
 

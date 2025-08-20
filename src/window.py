@@ -72,10 +72,15 @@ class RewaitaWindow(Adw.ApplicationWindow):
         #Moves the themes in the app sources to Rewaita's data directory
         if(not os.path.exists(os.path.join(GLib.get_user_data_dir(), "light"))):
             print("Refreshing light themes")
-            shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), "light"), os.path.join(GLib.get_user_data_dir(), "light"))
+            # Use `copyfile` to avoid copying metadata of files, like ownership or read-only flags
+            shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), "light"), os.path.join(GLib.get_user_data_dir(), "light"), copy_function=shutil.copyfile)
+            # And ensure the directory itself is writable
+            os.chmod(os.path.join(GLib.get_user_data_dir(), "light"), 0o755);
         if(not os.path.exists(os.path.join(GLib.get_user_data_dir(), "dark"))):
             print("Refreshing dark themes")
-            shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), "dark"), os.path.join(GLib.get_user_data_dir(), "dark"))
+            # Ditto
+            shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), "dark"), os.path.join(GLib.get_user_data_dir(), "dark"), copy_function=shutil.copyfile)
+            os.chmod(os.path.join(GLib.get_user_data_dir(), "dark"), 0o755);
 
         delete = Gio.SimpleAction.new(name="trash")
         delete.connect("activate", delete_items, self.delete_button, self)

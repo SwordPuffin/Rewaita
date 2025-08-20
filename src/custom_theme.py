@@ -206,7 +206,7 @@ class CustomPage(Gtk.Box):
         else:
             emoji = emoji_entry.get_label()
         theme_file = os.path.join(parent.data_dir, theme_type, (entry.get_text() + " " + emoji + ".css"))
-        shutil.copy2(src_file, theme_file)
+        shutil.copyfile(src_file, theme_file)
         with open(theme_file, "w") as file:
             file.write(src_file_text)
 
