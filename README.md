@@ -1,6 +1,10 @@
 # 🎨 Rewaita
 ---
 
+<p align="center">
+  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/icons/hicolor/scalable/apps/io.github.swordpuffin.rewaita.svg" width="400"/>
+</p>
+
 <p align="center">Rewaita gives your Adwaita apps a fresh look by tinting them with popular color schemes.</p>
 <br>
 <p align="center"> 
