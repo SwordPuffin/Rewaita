@@ -1,3 +1,15 @@
+windowcontrols.start:not(.colored):not(.macos):not(.default) > button.minimize > image {
+    color: @yellow_1;
+}
+
+windowcontrols.start:not(.colored):not(.macos):not(.default) > button.maximize > image {
+    color: @green_1;
+}
+
+windowcontrols.start:not(.colored):not(.macos):not(.default) > button.close > image {
+    color: @red_1;
+}
+
 windowcontrols.end:not(.colored):not(.macos):not(.default) > button.minimize > image {
     color: @yellow_1;
 }
