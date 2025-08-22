@@ -54,12 +54,22 @@
   </screenshots>
 
   <releases>
+    <release version="1.0.5" date="2025-08-21">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.5</url>
+      <description translate="no">
+        <p>Rewaita v1.0.5</p>
+        <ul>
+          <li>New app icon</li>
+          <li>Fixed bug where 'colored' setting would not work properly when aligned to the left</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.4" date="2025-08-18">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.4</url>
       <description translate="no">
         <p>Rewaita v1.0.4</p>
         <ul>
-          <li>Now allows switching the look of application window controls</li>
+          <li>Now allows switching the window controls look</li>
           <li>Mobile devices are now properly supported</li>
           <li>More Adwaita-like quick settings popup</li>
           <li>Minor bug fixes</li>
