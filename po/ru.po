@@ -117,10 +117,10 @@ msgstr ""
 
 #: src/window.py:121
 msgid ""
-"**Rewaita will only style GTK4 applications; Any other UI libraries are altogether "
+"**Rewaita will only style GTK3/4 applications; Any other UI libraries are altogether "
 "NOT supported**"
 msgstr ""
-"** Rewaita будет работать только с приложениями GTK4; Любые другие библиотеки "
+"** Rewaita будет работать только с приложениями GTK3/4; Любые другие библиотеки "
 "пользовательского интерфейса полностью не поддерживаются**"
 
 #: src/window.py:129
