@@ -27,18 +27,16 @@ msgid "Bring color to Adwaita"
 msgstr "Добавьте красок в Adwaita"
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:10
-msgid "Rewaita is a utility to recolor Adwaita apps to popular color schemes"
+msgid "Rewaita is a utility to recolor Gtk4/Adwaita apps to popular color schemes"
 msgstr ""
-"Rewaita - это утилита для перекрашивания приложений Adwaita в популярные "
+"Rewaita - это утилита для перекрашивания приложений Gtk4/Adwaita в популярные "
 "цветовые схемы"
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:11
 msgid ""
-"Currently, Rewaita only changes GTK4 applications; QT, and Cosmic are NOT "
-"supported"
+"Changes only affect GTK3/4 applications; Other libraries are NOT supported"
 msgstr ""
-"В настоящее время Rewaita изменяет только приложения GTK4; QT и Cosmic не "
-"поддерживаются"
+"Изменения затрагивают только приложения GTK3/4; Другие библиотеки не поддерживаются"
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:15
 msgid "Nathan Perlman"
@@ -119,12 +117,11 @@ msgstr ""
 
 #: src/window.py:121
 msgid ""
-"**Rewaita will only style GTK4 applications; GTK3 support may come later, "
-"but any other UI libraries are altogether NOT supported**"
+"**Rewaita will only style GTK4 applications; Any other UI libraries are altogether "
+"NOT supported**"
 msgstr ""
-"** Rewaita будет работать только с приложениями GTK4; поддержка GTK3 может "
-"появиться позже, но любые другие библиотеки пользовательского интерфейса "
-"полностью не поддерживаются**"
+"** Rewaita будет работать только с приложениями GTK4; Любые другие библиотеки "
+"пользовательского интерфейса полностью не поддерживаются**"
 
 #: src/window.py:129
 msgid "For Flatpak application support, run:"
