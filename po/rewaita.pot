@@ -28,17 +28,15 @@ msgid "Bring color to Adwaita"
 msgstr ""
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:10
-msgid "Rewaita is a utility to recolor Adwaita apps to popular color schemes"
+msgid "Rewaita is a utility to recolor Gtk4/Adwaita apps to popular color schemes"
 msgstr ""
 ""
 ""
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:11
 msgid ""
-"Currently, Rewaita only changes GTK4 applications; QT, and Cosmic are NOT "
-"supported"
+"Changes only affect GTK3/4 applications; Other libraries are NOT supported"
 msgstr ""
-""
 ""
 
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:15
@@ -120,8 +118,8 @@ msgstr ""
 
 #: src/window.py:121
 msgid ""
-"**Rewaita will only style GTK4 applications; GTK3 support may come later, "
-"but any other UI libraries are altogether NOT supported**"
+"**Rewaita will only style GTK3/4 applications; "
+"Any other UI libraries are altogether NOT supported**"
 msgstr ""
 ""
 
