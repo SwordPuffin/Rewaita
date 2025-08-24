@@ -54,3 +54,6 @@ git clone https://github.com/SwordPuffin/Rewaita
 Then, in [Builder](https://apps.gnome.org/Builder/) you can add it to your projects.
 
 ---
+
+## License
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
