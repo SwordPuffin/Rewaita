@@ -79,7 +79,7 @@ msgstr "Эмодзи (необязательно)"
 msgid "Theme Type"
 msgstr "Тип темы"
 
-#: src/custom_theme.py:158 
+#: src/custom_theme.py:158
 msgid "Light"
 msgstr "Светлая"
 

@@ -9,7 +9,7 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-        "--filesystem=~/.config/gtk-4.0:rw",
+        "--filesystem=~/.config:rw",
         "--filesystem=~/.local/share/themes:rw",
         "--talk-name=org.gnome.Shell.Extensions"
     ],

@@ -35,23 +35,11 @@ windowcontrols:not(.macos):not(.colored):not(.default) > button.minimize:not(.su
   background-color: @yellow_1;
 }
 
-windowcontrols:not(.macos):not(.colored):not(.default) > button.minimize:active:not(.suggested-action):not(.destructive-action) > image {
-  background-color: @yellow_1;
-}
-
 windowcontrols:not(.macos):not(.colored):not(.default) > button.maximize:not(.suggested-action):not(.destructive-action) > image {
   background-color: @green_1;
 }
 
-windowcontrols:not(.macos):not(.colored):not(.default) > button.maximize:active:not(.suggested-action):not(.destructive-action) > image {
-  background-color: @green_1;
-}
-
 windowcontrols:not(.macos):not(.colored):not(.default) > button.close:not(.suggested-action):not(.destructive-action) > image {
-  background-color: @red_1;
-}
-
-windowcontrols:not(.macos):not(.colored):not(.default) > button.close:active:not(.suggested-action):not(.destructive-action) > image {
   background-color: @red_1;
 }
 
