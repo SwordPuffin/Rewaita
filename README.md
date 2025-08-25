@@ -11,6 +11,13 @@
     <a href="https://flathub.org/apps/io.github.swordpuffin.rewaita"> 
        <img width="200" alt="Get it on Flathub" src="https://flathub.org/api/badge?svg&locale=en"/> 
     </a>
+    <br/>
+    <br/>
+    (Unofficial AUR build)
+    <br/>
+    <a href="https://aur.archlinux.org/packages/rewaita">
+        <img width="200" alt="Unofficial AUR build" src="https://img.shields.io/aur/version/rewaita?style=for-the-badge">
+    </a>
 </p>
 
 # ⬇️ Installation 
