@@ -30,7 +30,7 @@
 @define-color dialog_fg_color @view_fg_color;
 
 @define-color card_bg_color @card_bg_color;
-@define-color card_fg_color @card_bg_color;
+@define-color card_fg_color @card_fg_color;
 
 @define-color sidebar_bg_color @view_bg_color;
 @define-color sidebar_fg_color @view_fg_color;
