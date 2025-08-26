@@ -51,7 +51,7 @@ class RewaitaApplication(Adw.Application):
         about = Adw.AboutDialog(application_name='Rewaita',
                                 application_icon='io.github.swordpuffin.rewaita',
                                 developer_name='Nathan Perlman',
-                                version='1.0.4',
+                                version='1.0.6',
                                 developers=['Nathan Perlman'],
                                 copyright='© 2025 Nathan Perlman')
         # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
