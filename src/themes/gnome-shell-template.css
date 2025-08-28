@@ -565,3 +565,13 @@ StEntry:focus {
   background-color: window_bg_color;
   color: window_fg_color;
 }
+
+.icon-button:last-child {
+  color: window_fg_color;
+  background-color: card_bg_color;
+}
+
+.icon-button:last-child:hover {
+  color: window_fg_color;
+  background-color: headerbar_bg_color;
+}

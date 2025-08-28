@@ -47,17 +47,16 @@
 @define-color accent_color @accent_color;
 @define-color accent_fg_color @window_bg_color;
 @define-color destructive_bg_color @red_1;
+@define-color destructive_color @red_1;
 @define-color destructive_fg_color @window_bg_color;
 @define-color success_bg_color @green_1;
 @define-color success_fg_color @window_bg_color;
+@define-color warning_color @red_1;
 @define-color warning_bg_color @red_1;
 @define-color warning_fg_color @window_bg_color;
 @define-color error_bg_color @red_1;
 @define-color error_fg_color @window_bg_color;
-@define-color accent_color mix(@accent_bg_color,white,0.4);
-@define-color destructive_color mix(@destructive_bg_color,white,0.4);
 @define-color success_color mix(@success_bg_color,white,0.4);
-@define-color warning_color mix(@warning_bg_color,white,0.4);
 @define-color error_color mix(@error_bg_color,white,0.4);
 @define-color window_bg_color @window_bg_color;
 @define-color window_fg_color @window_fg_color;
@@ -124,6 +123,30 @@
 @define-color wm_button_active_color_c shade(@window_bg_color, 0.9);
 @define-color content_view_bg @view_bg_color;
 @define-color text_view_bg shade(@view_bg_color,0.94);
+
+/* Rewaita specific patches */
+
+.text-button:not(checkbutton):not(radiobutton) {
+	background-color: @card_bg_color;
+	border-radius: 10px;
+	border: 0px;
+	box-shadow: none;
+	background-image: none;
+}
+
+slider, scale slider {
+	background-color: @card_fg_color;
+	background-image: none;
+}
+
+combobox button, button.font, button.image-button, button.lock, button.popup.raised.toggle, text {
+  background-color: @card_bg_color;
+  background-image: none;
+}
+
+button.color {
+	background-image: none;
+}
 
 * {
   padding: 0;
