@@ -1,3 +1,22 @@
+# utils.py
+#
+# Copyright 2025 Nathan Perlman
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 import re, gi, os, shutil
 from collections import defaultdict
 gi.require_version('Xdp', '1.0')
@@ -33,8 +52,8 @@ def make_window_controls_page(page, window, current_config):
     page.append(Adw.Clamp(child=flowbox, maximum_size=1200))
 
 def add_css_provider(css):
-    from .window import on_gnome, RewaitaWindow
-    if(on_gnome): #Would break on non-gnome system
+    from .window import RewaitaWindow
+    if(GLib.getenv("XDG_CURRENT_DESKTOP") == "GNOME"): #Would break on non-gnome system
         settings = Xdp.Portal().get_settings()
         accent = settings.read_string("org.gnome.desktop.interface", "accent-color")
     else:
@@ -72,7 +91,7 @@ def add_css_provider(css):
 
     return accent_color
 
-def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file):
+def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file, gtk3_file):
     color_pattern = r'@define-color\s+([a-z0-9_]+)\s+(#[a-fA-F0-9]+|@[a-z0-9_]+);'
     colors = dict()
     references = defaultdict(list)
@@ -95,15 +114,23 @@ def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file):
     for item in items_to_replace:
         gnome_shell_css = gnome_shell_css.replace(item, colors[item])
 
+    for color in colors.keys():
+        gtk3_file = gtk3_file.replace(f"@{color}", colors[color])
+
+    gtk3_theme_file = os.path.join(GLib.getenv("HOME"), ".config", "gtk-3.0", "gtk.css")
+    with open(gtk3_theme_file, "w") as file:
+        file.write(gtk3_file)
+
     gnome_shell_theme_dir = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
     os.makedirs(gnome_shell_theme_dir, exist_ok=True)
     file = shutil.copyfile(theme_file, os.path.join(gnome_shell_theme_dir, "gnome-shell.css"))
     with open(file, "w") as f:
         f.write(gnome_shell_css)
 
-def set_to_default(config_dir, theme_type, reset_func, window_control_css):
-    with open(os.path.join(config_dir, "gtk.css"), "w") as file:
-        file.write(window_control_css)
+def set_to_default(config_dirs, theme_type, reset_func, window_control_css):
+    for config_dir in config_dirs:
+        with open(os.path.join(config_dir, "gtk.css"), "w") as file:
+            file.write(window_control_css)
 
     gnome_shell_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
     if(os.path.exists(os.path.join(gnome_shell_path, "gnome-shell.css"))):
@@ -162,6 +189,89 @@ def delete_items(action, _, button, window):
                 child.add_css_class("monospace")
                 child.disconnect_by_func(child.func)
                 child.connect("clicked", delete_theme, window)
+
+def set_gtk3_theme(gtk3_config_dir, window_control):
+    dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gtk3-template")
+    for item in os.listdir(dir):
+        if(os.path.isdir(os.path.join(dir, item))):
+            shutil.copytree(os.path.join(dir, item), os.path.join(gtk3_config_dir, item), copy_function=shutil.copyfile, dirs_exist_ok=True)
+
+    with open(os.path.join(gtk3_config_dir, "gtk.css"), "a") as file:
+        if(window_control == "colored"):
+            file.write("""
+                button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) {
+                  background: alpha(@yellow_1,0.1);
+                  color: @yellow_1;
+                }
+
+                button.minimize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
+                  color: shade(@yellow_1,0.5);
+                }
+
+                button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
+                  background: alpha(@green_1,0.1);
+                  color: @green_1;
+                }
+
+                button.maximize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
+                  color: shade(@green_1,0.5);
+                }
+
+                button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
+                  background: alpha(@red_1,0.1);
+                  color: @red_1;
+                }
+
+                button.close.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
+                  color: shade(@red_1,0.5);
+                }
+            """)
+        elif(window_control == "macos"):
+            file.write("""
+                button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) {
+                  background-color: @yellow_1;
+                  min-width: 16px;
+                  min-height: 16px;
+                  color: transparent;
+                }
+
+                button.minimize.titlebutton:active:not(.suggested-action):not(.destructive-action) {
+                  background-color: shade(@yellow_1, 0.8);
+                }
+
+                button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
+                  background-color: @green_1;
+                  min-width: 16px;
+                  min-height: 16px;
+                  color: transparent;
+                }
+
+                button.maximize.titlebutton:active:not(.suggested-action):not(.destructive-action) {
+                  background-color: shade(@green_1, 0.8);
+                }
+
+                button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
+                  background-color: @red_1;
+                  min-width: 16px;
+                  min-height: 16px;
+                  color: transparent;
+                }
+
+                button.close.titlebutton:active:not(.suggested-action):not(.destructive-action) {
+                  background-color: shade(@red_1, 0.8);
+                }
+
+                button.minimize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action), button.maximize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action), button.close.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
+                  color: transparent;
+                }
+
+                button.minimize.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action), button.minimize.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action), button.maximize.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action), button.maximize.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action), button.close.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action), button.close.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action),
+                button.maximize.titlebutton:hover:not(.suggested-action):not(.destructive-action), button.close.titlebutton:hover:not(.suggested-action):not(.destructive-action),
+                button.minimize.titlebutton:hover:not(.suggested-action):not(.destructive-action) {
+                  color: @window_bg_color;
+                }
+            """
+            )
 
 css = """
     .shake {

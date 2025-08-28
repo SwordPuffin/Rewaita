@@ -20,12 +20,10 @@
 import os, random, re, shutil, json, gi, subprocess
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
-from .utils import parse_gtk_theme, set_to_default, delete_items, make_window_controls_page, css
+from .utils import parse_gtk_theme, set_to_default, delete_items, make_window_controls_page, set_gtk3_theme, css
 from .custom_theme import CustomPage
 
-on_gnome = True
-
-try:
+if(GLib.getenv("XDG_CURRENT_DESKTOP") == "GNOME"):
     bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
     proxy = Gio.DBusProxy.new_sync(
         bus,
@@ -36,9 +34,6 @@ try:
         'org.gnome.Shell.Extensions',
         None
     )
-except Exception:
-    print("Desktop environment is not Gnome, skip shell integration")
-    on_gnome = False
 
 def reset_shell():
     proxy.call_sync("DisableExtension",
@@ -87,7 +82,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
         self.add_action(delete)
 
         self.grab_prefs()
-        scroll_box = Gtk.ScrolledWindow(vexpand=True, hexpand=True)
+        scroll_box = Gtk.ScrolledWindow(hexpand=True)
         self.main_box.append(scroll_box)
 
         self.controls = self.endbox.get_parent().get_last_child() #Gets the window controls
@@ -96,7 +91,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
         make_window_controls_page(self.theme_page, self, self.window_control)
         self.custom_page = CustomPage(self)
 
-        stack = Adw.ViewStack(transition_duration=200)
+        stack = Adw.ViewStack(transition_duration=200, vhomogeneous=False)
         stack.connect("notify::visible-child", self.on_page_changed)
         self.switcher.set_stack(stack)
         stack.add_titled_with_icon(self.theme_page, "settings", _("Theming"), "brush-symbolic")
@@ -179,31 +174,13 @@ class RewaitaWindow(Adw.ApplicationWindow):
         self.portal = Xdp.Portal()
         self.settings = self.portal.get_settings()
         self.pref = self.settings.read_uint("org.freedesktop.appearance", "color-scheme")
-        if(on_gnome):
+        if(GLib.getenv("XDG_CURRENT_DESKTOP") == "GNOME"):
             self.accent = self.settings.read_string("org.gnome.desktop.interface", "accent-color")
-        self.request_background()
-
-    def request_background(self):
-        self.portal.request_background(
-            None,
-            "Automatic transitions between light/dark mode",
-            None,
-            Xdp.BackgroundFlags.AUTOSTART | Xdp.BackgroundFlags.ACTIVATABLE,
-            None,
-            self.on_background_response
-        )
-
-    def on_background_response(self, portal, result):
-        success = portal.request_background_finish(result)
-        if(success):
-            print("Background permission granted")
-        else:
-            print("Background permission denied")
 
     def background_service(self):
         check_accent_color = False
         
-        if(on_gnome): #Will break on non-gnome systems
+        if(GLib.getenv("XDG_CURRENT_DESKTOP") == "GNOME"): #Will break on non-gnome systems
             check_accent_color = bool(self.settings.read_string("org.gnome.desktop.interface", "accent-color") != self.accent)
             
         if(self.settings.read_uint("org.freedesktop.appearance", "color-scheme") != self.pref or check_accent_color):
@@ -226,7 +203,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
         command_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, halign=Gtk.Align.CENTER, spacing=8)
         command_label = Gtk.Label(justify=Gtk.Justification.CENTER, label=_("For Flatpak application support, run:"))
         self.entry = Gtk.Entry(halign=Gtk.Align.CENTER, hexpand=True, editable=False, can_focus=True, width_request=390)
-        self.entry.set_text("sudo flatpak override --filesystem=xdg-config/gtk-4.0:rw")
+        self.entry.set_text("sudo flatpak override --filesystem=xdg-config/gtk-3.0:rw; sudo flatpak override --filesystem=xdg-config/gtk-4.0:rw")
 
         self.copy_button = Gtk.Button.new_from_icon_name("edit-copy-symbolic")
         self.copy_button.set_halign(Gtk.Align.START)
@@ -248,8 +225,8 @@ class RewaitaWindow(Adw.ApplicationWindow):
             button.remove_css_class("suggested-action")
         GLib.timeout_add(1000, remove_success)
 
-    template_file = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css"))
-    template_file_content = template_file.read()
+    template_file_content = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css")).read()
+    gtk3_template_file_content = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "gtk3-template", "gtk.css")).read()
 
     def create_theme_page(self):
         page = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
@@ -329,7 +306,8 @@ class RewaitaWindow(Adw.ApplicationWindow):
         if(button.get_icon_name() != "reload-symbolic"): button.add_css_class("suggested-action")
 
     def on_theme_selected(self):
-        config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-4.0")
+        gtk3_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-3.0")
+        gtk4_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-4.0")
         if(self.pref == 1):
             theme_name = self.dark_theme
             theme_type = "dark"
@@ -339,12 +317,12 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
         self.controls.set_css_classes([self.window_control])
         if(theme_name.lower() == "default"):
-            set_to_default(config_dir, theme_type, reset_shell, self.window_control_css)
+            set_to_default([gtk3_config_dir, gtk4_config_dir], theme_type, reset_shell, self.window_control_css)
             return
         theme_file = os.path.join(self.data_dir, theme_type, theme_name)
         try:
-            shutil.copy(theme_file, os.path.join(config_dir, "gtk.css"))
-            with open(os.path.join(config_dir, "gtk.css"), "a") as file:
+            shutil.copy(theme_file, os.path.join(gtk4_config_dir, "gtk.css"))
+            with open(os.path.join(gtk4_config_dir, "gtk.css"), "a") as file:
                 file.write(self.window_control_css)
         except Exception as e:
             print(f"Error moving file: {e}")
@@ -352,8 +330,9 @@ class RewaitaWindow(Adw.ApplicationWindow):
         gtk_file = open(theme_file)
         self.toast_overlay.dismiss_all()
         self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Change GNOME shell theme to 'Rewaita' and reboot for full changes"))))
-        parse_gtk_theme(gtk_file.read() + "\n\n" + self.window_control_css, self.template_file_content, os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css"))
-        if(on_gnome):
+        parse_gtk_theme(gtk_file.read() + "\n\n" + self.window_control_css, self.template_file_content, os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css"), self.gtk3_template_file_content)
+        set_gtk3_theme(gtk3_config_dir, self.window_control)
+        if(GLib.getenv("XDG_CURRENT_DESKTOP") == "GNOME"):
             reset_shell()
 
     def on_window_control_clicked(self, button, control_file, window, flowbox):

@@ -24,6 +24,7 @@ import sys
 import signal
 import locale
 import gettext
+from gi.repository import GLib
 
 VERSION = '@VERSION@'
 pkgdatadir = '@pkgdatadir@'

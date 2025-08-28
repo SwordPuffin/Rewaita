@@ -17,35 +17,89 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import sys
-import gi
+import sys, gi, os
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
+gi.require_version('Xdp', '1.0')
 
-from gi.repository import Gtk, Gio, Adw, GLib
+from gi.repository import Gtk, Gio, Adw, GLib, Xdp
 from .window import RewaitaWindow
 
 class RewaitaApplication(Adw.Application):
     def __init__(self):
         super().__init__(application_id='io.github.swordpuffin.rewaita',
-                         flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
+                         flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE,
                          resource_base_path='/io/github/swordpuffin/rewaita')
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
 
+        self.add_main_option(
+            "background",
+            ord("b"),
+            GLib.OptionFlags.NONE,
+            GLib.OptionArg.NONE,
+            "Checks for when the accent color or light/dark mode changes",
+            None,
+        )
+
     def do_activate(self):
+        print("activating")
         win = self.props.active_window
         if not win:
             win = RewaitaWindow(application=self)
+
+        win.portal.request_background(
+            None,
+            "Automatic transitions between light/dark mode",
+            None,
+            Xdp.BackgroundFlags.ACTIVATABLE,
+            None,
+            self.on_background_response
+        )
+
         win.present()
-        GLib.timeout_add_seconds(1, self.background_tick, win)
+        GLib.timeout_add_seconds(1, self.background_tick)
         loop = GLib.MainLoop()
         loop.run()
 
-    def background_tick(self, win):
+    def on_background_response(self, portal, result):
+        success = portal.request_background_finish(result)
+        if(success):
+            print("Background permission granted")
+            with open(os.path.join(GLib.getenv("HOME"), ".config", "autostart", "rewaita.desktop"), "w") as file:
+                file.write("""
+[Desktop Entry]
+Type=Application
+Name=io.github.swordpuffin.rewaita
+X-XDP-Autostart=io.github.swordpuffin.rewaita
+Exec=flatpak run io.github.swordpuffin.rewaita --background
+DBusActivatable=true
+X-Flatpak=io.github.swordpuffin.rewaita
+                """
+                )
+        else:
+            print("Background permission denied")
+
+    def background_tick(self):
+        win = self.props.active_window
+        if not win:
+            win = RewaitaWindow(application=self)
+
         win.background_service()
         return True
+
+    def do_command_line(self, args):
+        options = args.get_options_dict()
+        options = options.end().unpack()
+
+        if("background" in options):
+            print("Starting app in background")
+        else:
+            self.activate()
+        GLib.timeout_add_seconds(1, self.background_tick)
+        loop = GLib.MainLoop()
+        loop.run()
 
     def on_about_action(self, *args):
         about = Adw.AboutDialog(application_name='Rewaita',
@@ -59,22 +113,14 @@ class RewaitaApplication(Adw.Application):
         about.present(self.props.active_window)
 
     def create_action(self, name, callback, shortcuts=None):
-        """Add an application action.
-
-        Args:
-            name: the name of the action
-            callback: the function to be called when the action is
-              activated
-            shortcuts: an optional list of accelerators
-        """
         action = Gio.SimpleAction.new(name, None)
         action.connect("activate", callback)
         self.add_action(action)
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
-
 def main(version):
-    """The application's entry point."""
     app = RewaitaApplication()
     return app.run(sys.argv)
+
+

@@ -10,11 +10,6 @@
         <child type="top">
           <object class="AdwHeaderBar">
             <property name="show-title">false</property>
-            <!-- <child type="start"> -->
-            <!--   <object class="GtkStackSwitcher" id="switcher"> -->
-            <!--     <property name="halign">start</property> -->
-            <!--   </object> -->
-            <!-- </child> -->
             <child type="end">
               <object class="GtkBox" id="endbox">
                 <child>
@@ -77,3 +72,4 @@
     </section>
   </menu>
 </interface>
+

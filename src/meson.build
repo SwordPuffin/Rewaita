@@ -54,3 +54,8 @@ install_subdir(
   'themes/light',
   install_dir: moduledir
 )
+
+install_subdir(
+  'themes/gtk3-template',
+  install_dir: moduledir
+)
