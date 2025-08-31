@@ -22,6 +22,10 @@
   background-color: card_bg_color;
 }
 
+#panel .panel-button#panelActivities .workspace-dot {
+  background-color: window_fg_color;
+}
+
 .search-entry,
 StEntry {
   background-color: card_bg_color;
@@ -511,10 +515,13 @@ StEntry:focus {
   border-radius: 16px;
 }
 
-.message-list-controls .dnd-button {
-  color: window_bg_color;
+.toggle-switch {
+  color: window_fg_color;
+  background-color: window_bg_color;
+}
+
+.toggle-switch:checked {
   background-color: accent_color;
-  border: none;
 }
 
 .message {

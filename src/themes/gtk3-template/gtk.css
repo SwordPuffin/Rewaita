@@ -139,13 +139,17 @@ slider, scale slider {
 	background-image: none;
 }
 
-combobox button, button.font, button.image-button, button.lock, button.popup.raised.toggle, text {
+combobox button, button.font, button.image-button, button.lock, button.popup.raised.toggle, text, .popup.toggle {
   background-color: @card_bg_color;
   background-image: none;
 }
 
 button.color {
 	background-image: none;
+}
+
+menubar {
+	background-color: @window_bg_color;
 }
 
 * {

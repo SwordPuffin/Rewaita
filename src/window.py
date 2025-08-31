@@ -20,7 +20,7 @@
 import os, random, re, shutil, json, gi, subprocess
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
-from .utils import parse_gtk_theme, set_to_default, delete_items, make_window_controls_page, set_gtk3_theme, css
+from .utils import parse_gtk_theme, set_to_default, delete_items, make_window_controls_page, set_gtk3_theme, get_accent_color, css
 from .custom_theme import CustomPage
 
 if(GLib.getenv("XDG_CURRENT_DESKTOP") == "GNOME"):
@@ -63,7 +63,11 @@ class RewaitaWindow(Adw.ApplicationWindow):
         Gtk.StyleContext.add_provider_for_display(
             Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
         )
-
+        
+        if(not os.path.exists(os.path.join(GLib.getenv("HOME"), ".local", "share", "themes"))): 
+            print("Making gnome shell theme directory")
+            os.mkdir(os.path.join(GLib.getenv("HOME"), ".local", "share", "themes"))
+            
         #Moves the themes in the app sources to Rewaita's data directory
         if(not os.path.exists(os.path.join(GLib.get_user_data_dir(), "light"))):
             print("Refreshing light themes")
@@ -174,18 +178,12 @@ class RewaitaWindow(Adw.ApplicationWindow):
         self.portal = Xdp.Portal()
         self.settings = self.portal.get_settings()
         self.pref = self.settings.read_uint("org.freedesktop.appearance", "color-scheme")
-        if(GLib.getenv("XDG_CURRENT_DESKTOP") == "GNOME"):
-            self.accent = self.settings.read_string("org.gnome.desktop.interface", "accent-color")
-
-    def background_service(self):
-        check_accent_color = False
+        self.accent = get_accent_color()
         
-        if(GLib.getenv("XDG_CURRENT_DESKTOP") == "GNOME"): #Will break on non-gnome systems
-            check_accent_color = bool(self.settings.read_string("org.gnome.desktop.interface", "accent-color") != self.accent)
-            
-        if(self.settings.read_uint("org.freedesktop.appearance", "color-scheme") != self.pref or check_accent_color):
+    def background_service(self):
+        if(self.settings.read_uint("org.freedesktop.appearance", "color-scheme") != self.pref or get_accent_color() != self.accent):
             self.pref = self.settings.read_uint("org.freedesktop.appearance", "color-scheme")
-            self.accent = self.settings.read_string("org.gnome.desktop.interface", "accent-color")
+            self.accent = get_accent_color()
             self.on_theme_selected()
         print(self.pref)
 
@@ -323,7 +321,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
         try:
             shutil.copy(theme_file, os.path.join(gtk4_config_dir, "gtk.css"))
             with open(os.path.join(gtk4_config_dir, "gtk.css"), "a") as file:
-                file.write(self.window_control_css)
+                file.write(self.window_control_css + f"\n\n@define-color accent_bg_color @{get_accent_color()};\n@define-color accent_fg_color @window_bg_color;")
         except Exception as e:
             print(f"Error moving file: {e}")
 

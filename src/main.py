@@ -42,13 +42,17 @@ class RewaitaApplication(Adw.Application):
             "Checks for when the accent color or light/dark mode changes",
             None,
         )
-
+        
+    def on_close_request(self, window, *args):
+        window.hide()   
+        return True
+        
     def do_activate(self):
-        print("activating")
         win = self.props.active_window
         if not win:
             win = RewaitaWindow(application=self)
 
+        win.connect("close-request", self.on_close_request)
         win.portal.request_background(
             None,
             "Automatic transitions between light/dark mode",
@@ -57,11 +61,10 @@ class RewaitaApplication(Adw.Application):
             None,
             self.on_background_response
         )
-
+        
         win.present()
-        GLib.timeout_add_seconds(1, self.background_tick)
-        loop = GLib.MainLoop()
-        loop.run()
+        if(not hasattr(self, "_background_tick_id")):
+            self._background_tick_id = GLib.timeout_add_seconds(1, self.background_tick)
 
     def on_background_response(self, portal, result):
         success = portal.request_background_finish(result)
@@ -85,21 +88,18 @@ X-Flatpak=io.github.swordpuffin.rewaita
         win = self.props.active_window
         if not win:
             win = RewaitaWindow(application=self)
-
         win.background_service()
         return True
 
     def do_command_line(self, args):
-        options = args.get_options_dict()
-        options = options.end().unpack()
-
+        options = args.get_options_dict().end().unpack()
+        win = self.props.active_window
+        if not win:
+            win = RewaitaWindow(application=self)
+        
+        self.activate()
         if("background" in options):
-            print("Starting app in background")
-        else:
-            self.activate()
-        GLib.timeout_add_seconds(1, self.background_tick)
-        loop = GLib.MainLoop()
-        loop.run()
+            win.emit("close-request")   
 
     def on_about_action(self, *args):
         about = Adw.AboutDialog(application_name='Rewaita',

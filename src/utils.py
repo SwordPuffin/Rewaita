@@ -20,7 +20,7 @@
 import re, gi, os, shutil
 from collections import defaultdict
 gi.require_version('Xdp', '1.0')
-from gi.repository import Gtk, Gdk, GLib, Xdp, Adw
+from gi.repository import Gtk, Gdk, GLib, Xdp, Adw, Gio
 
 extras_info = {
     "Default": "default",
@@ -45,20 +45,20 @@ def make_window_controls_page(page, window, current_config):
         button_box.append(title)
         button = Gtk.Button(child=button_box, hexpand=True)
         button.connect("clicked", window.on_window_control_clicked, extras_info[control], window, flowbox)
-        print(current_config)
         if(extras_info[control] == current_config):
             button.add_css_class("suggested-action")
         flowbox.insert(button, -1)
     page.append(Adw.Clamp(child=flowbox, maximum_size=1200))
 
-def add_css_provider(css):
-    from .window import RewaitaWindow
-    if(GLib.getenv("XDG_CURRENT_DESKTOP") == "GNOME"): #Would break on non-gnome system
-        settings = Xdp.Portal().get_settings()
+def get_accent_color():
+    settings = Xdp.Portal().get_settings()
+    source = Gio.SettingsSchemaSource.get_default()
+    source.lookup("org.gnome.desktop.interface", True)
+    
+    try:
         accent = settings.read_string("org.gnome.desktop.interface", "accent-color")
-    else:
-        accent = "blue" 
-
+    except:
+        accent = "blue" #Pass through for the time being
     match(accent):
         case("blue"):
             accent_color = "blue_1"
@@ -78,8 +78,13 @@ def add_css_provider(css):
             accent_color = "purple_2"
         case("slate"):
             accent_color = "light_5"
-
+        
+    return accent_color
+        
+def add_css_provider(css):
+    accent_color = get_accent_color()
     css_provider = Gtk.CssProvider()
+
     css_provider.load_from_data(f"""
         {css}
         @define-color accent_bg_color @{accent_color};
