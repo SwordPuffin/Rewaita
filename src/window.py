@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os, random, re, shutil, json, gi, subprocess
+import os, random, re, shutil, json, gi
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
 from .utils import parse_gtk_theme, set_to_default, delete_items, make_window_controls_page, set_gtk3_theme, get_accent_color, css

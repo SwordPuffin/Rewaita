@@ -139,8 +139,9 @@ slider, scale slider {
 	background-image: none;
 }
 
-combobox button, button.font, button.image-button, button.lock, button.popup.raised.toggle, text, .popup.toggle {
+combobox button, button.font, button.image-button, button.lock, button.popup.raised.toggle, text, .popup.toggle, tab:checked {
   background-color: @card_bg_color;
+  color: @card_fg_color;
   background-image: none;
 }
 
@@ -150,6 +151,7 @@ button.color {
 
 menubar {
 	background-color: @window_bg_color;
+	color: @window_fg_color;
 }
 
 * {
