@@ -1,33 +1,35 @@
 /* Tokyo Night Storm Palette */
-@define-color window_bg_color #1a1b26; /* bg */
-@define-color window_fg_color #c0caf5; /* fg */
+/* bg */
+@define-color window_bg_color #24283b;
+/* fg */
+@define-color window_fg_color #c0caf5;
 
 /* View styling */
-@define-color view_bg_color #1a1b26;
+@define-color view_bg_color #1f2335;
 @define-color view_fg_color #c0caf5;
 
 /* Header bar */
-@define-color headerbar_bg_color #1f2335;
-@define-color headerbar_backdrop_color #1f2335;
+@define-color headerbar_bg_color #29304d;
+@define-color headerbar_backdrop_color #24283b;
 @define-color headerbar_fg_color #c0caf5;
 
 /* Popovers and dialogs */
-@define-color popover_bg_color #1a1b26;
+@define-color popover_bg_color #24283b;
 @define-color popover_fg_color #c0caf5;
 
 @define-color dialog_bg_color @popover_bg_color;
 @define-color dialog_fg_color @popover_fg_color;
 
 /* Cards and sidebars */
-@define-color card_bg_color #2b2c3b;
+@define-color card_bg_color rgb(255 255 255 / 8%);
 @define-color card_fg_color #c0caf5;
 
-@define-color sidebar_bg_color #1a1b26;
+@define-color sidebar_bg_color #29304d;
 @define-color sidebar_fg_color #c0caf5;
-@define-color sidebar_backdrop_color #1a1b26;
+@define-color sidebar_backdrop_color #292f48;
 @define-color sidebar_border_color #3b4261;
 
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_bg_color #292f48;
 @define-color secondary_sidebar_fg_color @sidebar_fg_color;
 @define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
 @define-color secondary_sidebar_border_color @sidebar_border_color;
@@ -85,7 +87,7 @@
 @define-color dark_2 #3b4261;
 @define-color dark_3 #292e42;
 @define-color dark_4 #1f2335;
-@define-color dark_5 #1a1b26;
+@define-color dark_5 #24283B;
 
 toast {
   background-color: @window_bg_color;
