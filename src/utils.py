@@ -52,8 +52,6 @@ def make_window_controls_page(page, window, current_config):
 
 def get_accent_color():
     settings = Xdp.Portal().get_settings()
-    source = Gio.SettingsSchemaSource.get_default()
-    source.lookup("org.gnome.desktop.interface", True)
     
     try:
         accent = settings.read_string("org.gnome.desktop.interface", "accent-color")
