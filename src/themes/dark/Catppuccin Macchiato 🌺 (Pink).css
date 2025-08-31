@@ -1,0 +1,130 @@
+/* Catppuccin Macchiato Palette */
+@define-color rosewater #f4dbd6;
+@define-color flamingo #f0c6c6;
+@define-color pink #f5bde6;
+@define-color mauve #c6a0f6;
+@define-color red #ed8796;
+@define-color maroon #ee99a0;
+@define-color peach #f5a97f;
+@define-color yellow #eed49f;
+@define-color green #a6da95;
+@define-color teal #8bd5ca;
+@define-color sky #91d7e3;
+@define-color sapphire #7dc4e4;
+@define-color blue #8aadf4;
+@define-color lavender #b7bdf8;
+@define-color text #cad3f5;
+@define-color subtext1 #b8c0e0;
+@define-color subtext0 #a5adcb;
+@define-color overlay2 #939ab7;
+@define-color overlay1 #8087a2;
+@define-color overlay0 #6e738d;
+@define-color surface2 #5b6078;
+@define-color surface1 #494d64;
+@define-color surface0 #363a4f;
+@define-color base #24273a;
+@define-color mantle #1e2030;
+@define-color crust #181926;
+
+/* Borrowed From Catppuccin Mocha Palette */
+@define-color blue_1 @blue;
+@define-color blue_2 @teal;
+@define-color blue_3 @sky;
+@define-color blue_4 @sappire;
+@define-color blue_5 @lavender;
+
+@define-color green_1 @green;
+@define-color green_2 @teal;
+@define-color green_3 @sky;
+@define-color green_4 @sapphire;
+@define-color green_5 @blue;
+
+@define-color yellow_1 @yellow;
+@define-color yellow_2 @peach;
+@define-color yellow_3 @yellow;
+@define-color yellow_4 @red;
+@define-color yellow_5 @maroon;
+
+@define-color orange_1 @peach;
+@define-color orange_2 @red;
+@define-color orange_3 @maroon;
+@define-color orange_4 @yellow;
+@define-color orange_5 @green;
+
+@define-color red_1 @red;
+@define-color red_2 @maroon;
+@define-color red_3 @pink;
+@define-color red_4 @flamingo;
+@define-color red_5 @rosewater;
+
+@define-color purple_1 @mauve;
+@define-color purple_2 @lavender;
+@define-color purple_3 @pink;
+@define-color purple_4 @flamingo;
+@define-color purple_5 @rosewater;
+
+@define-color brown_1 @surface2;
+@define-color brown_2 @overlay0;
+@define-color brown_3 @overlay1;
+@define-color brown_4 @overlay2;
+@define-color brown_5 @subtext1;
+
+@define-color light_1 @text;
+@define-color light_2 @subtext0;
+@define-color light_3 @subtext1;
+@define-color light_4 @blue;
+@define-color light_5 @overlay0;
+
+@define-color dark_1 @surface0;
+@define-color dark_2 @surface1;
+@define-color dark_3 @surface2;
+@define-color dark_4 @mantle;
+@define-color dark_5 @crust;
+
+
+@define-color window_bg_color @base;
+@define-color window_fg_color @text;
+
+/* View styling */
+@define-color view_bg_color @base;
+@define-color view_fg_color @text;
+
+/* Header bar */
+@define-color headerbar_bg_color @mantle;
+@define-color headerbar_backdrop_color @mantle;
+@define-color headerbar_fg_color @text;
+
+/* Popovers and dialogs */
+@define-color popover_bg_color @base;
+@define-color popover_fg_color @text;
+
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+
+/* Cards and sidebars */
+@define-color card_bg_color @surface0;
+@define-color card_fg_color @text;
+
+@define-color sidebar_bg_color @base;
+@define-color sidebar_fg_color @text;
+@define-color sidebar_backdrop_color @base;
+@define-color sidebar_border_color @surface0;
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+@define-color accent_color @pink;
+@define-color accent_bg_color @pink;
+@define-color accent_fg_color @mantle;
+
+toast {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+toggle:checked {
+  background-color: @card_bg_color;
+  color: @window_fg_color;
+}
