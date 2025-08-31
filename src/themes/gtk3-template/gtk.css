@@ -154,6 +154,20 @@ menubar {
 	color: @window_fg_color;
 }
 
+row:selected label {
+	color: @card_fg_color;
+}
+
+switch:checked {
+	background-image: none;
+	background-color: @accent_bg_color;
+}
+
+switch {
+	background-image: none;
+	background-color: @card_bg_color;
+}
+
 * {
   padding: 0;
   -GtkToolButton-icon-spacing: 4;
