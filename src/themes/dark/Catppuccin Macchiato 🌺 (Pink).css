@@ -115,10 +115,6 @@
 @define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
 @define-color secondary_sidebar_border_color @sidebar_border_color;
 
-@define-color accent_color @pink;
-@define-color accent_bg_color @pink;
-@define-color accent_fg_color @mantle;
-
 toast {
   background-color: @window_bg_color;
   color: @window_fg_color;
