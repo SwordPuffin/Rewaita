@@ -9,7 +9,9 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-        "--filesystem=~/.config:rw",
+		"--filesystem=~/.config/autostart:rw",
+        "--filesystem=~/.config/gtk-3.0:rw",
+        "--filesystem=~/.config/gtk-4.0:rw",
         "--filesystem=~/.local/share/themes:rw",
         "--talk-name=org.gnome.Shell.Extensions"
     ],
@@ -44,7 +46,7 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/SwordPuffin/Rewaita.git",
-                    "tag" : "v1.0.6"
+                    "tag" : "v1.0.7"
                 }
             ]
         }
