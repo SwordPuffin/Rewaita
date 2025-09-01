@@ -1,0 +1,157 @@
+# This file is distributed under the same license as the rewaita package.
+# Author: Furkan Akçay https://github.com/akcaymd., August 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rewaita\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-05 21:08+0400\n"
+"PO-Revision-Date: 2025-08-28 21:08+0400\n"
+"Last-Translator: Furkan Akçay https://github.com/akcaymd\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#: data/io.github.swordpuffin.rewaita.desktop.in:2
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:7
+msgid "Rewaita"
+msgstr "Rewaita"
+
+#: data/io.github.swordpuffin.rewaita.desktop.in:8
+msgid "gtk;adwaita;gnome;shell;theme"
+msgstr "gtk;adwaita;gnome;shell;tema"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:8
+msgid "Bring color to Adwaita"
+msgstr "Adwaita'ya renk katın"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:10
+msgid "Rewaita is a utility to recolor Gtk4/Adwaita apps to popular color schemes"
+msgstr ""
+"Rewaita, Gtk4/Adwaita uygulamalarını popüler renk şemalarına göre"
+"yeniden renklendirmeye yarayan bir araçtır."
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:11
+msgid ""
+"Changes only affect GTK3/4 applications; Other libraries are NOT supported"
+msgstr ""
+"Değişiklikler yalnızca GTK3/4 uygulamalarını etkiler; Diğer kütüphaneler DESTEKLENMEMEKTEDİR"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:15
+msgid "Nathan Perlman"
+msgstr "Nathan Perlman"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:35
+msgid "Browsing through dark themes"
+msgstr "Koyu temalara göz atın"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:39
+msgid "Browsing through light themes"
+msgstr "Açık temalara göz atın"
+
+#. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
+#: src/main.py:52
+msgid "translator-credits"
+msgstr "Furkan Akçay https://github.com/akcaymd"
+
+#: src/utils.py:92
+msgid " has been deleted"
+msgstr " silindi"
+
+#: src/utils.py:98
+msgid "Delete"
+msgstr "Sil"
+
+#: src/utils.py:99
+msgid "Are you sure you want to delete that theme?\nThis cannot be undone."
+msgstr "Bu temayı silmek istediğinizden emin misiniz?\nBu işlem geri alınamaz."
+
+#: src/custom_theme.py:149
+msgid "Theme name (required)"
+msgstr "Tema adı (gerekli)"
+
+#: src/custom_theme.py:153
+msgid "Emoji (optional)"
+msgstr "Emoji (isteğe bağlı)"
+
+#: src/custom_theme.py:157
+msgid "Theme Type"
+msgstr "Tema türü"
+
+#: src/custom_theme.py:158 
+msgid "Light"
+msgstr "Aydınlık"
+
+#: src/custom_theme.py:159
+msgid "Dark"
+msgstr "Karanlık"
+
+#: src/window.py:92
+msgid "Theming"
+msgstr "Tema"
+
+#: src/window.py:120
+msgid ""
+"After setting a color scheme, go to Gnome-Tweaks (or similar) and set "
+"'Rewaita' as your Shell theme. It contains the same colors as the active "
+"scheme for continuity\n"
+"\n"
+"Rewaita also does not style parts of apps like Gnome Builder and BlackBox "
+"which have their own syntax highlighting system\n"
+"\n"
+"If you find a problem with any theme, would like to suggest another be "
+"added, or want to submit your own to be included, please make an issue or a "
+"pull request @ https://github.com/SwordPuffin/Rewaita"
+msgstr ""
+"Bir renk şeması belirledikten sonra, Gnome-Tweaks (veya benzeri bir araç) uygulamasını açın ve "
+"Kabuk teması olarak 'Rewaita'yı seçin. Bu sayede, bütünlük sağlamak için etkin şemayla aynı"
+"renkleri kullanmış olursunuz."
+"\n"
+"Herhangi bir temada sorun fark ederseniz, yeni bir tema önerisinde bulunmak ya da kendi temanızı eklenmesi için"
+"paylaşmak isterseniz, lütfen https://github.com/SwordPuffin/Rewaita adresinde bir sorun bildirimi (issue) açın ya da o adrese bir katkı isteği (pull request) gönderin."
+"\n"
+""
+""
+""
+
+#: src/window.py:121
+msgid ""
+"**Rewaita will only style GTK3/4 applications; "
+"Any other UI libraries are altogether NOT supported**"
+msgstr ""
+"**Rewaita yalnızca GTK3/4 uygulamalarını destekler; diğer kütüphaneler desteklenmemektedir."
+
+#: src/window.py:129
+msgid "For Flatpak application support, run:"
+msgstr "Flatpak uygulama desteği için şu komutu çalıştırın:"
+
+#: src/window.py:201
+msgid "User Guide"
+msgstr "Kullanım Kılavuzu"
+
+#: src/window.py:260
+msgid "Reset to default"
+msgstr "Varsayılan ayarlara geri dön"
+
+#: src/window.py:328
+msgid "Change GNOME shell theme to 'Rewaita' and reboot for full changes"
+msgstr "GNOME Kabuk temasını 'Rewaita' olarak değiştirin ve tüm değişikliklerin etkili olması için sistemi yeniden başlatın."
+
+#: src/window.ui:22
+msgid "Main Menu"
+msgstr "Ana Menü"
+
+#: src/window.ui:44
+msgid "_Keyboard Shortcuts"
+msgstr "_Klavye Kısayolları"
+
+#: src/window.ui:48
+msgid "_About Rewaita"
+msgstr "_Rewaita Hakkında"
+
+#: src/window.ui:52
+msgid "_Help"
+msgstr "_Yardım"
