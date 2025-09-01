@@ -61,14 +61,14 @@
         <ul>
           <li>Start on GTK3 support w/ Adwgtk3</li>
           <li>Runs in the background on startup rather than a visible window</li>
-          <li>Russian translation support</li>
+          <li>Russian + Turkish translation support</li>
           <li>Updated app icon</li>
           <li>Numerous bug fixes</li>
         </ul>
         <p>Thanks to all our contributors !!!</p>
         <ul>
           <li>Bug reporters: @psypherium, @MirS0bhan, @ThatOneCalculator, @heliguy4599, @BigBoyBarney, @TahaIr88</li>
-          <li>Translators: @Vistaus (Dutch), @Alexmelman88 (Russian)</li>
+          <li>Translators: @Vistaus (Dutch), @Alexmelman88 (Russian), @akcaymd (Turkish)</li>
           <li>3rd party maintainers: @getchoo (NIXPKGS), @yochananmarqos (AUR)</li>
         </ul>
       </description>
