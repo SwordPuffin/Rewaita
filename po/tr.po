@@ -112,10 +112,6 @@ msgstr ""
 "\n"
 "Herhangi bir temada sorun fark ederseniz, yeni bir tema önerisinde bulunmak ya da kendi temanızı eklenmesi için"
 "paylaşmak isterseniz, lütfen https://github.com/SwordPuffin/Rewaita adresinde bir sorun bildirimi (issue) açın ya da o adrese bir katkı isteği (pull request) gönderin."
-"\n"
-""
-""
-""
 
 #: src/window.py:121
 msgid ""
