@@ -54,10 +54,10 @@
   </screenshots>
 
   <releases>
-    <release version="1.0.6" date="2025-08-31">
-      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.6</url>
+  <release version="1.0.7" date="2025-09-01">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.7</url>
       <description translate="no">
-        <p>Rewaita v1.0.6</p>
+        <p>Rewaita v1.0.7</p>
         <ul>
           <li>Start on GTK3 support w/ Adwgtk3</li>
           <li>Runs in the background on startup rather than a visible window</li>
@@ -70,6 +70,15 @@
           <li>Bug reporters: @psypherium, @MirS0bhan, @ThatOneCalculator, @heliguy4599, @BigBoyBarney, @TahaIr88</li>
           <li>Translators: @Vistaus (Dutch), @Alexmelman88 (Russian)</li>
           <li>3rd party maintainers: @getchoo (NIXPKGS), @yochananmarqos (AUR)</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.6" date="2025-08-31">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.6</url>
+      <description translate="no">
+        <p>Rewaita v1.0.6</p>
+        <ul>
+          <li>Autostart exception</li>
         </ul>
       </description>
     </release>
