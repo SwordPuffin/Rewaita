@@ -36,8 +36,9 @@ flatpak install io.github.swordpuffin.rewaita
 yay -s rewaita
 ```
 
-### Allow flatpak to edit gtk4 themes
+### Allow Flatpak to edit GTK3/4 themes
 ```bash
+flatpak override --filesystem=xdg-config/gtk-3.0:rw
 flatpak override --filesystem=xdg-config/gtk-4.0:rw
 ```
 
