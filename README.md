@@ -42,7 +42,6 @@ flatpak override --filesystem=xdg-config/gtk-3.0:rw
 flatpak override --filesystem=xdg-config/gtk-4.0:rw
 ```
 
-
 ## 🖼️ Screenshots
 
 <p align="center">

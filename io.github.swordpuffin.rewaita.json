@@ -9,7 +9,7 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-		"--filesystem=~/.config/autostart:rw",
+	"--filesystem=~/.config/autostart:rw",
         "--filesystem=~/.config/gtk-3.0:rw",
         "--filesystem=~/.config/gtk-4.0:rw",
         "--filesystem=~/.local/share/themes:rw",
@@ -46,7 +46,7 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/SwordPuffin/Rewaita.git",
-                    "tag" : "v1.0.7"
+                    "tag" : "v1.0.8"
                 }
             ]
         }

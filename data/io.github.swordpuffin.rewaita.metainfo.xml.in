@@ -9,7 +9,7 @@
   <description>
     <p>Rewaita gives your Adwaita apps a fresh look by tinting them with popular color schemes.</p>
     <p>Supported changes now include modifying application window controls, and making your own custom themes</p>
-    <p>Changes only affect GTK3/4 applications; Other libraries are NOT supported</p>
+    <p>Changes only affect GTK3/4 applications; other UI libraries are not affected</p>
   </description>
 
   <developer id="io.github.swordpuffin.rewaita">
@@ -54,7 +54,22 @@
   </screenshots>
 
   <releases>
-  <release version="1.0.7" date="2025-09-01">
+    <release version="1.0.8" date="2025-09-16">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.8</url>
+      <description translate="no">
+        <p>Rewaita v1.0.7</p>
+        <ul>
+          <li>Ironed out most remaining visual bugs with GTK3 and Gnome Shell support</li>
+          <li>Performance improvements when running in the background</li>
+          <li>Now allows adding some css to your custom themes beyond just colors</li>
+          <li>New themes: Catppuccin Macchiato, Otto, Bluetiful Dusk, Pretty Purple</li>
+          <li>Thanks to the new theme submitters: @psypherium, @F5BDE6, @Boria138</li>
+          <li>New preferences dialog + code overhaul</li>
+          <li>Numerous bug fixes</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.7" date="2025-09-01">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.7</url>
       <description translate="no">
         <p>Rewaita v1.0.7</p>
