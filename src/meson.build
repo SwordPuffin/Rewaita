@@ -31,7 +31,10 @@ rewaita_sources = [
   'main.py',
   'window.py',
   'utils.py',
-  'custom_theme.py'
+  'widgets/custom_theme_page.py',
+  'widgets/theme_page.py',
+  'widgets/window_control_box.py',
+  'widgets/pref_dialog.py'
 ]
 
 install_data(rewaita_sources, install_dir: moduledir)

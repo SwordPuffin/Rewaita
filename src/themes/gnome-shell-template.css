@@ -26,6 +26,49 @@
   background-color: window_fg_color;
 }
 
+#dash .dash-background {
+  color: window_fg_color;
+  background-color: card_bg_color;
+}
+
+#dash .dash-item-container .show-apps .overview-icon,
+#dash .dash-item-container .overview-tile .overview-icon,
+#dash .dash-item-container .grid-search-result .overview-icon {
+  color: window_fg_color;
+}
+
+.arcmenu-button {
+  background-color: card_bg_color;
+  color: window_fg_color;
+}
+
+/* screenshot-ui */
+.screenshot-ui-close-button {
+  background-color: card_bg_color;
+  color: window_fg_color;
+}
+.screenshot-ui-capture-button {
+  border: 4px window_fg_color;
+  padding: 4px;
+}
+
+.screenshot-ui-capture-button .screenshot-ui-capture-button-circle {
+  background-color: window_fg_color;
+}
+
+.screenshot-ui-capture-button:cast .screenshot-ui-capture-button-circle {
+  background-color: accent_color;
+}
+
+.screenshot-ui-show-pointer-button, .screenshot-ui-type-button {
+  background-color: card_bg_color;
+  color: window_fg_color;
+}
+
+.screenshot-ui-show-pointer-button:hover, .screenshot-ui-type-button:hover {
+  background-color: headerbar_bg_color;
+}
+
 .search-entry,
 StEntry {
   background-color: card_bg_color;
@@ -222,7 +265,7 @@ StEntry:focus {
   color: window_bg_color !important;
 }
 
-.device-subtitle:insensitive {
+.device-subtitle {
   color: window_fg_color;
 }
 
@@ -272,7 +315,6 @@ StEntry:focus {
   color: window_fg_color;
 }
 
-
 .quick-toggle-menu {
   background-color: window_bg_color !important;
   color: window_fg_color;
@@ -285,6 +327,11 @@ StEntry:focus {
 
 .quick-toggle-menu .popup-menu-item:active {
   background-color: accent_color !important;
+  color: window_bg_color;
+}
+
+.quick-toggle-menu .popup-menu-item:active > StLabel {
+  color: window_bg_color;
 }
 
 .quick-toggle-menu .header .icon.active {
@@ -408,6 +455,14 @@ StEntry:focus {
   font-feature-settings: "tnum";
 }
 
+.weather-header:insensitive, .world-clocks-header:insensitive, .event-placeholder:insensitive, .events-title {
+  color: window_fg_color;
+}
+
+.world-clocks-timezone:insensitive {
+  color: window_fg_color;
+}
+
 .notification,
 .notification-banner,
 .message-list {
@@ -427,7 +482,7 @@ StEntry:focus {
 }
 
 .notification-button {
-    background-color: card_bg_color;
+    background-color: mix(card_bg_color, window_fg_color, 0.2);
     color: window_fg_color;
 }
 
@@ -438,7 +493,7 @@ StEntry:focus {
 
 .message-list-clear-button {
     color: window_fg_color;
-    background-color: window_bg_color;
+    background-color: card_bg_color;
 }
 
 .message-expand-button {
@@ -510,14 +565,13 @@ StEntry:focus {
 }
 
 .message-list {
-  background-color: card_bg_color;
+  background-color: window_bg_color;
   color: window_fg_color !important;
-  border-radius: 16px;
 }
 
 .toggle-switch {
   color: window_fg_color;
-  background-color: window_bg_color;
+  background-color: card_bg_color;
 }
 
 .toggle-switch:checked {
@@ -525,7 +579,7 @@ StEntry:focus {
 }
 
 .message {
-  background-color: window_bg_color;
+  background-color: card_bg_color;
   margin-left: 16px;
   margin-top: 8px;
 }
@@ -582,3 +636,4 @@ StEntry:focus {
   color: window_fg_color;
   background-color: headerbar_bg_color;
 }
+

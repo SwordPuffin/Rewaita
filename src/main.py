@@ -17,14 +17,15 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import sys, gi, os
+import sys, gi, os, json
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 gi.require_version('Xdp', '1.0')
 
-from gi.repository import Gtk, Gio, Adw, GLib, Xdp
+from gi.repository import Gtk, Gdk, Gio, Adw, GLib, Xdp, GObject
 from .window import RewaitaWindow
+from .pref_dialog import PrefDialog
 
 class RewaitaApplication(Adw.Application):
     def __init__(self):
@@ -33,6 +34,8 @@ class RewaitaApplication(Adw.Application):
                          resource_base_path='/io/github/swordpuffin/rewaita')
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
+        self.create_action('pref', self.on_pref_clicked)
+        self.create_action('guide', self.on_guide_clicked)
 
         self.add_main_option(
             "background",
@@ -42,11 +45,43 @@ class RewaitaApplication(Adw.Application):
             "Checks for when the accent color or light/dark mode changes",
             None,
         )
-        
+
+        self.grab_prefs()
+
+    def grab_prefs(self):
+        win = RewaitaWindow
+        if(not os.path.exists(f"{win.data_dir}/prefs.json")):
+            with open(f"{win.data_dir}/prefs.json", "w") as file:
+                json.dump({"light_theme": "default", "dark_theme": "default", "window_controls": "default"}, file, indent=4)
+        try:
+            with open(f"{win.data_dir}/prefs.json", "r") as file:
+                data = json.load(file)
+                win.light_theme = data["light_theme"]
+                win.dark_theme = data["dark_theme"]
+                win.window_control = data["window_controls"]
+                win.modify_gtk3_theme = data["modify_gtk3_theme"]
+                win.modify_gnome_shell = data["modify_gnome_shell"]
+                win.run_in_background = data["run_in_background"]
+        except:
+            with open(f"{win.data_dir}/prefs.json", "w") as file:
+                json.dump(
+                {
+                "light_theme": win.light_theme,
+                "dark_theme": win.dark_theme,
+                "window_controls": win.window_control,
+                "modify_gtk3_theme": True,
+                "modify_gnome_shell": True,
+                "run_in_background": True
+                }, file, indent=4)
+                win.modify_gtk3_theme = True
+                win.modify_gnome_shell = True
+                win.run_in_background = True
+
     def on_close_request(self, window, *args):
-        window.hide()   
-        return True
-        
+        if(window.run_in_background):
+            window.hide()
+            return True
+
     def do_activate(self):
         win = self.props.active_window
         if not win:
@@ -61,10 +96,41 @@ class RewaitaApplication(Adw.Application):
             None,
             self.on_background_response
         )
-        
+
         win.present()
-        if(not hasattr(self, "_background_tick_id")):
-            self._background_tick_id = GLib.timeout_add_seconds(1, self.background_tick)
+        self.settings = Xdp.Portal().get_settings()
+        self.settings.connect("changed", self.on_settings_changed, win)
+
+    def on_settings_changed(self, settings, namespace, key, value, win):
+        if(namespace == "org.freedesktop.appearance" and key == "color-scheme" or namespace == "org.gnome.desktop.interface" and key == "accent-color"):
+            win.on_theme_selected()
+
+    def on_pref_clicked(self, action, _):
+        win = self.props.active_window
+        if not win:
+            win = RewaitaWindow(application=self)
+        dialog = PrefDialog(win)
+        dialog.present(win)
+
+    def on_guide_clicked(self, action, _):
+        builder = Gtk.Builder().new_from_resource('/io/github/swordpuffin/rewaita/widgets/guide_dialog.ui')
+        guide_dialog = builder.get_object("GuideDialog")
+        guide_dialog.present(parent=self.props.active_window)
+        gtk3_entry = builder.get_object("gtk3_entry")
+        gtk4_entry = builder.get_object("gtk4_entry")
+        self.clipboard = Gdk.Display.get_default().get_clipboard()
+
+        def on_copy(button, entry):
+            text = entry.get_text()
+            self.clipboard.set(text)
+
+            button.add_css_class("suggested-action")
+            def remove_success():
+                button.remove_css_class("suggested-action")
+            GLib.timeout_add(1000, remove_success)
+
+        builder.get_object("copy_button_gtk3").connect("clicked", on_copy, gtk3_entry)
+        builder.get_object("copy_button_gtk4").connect("clicked", on_copy, gtk4_entry)
 
     def on_background_response(self, portal, result):
         success = portal.request_background_finish(result)
@@ -84,28 +150,21 @@ X-Flatpak=io.github.swordpuffin.rewaita
         else:
             print("Background permission denied")
 
-    def background_tick(self):
-        win = self.props.active_window
-        if not win:
-            win = RewaitaWindow(application=self)
-        win.background_service()
-        return True
-
     def do_command_line(self, args):
         options = args.get_options_dict().end().unpack()
         win = self.props.active_window
         if not win:
             win = RewaitaWindow(application=self)
-        
+
         self.activate()
         if("background" in options):
-            win.emit("close-request")   
+            win.emit("close-request")
 
     def on_about_action(self, *args):
         about = Adw.AboutDialog(application_name='Rewaita',
                                 application_icon='io.github.swordpuffin.rewaita',
                                 developer_name='Nathan Perlman',
-                                version='1.0.7',
+                                version='1.0.8',
                                 developers=['Nathan Perlman'],
                                 copyright='© 2025 Nathan Perlman')
         # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.

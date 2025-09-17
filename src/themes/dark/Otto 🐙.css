@@ -1,0 +1,98 @@
+/* Otto Palette based on KDE theme */
+@define-color window_bg_color #2c3746;
+@define-color window_fg_color #fdfdfd;
+
+/* View styling */
+@define-color view_bg_color #2c3746;
+@define-color view_fg_color #fdfdfd;
+
+/* Header bar */
+@define-color headerbar_bg_color #2c3746;
+@define-color headerbar_backdrop_color #2a3443;
+@define-color headerbar_fg_color #fdfdfd;
+
+/* Popovers and dialogs */
+@define-color popover_bg_color #46586f;
+@define-color popover_fg_color #fcfdfd;
+
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+
+/* Cards and sidebars */
+@define-color card_bg_color #323e4f;
+@define-color card_fg_color #fefefe;
+
+@define-color sidebar_bg_color #2c3746;
+@define-color sidebar_fg_color #fdfdfd;
+@define-color sidebar_backdrop_color #2a3443;
+@define-color sidebar_border_color #606974;
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+/* Otto accent colors */
+@define-color blue_1 #3daee9;
+@define-color blue_2 #33607f;
+@define-color blue_3 #5f7dcd;
+@define-color blue_4 #378ab8;
+@define-color blue_5 #3daee9;
+
+@define-color green_1 #9c53c6;
+@define-color green_2 #4f3e6d;
+@define-color green_3 #27ae60;
+@define-color green_4 #1abc9c;
+@define-color green_5 #80ff80;
+
+@define-color yellow_1 #5f7dcd;
+@define-color yellow_2 #3b4c70;
+@define-color yellow_3 #f67400;
+@define-color yellow_4 #e67e22;
+@define-color yellow_5 #ffdd00;
+
+@define-color orange_1 #e67e22;
+@define-color orange_2 #f67400;
+@define-color orange_3 #ffdd00;
+@define-color orange_4 #e67e22;
+@define-color orange_5 #f67400;
+
+@define-color red_1 #43cdbd;
+@define-color red_2 #32666a;
+@define-color red_3 #da4453;
+@define-color red_4 #e74c3c;
+@define-color red_5 #f00101;
+
+@define-color purple_1 #7f8c8d;
+@define-color purple_2 #bdc3c7;
+@define-color purple_3 #9b59b6;
+@define-color purple_4 #8f59b6;
+@define-color purple_5 #afafaf;
+
+@define-color brown_1 #606974;
+@define-color brown_2 #3b4552;
+@define-color brown_3 #2a3443;
+@define-color brown_4 #323e4f;
+@define-color brown_5 #707780;
+
+@define-color light_1 #fefefe;
+@define-color light_2 #fdfdfd;
+@define-color light_3 #fcfdfd;
+@define-color light_4 #3daee9;
+@define-color light_5 #707780;
+
+@define-color dark_1 #606974;
+@define-color dark_2 #3b4552;
+@define-color dark_3 #2a3443;
+@define-color dark_4 #2c3746;
+@define-color dark_5 #46586f;
+
+toast {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+toggle:checked {
+  background-color: @card_bg_color;
+  color: @window_fg_color;
+}

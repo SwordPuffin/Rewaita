@@ -18,7 +18,7 @@
 
 @define-color error_color @destructive_color;
 @define-color error_bg_color @destructive_bg_color;
-@define-color error_fg_color @destructive_fg_color;
+@define-color errow_fg_color @destructive_fg_color;
 
 @define-color headerbar_bg_color @headerbar_bg_color;
 @define-color headerbar_fg_color @headerbar_fg_color;

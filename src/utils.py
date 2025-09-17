@@ -19,40 +19,11 @@
 
 import re, gi, os, shutil
 from collections import defaultdict
-gi.require_version('Xdp', '1.0')
 from gi.repository import Gtk, Gdk, GLib, Xdp, Adw, Gio
-
-extras_info = {
-    "Default": "default",
-    "Colored": "colored",
-    "MacOS style": "macos"
-}
-
-def make_window_controls_page(page, window, current_config):
-    page.append(Adw.Clamp(maximum_size=1200, child=Gtk.Separator(margin_start=20, margin_end=20, margin_top=25)))
-    title = Gtk.Label(label=_("Window Controls"), margin_bottom=12)
-    title.add_css_class("title-2")
-    page.append(title)
-    flowbox = Gtk.FlowBox(column_spacing=12, row_spacing=12, max_children_per_line=3, homogeneous=True, margin_start=12, margin_end=12, selection_mode=Gtk.SelectionMode.NONE)
-    for control in extras_info.keys():
-        button_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        window_controls = Gtk.WindowControls(side=Gtk.PackType.END, halign=Gtk.Align.CENTER)
-        window_controls.add_css_class(extras_info[control])
-        window_controls_frame = Gtk.Frame(child=window_controls, margin_bottom=12, margin_top=12, halign=Gtk.Align.CENTER)
-        window_controls_frame.add_css_class("card")
-        button_box.append(window_controls_frame)
-        title = Gtk.Label(label=_(control), margin_bottom=12)
-        button_box.append(title)
-        button = Gtk.Button(child=button_box, hexpand=True)
-        button.connect("clicked", window.on_window_control_clicked, extras_info[control], window, flowbox)
-        if(extras_info[control] == current_config):
-            button.add_css_class("suggested-action")
-        flowbox.insert(button, -1)
-    page.append(Adw.Clamp(child=flowbox, maximum_size=1200))
 
 def get_accent_color():
     settings = Xdp.Portal().get_settings()
-    
+
     try:
         accent = settings.read_string("org.gnome.desktop.interface", "accent-color")
     except:
@@ -76,9 +47,9 @@ def get_accent_color():
             accent_color = "purple_2"
         case("slate"):
             accent_color = "light_5"
-        
+
     return accent_color
-        
+
 def add_css_provider(css):
     accent_color = get_accent_color()
     css_provider = Gtk.CssProvider()
@@ -94,7 +65,7 @@ def add_css_provider(css):
 
     return accent_color
 
-def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file, gtk3_file):
+def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file, gtk3_file, modify_gtk3_theme, modify_gnome_shell, reset_func):
     color_pattern = r'@define-color\s+([a-z0-9_]+)\s+(#[a-fA-F0-9]+|@[a-z0-9_]+);'
     colors = dict()
     references = defaultdict(list)
@@ -114,21 +85,27 @@ def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file, gtk3_file):
                 colors[name] = colors[ref_name]
     colors["accent_color"] = colors[accent_color]
     items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "accent_color", "red_1"]
-    for item in items_to_replace:
-        gnome_shell_css = gnome_shell_css.replace(item, colors[item])
 
-    for color in colors.keys():
-        gtk3_file = gtk3_file.replace(f"@{color}", colors[color])
+    if(modify_gtk3_theme):
+        for color in colors.keys():
+            gtk3_file = gtk3_file.replace(f"@{color}", colors[color])
 
-    gtk3_theme_file = os.path.join(GLib.getenv("HOME"), ".config", "gtk-3.0", "gtk.css")
-    with open(gtk3_theme_file, "w") as file:
-        file.write(gtk3_file)
+        gtk3_theme_file = os.path.join(GLib.getenv("HOME"), ".config", "gtk-3.0", "gtk.css")
+        with open(gtk3_theme_file, "w") as file:
+            file.write(gtk3_file)
 
-    gnome_shell_theme_dir = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
-    os.makedirs(gnome_shell_theme_dir, exist_ok=True)
-    file = shutil.copyfile(theme_file, os.path.join(gnome_shell_theme_dir, "gnome-shell.css"))
-    with open(file, "w") as f:
-        f.write(gnome_shell_css)
+    if(modify_gnome_shell and GLib.getenv("XDG_CURRENT_DESKTOP") == "GNOME"):
+        for item in items_to_replace:
+            gnome_shell_css = gnome_shell_css.replace(item, colors[item])
+
+        gnome_shell_theme_dir = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
+        os.makedirs(gnome_shell_theme_dir, exist_ok=True)
+        file = shutil.copyfile(theme_file, os.path.join(gnome_shell_theme_dir, "gnome-shell.css"))
+        with open(file, "w") as f:
+            f.write(gnome_shell_css)
+
+        reset_func()
+
 
 def set_to_default(config_dirs, theme_type, reset_func, window_control_css):
     for config_dir in config_dirs:
@@ -281,6 +258,19 @@ css = """
         animation: shake_animation 0.4s ease-in-out infinite;
     }
 
+    textview {
+        background-color: @card_bg_color;
+        color: @window_fg_color;
+        border-radius: 6px;
+        font-family: "Fira Code", monospace;
+        font-size: 12pt;
+    }
+
+    gutter {
+        background-color: @headerbar_bg_color;
+        color: @window_fg_color;
+    }
+
     @keyframes shake_animation {
       0%   { transform: rotate(-0.75deg); }
       25%  { transform: rotate(0.75deg); }
@@ -302,9 +292,6 @@ css = """
     }
 
     windowcontrols.macos > button:not(.suggested-action):not(.destructive-action) {
-      min-height: 22px;
-      min-width: 22px;
-      padding: 0px;
       margin-left: 0px;
       margin-right: 0px;
       margin-top: 6px;
@@ -321,7 +308,9 @@ css = """
     }
 
     windowcontrols.macos > button.minimize:active:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos > button.maximize:active:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos> button.close:active:not(.suggested-action):not(.destructive-action) > image {
-      box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.25);
+      box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.6);
+      transition-duration: 350ms;
+      transition-timing-function: ease;
     }
 
     windowcontrols.macos > button.minimize:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.minimize:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.maximize:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.maximize:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.close:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.close:active:not(.suggested-action):not(.destructive-action) {
@@ -376,4 +365,11 @@ css = """
     windowcontrols.macos > button.minimize:backdrop:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos > button.maximize:backdrop:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos > button.close:backdrop:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos > button.minimize:backdrop:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.minimize:backdrop:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.maximize:backdrop:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.maximize:backdrop:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.close:backdrop:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.close:backdrop:active:not(.suggested-action):not(.destructive-action) {
         opacity: 0.7;
     }
+
+    windowcontrols.macos > button {
+      min-height: 17px;
+      min-width: 17px;
+      padding: 2px;
+    }
 """
+
