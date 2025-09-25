@@ -1,0 +1,70 @@
+@define-color window_bg_color #2a2e32;
+@define-color window_fg_color #fcfcfc;
+
+@define-color view_bg_color #1b1e20;
+@define-color view_fg_color #fcfcfc;
+
+@define-color success_color #26ae5f;
+@define-color success_bg_color #26ae5f;
+@define-color success_fg_color #ffffff;
+
+@define-color warning_color #f67400;
+@define-color warning_bg_color #f67400;
+@define-color warning_fg_color #ffffff;
+
+@define-color destructive_color #da4452;
+@define-color destructive_bg_color #da4452;
+@define-color destructive_fg_color #ffffff;
+
+@define-color error_color #da4452;
+@define-color error_bg_color #da4452;
+@define-color errow_fg_color #ffffff;
+
+@define-color headerbar_bg_color #31363b;
+@define-color headerbar_fg_color #fcfcfc;
+
+@define-color popover_bg_color #1b1e20;
+@define-color popover_fg_color #fcfcfc;
+
+@define-color dialog_bg_color #1b1e20;
+@define-color dialog_fg_color #fcfcfc;
+
+@define-color card_bg_color #1b1e20;
+@define-color card_fg_color #fcfcfc;
+
+@define-color sidebar_bg_color #1b1e20;
+@define-color sidebar_fg_color #fcfcfc;
+@define-color sidebar_backdrop_color #1b1e20;
+@define-color sidebar_border_color #1b1e20;
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+@define-color blue_1 #99c1f1;
+@define-color blue_2 #62a0ea;
+@define-color green_1 #8ff0a4;
+@define-color yellow_1 #f9f06b;
+@define-color red_1 #f66050;
+@define-color purple_1 #dc8add;
+@define-color purple_2 #c061cb;
+@define-color orange_1 #ffbe6f;
+@define-color brown_1 #cdab8f;
+@define-color light_1 #ffffff;
+@define-color light_5 #9a9996;
+@define-color dark_1 #77767b;
+
+@define-color accent_color #3cade9;
+@define-color accent_bg_color #3cade9;
+@define-color accent_fg_color #ffffff;
+
+toast {
+  background-color: #2a2e32;
+  color: #fcfcfc;
+}
+
+toggle:checked {
+  background-color: #1b1e20;
+  color: #fcfcfc;
+}
