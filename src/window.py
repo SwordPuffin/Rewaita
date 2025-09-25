@@ -177,8 +177,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
             control_button = control.get_first_child()
             control_button.remove_css_class("suggested-action")
 
-        with open(f"{self.data_dir}/prefs.json", "w") as file:
-            json.dump({"light_theme": self.light_theme, "dark_theme": self.dark_theme, "window_controls": control_file}, file, indent=4)
+        self.dump_json_into_prefs()
 
         self.window_control = control_file
         button.add_css_class("suggested-action")
@@ -194,8 +193,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
         elif(theme_type == "light" and theme_name == "Default"):
             self.light_theme = "default"
 
-        with open(f"{self.data_dir}/prefs.json", "w") as file:
-            json.dump({"light_theme": self.light_theme, "dark_theme": self.dark_theme, "window_controls": self.window_control}, file, indent=4)
+        self.dump_json_into_prefs()
 
         if(theme_type == "light" and self.pref in [0, 2] or theme_type == "dark" and self.pref == 1):
             self.on_theme_selected()
@@ -213,3 +211,15 @@ class RewaitaWindow(Adw.ApplicationWindow):
                 theme.remove_css_class("suggested-action")
 
         if(button.get_icon_name() != "reload-symbolic"): button.add_css_class("suggested-action")
+
+    def dump_json_into_prefs(self):
+        with open(f"{self.data_dir}/prefs.json", "w") as file:
+            json.dump(
+            {
+                "light_theme": self.light_theme,
+                "dark_theme": self.dark_theme,
+                "window_controls": self.window_control,
+                "modify_gtk3_theme": self.modify_gtk3_theme,
+                "modify_gnome_shell": self.modify_gnome_shell,
+                "run_in_background": self.run_in_background
+            }, file, indent=4)
