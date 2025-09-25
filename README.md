@@ -22,7 +22,7 @@
 
 # ⬇️ Installation 
 ---
-*The AUR and NIX packages are maintained by third-party developers and are not tested in production.
+*The AUR package is maintained by third-party developers, and is not tested in upstream production.
 <br/>
 <br/>
 **The Flatpak version is the only officially supported format and therefore is recommended for the best experience.**
@@ -35,14 +35,17 @@ flatpak install io.github.swordpuffin.rewaita
 ```bash
 yay -s rewaita
 ```
+*Please note that the AUR version in particular has had many issues in the past.
 
+
+# ✅ Permissions 
 ### Allow Flatpak to edit GTK3/4 themes
 ```bash
 flatpak override --filesystem=xdg-config/gtk-3.0:rw
 flatpak override --filesystem=xdg-config/gtk-4.0:rw
 ```
 
-## 🖼️ Screenshots
+# 🖼️ Screenshots
 
 <p align="center">
   <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/screenshots/Screenshot1.png" width="600"/>
@@ -52,7 +55,32 @@ flatpak override --filesystem=xdg-config/gtk-4.0:rw
 
 ---
 
-## 🤝 Contributing
+# 🐛 Known Bugs
+#### Gnome Shell theme is not generating:
+1. Power off your computer (like full shutdown, not restart).
+2. Turn it back on and try again.
+3. Hope it works 🙏🙏🙏.
+4. If it doesn't, file an issue and get some help here.
+
+#### Application window opens but is empty:
+#### 1. Flatpak
+   
+Delete:
+```
+~/.var/app/io.github.swordpuffin.rewaita/data/prefs.json
+```
+#### 2. AUR
+See upstream [bug](https://github.com/SwordPuffin/Rewaita/issues/48) 
+
+Install xdg-desktop-portal-gtk with:
+```bash
+sudo pacman -S xdg-desktop-portal-gtk
+```
+Then reboot.
+
+  
+
+# 🤝 Contributing
 
 Run the following commands in a terminal:
 
