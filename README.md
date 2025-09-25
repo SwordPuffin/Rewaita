@@ -62,7 +62,7 @@ flatpak override --filesystem=xdg-config/gtk-4.0:rw
 3. Hope it works 🙏🙏🙏.
 4. If it doesn't, file an issue and get some help here.
 
-#### Application window opens but is empty:
+#### Application window opens, but there is no content:
 #### 1. Flatpak
    
 Delete:
