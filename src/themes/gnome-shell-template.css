@@ -22,7 +22,7 @@
   background-color: card_bg_color;
 }
 
-#panel .panel-button#panelActivities .workspace-dot {
+#panel .panel-button #panelActivities .workspace-dot {
   background-color: window_fg_color;
 }
 
@@ -35,6 +35,18 @@
 #dash .dash-item-container .overview-tile .overview-icon,
 #dash .dash-item-container .grid-search-result .overview-icon {
   color: window_fg_color;
+  background-color: transparent;
+}
+
+#dash .dash-item-container .show-apps:hover .overview-icon,
+#dash .dash-item-container .overview-tile:hover .overview-icon,
+#dash .dash-item-container .grid-search-result:hover .overview-icon {
+  background-color: headerbar_bg_color;
+}
+
+#dash .dash-item-container .app-well-app-running-dot,
+#dash .dash-item-container .app-grid-running-dot {
+  background-color: accent_color;
 }
 
 .arcmenu-button {
@@ -636,4 +648,3 @@ StEntry:focus {
   color: window_fg_color;
   background-color: headerbar_bg_color;
 }
-
