@@ -49,6 +49,68 @@
   background-color: accent_color;
 }
 
+/* Overview stuff */
+#overviewGroup {
+  background-color: window_bg_color;
+}
+
+.overview-tile:hover, .grid-search-result:hover, .overview-tile:focus, .grid-search-result:focus, .overview-tile:selected, .grid-search-result:selected {
+  color: window_fg_color;
+  background-color: card_bg_color;
+}
+
+.overview-tile:active, .grid-search-result:active, .overview-tile:checked, .grid-search-result:checked {
+  color: window_fg_color;
+  background-color: window_bg_color;
+}
+
+.list-search-result-title {
+  color: window_fg_color;
+}
+
+.list-search-result-description {
+  color: window_fg_color;
+  font-weight: 300;
+}
+
+.list-search-result:hover {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+  background-color: card_bg_color;
+}
+
+.search-section-content {
+  color: window_fg_color;
+  background-color: card_bg_color;
+}
+
+.app-folder {
+  background-color: card_bg_color;
+  color: window_fg_color;
+}
+
+.app-folder .overview-icon {
+  background-color: transparent;
+}
+
+.app-folder:hover {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+  color: window_fg_color;
+}
+
+.app-folder:active {
+  background-color: card_bg_color;
+  color: window_fg_color;
+}
+
+.app-folder-dialog {
+  color: window_fg_color;
+  background-color: window_bg_color;
+}
+
+.app-grid-running-dot {
+  background-color: accent_color;
+}
+
 .arcmenu-button {
   background-color: card_bg_color;
   color: window_fg_color;
@@ -495,8 +557,8 @@ StEntry:focus {
 }
 
 .notification-button {
-    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
-    background-color: headerbar_bg_color;
+    box-shadow: inset 0 0 100px 100px rgba(140, 140, 140, 0.2);
+    background-color: card_bg_color;
     color: window_fg_color;
 }
 
