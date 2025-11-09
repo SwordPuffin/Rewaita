@@ -24,7 +24,7 @@
 
 @define-color sidebar_bg_color #fdf6e3;
 @define-color sidebar_fg_color #657b83;
-@define-color sidebar_backdrop_color #fdf6e3;
+@define-color sidebar_backdrop_color @sidebar_bg_color;
 @define-color sidebar_border_color #93a1a1; /* base1 */
 
 @define-color secondary_sidebar_bg_color @sidebar_bg_color;
@@ -95,4 +95,8 @@ toast {
 toggle:checked {
   background-color: @card_bg_color;
   color: @window_fg_color;
+}
+
+.inline {
+	background-color: rgba(0, 0, 0, 0);
 }

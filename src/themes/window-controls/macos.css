@@ -57,7 +57,7 @@ windowcontrols:not(.macos):not(.colored):not(.default):not(.empty).start:dir(rtl
 }
 
 windowcontrols:not(.macos):not(.colored):not(.default) > button:not(.suggested-action):not(.destructive-action) > image {
-  border-radius: 100%;
+  /* border-radius: 100%; */
   min-width: 17px;
   min-height: 17px;
   padding: 0;

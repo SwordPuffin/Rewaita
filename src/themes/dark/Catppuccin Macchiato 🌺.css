@@ -26,7 +26,7 @@
 
 @define-color sidebar_bg_color #24273a; /* base */
 @define-color sidebar_fg_color #cad3f5; /* text */
-@define-color sidebar_backdrop_color #24273a; /* base */
+@define-color sidebar_backdrop_color @sidebar_bg_color; /* base */
 @define-color sidebar_border_color #363a4f; /* surface0 */
 
 @define-color secondary_sidebar_bg_color @sidebar_bg_color;
@@ -99,3 +99,6 @@ toggle:checked {
   color: @window_fg_color;
 }
 
+.inline {
+	background-color: rgba(0, 0, 0, 0);
+}

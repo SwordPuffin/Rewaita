@@ -16,7 +16,7 @@
 
 @define-color sidebar_bg_color #342f4f;
 @define-color sidebar_fg_color #dcdbe2;
-@define-color sidebar_backdrop_color #342f4f;
+@define-color sidebar_backdrop_color @sidebar_bg_color;
 @define-color sidebar_border_color #363a4f;
 
 /* Popovers and dialogs */
@@ -123,3 +123,6 @@ toggle:checked {
   color: @window_fg_color;
 }
 
+.inline {
+	background-color: rgba(0, 0, 0, 0);
+}

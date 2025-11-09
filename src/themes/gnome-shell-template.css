@@ -1,91 +1,114 @@
 /*window_fg_color: generic text color */
 /*window_bg_color: generic background color */
+/*border_color: accent color if window border is enabled*/
 /*card_bg_color: background color for buttons or items that need to contrast the background*/
 /*headerbar_bg_color: dark color for high contrast*/
 
 /* Top Bar */
 #panel {
-  background-color: window_bg_color;
-  color: window_fg_color;
+  background-color: @window_bg_color;
+  color: @window_fg_color;
   font-feature-settings: "tnum";
+  height: 45px;
 }
 
 #panel .panel-button {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 #panel .panel-button:hover {
-  background-color: card_bg_color;
+  background-color: @card_bg_color;
 }
 
 #panel .panel-button:hover.clock-display .clock {
-  background-color: card_bg_color;
+  background-color: @card_bg_color;
 }
 
 #panel .panel-button #panelActivities .workspace-dot {
-  background-color: window_fg_color;
+  background-color: @window_fg_color;
+}
+
+.window-close {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+.window-close:hover {
+  background-color: @headerbar_bg_color;
 }
 
 #dash .dash-background {
-  color: window_fg_color;
-  background-color: card_bg_color;
+  color: @window_fg_color;
+  background-color: @card_bg_color;
 }
 
 #dash .dash-item-container .show-apps .overview-icon,
 #dash .dash-item-container .overview-tile .overview-icon,
 #dash .dash-item-container .grid-search-result .overview-icon {
-  color: window_fg_color;
+  color: @window_fg_color;
   background-color: transparent;
 }
 
 #dash .dash-item-container .show-apps:hover .overview-icon,
 #dash .dash-item-container .overview-tile:hover .overview-icon,
 #dash .dash-item-container .grid-search-result:hover .overview-icon {
-  background-color: headerbar_bg_color;
+  background-color: @headerbar_bg_color;
 }
 
 #dash .dash-item-container .app-well-app-running-dot,
 #dash .dash-item-container .app-grid-running-dot {
-  background-color: accent_color;
+  background-color: @accent_color;
 }
 
 /* Overview stuff */
 #overviewGroup {
-  background-color: window_bg_color;
+  background-color: @window_bg_color;
 }
 
 .overview-tile:hover, .grid-search-result:hover, .overview-tile:focus, .grid-search-result:focus, .overview-tile:selected, .grid-search-result:selected {
-  color: window_fg_color;
-  background-color: card_bg_color;
+  color: @window_fg_color;
+  background-color: @card_bg_color;
 }
 
 .overview-tile:active, .grid-search-result:active, .overview-tile:checked, .grid-search-result:checked {
-  color: window_fg_color;
-  background-color: window_bg_color;
+  color: @window_fg_color;
+  background-color: @window_bg_color;
 }
 
 .list-search-result-title {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .list-search-result-description {
-  color: window_fg_color;
+  color: @window_fg_color;
   font-weight: 300;
 }
 
-.list-search-result:hover {
+.list-search-result:hover, .list-search-result:selected, .search-provider-icon:hover {
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
-  background-color: card_bg_color;
+  background-color: @card_bg_color;
+}
+
+.page-navigation-arrow {
+  background-color: @card_bg_color;
+}
+
+.page-navigation-arrow > StIcon {
+  color: @window_fg_color;
+}
+
+.page-navigation-arrow:hover {
+  background-color: @headerbar_bg_color;
 }
 
 .search-section-content {
-  color: window_fg_color;
-  background-color: card_bg_color;
+  color: @window_fg_color;
+  background-color: @card_bg_color;
 }
 
 .app-folder {
-  background-color: card_bg_color;
-  color: window_fg_color;
+  background-color: @card_bg_color;
+  color: @window_fg_color;
 }
 
 .app-folder .overview-icon {
@@ -94,68 +117,87 @@
 
 .app-folder:hover {
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .app-folder:active {
-  background-color: card_bg_color;
-  color: window_fg_color;
+  background-color: @card_bg_color;
+  color: @window_fg_color;
 }
 
 .app-folder-dialog {
-  color: window_fg_color;
-  background-color: window_bg_color;
+  color: @window_fg_color;
+  background-color: @window_bg_color;
+  border: 2px @border_color;
 }
 
 .app-grid-running-dot {
-  background-color: accent_color;
+  background-color: @accent_color;
 }
 
 .arcmenu-button {
-  background-color: card_bg_color;
-  color: window_fg_color;
+  background-color: @card_bg_color;
+  color: @window_fg_color;
+}
+
+.workspace-thumbnails .workspace-thumbnail {
+  color: @window_fg_color;
+  background-color: @card_bg_color;
+}
+
+.workspace-thumbnail-indicator {
+  border: 3px solid @accent_color;
+}
+
+.event-time {
+  color: @window_fg_color;
 }
 
 /* screenshot-ui */
 .screenshot-ui-close-button {
-  background-color: card_bg_color;
-  color: window_fg_color;
+  background-color: @card_bg_color;
+  color: @window_fg_color;
 }
+
 .screenshot-ui-capture-button {
-  border: 4px window_fg_color;
+  border: 4px @window_fg_color;
   padding: 4px;
 }
 
 .screenshot-ui-capture-button .screenshot-ui-capture-button-circle {
-  background-color: window_fg_color;
+  background-color: @window_fg_color;
 }
 
 .screenshot-ui-capture-button:cast .screenshot-ui-capture-button-circle {
-  background-color: accent_color;
+  background-color: @accent_color;
 }
 
 .screenshot-ui-show-pointer-button, .screenshot-ui-type-button {
-  background-color: card_bg_color;
-  color: window_fg_color;
+  background-color: @card_bg_color;
+  color: @window_fg_color;
 }
 
 .screenshot-ui-show-pointer-button:hover, .screenshot-ui-type-button:hover {
-  background-color: headerbar_bg_color;
+  background-color: @headerbar_bg_color;
+}
+
+.screenshot-ui-show-pointer-button:active, .screenshot-ui-type-button:active {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
 }
 
 .search-entry,
 StEntry {
-  background-color: card_bg_color;
-  color: window_fg_color;
+  background-color: @card_bg_color;
+  color: @window_fg_color;
 }
 
-StLabel.hint-text:insensitive {
-  color: window_fg_color;
+StLabel.hint-text:insensitive, .overview-tile {
+  color: @window_fg_color;
 }
 
 .search-entry:focus,
 StEntry:focus {
-  background-color: headerbar_bg_color;
+  background-color: @headerbar_bg_color;
 }
 
 /* Popovers/Menus */
@@ -165,61 +207,62 @@ StEntry:focus {
   background: transparent;
 }
 
+.vhandle {
+  background-color: @card_bg_color;
+}
+
 .popup-menu {
-  color: window_fg_color !important;
-  border: none;
-  outline: none;
+  color: @window_fg_color !important;
 }
 
 .popup-menu .popup-menu-content {
-  background-color: window_bg_color;
-  border: none;
-  outline: none;
+  background-color: @window_bg_color;
+  border: 2px @border_color;
 }
 
 .popup-menu .popup-menu-item {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
   background-color: transparent;
 }
 
 .popup-inactive-menu-item:insensitive {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .popup-menu .popup-menu-item:checked {
-  color: window_fg_color !important;
-  background-color: window_bg_color !important;
+  color: @window_fg_color !important;
+  background-color: @window_bg_color !important;
 }
 
 .popup-menu .popup-menu-item:checked:focus, .popup-menu .popup-menu-item:checked:hover, .popup-menu .popup-menu-item:checked.selected {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .popup-menu .popup-menu-item:checked:active {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .popup-menu .popup-menu-item:checked:insensitive {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .popup-menu .popup-menu-item:focus, .popup-menu .popup-menu-item:hover, .popup-menu .popup-menu-item.selected {
-  color: window_fg_color !important;
-  background-color: card_bg_color !important;
+  color: @window_fg_color !important;
+  background-color: @card_bg_color !important;
 }
 
 .popup-menu .popup-menu-item:active, .popup-menu .popup-menu-item.selected:active {
-  color: window_fg_color !important;
-  background-color: window_bg_color !important;
+  color: @window_fg_color !important;
+  background-color: @window_bg_color !important;
 }
 
 .popup-menu .popup-menu-item:insensitive {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .popup-menu .popup-sub-menu {
-  background-color: window_bg_color !important;
-  color: window_fg_color !important;
+  background-color: @window_bg_color !important;
+  color: @window_fg_color !important;
 }
 
 .popup-menu .popup-sub-menu .popup-menu-item {
@@ -227,191 +270,195 @@ StEntry:focus {
 }
 
 .popup-menu .popup-sub-menu .popup-menu-item:focus, .popup-menu .popup-sub-menu .popup-menu-item:hover, .popup-menu .popup-sub-menu .popup-menu-item.selected {
-  color: window_fg_color !important;
-  background-color: window_bg_color !important;
+  color: @window_fg_color !important;
+  background-color: @window_bg_color !important;
 }
 
 .popup-menu .popup-sub-menu .popup-menu-item:active, .popup-menu .popup-sub-menu .popup-menu-item.selected:active {
-  color: window_fg_color !important;
-  background-color: window_bg_color !important;
+  color: @window_fg_color !important;
+  background-color: @window_bg_color !important;
 }
 
 .popup-menu .popup-sub-menu .popup-menu-item:insensitive {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .popup-menu .popup-inactive-menu-item {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .popup-menu .popup-inactive-menu-item:insensitive {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .quick-settings .icon-button, .quick-settings .message-notification-group .message-collapse-button, .message-notification-group .quick-settings .message-collapse-button, .quick-settings .message .message-header .message-expand-button, .message .message-header .quick-settings .message-expand-button,
 .quick-settings .message .message-header .message-close-button,
 .message .message-header .quick-settings .message-close-button, .quick-settings .button {
-  background-color: card_bg_color;
-  color: window_fg_color;
+  background-color: @card_bg_color;
+  color: @window_fg_color;
 }
 
 .quick-settings .icon-button > StIcon, .quick-settings .message-notification-group .message-collapse-button > StIcon, .message-notification-group .quick-settings .message-collapse-button > StIcon, .quick-settings .message .message-header .message-expand-button > StIcon, .message .message-header .quick-settings .message-expand-button > StIcon,
 .quick-settings .message .message-header .message-close-button > StIcon,
 .message .message-header .quick-settings .message-close-button > StIcon {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .quick-toggle, .quick-toggle-has-menu {
-  background-color: card_bg_color !important;
+  background-color: @card_bg_color !important;
   border: none;
   outline: none;
 }
 
 .quick-toggle {
-  background-color: card_bg_color !important;
+  background-color: @card_bg_color !important;
 }
 
 .quick-toggle:hover {
-  background-color: headerbar_bg_color !important;
-  color: window_fg_color !important;
+  background-color: @headerbar_bg_color !important;
+  color: @window_fg_color !important;
 }
 
 .quick-toggle:active {
-  background-color: headerbar_bg_color !important;
+  background-color: @headerbar_bg_color !important;
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
 }
 
 .quick-toggle:checked {
-  background-color: accent_color !important;
-  color: window_bg_color !important;
+  background-color: @accent_color !important;
+  color: @window_bg_color !important;
 }
 
 .quick-toggle:checked:hover {
-  background-color: headerbar_bg_color !important;
-  color: window_fg_color;
+  background-color: @headerbar_bg_color !important;
+  color: @window_fg_color;
 }
 
 .quick-toggle:checked:active {
-  background-color: headerbar_bg_color !important;
+  background-color: @headerbar_bg_color !important;
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
 }
 
 .quick-toggle.button {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .quick-toggle.button:checked {
-  color: window_bg_color !important;
+  color: @window_bg_color !important;
 }
 
 .quick-toggle.button:checked:hover {
-  background-color: accent_color !important;
+  background-color: @accent_color !important;
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
-  color: window_bg_color !important;
+  color: @window_bg_color !important;
 }
 
 .quick-toggle-has-menu .quick-toggle-separator {
-  background-color: headerbar_bg_color;
+  background-color: @headerbar_bg_color;
   opacity: 0.1;
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button {
-  background-color: card_bg_color;
+  background-color: @card_bg_color;
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button:hover {
-  background-color: headerbar_bg_color !important;
+  background-color: @headerbar_bg_color !important;
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button:active {
-  background-color: headerbar_bg_color !important;
+  background-color: @headerbar_bg_color !important;
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button:checked {
-  background-color: accent_color !important;
-  color: window_bg_color !important;
+  background-color: @accent_color !important;
+  color: @window_bg_color !important;
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button:checked:hover {
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
-  color: window_bg_color !important;
+  color: @window_bg_color !important;
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button:checked:active {
-  background-color: accent_color !important;
-  color: window_bg_color !important;
+  background-color: @accent_color !important;
+  color: @window_bg_color !important;
 }
 
 .device-subtitle {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .slider {
-  color: window_fg_color;
-  -barlevel-background-color: card_bg_color;
-  -barlevel-active-background-color: accent_color;
+  color: @window_fg_color;
+  -barlevel-background-color: @card_bg_color;
+  -barlevel-active-background-color: @accent_color;
 }
 
 .quick-toggle-menu-button.icon-button:last-child > StIcon {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 
 .quick-toggle-menu-button.icon-button:last-child:checked > StIcon {
-  color: window_bg_color;
+  color: @window_bg_color !important;
 }
 
 .quick-toggle-menu-button.icon-button:last-child:checked:hover > StIcon {
-  color: window_bg_color;
+  color: @window_bg_color;
 }
 
 .quick-slider .icon-button, .quick-slider .message-notification-group .message-collapse-button, .message-notification-group .quick-slider .message-collapse-button, .quick-slider .message .message-header .message-expand-button, .message .message-header .quick-slider .message-expand-button,
 .quick-slider .message .message-header .message-close-button,
 .message .message-header .quick-slider .message-close-button {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .quick-slider .icon-button:hover, .quick-slider .message-notification-group .message-collapse-button:hover, .message-notification-group .quick-slider .message-collapse-button:hover, .quick-slider .message .message-header .message-expand-button:hover, .message .message-header .quick-slider .message-expand-button:hover,
 .quick-slider .message .message-header .message-close-button:hover,
 .message .message-header .quick-slider .message-close-button:hover {
-  background-color: headerbar_bg_color;
-  color: window_fg_color;
+  background-color: @headerbar_bg_color;
+  color: @window_fg_color;
 }
 
 .quick-slider .icon-button:active, .quick-slider .message-notification-group .message-collapse-button:active, .message-notification-group .quick-slider .message-collapse-button:active, .quick-slider .message .message-header .message-expand-button:active, .message .message-header .quick-slider .message-expand-button:active,
 .quick-slider .message .message-header .message-close-button:active,
 .message .message-header .quick-slider .message-close-button:active {
-  background-color: window_bg_color;
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
+  /* background-color: @window_bg_color; */
 }
 
 .icon-button:hover {
-  background-color: headerbar_bg_color !important;
+  background-color: @headerbar_bg_color !important;
 }
 
 .icon-button:hover > StIcon {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .quick-toggle-menu {
-  background-color: window_bg_color !important;
-  color: window_fg_color;
+  background-color: @window_bg_color !important;
+  color: @window_fg_color;
 }
 
 .quick-toggle-menu .popup-menu-item:focus, .quick-toggle-menu .popup-menu-item:hover, .quick-toggle-menu .popup-menu-item.selected {
-  color: window_fg_color;
-  background-color: headerbar_bg_color !important;
+  color: @window_fg_color;
+  background-color: @headerbar_bg_color !important;
 }
 
 .quick-toggle-menu .popup-menu-item:active {
-
-  background-color: headerbar_bg_color !important;
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+  background-color: @headerbar_bg_color !important;
 }
 
 .quick-toggle-menu .popup-menu-item:active > StLabel {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .quick-toggle-menu .header .icon.active {
-  background-color: accent_color !important;
-  color: window_bg_color !important;
+  background-color: @accent_color !important;
+  color: @window_bg_color !important;
 }
 
 .quick-settings-system-item .power-item:insensitive {
@@ -421,178 +468,178 @@ StEntry:focus {
 /* Calendar */
 .calendar {
   background-color: transparent;
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .calendar .calendar-month-label {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
   background-color: transparent;
 }
 
 .calendar .pager-button {
   background-color: transparent;
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .calendar .pager-button:hover, .calendar .pager-button:focus {
-  background-color: card_bg_color;
+  background-color: @card_bg_color;
 }
 
 .calendar .pager-button:active {
-  background-color: card_bg_color;
+  background-color: @card_bg_color;
 }
 
 .calendar .calendar-day {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
   font-feature-settings: "tnum";
   background-color: transparent;
 }
 
 .calendar .calendar-day:hover, .calendar .calendar-day:focus {
-  background-color: card_bg_color;
-  color: window_fg_color !important;
+  background-color: @card_bg_color;
+  color: @window_fg_color !important;
 }
 
 .calendar .calendar-day:active, .calendar .calendar-day:selected {
-  color: window_fg_color !important;
-  background-color: card_bg_color;
+  color: @window_fg_color !important;
+  background-color: @card_bg_color;
 }
 
 .calendar .calendar-day.calendar-weekend {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .calendar .calendar-day {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .calendar .calendar-day-top {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .calendar .calendar-day-left {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .calendar .calendar-nonwork-day {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .calendar .calendar-today {
-  color: window_fg_color !important;
-  background-color: card_bg_color;
+  color: @window_fg_color !important;
+  background-color: @card_bg_color;
 }
 
 .calendar .calendar-today:hover, .calendar .calendar-today:focus {
-  background-color: card_bg_color;
-  color: window_fg_color !important;
+  background-color: @card_bg_color;
+  color: @window_fg_color !important;
 }
 
 .calendar .calendar-today:active {
-  background-color: card_bg_color;
-  color: window_fg_color !important;
+  background-color: @card_bg_color;
+  color: @window_fg_color !important;
 }
 
 .calendar .calendar-today:selected {
-  background-color: card_bg_color;
-  color: window_fg_color !important;
+  background-color: @card_bg_color;
+  color: @window_fg_color !important;
 }
 
 .calendar .calendar-today:selected:hover, .calendar .calendar-today:selected:focus {
-  background-color: card_bg_color;
-  color: window_fg_color !important;
+  background-color: @card_bg_color;
+  color: @window_fg_color !important;
 }
 
 .calendar .calendar-day-with-events {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .calendar .calendar-day-with-events.calendar-work-day {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .calendar .calendar-other-month {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .calendar .calendar-other-month.calendar-weekend {
-  color: window_fg_color !important;
+  color: @window_fg_color !important;
 }
 
 .calendar .calendar-day-heading {
   background-color: transparent;
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .calendar .calendar-week-number {
-  background-color: card_bg_color;
-  color: window_fg_color;
+  background-color: @card_bg_color;
+  color: @window_fg_color;
   font-feature-settings: "tnum";
 }
 
 .weather-header:insensitive, .world-clocks-header:insensitive, .event-placeholder:insensitive, .events-title {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .world-clocks-timezone:insensitive {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .notification,
 .notification-banner,
 .message-list {
-  background-color: card_bg_color;
-  color: window_fg_color;
+  background-color: @card_bg_color;
+  color: @window_fg_color;
 }
 
 .notification:hover,
 .notification-banner:hover {
-  background-color: card_bg_color;
-  color: window_fg_color;
+  background-color: @card_bg_color;
+  color: @window_fg_color;
 }
 
 .date-menu .notification-icon,
 .date-menu .system-status-icon {
-    color: window_fg_color;
+    color: @window_fg_color;
 }
 
 .notification-button {
     box-shadow: inset 0 0 100px 100px rgba(140, 140, 140, 0.2);
-    background-color: card_bg_color;
-    color: window_fg_color;
+    background-color: @card_bg_color;
+    color: @window_fg_color;
 }
 
 .notification-button:hover {
-    background-color: accent_color;
-    color: window_bg_color;
+    background-color: @accent_color;
+    color: @window_bg_color;
 }
 
 .message-list-clear-button {
-    color: window_fg_color;
-    background-color: card_bg_color;
+    color: @window_fg_color;
+    background-color: @card_bg_color;
 }
 
 .message-expand-button {
-    color: window_fg_color;
-    background-color: card_bg_color;
+    color: @window_fg_color;
+    background-color: @card_bg_color;
 }
 
 .message-expand-button:hover {
-    color: window_bg_color;
-    background-color: accent_color;
+    color: @window_bg_color;
+    background-color: @accent_color;
 }
 
 .datemenu-today-button {
   background: none;
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 /* Date/Time Menu */
 .world-clocks-button,
 .weather-button,
 .events-button {
-  color: window_fg_color;
-  background-color: card_bg_color;
+  color: @window_fg_color;
+  background-color: @card_bg_color;
 }
 
 .world-clocks-button:hover,
@@ -600,115 +647,120 @@ StEntry:focus {
 .events-button:hover, .world-clocks-button:focus,
 .weather-button:focus,
 .events-button:focus {
-  color: window_fg_color;
-  background-color: card_bg_color;
+  color: @window_fg_color;
+  background-color: @card_bg_color;
 }
 
 .world-clocks-button:active,
 .weather-button:active,
 .events-button:active {
-  color: window_fg_color;
-  background-color: card_bg_color;
+  color: @window_fg_color;
+  background-color: @card_bg_color;
 }
 
 .screenshot-ui-panel, .workspace-switcher-container, .switcher-list, .resize-popup, .osd-window {
-  color: window_fg_color;
-  background-color: window_bg_color;
+  color: @window_fg_color;
+  background-color: @window_bg_color;
+  border: 2px @border_color;
 }
 
 .osd-window {
-  background-color: window_bg_color;
+  background-color: @window_bg_color;
 }
 
 .osd-window .level {
-  background-color: window_bg_color;
-  color: window_fg_color;
+  background-color: @window_bg_color;
+  color: @window_fg_color;
   -barlevel-height: 2px;
-  -barlevel-background-color: card_bg_color;
-  -barlevel-active-background-color: accent_color;
-  -barlevel-overdrive-color: red_1;
+  -barlevel-background-color: @card_bg_color;
+  -barlevel-active-background-color: @accent_color;
+  -barlevel-overdrive-color: @red_1;
   -barlevel-overdrive-separator-width: 2px;
   -barlevel-border-width: 0;
-  -barlevel-border-color: window_bg_color;
+  -barlevel-border-color: @window_bg_color;
 }
 
 .osd-window .level-bar {
-  background-color: card_bg_color;
+  background-color: @card_bg_color;
 }
 
 .pad-osd-window {
-  background-color: window_bg_color;
+  background-color: @window_bg_color;
 }
 
 .message-list {
-  background-color: window_bg_color;
-  color: window_fg_color !important;
+  background-color: @window_bg_color;
+  border-radius: 12px;
+  color: @window_fg_color !important;
+  outline: none;
+  border: none;
 }
 
 .toggle-switch {
-  color: window_fg_color;
-  background-color: card_bg_color;
+  color: @window_fg_color;
+  background-color: @card_bg_color;
 }
 
 .toggle-switch:checked {
-  background-color: accent_color;
+  background-color: @accent_color;
 }
 
 .message {
-  background-color: card_bg_color;
+  background-color: @card_bg_color;
   margin-left: 16px;
   margin-top: 8px;
 }
 
 .message-list-placeholder {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .message-header, .message-body, .message-icon, .message-title {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .message-close-button {
-  background-color: accent_color;
-  color: card_bg_color;
+  background-color: @accent_color;
+  color: @card_bg_color;
 }
 
 .message-close-button:hover {
-  color: window_bg_color;
+  color: @window_bg_color;
 }
 
 .message-media-control {
-  color: window_fg_color;
+  color: @window_fg_color;
 }
 
 .message-media-control:hover, .message-media-control:focus {
-  background-color: accent_color;
-  color: window_bg_color;
+  background-color: @accent_color;
+  color: @window_bg_color;
 }
 
 .modal-dialog .modal-dialog-button-box .modal-dialog-button, .lg-obj-inspector-button, #LookingGlassDialog > #Toolbar .lg-toolbar-button, .candidate-page-button, .message .message-header .flat.message-expand-button,
 .message .message-header .flat.message-close-button, .message-notification-group .flat.message-collapse-button {
-  color: window_fg_color;
-  background-color: card_bg_color;
+  color: @window_fg_color;
+  background-color: @card_bg_color;
 }
 
 .modal-dialog .modal-dialog-button-box .modal-dialog-button:hover, .lg-obj-inspector-button:hover, #LookingGlassDialog > #Toolbar .lg-toolbar-button:hover, .candidate-page-button:hover, .icon-button.flat:hover, .message .message-header .flat.message-expand-button:hover,
 .message .message-header .flat.message-close-button:hover, .message-notification-group .flat.message-collapse-button:hover, .button.flat:hover, .popup-menu .button:hover {
-  color: window_bg_color;
-  background-color: accent_color;
+  color: @window_bg_color;
+  background-color: @accent_color;
 }
 
 .modal-dialog {
-  background-color: window_bg_color;
-  color: window_fg_color;
+  background-color: @window_bg_color;
+  color: @window_fg_color;
 }
 
 .icon-button:last-child {
-  color: window_fg_color;
-  background-color: card_bg_color;
+  color: @window_fg_color;
+  background-color: @card_bg_color;
 }
 
 .icon-button:last-child:hover {
-  color: window_fg_color;
-  background-color: headerbar_bg_color;
+  color: @window_fg_color;
+  background-color: @headerbar_bg_color;
 }
+

@@ -184,6 +184,10 @@ switch {
 	background-color: @card_bg_color;
 }
 
+revealer label {
+	color: @window_fg_color;
+}
+
 * {
   padding: 0;
   -GtkToolButton-icon-spacing: 4;

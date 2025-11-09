@@ -34,7 +34,7 @@
 
 @define-color sidebar_bg_color #2b3269;
 @define-color sidebar_fg_color #99c1f1;
-@define-color sidebar_backdrop_color #2b3258;
+@define-color sidebar_backdrop_color @sidebar_bg_color;
 @define-color sidebar_border_color #2b3258;
 
 @define-color secondary_sidebar_bg_color @sidebar_bg_color;
@@ -63,4 +63,8 @@ toast {
 toggle:checked {
   background-color: #2b3258;
   color: #99c1f1;
+}
+
+.inline {
+	background-color: rgba(0, 0, 0, 0);
 }
