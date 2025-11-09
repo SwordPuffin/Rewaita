@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="rewaita">
 	<schema id="io.github.swordpuffin.rewaita" path="/io/github/swordpuffin/rewaita/">
+    <key name="light-theme" type="s">
+      <default>'default'</default>
+    </key>
+    <key name="dark-theme" type="s">
+      <default>'default'</default>
+    </key>
+    <key name="window-controls" type="s">
+      <default>'default'</default>
+    </key>
+    <key name="modify-gtk3-theme" type="b">
+      <default>false</default>
+    </key>
+    <key name="modify-gnome-shell" type="b">
+      <default>false</default>
+    </key>
+    <key name="run-in-background" type="b">
+      <default>false</default>
+    </key>
+    <key name="transparency" type="b">
+      <default>false</default>
+    </key>
+    <key name="window" type="b">
+      <default>false</default>
+    </key>
+    <key name="sharp" type="b">
+      <default>false</default>
+    </key>
 	</schema>
 </schemalist>
