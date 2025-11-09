@@ -22,7 +22,7 @@
 
 # ⬇️ Installation 
 ---
-*The AUR package is maintained by third-party developers, and is not tested in upstream production.
+*The AUR package is maintained by third-party developers, and is not tested in upstream production. This version has also had many more bugs in the past.
 <br/>
 <br/>
 **The Flatpak version is the only officially supported format and therefore is recommended for the best experience.**
@@ -35,7 +35,6 @@ flatpak install io.github.swordpuffin.rewaita
 ```bash
 yay -s rewaita
 ```
-*Please note that the AUR version in particular has had many issues in the past.
 
 
 # ✅ Permissions 
