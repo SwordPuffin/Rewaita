@@ -50,32 +50,17 @@ class RewaitaApplication(Adw.Application):
 
     def grab_prefs(self):
         win = RewaitaWindow
-        if(not os.path.exists(f"{win.data_dir}/prefs.json")):
-            with open(f"{win.data_dir}/prefs.json", "w") as file:
-                json.dump({"light_theme": "default", "dark_theme": "default", "window_controls": "default"}, file, indent=4)
-        try:
-            with open(f"{win.data_dir}/prefs.json", "r") as file:
-                data = json.load(file)
-                win.light_theme = data["light_theme"]
-                win.dark_theme = data["dark_theme"]
-                win.window_control = data["window_controls"]
-                win.modify_gtk3_theme = data["modify_gtk3_theme"]
-                win.modify_gnome_shell = data["modify_gnome_shell"]
-                win.run_in_background = data["run_in_background"]
-        except:
-            with open(f"{win.data_dir}/prefs.json", "w") as file:
-                json.dump(
-                {
-                "light_theme": win.light_theme,
-                "dark_theme": win.dark_theme,
-                "window_controls": win.window_control,
-                "modify_gtk3_theme": True,
-                "modify_gnome_shell": True,
-                "run_in_background": True
-                }, file, indent=4)
-                win.modify_gtk3_theme = True
-                win.modify_gnome_shell = True
-                win.run_in_background = True
+        win.app_settings = Gio.Settings.new("io.github.swordpuffin.rewaita")
+
+        win.light_theme = win.app_settings.get_string("light-theme")
+        win.dark_theme = win.app_settings.get_string("dark-theme")
+        win.window_control = win.app_settings.get_string("window-controls")
+        win.modify_gtk3_theme = win.app_settings.get_boolean("modify-gtk3-theme")
+        win.modify_gnome_shell = win.app_settings.get_boolean("modify-gnome-shell")
+        win.run_in_background = win.app_settings.get_boolean("run-in-background")
+        win.transparency = win.app_settings.get_boolean("transparency")
+        win.borders = win.app_settings.get_boolean("window")
+        win.sharp = win.app_settings.get_boolean("sharp")
 
     def on_close_request(self, window, *args):
         if(window.run_in_background):

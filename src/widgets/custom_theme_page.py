@@ -1,7 +1,7 @@
 import gi, shutil, os
 gi.require_version("Gtk", "4.0")
 gi.require_version('GtkSource', '5')
-from gi.repository import Gtk, Gdk, Adw, GLib, GtkSource
+from gi.repository import Gtk, Gdk, Adw, GLib, GtkSource, Gio
 from .theme_page import load_colors_from_css, create_color_thumbnail_button
 
 #Stripped down colors for the time being
@@ -164,11 +164,15 @@ class CustomPage(Gtk.Box):
         mode_box.append(light_radio)
         mode_box.append(dark_radio)
 
+        open_folder_button = Gtk.Button(label=_("Open Theme Directory"))
+        folder = Gio.File.new_for_path(GLib.get_user_data_dir())
+        open_folder_button.connect("clicked", lambda d : Gio.AppInfo.launch_default_for_uri(folder.get_uri(), None))
+
         self.append(mode_label)
         self.append(mode_box)
         self.append(entry_box)
 
-        self.append(Gtk.Label(wrap=True, label=_(f"*Themes will be saved to: ") + GLib.get_user_data_dir()))
+        self.append(open_folder_button)
         self.save_button = Gtk.Button(label=_("Save"), sensitive=False, margin_bottom=12, margin_start=12, margin_end=12)
         self.save_button.connect("clicked", self.save_theme, parent, name_entry, light_radio, emoji_entry)
 
@@ -230,8 +234,14 @@ class CustomPage(Gtk.Box):
         with open(theme_file, "w") as file:
             file.write(src_file_text)
 
+        match(theme_type):
+            case("light"):
+                flowbox = parent.light_flowbox
+            case("dark"):
+                flowbox = parent.dark_flowbox
+
         colors = load_colors_from_css(theme_file)
-        new_button = create_color_thumbnail_button(colors, (entry.get_text() + " " + emoji))
+        new_button = create_color_thumbnail_button(colors, (entry.get_text() + " " + emoji), flowbox.snippet)
         new_button.connect("clicked", parent.on_theme_button_clicked, (entry.get_text() + " " + emoji + ".css"), theme_type)
 
         #Attributes
@@ -239,12 +249,6 @@ class CustomPage(Gtk.Box):
         new_button.path = os.path.join(parent.data_dir, theme_type, (entry.get_text() + " " + emoji + ".css"))
         new_button.theme_type = theme_type
         new_button.theme = entry.get_text()
-
-        match(theme_type):
-            case("light"):
-                flowbox = parent.light_flowbox
-            case("dark"):
-                flowbox = parent.dark_flowbox
 
         flowbox.insert(new_button, -1)
         flowbox.invalidate_sort()

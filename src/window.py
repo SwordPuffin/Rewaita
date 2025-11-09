@@ -17,10 +17,10 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os, shutil, json, gi
+import os, shutil, gi
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
-from .utils import parse_gtk_theme, set_to_default, delete_items, set_gtk3_theme, get_accent_color, css
+from .utils import parse_gtk_theme, set_to_default, delete_items, set_gtk3_theme, get_accent_color
 from .custom_theme_page import CustomPage
 from .theme_page import ThemePage
 from .window_control_box import WindowControlBox
@@ -55,16 +55,20 @@ class RewaitaWindow(Adw.ApplicationWindow):
     toast_overlay = Gtk.Template.Child()
     delete_button = Gtk.Template.Child()
     endbox = Gtk.Template.Child()
+    extra_css = set()
     window_control_css = ""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         css_provider = Gtk.CssProvider()
-        css_provider.load_from_data(css.encode('utf-8'))
+        css_provider.load_from_data(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "styles.css")).read())
         Gtk.StyleContext.add_provider_for_display(
             Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
         )
+
+        if(os.path.exists(os.path.join(GLib.get_user_data_dir(), "prefs.json"))):
+            os.remove(os.path.join(GLib.get_user_data_dir(), "prefs.json"))
 
         if(not os.path.exists(os.path.join(GLib.getenv("HOME"), ".local", "share", "themes"))):
             print("Making gnome shell theme directory")
@@ -139,29 +143,40 @@ class RewaitaWindow(Adw.ApplicationWindow):
             theme_name = self.light_theme
             theme_type = "light"
 
-        self.controls.set_css_classes([self.window_control])
+        self.save_prefs()
+
         if(theme_name.lower() == "default"):
             set_to_default([gtk3_config_dir, gtk4_config_dir], theme_type, reset_shell, self.window_control_css)
             return
+
         theme_file = os.path.join(self.data_dir, theme_type, theme_name)
         try:
             shutil.copy(theme_file, os.path.join(gtk4_config_dir, "gtk.css"))
             with open(os.path.join(gtk4_config_dir, "gtk.css"), "a") as file:
-                file.write(self.window_control_css + f"\n\n@define-color accent_bg_color @{get_accent_color()};\n@define-color accent_fg_color @window_bg_color;")
+                extra_css_string = ""
+                for item in self.extra_css:
+                    extra_css_string += item
+                extras = self.window_control_css + f"\n\n@define-color accent_bg_color @{self.accent};\n@define-color accent_fg_color @window_bg_color;" + "\n\n" + extra_css_string
+                file.write(extras)
         except Exception as e:
             print(f"Error moving file: {e}")
+
+        self.controls.set_css_classes([self.window_control])
 
         gtk_file = open(theme_file)
         self.toast_overlay.dismiss_all()
         self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Change GNOME shell theme to 'Rewaita' and reboot for full changes"))))
 
         parse_gtk_theme(
-            gtk_file.read() + "\n\n" + self.window_control_css,
+            gtk_file.read() + extras,
             self.template_file_content,
             os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css"),
             self.gtk3_template_file_content,
             self.modify_gtk3_theme,
             self.modify_gnome_shell,
+            self.app_settings.get_boolean("transparency"),
+            self.app_settings.get_boolean("window"),
+            self.app_settings.get_boolean("sharp"),
             reset_shell
         )
 
@@ -175,12 +190,10 @@ class RewaitaWindow(Adw.ApplicationWindow):
             self.window_control_css = ""
         for control in flowbox:
             control_button = control.get_first_child()
-            control_button.remove_css_class("suggested-action")
-
-        self.dump_json_into_prefs()
+            control_button.remove_css_class("active-scheme")
 
         self.window_control = control_file
-        button.add_css_class("suggested-action")
+        button.add_css_class("active-scheme")
         self.on_theme_selected()
 
     def on_theme_button_clicked(self, button, theme_name, theme_type):
@@ -193,33 +206,28 @@ class RewaitaWindow(Adw.ApplicationWindow):
         elif(theme_type == "light" and theme_name == "Default"):
             self.light_theme = "default"
 
-        self.dump_json_into_prefs()
-
         if(theme_type == "light" and self.pref in [0, 2] or theme_type == "dark" and self.pref == 1):
             self.on_theme_selected()
         else:
+            self.save_prefs()
             self.toast_overlay.dismiss_all()
             self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_(f"{theme_type.capitalize()} theme set to: {theme_name.replace('.css', '')}"))))
 
         if(theme_type == "dark"):
             flowbox_type = self.dark_flowbox
-        else:
+        elif(theme_type == "light"):
             flowbox_type = self.light_flowbox
 
         for flowbox in flowbox_type:
             for theme in flowbox:
-                theme.remove_css_class("suggested-action")
+                theme.remove_css_class("active-scheme")
 
-        if(button.get_icon_name() != "reload-symbolic"): button.add_css_class("suggested-action")
+        if(button.get_icon_name() != "reload-symbolic"): button.add_css_class("active-scheme")
 
-    def dump_json_into_prefs(self):
-        with open(f"{self.data_dir}/prefs.json", "w") as file:
-            json.dump(
-            {
-                "light_theme": self.light_theme,
-                "dark_theme": self.dark_theme,
-                "window_controls": self.window_control,
-                "modify_gtk3_theme": self.modify_gtk3_theme,
-                "modify_gnome_shell": self.modify_gnome_shell,
-                "run_in_background": self.run_in_background
-            }, file, indent=4)
+    def save_prefs(self):
+        self.app_settings.set_string("light-theme", self.light_theme)
+        self.app_settings.set_string("dark-theme", self.dark_theme)
+        self.app_settings.set_string("window-controls", self.window_control)
+        self.app_settings.set_boolean("modify-gtk3-theme", self.modify_gtk3_theme)
+        self.app_settings.set_boolean("modify-gnome-shell", self.modify_gnome_shell)
+        self.app_settings.set_boolean("run-in-background", self.run_in_background)

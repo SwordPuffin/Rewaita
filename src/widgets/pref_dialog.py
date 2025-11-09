@@ -1,4 +1,4 @@
-import gi, json, os, shutil
+import gi, os, shutil
 from gi.repository import Gtk, Adw, GLib
 from .window import reset_shell
 
@@ -55,17 +55,9 @@ class PrefDialog(Adw.PreferencesDialog):
             self.clear_gnome_shell(bool(state), win)
         elif(title == "Run in background"):
             win.run_in_background = bool(state)
+            self.change_autostart(bool(state))
 
-        with open(f"{win.data_dir}/prefs.json", "w") as file:
-            json.dump(
-            {
-                "light_theme": win.light_theme,
-                "dark_theme": win.dark_theme,
-                "window_controls": win.window_control,
-                "modify_gtk3_theme": win.modify_gtk3_theme,
-                "modify_gnome_shell": win.modify_gnome_shell,
-                "run_in_background": win.run_in_background
-            }, file, indent=4)
+        win.save_prefs()
 
     def clear_theme(self, button, folder, win):
         folder_path = os.path.join(GLib.getenv("HOME"), ".config", folder)
@@ -88,3 +80,20 @@ class PrefDialog(Adw.PreferencesDialog):
         else:
             win.on_theme_selected()
 
+    def change_autostart(self, state):
+        if(state == False):
+            path = os.path.join(GLib.getenv("HOME"), ".config", "autostart", "rewaita.desktop")
+            if(os.path.exists(path)):
+                os.remove(os.path.join(GLib.getenv("HOME"), ".config", "autostart", "rewaita.desktop"))
+        else:
+            with open(os.path.join(GLib.getenv("HOME"), ".config", "autostart", "rewaita.desktop"), "w") as file:
+                file.write("""
+[Desktop Entry]
+Type=Application
+Name=io.github.swordpuffin.rewaita
+X-XDP-Autostart=io.github.swordpuffin.rewaita
+Exec=flatpak run io.github.swordpuffin.rewaita --background
+DBusActivatable=true
+X-Flatpak=io.github.swordpuffin.rewaita
+                """
+                )

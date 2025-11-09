@@ -1,3 +1,22 @@
+# window_control_box.py
+#
+# Copyright 2025 Nathan Perlman
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 import gi
 from gi.repository import Gtk, Adw
 
@@ -22,7 +41,7 @@ class ButtonBox(Gtk.Button):
         self.connect("clicked", window.on_window_control_clicked, extras_info[control], window, flowbox)
         self.set_child(box)
         if(extras_info[control] == current_config):
-            self.add_css_class("suggested-action")
+            self.add_css_class("active-scheme")
 
 class WindowControlBox(Gtk.Box):
     def __init__(self, window, current_config):
