@@ -58,8 +58,11 @@ flatpak override --filesystem=xdg-config/gtk-4.0:rw
 #### Gnome Shell theme is not generating:
 1. Power off your computer (like full shutdown, not restart).
 2. Turn it back on and try again.
-3. Hope it works 🙏🙏🙏.
-4. If it doesn't, file an issue and get some help here.
+3. If it still doesn't generate:
+     1. Go into Flatseal and find Rewaita's page
+     2. Find filesystem permissions (you should see ~/.local/share/themes among them)
+     3. Change ~/.local/share/themes to: ~/.local/share/themes:create (just append ":create")
+     4. If it still doesn't work file an issue.
 
 #### Application window opens but is empty:
 #### 1. Flatpak
