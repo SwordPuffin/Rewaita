@@ -39,9 +39,15 @@ yay -s rewaita
 
 # ✅ Permissions 
 ### Allow Flatpak to edit GTK3/4 themes
+#### System installs (default):
 ```bash
-flatpak override --filesystem=xdg-config/gtk-3.0:rw
-flatpak override --filesystem=xdg-config/gtk-4.0:rw
+sudo flatpak override --filesystem=xdg-config/gtk-3.0:rw
+sudo flatpak override --filesystem=xdg-config/gtk-4.0:rw
+```
+#### User installs
+```bash
+flatpak --user override --filesystem=xdg-config/gtk-3.0:rw
+flatpak --user override --filesystem=xdg-config/gtk-4.0:rw
 ```
 
 # 🖼️ Screenshots
