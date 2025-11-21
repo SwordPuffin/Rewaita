@@ -13,7 +13,7 @@
     </a>
     <br/>
     <br/>
-    (Unofficial AUR build)
+    (AUR build)
     <br/>
     <a href="https://aur.archlinux.org/packages/rewaita">
         <img width="200" alt="Unofficial AUR build" src="https://img.shields.io/aur/version/rewaita?style=for-the-badge">
@@ -26,11 +26,19 @@
   <a href="https://build.opensuse.org/package/show/home:ericfrs/rewaita">
     <img width="200" alt="Zypper Package" src="https://img.shields.io/badge/openSUSE-73BA25?logo=opensuse&logoColor=white">
   </a>
+
+  <br/>
+  <br/>
+  (NixOS build)
+  <br />
+  <a href="https://search.nixos.org/packages?channel=unstable&show=rewaita&query=adwaita">
+    <img width="190" alt="NixOS Package" src="https://img.shields.io/badge/NixOS-5277C3?logo=nixos&logoColor=fff">
+  </a>
 </p>
 
 # ⬇️ Installation 
 ---
-*The AUR and Zypper packages are maintained by third-party developers, and are not tested in upstream production. Use with caution!!!
+*The AUR, Zypper, and Nix packages are maintained by third-party developers, and are not tested in upstream production. Use with caution!!!
 <br/>
 <br/>
 **The Flatpak version is the only officially supported format and therefore is recommended for the best experience.**
@@ -44,7 +52,7 @@ flatpak install io.github.swordpuffin.rewaita
 yay -s rewaita
 ```
 
-### openSUSE
+### OpenSUSE
 ```bash
 # Tumbleweed
 sudo zypper ar -cfp 90 https://download.opensuse.org/repositories/home:/ericfrs/openSUSE_Tumbleweed/home:ericfrs.repo
@@ -53,6 +61,11 @@ sudo zypper ar -cfp 90 https://download.opensuse.org/repositories/home:/ericfrs/
 
 sudo zypper ref
 sudo zypper in rewaita
+```
+
+### NixOS
+```bash
+nix-shell -p rewaita
 ```
 
 
@@ -121,7 +134,7 @@ git clone https://github.com/SwordPuffin/Rewaita
 
 Then, in [Builder](https://apps.gnome.org/Builder/) you can add it to your projects.
 
-## AUR or OpenSUSE 
+## AUR, OpenSUSE, or NixOS
 Please contact the maintainers for instuctions, they are not directly affiliated with any upstream project developer(s).
 <br />
 Any serious issues should be brought up here, but please indicate you are running a third-party build.
@@ -129,6 +142,8 @@ Any serious issues should be brought up here, but please indicate you are runnin
 AUR maintainer: [Mark Wagie](https://github.com/yochananmarqos)
 <br />
 OpenSUSE maintainer: [ericfs](https://github.com/ericfrs)
+<br />
+NixOS maintainer: [Seth Flynn](https://github.com/getchoo)
 
 ---
 
