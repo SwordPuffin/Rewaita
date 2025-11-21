@@ -30,7 +30,7 @@
 
 # ⬇️ Installation 
 ---
-*The AUR package is maintained by third-party developers, and is not tested in upstream production. This version has also had many more bugs in the past.
+*The AUR and Zypper packages are maintained by third-party developers, and are not tested in upstream production. Use with caution!!!
 <br/>
 <br/>
 **The Flatpak version is the only officially supported format and therefore is recommended for the best experience.**
