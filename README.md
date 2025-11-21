@@ -36,6 +36,17 @@ flatpak install io.github.swordpuffin.rewaita
 yay -s rewaita
 ```
 
+### openSUSE
+```bash
+# Tumbleweed
+sudo zypper ar -cfp 90 https://download.opensuse.org/repositories/home:/ericfrs/openSUSE_Tumbleweed/home:ericfrs.repo
+# Slowroll
+sudo zypper ar -cfp 90 https://download.opensuse.org/repositories/home:/ericfrs/openSUSE_Slowroll/home:ericfrs.repo
+
+sudo zypper ref
+sudo zypper in rewaita
+```
+
 
 # ✅ Permissions 
 ### Allow Flatpak to edit GTK3/4 themes
