@@ -1,11 +1,11 @@
 # 🎨 Rewaita
----
 
 <p align="center">
   <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/icons/hicolor/scalable/apps/io.github.swordpuffin.rewaita.svg" width="400"/>
 </p>
 
-<p align="center">Rewaita gives your Adwaita apps a fresh look by tinting them with popular color schemes.</p>
+#### <p align="center">Rewaita gives your Adwaita apps a fresh look by tinting them with popular color schemes.</p>
+
 <br>
 <p align="center"> 
     <a href="https://flathub.org/apps/io.github.swordpuffin.rewaita"> 
@@ -18,6 +18,14 @@
     <a href="https://aur.archlinux.org/packages/rewaita">
         <img width="200" alt="Unofficial AUR build" src="https://img.shields.io/aur/version/rewaita?style=for-the-badge">
     </a>
+
+  <br />
+  <br />
+  (OpenSUSE build)
+  <br />
+  <a href="https://build.opensuse.org/package/show/home:ericfrs/rewaita">
+    <img width="200" alt="Zypper Package" src="https://img.shields.io/badge/openSUSE-73BA25?logo=opensuse&logoColor=white">
+  </a>
 </p>
 
 # ⬇️ Installation 
@@ -84,9 +92,9 @@ flatpak --user override --filesystem=xdg-config/gtk-4.0:rw
 #### Application window opens but is empty:
 #### 1. Flatpak
    
-Delete:
+Run:
 ```
-~/.var/app/io.github.swordpuffin.rewaita/data/prefs.json
+rm ~/.var/app/io.github.swordpuffin.rewaita/data/prefs.json
 ```
 #### 2. AUR
 See upstream [bug](https://github.com/SwordPuffin/Rewaita/issues/48) 
@@ -101,6 +109,7 @@ Then reboot.
 
 # 🤝 Contributing
 
+## Flatpak
 Run the following commands in a terminal:
 
 (Make a folder named `Projects` in your home directory if it doesn't already exist)
@@ -111,6 +120,15 @@ git clone https://github.com/SwordPuffin/Rewaita
 ```
 
 Then, in [Builder](https://apps.gnome.org/Builder/) you can add it to your projects.
+
+## AUR or OpenSUSE 
+Please contact the maintainers for instuctions, they are not directly affiliated with any upstream project developer(s).
+<br />
+Any serious issues should be brought up here, but please indicate you are running a third-party build.
+
+AUR maintainer: [Mark Wagie](https://github.com/yochananmarqos)
+<br />
+OpenSUSE maintainer: [ericfs](https://github.com/ericfrs)
 
 ---
 
