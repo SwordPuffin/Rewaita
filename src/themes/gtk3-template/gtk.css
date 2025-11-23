@@ -139,6 +139,10 @@ slider, scale slider {
 	background-image: none;
 }
 
+scale trough, scale trough.fill {
+	border-color: transparent;
+}
+
 combobox button, button.combo, button.font, button.image-button, button.lock, button.popup.raised.toggle, text, .popup.toggle, tab:checked {
   background-color: @card_bg_color;
   color: @card_fg_color;
