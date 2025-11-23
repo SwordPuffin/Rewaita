@@ -90,7 +90,7 @@ def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file, gtk3_file, modify_gtk3
     if(window_borders):
         colors["border_color"] = colors[accent_color]
     else:
-        colors["border_color"] = "transparent"
+        colors["border_color"] = colors["window_bg_color"]
 
     items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "accent_color", "border_color", "red_1"]
 
