@@ -3,29 +3,34 @@
 /*border_color: accent color if window border is enabled*/
 /*card_bg_color: background color for buttons or items that need to contrast the background*/
 /*headerbar_bg_color: dark color for high contrast*/
+/*panel_bg_color: panel background color*/
+/*panel_fg_color: panel text color*/
+/*panel_button_bg_color: panel button background color*/
+/*panel_hover_bg_color: panel button hover background color*/
 
 /* Top Bar */
 #panel {
-  background-color: @window_bg_color;
-  color: @window_fg_color;
+  background-color: @panel_bg_color;
+  color: @panel_fg_color;
   font-feature-settings: "tnum";
   height: 45px;
 }
 
 #panel .panel-button {
-  color: @window_fg_color;
+  color: @panel_fg_color;
+  background-color: @panel_button_bg_color;
 }
 
 #panel .panel-button:hover {
-  background-color: @card_bg_color;
+  background-color: @panel_hover_bg_color;
 }
 
 #panel .panel-button:hover.clock-display .clock {
-  background-color: @card_bg_color;
+  background-color: @panel_hover_bg_color;
 }
 
 #panel .panel-button #panelActivities .workspace-dot {
-  background-color: @window_fg_color;
+  background-color: @panel_fg_color;
 }
 
 .window-close {
