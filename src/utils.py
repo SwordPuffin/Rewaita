@@ -92,7 +92,17 @@ def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file, gtk3_file, modify_gtk3
     else:
         colors["border_color"] = colors["window_bg_color"]
 
-    items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "accent_color", "border_color", "red_1"]
+    # Fallback for themes without panel variables (backward compatibility)
+    if("panel_bg_color" not in colors):
+        colors["panel_bg_color"] = colors["window_bg_color"]
+    if("panel_fg_color" not in colors):
+        colors["panel_fg_color"] = colors["window_fg_color"]
+    if("panel_button_bg_color" not in colors):
+        colors["panel_button_bg_color"] = "transparent"
+    if("panel_hover_bg_color" not in colors):
+        colors["panel_hover_bg_color"] = colors["card_bg_color"]
+
+    items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color", "panel_button_bg_color", "panel_hover_bg_color"]
 
     if(transparency):
         for color_to_replace in ["window_bg_color", "headerbar_bg_color", "card_bg_color"]:
