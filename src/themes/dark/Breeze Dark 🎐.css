@@ -42,6 +42,11 @@
 @define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
 @define-color secondary_sidebar_border_color @sidebar_border_color;
 
+@define-color panel_bg_color @window_bg_color;
+@define-color panel_fg_color @window_fg_color;
+@define-color panel_button_bg_color transparent;
+@define-color panel_hover_bg_color @card_bg_color;
+
 @define-color blue_1 #99c1f1;
 @define-color blue_2 #62a0ea;
 @define-color green_1 #8ff0a4;

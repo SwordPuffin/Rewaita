@@ -32,6 +32,11 @@
 @define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
 @define-color secondary_sidebar_border_color @sidebar_border_color;
 
+@define-color panel_bg_color @window_bg_color;
+@define-color panel_fg_color @window_fg_color;
+@define-color panel_button_bg_color transparent;
+@define-color panel_hover_bg_color @card_bg_color;
+
 /* Tokyo Night accent colors (light variant) */
 @define-color blue_1 #2e7de9;
 @define-color blue_2 #1d99f3;

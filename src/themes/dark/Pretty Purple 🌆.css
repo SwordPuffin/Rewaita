@@ -30,6 +30,12 @@
 @define-color card_bg_color #494267;
 @define-color card_fg_color #dcdbe2;
 
+/* Panel */
+@define-color panel_bg_color @window_bg_color;
+@define-color panel_fg_color @window_fg_color;
+@define-color panel_button_bg_color transparent;
+@define-color panel_hover_bg_color @card_bg_color;
+
 /* Destructive */
 @define-color destructive_color #ff7b63;
 @define-color destructive_bg_color #c01c28;
