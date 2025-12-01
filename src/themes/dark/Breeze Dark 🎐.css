@@ -18,7 +18,7 @@
 
 @define-color error_color #da4452;
 @define-color error_bg_color #da4452;
-@define-color errow_fg_color #ffffff;
+@define-color error_fg_color #ffffff;
 
 @define-color headerbar_bg_color #31363b;
 @define-color headerbar_fg_color #fcfcfc;
