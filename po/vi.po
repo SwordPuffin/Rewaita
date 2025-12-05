@@ -1,0 +1,155 @@
+# Translation template for Rewaita
+# Loc Huynh <huynhloc.contact@gmail.com>, 2025
+msgid ""
+msgstr ""
+"Project-Id-Version: rewaita\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-05 21:08+0400\n"
+"PO-Revision-Date: 2025-12-05 21:02+0700\n"
+"Last-Translator: Loc Huynh <huynhloc.contact@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: data/io.github.swordpuffin.rewaita.desktop.in:2
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:7
+msgid "Rewaita"
+msgstr "Rewaita"
+
+#: data/io.github.swordpuffin.rewaita.desktop.in:8
+msgid "gtk;adwaita;gnome;shell;theme"
+msgstr "gtk;adwaita;gnome;shell;theme;chủ đề"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:8
+msgid "Bring color to Adwaita"
+msgstr "Mang màu sắc đến Adwaita"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:10
+msgid ""
+"Rewaita is a utility to recolor Gtk4/Adwaita apps to popular color schemes"
+msgstr ""
+"Rewaita là tiện ích để đổi màu ứng dụng Gtk4/Adwaita theo các bảng màu phổ biến"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:11
+msgid ""
+"Changes only affect GTK3/4 applications; Other libraries are NOT supported"
+msgstr ""
+"Thay đổi chỉ ảnh hưởng đến ứng dụng GTK3/4; Các thư viện khác KHÔNG được hỗ trợ"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:15
+msgid "Nathan Perlman"
+msgstr "Nathan Perlman"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:35
+msgid "Browsing through dark themes"
+msgstr "Duyệt qua các chủ đề tối"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:39
+msgid "Browsing through light themes"
+msgstr "Duyệt qua các chủ đề sáng"
+
+#. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
+#: src/main.py:52
+msgid "translator-credits"
+msgstr "Loc Huynh <huynhloc.contact@gmail.com>"
+
+#: src/utils.py:92
+msgid " has been deleted"
+msgstr " đã bị xóa"
+
+#: src/utils.py:98
+msgid "Delete"
+msgstr "Xóa"
+
+#: src/utils.py:99
+msgid ""
+"Are you sure you want to delete that theme?\n"
+"This cannot be undone."
+msgstr ""
+"Bạn có chắc chắn muốn xóa chủ đề này không?\n"
+"Hành động này không thể hoàn tác."
+
+#: src/custom_theme.py:149
+msgid "Theme name (required)"
+msgstr "Tên chủ đề (bắt buộc)"
+
+#: src/custom_theme.py:153
+msgid "Emoji (optional)"
+msgstr "Emoji (tùy chọn)"
+
+#: src/custom_theme.py:157
+msgid "Theme Type"
+msgstr "Loại chủ đề"
+
+#: src/custom_theme.py:158
+msgid "Light"
+msgstr "Sáng"
+
+#: src/custom_theme.py:159
+msgid "Dark"
+msgstr "Tối"
+
+#: src/window.py:92
+msgid "Theming"
+msgstr "Chủ đề"
+
+#: src/window.py:120
+msgid ""
+"After setting a color scheme, go to Gnome-Tweaks (or similar) and set "
+"'Rewaita' as your Shell theme. It contains the same colors as the active "
+"scheme for continuity\n"
+"\n"
+"Rewaita also does not style parts of apps like Gnome Builder and BlackBox "
+"which have their own syntax highlighting system\n"
+"\n"
+"If you find a problem with any theme, would like to suggest another be "
+"added, or want to submit your own to be included, please make an issue or a "
+"pull request @ https://github.com/SwordPuffin/Rewaita"
+msgstr ""
+"Sau khi chọn bảng màu, vào Gnome-Tweaks (hoặc tương tự) và đặt 'Rewaita' làm chủ đề Shell. Nó chứa cùng màu với bảng màu đang dùng để đồng bộ\n"
+"\n"
+"Rewaita cũng không tô màu một số phần của ứng dụng như Gnome Builder và BlackBox vì chúng có hệ thống tô màu cú pháp riêng\n"
+"\n"
+"Nếu bạn phát hiện lỗi với chủ đề nào, muốn đề xuất thêm chủ đề mới hoặc gửi chủ đề tự tạo để đưa vào, vui lòng tạo issue hoặc pull request tại https://github.com/SwordPuffin/Rewaita"
+
+#: src/window.py:121
+msgid ""
+"**Rewaita will only style GTK3/4 applications; Any other UI libraries are "
+"altogether NOT supported**"
+msgstr ""
+"**Rewaita chỉ tô màu ứng dụng GTK3/4; Các thư viện giao diện khác hoàn toàn KHÔNG được hỗ trợ**"
+
+#: src/window.py:129
+msgid "For Flatpak application support, run:"
+msgstr "Để hỗ trợ ứng dụng Flatpak, chạy lệnh:"
+
+#: src/window.py:201
+msgid "User Guide"
+msgstr "Hướng dẫn sử dụng"
+
+#: src/window.py:260
+msgid "Reset to default"
+msgstr "Đặt lại mặc định"
+
+#: src/window.py:328
+msgid "Change GNOME shell theme to 'Rewaita' and reboot for full changes"
+msgstr "Đổi chủ đề GNOME Shell thành 'Rewaita' và khởi động lại để áp dụng đầy đủ"
+
+#: src/window.ui:22
+msgid "Main Menu"
+msgstr "Trình đơn chính"
+
+#: src/window.ui:44
+msgid "_Keyboard Shortcuts"
+msgstr "_Phím tắt bàn phím"
+
+#: src/window.ui:48
+msgid "_About Rewaita"
+msgstr "_Giới thiệu Rewaita"
+
+#: src/window.ui:52
+msgid "_Help"
+msgstr "_Trợ giúp"
