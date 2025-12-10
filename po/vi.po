@@ -140,7 +140,7 @@ msgstr "Đổi chủ đề GNOME Shell thành 'Rewaita' và khởi động lại
 
 #: src/window.ui:22
 msgid "Main Menu"
-msgstr "Trình đơn chính"
+msgstr "Menu chính"
 
 #: src/window.ui:44
 msgid "_Keyboard Shortcuts"
