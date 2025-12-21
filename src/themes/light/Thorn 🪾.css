@@ -1,0 +1,103 @@
+/* Thorn Light Palette - Adapted from jpwol/thorn.nvim */
+@define-color window_bg_color #c9e4d4;
+@define-color window_fg_color #3C6746;
+
+/* View styling */
+@define-color view_bg_color #B4D0BF;
+@define-color view_fg_color #3c4542;
+
+/* Header bar */
+@define-color headerbar_bg_color #B4D0BF;
+@define-color headerbar_backdrop_color #B4D0BF;
+@define-color headerbar_fg_color #3C6746;
+
+/* Popovers and dialogs */
+@define-color popover_bg_color #c9e4d4;
+@define-color popover_fg_color #3c4542;
+
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+
+/* Cards and sidebars */
+@define-color card_bg_color #B4D0BF;
+@define-color card_fg_color #3c4542;
+
+@define-color sidebar_bg_color #B4D0BF;
+@define-color sidebar_fg_color @window_fg_color;
+@define-color sidebar_backdrop_color @sidebar_bg_color;
+@define-color sidebar_border_color #e6e6dc;
+
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+@define-color blue_1 #0E747B;    /* lightblue */
+@define-color blue_2 #4F8FA1;    /* blue */
+@define-color blue_3 #4F6980;    /* blue0 */
+@define-color blue_4 #a8d5d3;    /* Light teal */
+@define-color blue_5 #d6eceb;    /* Pale teal */
+
+@define-color green_1 #73A08D;   /* green */
+@define-color green_2 #6FA791;   /* green0 */
+@define-color green_3 #6da66d;   /* Bright green */
+@define-color green_4 #a8c9a8;   /* Light green */
+@define-color green_5 #5E800E;   /* green1 */
+
+@define-color yellow_1 #BF7021;  /* yellow */
+@define-color yellow_2 #C78500;  /* yellow0 */
+@define-color yellow_3 #d4c158;  /* Bright gold */
+@define-color yellow_4 #e8dfa8;  /* Light gold */
+@define-color yellow_5 #f4f0d6;  /* Pale gold */
+
+@define-color orange_1 #c98a5a;  /* Muted orange */
+@define-color orange_2 #b07a4a;  /* Darker orange */
+@define-color orange_3 #e0a46d;  /* Bright orange */
+@define-color orange_4 #efd0a8;  /* Light orange */
+@define-color orange_5 #BF442B;  /* orange */
+
+@define-color red_1 #FF0008;     /* git-delete */
+@define-color red_2 #E89396;     /* red1 */
+@define-color red_3 #FA5056;     /* red0 */
+@define-color red_4 #d46d6d;     /* Bright red */
+@define-color red_5 #971015;     /* red */
+
+@define-color purple_1 #913069;  /* pink */
+@define-color purple_2 #7c4a7c;  /* Darker purple */
+@define-color purple_3 #a66da6;  /* Bright purple */
+@define-color purple_4 #c9a8c9;  /* Light purple */
+@define-color purple_5 #e4d6e4;  /* Pale purple */
+
+@define-color brown_1 #8c7c63;   /* Muted brown */
+@define-color brown_2 #7a6c58;   /* Darker brown */
+@define-color brown_3 #a69984;   /* Warm brown */
+@define-color brown_4 #d0c8b8;   /* Light brown */
+@define-color brown_5 #ece8e0;   /* Pale brown */
+
+@define-color light_1 #D9D3CE;   /* white */
+@define-color light_2 #B4D0BF;   /* Secondary background */
+@define-color light_3 #e6e6dc;   /* Tertiary background */
+@define-color light_4 #4b8f8c;    /* Accent teal */
+@define-color light_5 #5a8c5a;    /* Accent green */
+
+@define-color dark_1 #444E52;    /* grey */
+@define-color dark_2 #5a6360;    /* Secondary text */
+@define-color dark_3 #4b5451;    /* Tertiary text */
+@define-color dark_4 #6da66d;    /* Accent green */
+@define-color dark_5 #63b1ad;    /* Accent teal */
+
+/* Component styling */
+toast {
+  background-color: @window_bg_color;
+  color: @window_fg_color;
+  border: 1px solid @sidebar_border_color;
+}
+
+toggle:checked {
+  background-color: @card_bg_color;
+  color: @window_fg_color;
+}
+
+.inline {
+  background-color: rgba(0, 0, 0, 0);
+}
