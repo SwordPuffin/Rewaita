@@ -21,7 +21,7 @@
 @define-color dialog_fg_color @popover_fg_color;
 
 /* Cards and sidebars */
-@define-color card_bg_color rgb(255 255 255 / 8%);
+@define-color card_bg_color #363c50;
 @define-color card_fg_color #c0caf5;
 
 @define-color sidebar_bg_color #29304d;
@@ -33,11 +33,6 @@
 @define-color secondary_sidebar_fg_color @sidebar_fg_color;
 @define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
 @define-color secondary_sidebar_border_color @sidebar_border_color;
-
-@define-color panel_bg_color @window_bg_color;
-@define-color panel_fg_color @window_fg_color;
-@define-color panel_button_bg_color transparent;
-@define-color panel_hover_bg_color @card_bg_color;
 
 /* Tokyo Night accent colors */
 @define-color blue_1 #7aa2f7;

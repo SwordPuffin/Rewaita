@@ -27,11 +27,6 @@
 @define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
 @define-color secondary_sidebar_border_color @sidebar_border_color;
 
-@define-color panel_bg_color @window_bg_color;
-@define-color panel_fg_color @window_fg_color;
-@define-color panel_button_bg_color transparent;
-@define-color panel_hover_bg_color @card_bg_color;
-
 @define-color blue_1 #3584e4;
 @define-color green_1 #33d17a;
 @define-color yellow_1 #f6d32d;
@@ -51,5 +46,3 @@ toggle:checked {
   background-color: @card_bg_color;
   color: @window_fg_color;
 }
-
-
