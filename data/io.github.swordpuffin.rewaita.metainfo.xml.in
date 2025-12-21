@@ -51,9 +51,30 @@
       <image>https://raw.githubusercontent.com/SwordPuffin/Rewaita/main/data/screenshots/Screenshot4.png</image>
       <caption>Changing the window control scheme</caption>
     </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/SwordPuffin/Rewaita/main/data/screenshots/Screenshot5.png</image>
+      <caption>Palette swapping dialog for wallpapers</caption>
+    </screenshot>
   </screenshots>
 
   <releases>
+    <release version="1.0.9" date="2025-12-20">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.9</url>
+      <description translate="no">
+        <p>Rewaita v1.0.9</p>
+        <ul>
+          <li>Patched up most remaining holes in Gnome Shell integration</li>
+          <li>Extra customization options: transparency, window borders, and sharp corners</li>
+          <li>Major performance improvements</li>
+          <li>Added two new light themes: Kanagawa-Paper Canvas, and Thorn</li>
+          <li>Fixed issue with Tokyonight Storm</li>
+          <li>Now allows palette swapping images</li>
+          <li>Added Vietnamese translations, thanks to @htienloc</li>
+          <li>UI changes</li>
+          <li>Many bug fixes</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.0.8" date="2025-09-16">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.8</url>
       <description translate="no">

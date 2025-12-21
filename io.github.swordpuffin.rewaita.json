@@ -12,7 +12,7 @@
 	"--filesystem=~/.config/autostart:rw",
         "--filesystem=~/.config/gtk-3.0:rw",
         "--filesystem=~/.config/gtk-4.0:rw",
-        "--filesystem=~/.local/share/themes:rw",
+        "--filesystem=~/.local/share/themes:create",
         "--talk-name=org.gnome.Shell.Extensions"
     ],
     "cleanup" : [
