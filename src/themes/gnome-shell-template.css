@@ -18,7 +18,7 @@
 
 #panel .panel-button {
   color: @panel_fg_color;
-  color: @panel_button_bg_color;
+  background-color: @panel_button_bg_color;
 }
 
 #panel .panel-button:hover {
@@ -29,8 +29,9 @@
   background-color: @panel_hover_bg_color;
 }
 
-#panel .panel-button #panelActivities .workspace-dot {
+#panel .workspace-dot {
   background-color: @panel_fg_color;
+  color: @panel_fg_color;
 }
 
 .window-close {
@@ -71,6 +72,12 @@
   background-color: @accent_color;
 }
 
+/* Tiled window previews */
+.tile-preview {
+  background-color: alpha(@accent_color, 0.2);
+  border: 1px solid @accent_color;
+}
+
 /* Overview stuff */
 #overviewGroup {
   background-color: @window_bg_color;
@@ -79,14 +86,10 @@
 .icon-grid .overview-tile:hover, .grid-search-result:hover, .overview-tile:focus, .grid-search-result:focus, .overview-tile:selected, .grid-search-result:selected {
   color: @window_fg_color;
   background-color: @card_bg_color;
+  background-image: none;
 }
 
-/* .overview-tile:active, .grid-search-result:active, .overview-tile:checked, .grid-search-result:checked { */
-/*   color: @window_fg_color; */
-/*   background-color: @window_bg_color; */
-/* } */
-
-.list-search-result-title {
+.list-search-result-title, .list-search-provider-details {
   color: @window_fg_color;
 }
 
@@ -95,7 +98,7 @@
   font-weight: 300;
 }
 
-.list-search-result:hover, .list-search-result:selected, .search-provider-icon:hover {
+.list-search-result:hover, .list-search-result:selected, .search-provider-icon:hover, .search-section *:hover {
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
   background-color: @card_bg_color;
 }
@@ -112,7 +115,7 @@
   background-color: @headerbar_bg_color;
 }
 
-.search-section-content {
+.search-section-content  {
   color: @window_fg_color;
   background-color: @card_bg_color;
 }
@@ -162,6 +165,18 @@
 
 .event-time {
   color: @window_fg_color;
+}
+
+.cycler-highlight {
+  border: 5px solid @accent_color;
+}
+
+.switcher-list .item-box {
+  color: @window_fg_color;
+}
+
+.switcher-list .item-box:hover, .switcher-list .item-box:selected {
+  background-color: @headerbar_bg_color;
 }
 
 /* screenshot-ui */
@@ -233,14 +248,13 @@ StEntry:focus {
 
 .popup-menu .popup-menu-item {
   color: @window_fg_color !important;
-  /* background-color: transparent; */
 }
 
 .popup-inactive-menu-item:insensitive {
   color: @window_fg_color;
 }
 
-.popup-menu .popup-menu-item:checked {
+.popup-menu .popup-menu-item:checked, .popup-menu-item:active {
   color: @window_fg_color !important;
   background-color: @card_bg_color;
 }
@@ -560,7 +574,7 @@ StEntry:focus {
   color: @window_fg_color;
 }
 
-.calendar .calendar-day-with-events.calendar-work-day {
+.calendar .calendar-day-with-events .calendar-work-day {
   color: @window_fg_color;
 }
 
@@ -769,3 +783,4 @@ StEntry:focus {
   color: @window_fg_color;
   background-color: @headerbar_bg_color;
 }
+
