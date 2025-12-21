@@ -45,7 +45,7 @@ class ButtonBox(Gtk.Button):
 
 class WindowControlBox(Gtk.Box):
     def __init__(self, window, current_config):
-        super().__init__(hexpand=True, orientation=Gtk.Orientation.VERTICAL)
+        super().__init__(hexpand=True, orientation=Gtk.Orientation.VERTICAL, margin_bottom=12)
         self.append(Adw.Clamp(maximum_size=1200, child=Gtk.Separator(margin_start=20, margin_end=20, margin_top=25)))
         title = Gtk.Label(label=_("Window Controls"), margin_bottom=12, margin_top=15)
         title.add_css_class("title-2")

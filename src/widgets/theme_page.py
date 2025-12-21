@@ -17,8 +17,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import gi, os, re, random, json
-from gi.repository import Gtk, Adw, Gdk
+import gi, os, re
+from gi.repository import Gtk, Adw, Gdk, GLib
 from fortune import fortune
 from .wallpaper_dialog import WallpaperDialog
 from .extra_options_box import OptionsBox
@@ -51,29 +51,21 @@ def load_colors_from_css(file_path):
 def create_color_thumbnail_button(colors, name, example_text):
     button = Gtk.Button()
     box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-    frame = Gtk.Frame(vexpand=True, valign=Gtk.Align.END)
-    color_box = Gtk.Box()
+    dots = Gtk.Label(vexpand=True, valign=Gtk.Align.END, use_markup=True)
+    dot_txt = ""
 
     keys_to_show = ["red_1", "orange_1", "yellow_1", "green_1", "blue_1", "dark_1", "light_1"]
     for key in keys_to_show:
         color = colors.get(key)
-        rand = random.randint(0, 10000000)
         if(color):
-            color_widget = Gtk.Box(hexpand=True, height_request=40)
-            color_widget.add_css_class(f"color-{rand}")
-            css_provider = Gtk.CssProvider()
-            css_provider.load_from_data(f"""
-                .color-{rand} {{
-                    background-color: {color};
-                }}
-            """.encode())
-            Gtk.StyleContext.add_provider_for_display(
-                Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-            )
-            color_box.append(color_widget)
+            dot_txt += f"<span font_size='20pt' foreground='{color}'> ● </span>"
 
+    dots.set_label(dot_txt)
+    rand = os.urandom(15).hex()
+    css_provider = Gtk.CssProvider()
     css_provider.load_from_data(f"""
         .background-{rand} {{
+            border-radius: 18px;
             background-color: {colors.get("window_bg_color")};
             color: {colors.get("window_fg_color")};
         }}
@@ -83,35 +75,47 @@ def create_color_thumbnail_button(colors, name, example_text):
     )
     button.add_css_class(f'background-{rand}')
 
-    title = Gtk.Label(margin_bottom=12, margin_top=12, label=name, vexpand=True, valign=Gtk.Align.END)
-    title.set_css_classes(["monospace", "title-2"])
-    box.append(title)
-    box.append(frame)
-    example = Gtk.Label(wrap=True, margin_top=12, margin_bottom=12, hexpand=True, vexpand=True, valign=Gtk.Align.START, halign=Gtk.Align.CENTER, max_width_chars=12)
+    example = Gtk.Label(wrap=True, margin_top=12, margin_bottom=12, hexpand=True, vexpand=True, valign=Gtk.Align.CENTER, halign=Gtk.Align.CENTER, max_width_chars=12)
     example.set_markup(f"<i><b>{example_text}</b></i>")
     box.prepend(example)
+    title = Gtk.Label(margin_bottom=12, margin_top=12, label=name)
+    title.set_css_classes(["monospace", "title-2"])
+    box.prepend(title)
+    box.append(dots)
     button.set_child(box)
-    frame.set_child(color_box)
     return button
+
+def symlink_all_in_dir(src, out):
+    os.makedirs(out, exist_ok=True)
+
+    for name in os.listdir(src):
+        src_path = os.path.join(src, name)
+        out_path = os.path.join(out, name)
+
+        if(os.path.isfile(src_path)):
+            if(os.path.exists(out_path)):
+                os.remove(out_path)
+
+            os.symlink(src_path, out_path)
 
 class ThemePage(Gtk.Box):
     def __init__(self, parent):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=12)
 
         top_box = Gtk.Box(hexpand=True, halign=Gtk.Align.CENTER, margin_top=12, spacing=8)
-        help_button = Gtk.Button(label=_("User Guide"), halign=Gtk.Align.CENTER)
+        help_button = Gtk.Button(label=_("User Guide"), valign=Gtk.Align.CENTER, vexpand=True)
         help_button.set_css_classes(["pill", "suggested-action"])
         help_button.set_action_name("app.guide")
         top_box.append(help_button)
 
         wallpaper_dialog = WallpaperDialog(parent)
-        image_button = Gtk.Button(label=_("Tint Wallpaper"), halign=Gtk.Align.CENTER)
+        image_button = Gtk.Button(label=_("Theme Wallpaper"), valign=Gtk.Align.CENTER, vexpand=True)
         image_button.connect("clicked", lambda d : wallpaper_dialog.present(parent))
         image_button.set_css_classes(["pill", "suggested-action"])
         top_box.append(image_button)
 
-        self.append(top_box)
         options_listbox = OptionsBox(parent)
+        self.append(top_box)
         self.append(options_listbox)
 
         snippet = self.get_example_text()
@@ -120,6 +124,10 @@ class ThemePage(Gtk.Box):
             reset_button = Gtk.Button(icon_name="reload-symbolic", tooltip_text=_("Reset to default"))
             reset_button.add_css_class("circular")
             reset_button.connect("clicked", parent.on_theme_button_clicked, "Default", theme_type)
+
+            default_theme_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), theme_type)
+            default_themes = os.listdir(default_theme_path)
+            symlink_all_in_dir(default_theme_path, os.path.join(GLib.get_user_data_dir(), theme_type))
             themes = os.listdir(os.path.join(parent.data_dir, theme_type))
 
             if(theme_type == "light"):
@@ -141,10 +149,14 @@ class ThemePage(Gtk.Box):
             for theme in sorted(themes):
                 colors = load_colors_from_css(os.path.join(parent.data_dir, theme_type, theme))
                 btn = create_color_thumbnail_button(colors, theme.replace(".css", ""), flowbox.snippet)
-
-                if(theme == parent.dark_theme and theme_type == "dark"): btn.add_css_class("active-scheme")
-                elif(theme == parent.light_theme and theme_type == "light"): btn.add_css_class("active-scheme")
                 btn.connect("clicked", parent.on_theme_button_clicked, theme, theme_type)
+
+                if(theme == parent.dark_theme and theme_type == "dark" or theme == parent.light_theme and theme_type == "light"):
+                    btn.add_css_class("active-scheme")
+                if(theme in default_themes):
+                    btn.default = True
+                else:
+                    btn.default = False
 
                 #Attributes
                 btn.path = os.path.join(parent.data_dir, theme_type, theme)
@@ -161,5 +173,4 @@ class ThemePage(Gtk.Box):
         while(True):
             example = fortune()
             if(len(example) < 70 and not "<" in example and ">" not in example):
-                print(len(example))
                 return example

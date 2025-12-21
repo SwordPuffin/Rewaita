@@ -5,18 +5,19 @@ from .window import reset_shell
 class ToggleRow(Adw.ActionRow):
     def __init__(self, title, win, parent):
         super().__init__()
-        self.set_title(_(title))
+        self.set_title(_(title[0]))
+        self.set_subtitle(_(title[1]))
 
-        if(title == "Generate GTK-3.0 Theme"):
+        if(title[0] == "Generate GTK-3.0 Theme"):
             state = win.modify_gtk3_theme
-        elif(title == "Generate Gnome Shell Theme"):
+        elif(title[0] == "Generate Gnome Shell Theme"):
             state = win.modify_gnome_shell
-        elif(title == "Run in background"):
+        else:
             state = win.run_in_background
 
         toggle = Gtk.Switch(valign=Gtk.Align.CENTER)
         toggle.set_active(state)
-        toggle.connect("state_set", parent.on_pref_toggle_switched, title, win)
+        toggle.connect("state_set", parent.on_pref_toggle_switched, title[0], win)
         self.add_suffix(toggle)
 
 class PrefDialog(Adw.PreferencesDialog):
@@ -26,20 +27,20 @@ class PrefDialog(Adw.PreferencesDialog):
         page = Adw.PreferencesPage()
         page.add(toggle_group)
 
-        clear_box = Gtk.Box(hexpand=True, halign=Gtk.Align.CENTER, spacing=10, margin_top=8)
-        clear_box.add_css_class("error")
+        # clear_box = Gtk.Box(hexpand=True, halign=Gtk.Align.CENTER, spacing=10, margin_top=8)
+        # clear_box.add_css_class("error")
 
-        clear_gtk3_button = Gtk.Button(label=_("Clear GTK-3.0 theme"))
-        clear_gtk3_button.connect("clicked", self.clear_theme, "gtk-3.0", win)
-        clear_box.append(clear_gtk3_button)
+        # clear_gtk3_button = Gtk.Button(label=_("Clear GTK-3.0 theme"))
+        # clear_gtk3_button.connect("clicked", self.clear_theme, "gtk-3.0", win)
+        # clear_box.append(clear_gtk3_button)
 
-        clear_gtk4_button = Gtk.Button(label=_("Clear GTK-4.0 theme"))
-        clear_gtk4_button.connect("clicked", self.clear_theme, "gtk-4.0", win)
-        clear_box.append(clear_gtk4_button)
+        # clear_gtk4_button = Gtk.Button(label=_("Clear GTK-4.0 theme"))
+        # clear_gtk4_button.connect("clicked", self.clear_theme, "gtk-4.0", win)
+        # clear_box.append(clear_gtk4_button)
 
-        toggle_group.add(clear_box)
+        # toggle_group.add(clear_box)
 
-        for title in ["Generate GTK-3.0 Theme", "Generate Gnome Shell Theme", "Run in background"]:
+        for title in [("Generate GTK-3.0 Theme", "Highly recommended for all users"), ("Generate Gnome Shell Theme", "For Gnome users"), ("Run in background", "For users who swap between light/dark mode")]:
             toggle_group.add(ToggleRow(title, win, self))
         self.add(page)
 
@@ -59,17 +60,17 @@ class PrefDialog(Adw.PreferencesDialog):
 
         win.save_prefs()
 
-    def clear_theme(self, button, folder, win):
-        folder_path = os.path.join(GLib.getenv("HOME"), ".config", folder)
-        for filename in os.listdir(folder_path):
-            file_path = os.path.join(folder_path, filename)
-            try:
-                if os.path.isfile(file_path) or os.path.islink(file_path):
-                    os.unlink(file_path)
-                elif os.path.isdir(file_path):
-                    shutil.rmtree(file_path)
-            except Exception as e:
-                print('Failed to clear folder: ' + e)
+    # def clear_theme(self, button, folder, win):
+    #     folder_path = os.path.join(GLib.getenv("HOME"), ".config", folder)
+    #     for filename in os.listdir(folder_path):
+    #         file_path = os.path.join(folder_path, filename)
+    #         try:
+    #             if os.path.isfile(file_path) or os.path.islink(file_path):
+    #                 os.unlink(file_path)
+    #             elif os.path.isdir(file_path):
+    #                 shutil.rmtree(file_path)
+    #         except Exception as e:
+    #             print('Failed to clear folder: ' + e)
 
     def clear_gnome_shell(self, state, win):
         if(not state):

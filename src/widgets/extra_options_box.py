@@ -54,18 +54,18 @@ sharp_corners_css = """
 }
 """
 
-class OptionsBox(Gtk.FlowBox):
+class OptionsBox(Gtk.ListBox):
     def __init__(self, parent):
         super().__init__(halign=Gtk.Align.CENTER, selection_mode=Gtk.SelectionMode.NONE)
         for option, css in zip(["Transparency", "Window borders", "Sharp corners"], [transparency_css, border_css, sharp_corners_css]):
-            row = Gtk.Box(height_request=48)
-            row.prepend(Gtk.Label(margin_start=12, label=_(option)))
-            row.add_css_class("card")
+            row = Adw.ActionRow(height_request=48)
+            row.set_title(_(option))
 
             option = option.split()[0].lower()
             toggle = Gtk.Switch(active=parent.app_settings.get_boolean(option), valign=Gtk.Align.CENTER, hexpand=True, halign=Gtk.Align.END, margin_start=36, margin_end=12)
             toggle.connect("notify::active", self.on_row_toggled, parent, css, option)
-            row.append(toggle)
+            row.add_suffix(toggle)
+            self.add_css_class("boxed-list")
             self.append(row)
 
             if(parent.app_settings.get_boolean(option)):
@@ -79,20 +79,6 @@ class OptionsBox(Gtk.FlowBox):
             parent.extra_css.add(css)
         else:
             parent.extra_css.remove(css)
-
-        css_provider = Gtk.CssProvider()
-        css_provider.load_from_data("""
-            .background {
-	            opacity: 100%;
-            }
-
-            window {
-                box-shadow: none;
-            }
-        """.encode())
-        Gtk.StyleContext.add_provider_for_display(
-            Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
-        )
 
         parent.app_settings.set_boolean(key, switch.get_active())
         parent.on_theme_selected()

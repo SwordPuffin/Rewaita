@@ -20,11 +20,12 @@
 from PIL import Image
 import numpy as np
 
-import gi, os, asyncio
+import gi, os, asyncio, random
 gi.require_version('XdpGtk4', '1.0')
 from gi.repository import Gtk, GLib, Gio, Xdp, XdpGtk4, Adw, Gdk
-
 from .loading_dialog import LoadingDialog
+
+picture_path = os.path.join(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES), "rewaita")
 
 def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')
@@ -76,6 +77,9 @@ async def remap_palette(image_path, target_palette_hex, n_colors=8, blend=1.0):
 
 def make_new_image(parent, file_path):
     from .theme_page import load_colors_from_css
+    os.makedirs(picture_path, exist_ok=True)
+    output_path = os.path.join(picture_path, f"{os.path.basename(file_path)}-tinted.jpg")
+
     theme_type = {
         0: "light",
         1: "dark",
@@ -113,8 +117,7 @@ def make_new_image(parent, file_path):
         img = loop.run_until_complete(remap_palette(file_path, palette_vals))
         loop.close()
 
-        output_path = os.path.join(parent.data_dir, "recolored_img.jpg")
-        img.save(output_path)
+        img.save(f"{output_path}")
         task.return_value(output_path)
 
     def on_done(task, result, user_data=None):
@@ -122,7 +125,7 @@ def make_new_image(parent, file_path):
         top = XdpGtk4.parent_new_gtk(parent)
         portal.set_wallpaper(
             top,
-            f"file://{os.path.join(parent.data_dir, 'recolored_img.jpg')}",
+            f"file://{output_path}",
             Xdp.WallpaperFlags.PREVIEW
             | Xdp.WallpaperFlags.BACKGROUND
             | Xdp.WallpaperFlags.LOCKSCREEN,
@@ -136,4 +139,113 @@ def on_image_opened(file_dialog, result, parent):
     file_path = file.get_path()
     make_new_image(parent, file_path)
 
+# ciede2000 Implementation
+
+def rgb_to_xyz(rgb):
+    rgb = np.array(rgb) / 255.0
+
+    mask = rgb > 0.04045
+    rgb_lin = np.where(mask, ((rgb + 0.055) / 1.055) ** 2.4, rgb / 12.92)
+
+    M = np.array([
+        [0.4124564, 0.3575761, 0.1804375],
+        [0.2126729, 0.7151522, 0.0721750],
+        [0.0193339, 0.1191920, 0.9503041]
+    ])
+
+    return np.dot(M, rgb_lin) * 100
+
+def xyz_to_lab(xyz):
+    xyz = np.array(xyz)
+    ref = np.array([95.047, 100.0, 108.883])
+
+    xyz = xyz / ref
+
+    def f(t):
+        return np.where(t > 0.008856, t ** (1/3), 7.787 * t + 16/116)
+
+    fx, fy, fz = f(xyz[0]), f(xyz[1]), f(xyz[2])
+
+    L = 116 * fy - 16
+    a = 500 * (fx - fy)
+    b = 200 * (fy - fz)
+
+    return np.array([L, a, b])
+
+def rgb_to_lab(rgb):
+    return xyz_to_lab(rgb_to_xyz(rgb))
+
+def deltaE2000(lab1, lab2):
+    L1, a1, b1 = lab1
+    L2, a2, b2 = lab2
+
+    avg_L = (L1 + L2) / 2.0
+    C1 = np.sqrt(a1*a1 + b1*b1)
+    C2 = np.sqrt(a2*a2 + b2*b2)
+    avg_C = (C1 + C2) / 2.0
+
+    G = 0.5 * (1 - np.sqrt((avg_C**7) / (avg_C**7 + 25**7)))
+    a1p = (1 + G) * a1
+    a2p = (1 + G) * a2
+
+    C1p = np.sqrt(a1p*a1p + b1*b1)
+    C2p = np.sqrt(a2p*a2p + b2*b2)
+
+    avg_Cp = (C1p + C2p) / 2.0
+
+    h1p = np.degrees(np.arctan2(b1, a1p)) % 360
+    h2p = np.degrees(np.arctan2(b2, a2p)) % 360
+
+    dhp = h2p - h1p
+    dhp = np.where(dhp > 180, dhp - 360, dhp)
+    dhp = np.where(dhp < -180, dhp + 360, dhp)
+
+    avg_hp = np.where(
+        np.abs(h1p - h2p) > 180,
+        (h1p + h2p + 360) / 2,
+        (h1p + h2p) / 2
+    )
+
+    T = (
+        1
+        - 0.17 * np.cos(np.radians(avg_hp - 30))
+        + 0.24 * np.cos(np.radians(2 * avg_hp))
+        + 0.32 * np.cos(np.radians(3 * avg_hp + 6))
+        - 0.20 * np.cos(np.radians(4 * avg_hp - 63))
+    )
+
+    dLp = L2 - L1
+    dCp = C2p - C1p
+    dHp = 2 * np.sqrt(C1p * C2p) * np.sin(np.radians(dhp / 2))
+
+    S_L = 1 + (0.015 * (avg_L - 50)**2) / np.sqrt(20 + (avg_L - 50)**2)
+    S_C = 1 + 0.045 * avg_Cp
+    S_H = 1 + 0.015 * avg_Cp * T
+
+    Rt = -2 * np.sqrt((avg_Cp**7) / (avg_Cp**7 + 25**7))
+    Rt *= np.sin(np.radians(60 * np.exp(-(((avg_hp - 275) / 25) ** 2))))
+
+    dE = np.sqrt(
+        (dLp / S_L)**2 +
+        (dCp / S_C)**2 +
+        (dHp / S_H)**2 +
+        Rt * (dCp / S_C) * (dHp / S_H)
+    )
+    return dE
+
+def ciede2000(rgb, palette):
+    palette = list(palette)
+
+    palette_rgb = [
+        tuple(int(h[i:i+2], 16) for i in (1,3,5))
+        for h in palette
+    ]
+
+    palette_lab = np.array([rgb_to_lab(c) for c in palette_rgb])
+    lab_input = rgb_to_lab(rgb)
+
+    diffs = np.array([deltaE2000(lab_input, lab) for lab in palette_lab])
+
+    idx = np.argmin(diffs)
+    return palette[idx]
 

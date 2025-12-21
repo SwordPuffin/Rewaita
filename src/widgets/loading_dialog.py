@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, Gtk, GLib
 
 class LoadingDialog(Adw.Dialog):
     def __init__(self, parent):
@@ -25,13 +25,20 @@ class LoadingDialog(Adw.Dialog):
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12, margin_top=24, margin_bottom=24, margin_start=24, margin_end=24, valign=Gtk.Align.CENTER, halign=Gtk.Align.CENTER)
 
-        spinner = Gtk.Spinner(spinning=True)
-        spinner.set_size_request(40, 40)
+        self.spinner = Gtk.ProgressBar(margin_top=12, pulse_step=0.5)
+        GLib.timeout_add(500, self.pulse)
 
         label = Gtk.Label(label=_("This may take a moment"))
         label.add_css_class("title-4")
 
         box.append(label)
-        box.append(spinner)
+        box.append(self.spinner)
 
         self.set_child(box)
+
+    def pulse(self):
+        self.spinner.pulse()
+        return True
+
+
+

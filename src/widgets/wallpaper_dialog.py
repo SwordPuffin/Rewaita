@@ -17,8 +17,11 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk, Gio, Gdk
+import os
+from gi.repository import Adw, Gtk, Gio, Gdk, GLib
 from .image_modifier import on_image_opened, make_new_image
+
+picture_path = os.path.join(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES), "rewaita")
 
 class WallpaperDialog(Adw.Dialog):
     def __init__(self, parent):
@@ -41,15 +44,28 @@ class WallpaperDialog(Adw.Dialog):
             file_dialog = Gtk.FileDialog(default_filter=file_filter_image)
             file_dialog.open(parent, None, on_image_opened, parent)
 
-        warning_label = Gtk.Label(wrap=True, margin_top=24, justify=Gtk.Justification.CENTER, halign=Gtk.Align.CENTER, label=_("This feature is still under development, and results can be hit or miss. Under 4k resolution is recommended."))
+        warning_label = Gtk.Label(wrap=True, margin_top=24, justify=Gtk.Justification.CENTER, halign=Gtk.Align.CENTER, label=_("This feature is still under development. Under 4k resolution is recommended."))
         warning_label.set_css_classes(["warning", "bold"])
         message_area.append(warning_label)
 
-        open_file_button = Gtk.Button(label=_("Open Image"), halign=Gtk.Align.CENTER, margin_top=20)
-        open_file_button.connect("clicked", on_open_image)
-        open_file_button.set_css_classes(["suggested-action", "pill"])
+        file_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8, hexpand=True, halign=Gtk.Align.CENTER, margin_top=20)
 
-        message_area.append(open_file_button)
+        open_file_button = Gtk.Button(label=_("Open File"), halign=Gtk.Align.CENTER)
+        open_file_button.connect("clicked", on_open_image)
+        file_box.append(open_file_button)
+
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        label = Gtk.Label(label=_("Save Folder"))
+        icon = Gtk.Image.new_from_icon_name("folder-open-symbolic")
+        box.append(label); box.append(icon)
+        dir_button = Gtk.Button(child=box)
+        folder = Gio.File.new_for_path(picture_path)
+        dir_button.connect("clicked", lambda d : Gio.AppInfo.launch_default_for_uri(folder.get_uri(), None))
+        file_box.append(dir_button)
+
+        message_area.append(file_box)
+        open_file_button.set_css_classes(["suggested-action", "pill"])
+        dir_button.set_css_classes(["suggested-action", "pill"])
 
         drop_target = Gtk.DropTarget.new(Gio.File, Gdk.DragAction.COPY)
         drop_target.connect("drop", on_drop_file)

@@ -148,13 +148,9 @@ class CustomPage(Gtk.Box):
         for bundle, title in zip(gnome_colors.keys(), [accent_label, main_label, success_label, destructive_label, warning_label, interface_label, colors_label]):
             self.append(CustomBundle(title, bundle))
 
-        name_entry = Gtk.Entry(placeholder_text=_("Theme name (required)"), width_request=171)
+        name_entry = Gtk.Entry(placeholder_text=_("Theme name (required)"), hexpand=True, width_request=250, halign=Gtk.Align.CENTER)
         name_entry.connect("changed", self.entry_changed)
         name_entry.add_css_class("error")
-        emoji_chooser = Gtk.EmojiChooser()
-        emoji_entry = Gtk.MenuButton(label=_("Emoji (optional)"), popover=emoji_chooser)
-        emoji_chooser.connect("emoji-picked", self.on_emoji_picked, emoji_entry)
-        entry_box = Gtk.Box(spacing=12, halign=Gtk.Align.CENTER, orientation=Gtk.Orientation.HORIZONTAL); entry_box.append(name_entry); entry_box.append(emoji_entry)
 
         mode_label = Gtk.Label(label=_("Theme Type"), xalign=0.5); mode_label.add_css_class("title-4")
         light_radio = Gtk.CheckButton(label=_("Light"), group=None, active=True)
@@ -164,17 +160,22 @@ class CustomPage(Gtk.Box):
         mode_box.append(light_radio)
         mode_box.append(dark_radio)
 
-        open_folder_button = Gtk.Button(label=_("Open Theme Directory"))
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
+        label = Gtk.Label(label=_("Save Folder"))
+        icon = Gtk.Image.new_from_icon_name("folder-open-symbolic")
+        box.append(label); box.append(icon)
+        open_folder_button = Gtk.Button(child=box, halign=Gtk.Align.CENTER)
+        open_folder_button.set_css_classes(["suggested-action", "pill"])
         folder = Gio.File.new_for_path(GLib.get_user_data_dir())
         open_folder_button.connect("clicked", lambda d : Gio.AppInfo.launch_default_for_uri(folder.get_uri(), None))
 
         self.append(mode_label)
         self.append(mode_box)
-        self.append(entry_box)
+        self.append(name_entry)
 
         self.append(open_folder_button)
         self.save_button = Gtk.Button(label=_("Save"), sensitive=False, margin_bottom=12, margin_start=12, margin_end=12)
-        self.save_button.connect("clicked", self.save_theme, parent, name_entry, light_radio, emoji_entry)
+        self.save_button.connect("clicked", self.save_theme, parent, name_entry, light_radio)
 
         GtkSource.init()
         css_entry = GtkSource.View(auto_indent=True, indent_width=2, show_line_numbers=True)
@@ -205,7 +206,7 @@ class CustomPage(Gtk.Box):
     def on_emoji_picked(self, emojipicker, emoji, entry):
         entry.set_label(emoji)
 
-    def save_theme(self, button, parent, entry, light_radio, emoji_entry):
+    def save_theme(self, button, parent, entry, light_radio):
         parent.toast_overlay.add_toast(Adw.Toast(timeout=3, title=entry.get_text() + _(" has been saved")))
 
         if(light_radio.get_active()):
@@ -225,11 +226,7 @@ class CustomPage(Gtk.Box):
             src_file_text = src_file_text.replace("@" + color.variable, hex_color)
         src_file_text += self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), True)
         os.makedirs(os.path.join(parent.data_dir, theme_type), exist_ok=True)
-        if(emoji_entry.get_label() == "Emoji (optional)"):
-            emoji = ""
-        else:
-            emoji = emoji_entry.get_label()
-        theme_file = os.path.join(parent.data_dir, theme_type, (entry.get_text() + " " + emoji + ".css"))
+        theme_file = os.path.join(parent.data_dir, theme_type, entry.get_text() + ".css")
         shutil.copyfile(src_file, theme_file)
         with open(theme_file, "w") as file:
             file.write(src_file_text)
@@ -241,15 +238,21 @@ class CustomPage(Gtk.Box):
                 flowbox = parent.dark_flowbox
 
         colors = load_colors_from_css(theme_file)
-        new_button = create_color_thumbnail_button(colors, (entry.get_text() + " " + emoji), flowbox.snippet)
-        new_button.connect("clicked", parent.on_theme_button_clicked, (entry.get_text() + " " + emoji + ".css"), theme_type)
+        new_button = create_color_thumbnail_button(colors, entry.get_text(), flowbox.snippet)
+        new_button.connect("clicked", parent.on_theme_button_clicked, entry.get_text() + ".css", theme_type)
 
         #Attributes
         new_button.func = parent.on_theme_button_clicked
-        new_button.path = os.path.join(parent.data_dir, theme_type, (entry.get_text() + " " + emoji + ".css"))
+        new_button.path = os.path.join(parent.data_dir, theme_type, entry.get_text() + ".css")
         new_button.theme_type = theme_type
         new_button.theme = entry.get_text()
+        new_button.default = False
 
-        flowbox.insert(new_button, -1)
-        flowbox.invalidate_sort()
+        already_exists = False
+        for button in flowbox:
+            if(button.get_first_child().theme == new_button.theme):
+                already_exists = True
 
+        if(not already_exists):
+            flowbox.insert(new_button, -1)
+            flowbox.invalidate_sort()

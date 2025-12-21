@@ -17,97 +17,49 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import re, gi, os, shutil
-from collections import defaultdict
-from gi.repository import Gtk, Gdk, GLib, Xdp, Adw, Gio
+import gi, os, shutil
+from gi.repository import Gtk, Gdk, GLib, Xdp, Adw
 from .extra_options_box import sharp_corners_css
-from .image_modifier import hex_to_rgb
+from .image_modifier import hex_to_rgb, ciede2000
 
-def get_accent_color():
-    settings = Xdp.Portal().get_settings()
-    try:
-        accent = settings.read_string("org.gnome.desktop.interface", "accent-color")
-    except:
-        accent = "blue" #Pass through for the time being
-    match(accent):
-        case("blue"):
-            accent_color = "blue_1"
-        case("teal"):
-            accent_color = "blue_2"
-        case("green"):
-            accent_color = "green_1"
-        case("yellow"):
-            accent_color = "yellow_1"
-        case("orange"):
-            accent_color = "orange_1"
-        case("red"):
-            accent_color = "red_1"
-        case("pink"):
-            accent_color = "purple_1"
-        case("purple"):
-            accent_color = "purple_2"
-        case("slate"):
-            accent_color = "light_5"
+settings = Xdp.Portal().get_settings()
+css_provider = Gtk.CssProvider()
 
-    return accent_color
+def get_accent_color(palette):
+    accent = settings.read_value("org.freedesktop.appearance", "accent-color")
+    converted = tuple(int(x * 255) for x in accent)
+    return ciede2000(converted, palette)
 
-def add_css_provider(css):
-    accent_color = get_accent_color()
-    css_provider = Gtk.CssProvider()
-
+def add_css_provider(css, accent_color):
+    Gtk.StyleContext.remove_provider_for_display(Gdk.Display.get_default(), css_provider)
     css_provider.load_from_data(f"""
         {css}
-        @define-color accent_bg_color @{accent_color};
+        @define-color accent_bg_color {accent_color};
         @define-color accent_fg_color @window_bg_color;
     """.encode())
     Gtk.StyleContext.add_provider_for_display(
         Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
     )
 
-    return accent_color
-
-def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file, gtk3_file, modify_gtk3_theme, modify_gnome_shell, transparency, window_borders, sharp_corners, reset_func):
-    color_pattern = r'@define-color\s+([a-z0-9_]+)\s+(#[a-fA-F0-9]+|@[a-z0-9_]+);'
-    colors = dict()
-    references = defaultdict(list)
-    accent_color = add_css_provider(gtk_css)
-
-    for match in re.finditer(color_pattern, gtk_css):
-        name, value = match.groups()
-        if(value.startswith('@')):
-            ref_name = value[1:]
-            references[ref_name].append(name)
-        else:
-            colors[name] = value
-
-    for ref_name, dependent_names in references.items():
-        if(ref_name in colors):
-            for name in dependent_names:
-                colors[name] = colors[ref_name]
-
-    colors["accent_color"] = colors[accent_color]
-
-    if(window_borders):
-        colors["border_color"] = colors[accent_color]
+def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, modify_gtk3_theme, modify_gnome_shell, app_settings, reset_func):
+    if(app_settings.get_boolean("window")):
+        colors["border_color"] = colors["accent_color"]
     else:
         colors["border_color"] = colors["window_bg_color"]
 
-    # Fallback for themes without panel variables (backward compatibility)
-    if("panel_bg_color" not in colors):
-        colors["panel_bg_color"] = colors["window_bg_color"]
-    if("panel_fg_color" not in colors):
-        colors["panel_fg_color"] = colors["window_fg_color"]
-    if("panel_button_bg_color" not in colors):
-        colors["panel_button_bg_color"] = "transparent"
-    if("panel_hover_bg_color" not in colors):
-        colors["panel_hover_bg_color"] = colors["card_bg_color"]
-
-    items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color", "panel_button_bg_color", "panel_hover_bg_color"]
-
-    if(transparency):
+    if(app_settings.get_boolean("transparency")):
         for color_to_replace in ["window_bg_color", "headerbar_bg_color", "card_bg_color"]:
             rgb = hex_to_rgb(colors[color_to_replace])
             colors[color_to_replace] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.8)"
+        gtk3_file += ".background { opacity: 0.95; }"
+
+    # Panel colors
+    colors["panel_bg_color"] = colors["window_bg_color"]
+    colors["panel_fg_color"] = colors["window_fg_color"]
+    colors["panel_button_bg_color"] = "transparent"
+    colors["panel_hover_bg_color"] = colors["card_bg_color"]
+
+    items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color", "panel_button_bg_color", "panel_hover_bg_color"]
 
     if(modify_gtk3_theme):
         for color in colors.keys():
@@ -125,17 +77,17 @@ def parse_gtk_theme(gtk_css, gnome_shell_css, theme_file, gtk3_file, modify_gtk3
         os.makedirs(gnome_shell_theme_dir, exist_ok=True)
         file = shutil.copyfile(theme_file, os.path.join(gnome_shell_theme_dir, "gnome-shell.css"))
 
-        if(sharp_corners):
+        if(app_settings.get_boolean("sharp")):
             gnome_shell_css += f"\n\n{sharp_corners_css}"
         with open(file, "w") as f:
             f.write(gnome_shell_css)
 
         reset_func()
 
-def set_to_default(config_dirs, theme_type, reset_func, window_control_css):
+def set_to_default(config_dirs, theme_type, reset_func, extras):
     for config_dir in config_dirs:
         with open(os.path.join(config_dir, "gtk.css"), "w") as file:
-            file.write(window_control_css)
+            file.write(extras)
 
     gnome_shell_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
     if(os.path.exists(os.path.join(gnome_shell_path, "gnome-shell.css"))):
@@ -143,7 +95,9 @@ def set_to_default(config_dirs, theme_type, reset_func, window_control_css):
 
     gtk_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"default-{theme_type}.css")
     gtk_css = open(gtk_file).read()
-    add_css_provider(gtk_css)
+    accent = settings.read_value("org.freedesktop.appearance", "accent-color")
+    converted = tuple(int(x * 255) for x in accent)
+    add_css_provider(gtk_css, f"rgb({converted[0]}, {converted[1]}, {converted[2]})")
     reset_func()
 
 def confirm_delete(dialog, response, button, window):
@@ -185,7 +139,7 @@ def delete_items(action, _, button, window):
         for flowbox in [window.light_flowbox, window.dark_flowbox]:
             for theme in flowbox:
                 child = theme.get_first_child()
-                if(child.has_css_class("active-scheme")):
+                if(child.has_css_class("active-scheme") or child.default):
                     child.set_sensitive(False)
                     window.light_button.set_sensitive(False); window.dark_button.set_sensitive(False);
                     continue

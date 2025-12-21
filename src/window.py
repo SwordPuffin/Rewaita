@@ -17,10 +17,11 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os, shutil, gi
+import os, shutil, gi, re
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
-from .utils import parse_gtk_theme, set_to_default, delete_items, set_gtk3_theme, get_accent_color
+from collections import defaultdict
+from .utils import parse_gtk_theme, set_to_default, delete_items, set_gtk3_theme, get_accent_color, add_css_provider
 from .custom_theme_page import CustomPage
 from .theme_page import ThemePage
 from .window_control_box import WindowControlBox
@@ -74,19 +75,6 @@ class RewaitaWindow(Adw.ApplicationWindow):
             print("Making gnome shell theme directory")
             os.mkdir(os.path.join(GLib.getenv("HOME"), ".local", "share", "themes"))
 
-        #Moves the themes in the app sources to Rewaita's data directory
-        if(not os.path.exists(os.path.join(GLib.get_user_data_dir(), "light"))):
-            print("Refreshing light themes")
-            # Use `copyfile` to avoid copying metadata of files, like ownership or read-only flags
-            shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), "light"), os.path.join(GLib.get_user_data_dir(), "light"), copy_function=shutil.copyfile)
-            # And ensure the directory itself is writable
-            os.chmod(os.path.join(GLib.get_user_data_dir(), "light"), 0o755);
-        if(not os.path.exists(os.path.join(GLib.get_user_data_dir(), "dark"))):
-            print("Refreshing dark themes")
-            # Ditto
-            shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), "dark"), os.path.join(GLib.get_user_data_dir(), "dark"), copy_function=shutil.copyfile)
-            os.chmod(os.path.join(GLib.get_user_data_dir(), "dark"), 0o755);
-
         delete = Gio.SimpleAction.new(name="trash")
         delete.connect("activate", delete_items, self.delete_button, self)
         self.add_action(delete)
@@ -96,7 +84,6 @@ class RewaitaWindow(Adw.ApplicationWindow):
         self.portal = Xdp.Portal()
         self.settings = self.portal.get_settings()
         self.pref = self.settings.read_uint("org.freedesktop.appearance", "color-scheme")
-        self.accent = get_accent_color()
 
         scroll_box = Gtk.ScrolledWindow(hexpand=True)
         self.main_box.append(scroll_box)
@@ -133,7 +120,6 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
     def on_theme_selected(self):
         self.pref = self.settings.read_uint("org.freedesktop.appearance", "color-scheme")
-        self.accent = get_accent_color()
         gtk3_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-3.0")
         gtk4_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-4.0")
         if(self.pref == 1):
@@ -145,38 +131,58 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
         self.save_prefs()
 
+        extra_css_string = ""
+        for item in self.extra_css:
+            extra_css_string += item
+        extras = self.window_control_css + extra_css_string
+
         if(theme_name.lower() == "default"):
-            set_to_default([gtk3_config_dir, gtk4_config_dir], theme_type, reset_shell, self.window_control_css)
+            set_to_default([gtk3_config_dir, gtk4_config_dir], theme_type, reset_shell, extras)
             return
 
         theme_file = os.path.join(self.data_dir, theme_type, theme_name)
+        self.controls.set_css_classes([self.window_control])
+        gtk_css = open(theme_file).read()
+        self.toast_overlay.dismiss_all()
+        self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Change GNOME shell theme to 'Rewaita' and reboot for full changes"))))
+
+        color_pattern = r'@define-color\s+([a-z0-9_]+)\s+(#[a-fA-F0-9]+|@[a-z0-9_]+);'
+        references = defaultdict(list)
+        colors = dict()
+
+        for match in re.finditer(color_pattern, gtk_css):
+            name, value = match.groups()
+            if(value.startswith('@')):
+                ref_name = value[1:]
+                references[ref_name].append(name)
+            else:
+                colors[name] = value
+
+        for ref_name, dependent_names in references.items():
+            if(ref_name in colors):
+                for name in dependent_names:
+                    colors[name] = colors[ref_name]
+
+        accent_color = get_accent_color(colors.values())
+        colors["accent_color"] = accent_color
+        extras = "\n" + extras + f"\n@define-color accent_bg_color {accent_color};\n@define-color accent_fg_color @window_bg_color;"
+
         try:
             shutil.copy(theme_file, os.path.join(gtk4_config_dir, "gtk.css"))
             with open(os.path.join(gtk4_config_dir, "gtk.css"), "a") as file:
-                extra_css_string = ""
-                for item in self.extra_css:
-                    extra_css_string += item
-                extras = self.window_control_css + f"\n\n@define-color accent_bg_color @{self.accent};\n@define-color accent_fg_color @window_bg_color;" + "\n\n" + extra_css_string
                 file.write(extras)
         except Exception as e:
             print(f"Error moving file: {e}")
 
-        self.controls.set_css_classes([self.window_control])
-
-        gtk_file = open(theme_file)
-        self.toast_overlay.dismiss_all()
-        self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Change GNOME shell theme to 'Rewaita' and reboot for full changes"))))
-
+        add_css_provider(open(theme_file).read() + extras, accent_color)
         parse_gtk_theme(
-            gtk_file.read() + extras,
+            colors,
             self.template_file_content,
             os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css"),
             self.gtk3_template_file_content,
             self.modify_gtk3_theme,
             self.modify_gnome_shell,
-            self.app_settings.get_boolean("transparency"),
-            self.app_settings.get_boolean("window"),
-            self.app_settings.get_boolean("sharp"),
+            self.app_settings,
             reset_shell
         )
 
