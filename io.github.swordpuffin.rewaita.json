@@ -114,7 +114,7 @@
                 {
                     "type" : "git",
                     "url" : "https://github.com/SwordPuffin/Rewaita.git",
-                    "tag" : "v1.0.9"
+                    "tag" : "v1.1.0"
                 }
             ]
         }
