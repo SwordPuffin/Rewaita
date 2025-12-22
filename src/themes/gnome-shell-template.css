@@ -7,6 +7,7 @@
 /*panel_fg_color: panel text color*/
 /*panel_button_bg_color: panel button background color*/
 /*panel_hover_bg_color: panel button hover background color*/
+/*overview_bg_color: always opaque background color*/
 
 /* Top Bar */
 #panel {
@@ -80,7 +81,7 @@
 
 /* Overview stuff */
 #overviewGroup {
-  background-color: @window_bg_color;
+  background-color: @overview_bg_color;
 }
 
 .icon-grid .overview-tile:hover, .grid-search-result:hover, .overview-tile:focus, .grid-search-result:focus, .overview-tile:selected, .grid-search-result:selected {
@@ -783,4 +784,3 @@ StEntry:focus {
   color: @window_fg_color;
   background-color: @headerbar_bg_color;
 }
-
