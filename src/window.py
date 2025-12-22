@@ -47,6 +47,10 @@ def reset_shell():
         GLib.Variant("(s)", ("user-theme@gnome-shell-extensions.gcampax.github.com",)),
         Gio.DBusCallFlags.NONE, -1, None)
 
+gtk3_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-3.0")
+gtk4_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-4.0")
+gnome_shell_dir = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes")
+
 @Gtk.Template(resource_path='/io/github/swordpuffin/rewaita/window.ui')
 class RewaitaWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'RewaitaWindow'
@@ -71,9 +75,9 @@ class RewaitaWindow(Adw.ApplicationWindow):
         if(os.path.exists(os.path.join(GLib.get_user_data_dir(), "prefs.json"))):
             os.remove(os.path.join(GLib.get_user_data_dir(), "prefs.json"))
 
-        if(not os.path.exists(os.path.join(GLib.getenv("HOME"), ".local", "share", "themes"))):
-            print("Making gnome shell theme directory")
-            os.mkdir(os.path.join(GLib.getenv("HOME"), ".local", "share", "themes"))
+        #Makes necessary directories
+        for path in [gtk3_config_dir, gtk4_config_dir, gnome_shell_dir]:
+            os.makedirs(path, exist_ok=True)
 
         delete = Gio.SimpleAction.new(name="trash")
         delete.connect("activate", delete_items, self.delete_button, self)
@@ -120,8 +124,6 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
     def on_theme_selected(self):
         self.pref = self.settings.read_uint("org.freedesktop.appearance", "color-scheme")
-        gtk3_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-3.0")
-        gtk4_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-4.0")
         if(self.pref == 1):
             theme_name = self.dark_theme
             theme_type = "dark"
