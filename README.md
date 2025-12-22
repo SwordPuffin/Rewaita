@@ -94,19 +94,33 @@ flatpak --user override --filesystem=xdg-config/gtk-4.0:rw
 
 # 🐛 Known Bugs
 #### Gnome Shell theme is not generating:
-1. Power off your computer (like full shutdown, not restart).
-2. Turn it back on and try again.
-3. If it still doesn't generate:
-     1. Go into [Flatseal](https://flathub.org/en/apps/com.github.tchx84.Flatseal) and find Rewaita's page
-     2. Scroll down to filesystem permissions (you should see ~/.local/share/themes among "other files")
-     3. Change ~/.local/share/themes to: ~/.local/share/themes:create (just append ":create")
-     4. If it still doesn't work file an issue.
+Update Rewaita to v1.0.9 or greater. Or: 
+```bash
+mkdir -p $HOME/.local/share/themes
+```
+
+#### GTK-3.0 or GTK-4.0 theme is not generating:
+```bash
+mkdir -p $HOME/.config/gtk-3.0 && mkdir -p $HOME/.config/gtk-4.0
+```
+
+#### Autostart file is not generating:
+This error message would show when running Rewaita.
+
+> Traceback (most recent call last):
+>  File "/app/share/rewaita/rewaita/main.py", line 124, in on_background_response
+>    with open(os.path.join(GLib.getenv("HOME"), ".config", "autostart", "rewaita.desktop"), "w") as file:
+>         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> FileNotFoundError: [Errno 2] No such file or directory: '/home/(user)/.config/autostart/rewaita.desktop'
+```bash
+mkdir $HOME/.config/autostart
+```
 
 #### Application window opens but is empty:
 #### 1. Flatpak
    
 Run:
-```
+```bash
 rm ~/.var/app/io.github.swordpuffin.rewaita/data/prefs.json
 ```
 #### 2. AUR
