@@ -8,7 +8,12 @@
   <summary>Bring color to Adwaita</summary>
   <description>
     <p>Rewaita gives your Adwaita apps a fresh look by tinting them with popular color schemes.</p>
-    <p>Features include modifying application window controls, making custom themes, palette swapping wallpapers, and adding effects like transparency</p>
+    <ul>
+      <li>Modify application window controls</li>
+      <li>Make custom themes</li>
+      <li>Palette swap/tint wallpapers</li>
+      <li>Add effects like transparency, window borders, or sharp corners</li>
+    </ul>
     <p>Changes only affect GTK3/4 applications; other UI libraries are not affected</p>
   </description>
 
@@ -30,8 +35,8 @@
   <content_rating type="oars-1.1"/>
 
   <branding>
-    <color type="primary" scheme_preference="light">#a0a36c</color>
-    <color type="primary" scheme_preference="dark">#303475</color>
+    <color type="primary" scheme_preference="light">#c8dbf4</color>
+    <color type="primary" scheme_preference="dark">#2d5a91</color>
   </branding>
 
   <screenshots>
@@ -58,29 +63,35 @@
   </screenshots>
 
   <releases>
+    <release version="1.1.0" date="2025-12-22">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.1.0</url>
+        <description translate="no">
+          <p>Rewaita v1.1.0</p>
+          <ul>
+            <li>Patched up most remaining holes in Gnome Shell integration</li>
+            <li>Extra customization options: transparency, window borders, and sharp corners</li>
+            <li>Accent colors are now followed for all desktop environments, not just Gnome</li>
+            <li>Major performance improvements</li>
+            <li>Added two new light themes: Kanagawa-Paper, and Thorn</li>
+            <li>Fixed issue with Tokyonight Storm</li>
+            <li>Now allows palette swapping/theming your wallpapers</li>
+            <li>Added Vietnamese translations, thanks to @htienloc</li>
+            <li>UI changes + uses Fortune for text snippets</li>
+            <li>Updated adwgtk3 to v6.4</li>
+            <li>Many bug fixes</li>
+          </ul>
+      </description>
+    </release>
     <release version="1.0.9" date="2025-12-21">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.9</url>
-      <description translate="no">
-        <p>Rewaita v1.0.9</p>
-        <ul>
-          <li>Patched up most remaining holes in Gnome Shell integration</li>
-          <li>Extra customization options: transparency, window borders, and sharp corners</li>
-          <li>Accent colors are now followed for all desktop environments, not just Gnome</li>
-          <li>Major performance improvements</li>
-          <li>Added two new light themes: Kanagawa-Paper, and Thorn</li>
-          <li>Fixed issue with Tokyonight Storm</li>
-          <li>Now allows palette swapping/theming your wallpapers</li>
-          <li>Added Vietnamese translations, thanks to @htienloc</li>
-          <li>UI changes + uses Fortune for text snippets</li>
-          <li>Updated adwgtk3 to v6.4</li>
-          <li>Many bug fixes</li>
-        </ul>
+      <description>
+        <p>See v1.1.0</p>
       </description>
     </release>
     <release version="1.0.8" date="2025-09-16">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.0.8</url>
       <description translate="no">
-        <p>Rewaita v1.0.7</p>
+        <p>Rewaita v1.0.8</p>
         <ul>
           <li>Ironed out most remaining visual bugs with GTK3 and Gnome Shell support</li>
           <li>Performance improvements when running in the background</li>
