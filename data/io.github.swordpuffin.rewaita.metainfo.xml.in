@@ -8,7 +8,7 @@
   <summary>Bring color to Adwaita</summary>
   <description>
     <p>Rewaita gives your Adwaita apps a fresh look by tinting them with popular color schemes.</p>
-    <p>Supported changes now include modifying application window controls, and making your own custom themes</p>
+    <p>Features include modifying application window controls, making custom themes, palette swapping wallpapers, and adding effects like transparency</p>
     <p>Changes only affect GTK3/4 applications; other UI libraries are not affected</p>
   </description>
 
@@ -65,6 +65,7 @@
         <ul>
           <li>Patched up most remaining holes in Gnome Shell integration</li>
           <li>Extra customization options: transparency, window borders, and sharp corners</li>
+          <li>Accent colors are now followed for all desktop environments, not just Gnome</li>
           <li>Major performance improvements</li>
           <li>Added two new light themes: Kanagawa-Paper, and Thorn</li>
           <li>Fixed issue with Tokyonight Storm</li>
