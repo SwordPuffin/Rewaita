@@ -21,7 +21,7 @@ import os
 from gi.repository import Adw, Gtk, Gio, Gdk, GLib
 from .image_modifier import on_image_opened, make_new_image
 
-picture_path = os.path.join(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES), "rewaita")
+picture_path = os.path.join(GLib.get_user_data_dir(), "wallpapers")
 
 class WallpaperDialog(Adw.Dialog):
     def __init__(self, parent):
@@ -59,6 +59,7 @@ class WallpaperDialog(Adw.Dialog):
         icon = Gtk.Image.new_from_icon_name("folder-open-symbolic")
         box.append(label); box.append(icon)
         dir_button = Gtk.Button(child=box)
+        os.makedirs(picture_path, exist_ok=True)
         folder = Gio.File.new_for_path(picture_path)
         dir_button.connect("clicked", lambda d : Gio.AppInfo.launch_default_for_uri(folder.get_uri(), None))
         file_box.append(dir_button)
