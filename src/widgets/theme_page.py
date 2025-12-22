@@ -109,7 +109,7 @@ class ThemePage(Gtk.Box):
         top_box.append(help_button)
 
         wallpaper_dialog = WallpaperDialog(parent)
-        image_button = Gtk.Button(label=_("Theme Wallpaper"), valign=Gtk.Align.CENTER, vexpand=True)
+        image_button = Gtk.Button(label=_("Tint Wallpaper"), valign=Gtk.Align.CENTER, vexpand=True)
         image_button.connect("clicked", lambda d : wallpaper_dialog.present(parent))
         image_button.set_css_classes(["pill", "suggested-action"])
         top_box.append(image_button)
