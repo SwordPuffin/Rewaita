@@ -25,10 +25,15 @@ from .image_modifier import hex_to_rgb, ciede2000
 settings = Xdp.Portal().get_settings()
 css_provider = Gtk.CssProvider()
 
-def get_accent_color(palette):
+def read_accent_color():
     accent = settings.read_value("org.freedesktop.appearance", "accent-color")
     converted = tuple(int(x * 255) for x in accent)
-    return ciede2000(converted, palette)
+    if(any(value < 0 for value in converted) or any(value > 255 for value in converted)):
+        converted = (53, 132, 228) # Default Gnome blue
+    return converted
+
+def get_accent_color(palette):
+    return ciede2000(read_accent_color(), palette)
 
 def add_css_provider(css, accent_color):
     Gtk.StyleContext.remove_provider_for_display(Gdk.Display.get_default(), css_provider)
@@ -95,9 +100,7 @@ def set_to_default(config_dirs, theme_type, reset_func, extras):
 
     gtk_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"default-{theme_type}.css")
     gtk_css = open(gtk_file).read()
-    accent = settings.read_value("org.freedesktop.appearance", "accent-color")
-    converted = tuple(int(x * 255) for x in accent)
-    add_css_provider(gtk_css, f"rgb({converted[0]}, {converted[1]}, {converted[2]})")
+    add_css_provider(gtk_css, f"rgb{read_accent_color()}")
     reset_func()
 
 def confirm_delete(dialog, response, button, window):
