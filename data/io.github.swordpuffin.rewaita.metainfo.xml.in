@@ -27,7 +27,7 @@
 
   <translation type="gettext">rewaita</translation>
   <launchable type="desktop-id">io.github.swordpuffin.rewaita.desktop</launchable>
-  <content_rating type="oars-1.1" />
+  <content_rating type="oars-1.1"/>
 
   <branding>
     <color type="primary" scheme_preference="light">#a0a36c</color>
@@ -66,11 +66,12 @@
           <li>Patched up most remaining holes in Gnome Shell integration</li>
           <li>Extra customization options: transparency, window borders, and sharp corners</li>
           <li>Major performance improvements</li>
-          <li>Added two new light themes: Kanagawa-Paper Canvas, and Thorn</li>
+          <li>Added two new light themes: Kanagawa-Paper, and Thorn</li>
           <li>Fixed issue with Tokyonight Storm</li>
-          <li>Now allows palette swapping images</li>
+          <li>Now allows palette swapping/theming your wallpapers</li>
           <li>Added Vietnamese translations, thanks to @htienloc</li>
-          <li>UI changes</li>
+          <li>UI changes + uses Fortune for text snippets</li>
+          <li>Updated adwgtk3 to v6.4</li>
           <li>Many bug fixes</li>
         </ul>
       </description>
