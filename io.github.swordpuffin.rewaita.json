@@ -9,9 +9,9 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-	"--filesystem=~/.config/autostart:rw",
-        "--filesystem=~/.config/gtk-3.0:rw",
-        "--filesystem=~/.config/gtk-4.0:rw",
+		"--filesystem=~/.config/autostart:create",
+        "--filesystem=~/.config/gtk-3.0:create",
+        "--filesystem=~/.config/gtk-4.0:create",
         "--filesystem=~/.local/share/themes:create",
         "--talk-name=org.gnome.Shell.Extensions"
     ],
