@@ -25,7 +25,7 @@ gi.require_version('XdpGtk4', '1.0')
 from gi.repository import Gtk, GLib, Gio, Xdp, XdpGtk4, Adw, Gdk
 from .loading_dialog import LoadingDialog
 
-picture_path = os.path.join(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES), "rewaita")
+picture_path = os.path.join(GLib.get_user_data_dir(), "wallpapers")
 
 def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')
@@ -77,7 +77,6 @@ async def remap_palette(image_path, target_palette_hex, n_colors=8, blend=1.0):
 
 def make_new_image(parent, file_path):
     from .theme_page import load_colors_from_css
-    os.makedirs(picture_path, exist_ok=True)
     output_path = os.path.join(picture_path, f"{os.path.basename(file_path)}-tinted.jpg")
 
     theme_type = {
@@ -248,4 +247,3 @@ def ciede2000(rgb, palette):
 
     idx = np.argmin(diffs)
     return palette[idx]
-
