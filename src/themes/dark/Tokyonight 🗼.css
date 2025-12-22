@@ -22,7 +22,7 @@
 @define-color card_bg_color #282a38;
 @define-color card_fg_color #a9b1d6;
 
-@define-color sidebar_bg_color #1a1b26;
+@define-color sidebar_bg_color #12131b;
 @define-color sidebar_fg_color #a9b1d6;
 @define-color sidebar_backdrop_color @sidebar_bg_color;
 @define-color sidebar_border_color #2f334d;
