@@ -52,10 +52,11 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, modify_gtk3_
     else:
         colors["border_color"] = colors["window_bg_color"]
 
+    colors["overview_bg_color"] = colors["window_bg_color"] # overview_bg_color must be opaque
     if(app_settings.get_boolean("transparency")):
         for color_to_replace in ["window_bg_color", "headerbar_bg_color", "card_bg_color"]:
             rgb = hex_to_rgb(colors[color_to_replace])
-            colors[color_to_replace] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.8)"
+            colors[color_to_replace] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.82)"
         gtk3_file += ".background { opacity: 0.95; }"
 
     # Panel colors
@@ -64,7 +65,7 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, modify_gtk3_
     colors["panel_button_bg_color"] = "transparent"
     colors["panel_hover_bg_color"] = colors["card_bg_color"]
 
-    items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color", "panel_button_bg_color", "panel_hover_bg_color"]
+    items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color", "panel_button_bg_color", "panel_hover_bg_color", "overview_bg_color"]
 
     if(modify_gtk3_theme):
         for color in colors.keys():
