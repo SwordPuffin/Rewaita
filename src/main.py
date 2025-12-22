@@ -121,7 +121,9 @@ class RewaitaApplication(Adw.Application):
         success = portal.request_background_finish(result)
         if(success):
             print("Background permission granted")
-            with open(os.path.join(GLib.getenv("HOME"), ".config", "autostart", "rewaita.desktop"), "w") as file:
+            path = os.path.join(GLib.getenv("HOME"), ".config", "autostart")
+            os.makedirs(path, exist_ok=True)
+            with open(os.path.join(path, "rewaita.desktop"), "w") as file:
                 file.write("""
 [Desktop Entry]
 Type=Application
@@ -149,7 +151,7 @@ X-Flatpak=io.github.swordpuffin.rewaita
         about = Adw.AboutDialog(application_name='Rewaita',
                                 application_icon='io.github.swordpuffin.rewaita',
                                 developer_name='Nathan Perlman',
-                                version='1.0.9',
+                                version='1.1.0',
                                 developers=['Nathan Perlman'],
                                 copyright='© 2025 Nathan Perlman')
         # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
@@ -166,5 +168,4 @@ X-Flatpak=io.github.swordpuffin.rewaita
 def main(version):
     app = RewaitaApplication()
     return app.run(sys.argv)
-
 
