@@ -14,7 +14,6 @@
   background-color: @panel_bg_color;
   color: @panel_fg_color;
   font-feature-settings: "tnum";
-  height: 45px;
 }
 
 #panel .panel-button {
