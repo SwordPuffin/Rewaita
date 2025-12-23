@@ -117,7 +117,7 @@ mkdir $HOME/.config/autostart
 ```
 
 #### Application window opens but is empty:
-#### 1. Flatpak
+#### 1. Flatpak (pre-v1.0.9)
    
 Run:
 ```bash
