@@ -126,9 +126,9 @@ rm ~/.var/app/io.github.swordpuffin.rewaita/data/prefs.json
 #### 2. AUR
 See upstream [bug](https://github.com/SwordPuffin/Rewaita/issues/48) 
 
-Install xdg-desktop-portal-gtk with:
+Install xdg-desktop-portal-gnome with:
 ```bash
-sudo pacman -S xdg-desktop-portal-gtk
+sudo pacman -S xdg-desktop-portal-gnome
 ```
 Then reboot.
 
