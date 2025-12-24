@@ -11,13 +11,13 @@
       <default>'default'</default>
     </key>
     <key name="modify-gtk3-theme" type="b">
-      <default>false</default>
+      <default>true</default>
     </key>
     <key name="modify-gnome-shell" type="b">
-      <default>false</default>
+      <default>true</default>
     </key>
     <key name="run-in-background" type="b">
-      <default>false</default>
+      <default>true</default>
     </key>
     <key name="transparency" type="b">
       <default>false</default>
