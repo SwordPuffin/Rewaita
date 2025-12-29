@@ -26,8 +26,10 @@ picture_path = os.path.join(GLib.get_user_data_dir(), "wallpapers")
 class WallpaperDialog(Adw.Dialog):
     def __init__(self, parent):
         super().__init__()
-
-        message_area = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12, margin_top=24, margin_bottom=24, margin_start=24, margin_end=24, valign=Gtk.Align.CENTER, halign=Gtk.Align.CENTER)
+        page = Gtk.Box(hexpand=True, vexpand=True, orientation=Gtk.Orientation.VERTICAL)
+        message_area = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12, margin_bottom=24, margin_start=24, margin_end=24, valign=Gtk.Align.CENTER, halign=Gtk.Align.CENTER)
+        page.append(Adw.HeaderBar())
+        page.append(message_area)
 
         def on_drop_file(target, value, x, y):
             file_path = value.get_path() or value.get_uri()
@@ -78,4 +80,4 @@ class WallpaperDialog(Adw.Dialog):
         drop_area.add_controller(drop_target)
 
         message_area.append(drop_area)
-        self.set_child(message_area)
+        self.set_child(page)
