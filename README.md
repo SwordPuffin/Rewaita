@@ -48,8 +48,13 @@
 flatpak install io.github.swordpuffin.rewaita
 ```
 ### AUR
+Using yay
 ```bash
-yay -s rewaita
+yay -S rewaita
+```
+Using paru
+```bash
+paru -S rewaita
 ```
 
 ### OpenSUSE
