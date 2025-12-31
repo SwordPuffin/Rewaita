@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import sys, gi, os, json
+import sys, gi, os
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
@@ -73,14 +73,15 @@ class RewaitaApplication(Adw.Application):
             win = RewaitaWindow(application=self)
 
         win.connect("close-request", self.on_close_request)
-        win.portal.request_background(
-            None,
-            "Automatic transitions between light/dark mode",
-            None,
-            Xdp.BackgroundFlags.ACTIVATABLE,
-            None,
-            self.on_background_response
-        )
+        if(win.run_in_background):
+            win.portal.request_background(
+                None,
+                "Automatic transitions between light/dark mode",
+                None,
+                Xdp.BackgroundFlags.ACTIVATABLE,
+                None,
+                self.on_background_response
+            )
 
         win.present()
         self.settings = Xdp.Portal().get_settings()
@@ -168,4 +169,3 @@ X-Flatpak=io.github.swordpuffin.rewaita
 def main(version):
     app = RewaitaApplication()
     return app.run(sys.argv)
-
