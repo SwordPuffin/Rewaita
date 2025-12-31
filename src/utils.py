@@ -156,9 +156,8 @@ def delete_items(action, _, button, window):
 
 def set_gtk3_theme(gtk3_config_dir, window_control):
     dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gtk3-template")
-    for item in os.listdir(dir):
-        if(os.path.isdir(os.path.join(dir, item))):
-            shutil.copytree(os.path.join(dir, item), os.path.join(gtk3_config_dir, item), copy_function=shutil.copyfile, dirs_exist_ok=True)
+    assets = os.path.join(dir, "assets.tar.xz")
+    shutil.unpack_archive(assets, extract_dir=gtk3_config_dir, format="tar")
 
     with open(os.path.join(gtk3_config_dir, "gtk.css"), "a") as file:
         if(window_control == "colored"):
