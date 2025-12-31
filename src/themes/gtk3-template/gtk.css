@@ -196,6 +196,11 @@ entry labal {
   color: @window_fg_color;
 }
 
+.background:not(.desktopwindow) {
+  color: @window_fg_color;
+  background-color: @window_bg_color;
+}
+
 window.desktopwindow {
     background-color: rgba(0, 0, 0, 0);
 }
@@ -220,10 +225,6 @@ window.desktopwindow {
   text-shadow: none;
 }
 
-.background {
-  color: @window_fg_color;
-  background-color: @window_bg_color;
-}
 .background:backdrop {
   text-shadow: none;
   -gtk-icon-shadow: none;
