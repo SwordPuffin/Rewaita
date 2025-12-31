@@ -64,6 +64,17 @@
   </screenshots>
 
   <releases>
+    <release version="1.1.1" date="2026-01-01">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.1.1</url>
+        <description translate="no">
+          <p>Rewaita v1.1.1</p>
+          <ul>
+            <li>Changed incorrect default preference values</li>
+            <li>Won't autostart when running in background is disabled</li>
+            <li>Fixed 'Get Involved' page not loading</li>
+          </ul>
+      </description>
+    </release>
     <release version="1.1.0" date="2025-12-22">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.1.0</url>
         <description translate="no">
