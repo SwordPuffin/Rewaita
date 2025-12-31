@@ -138,34 +138,66 @@ If you find a problem with any theme, would like to suggest another be added, or
       <object class="AdwPreferencesPage">
         <property name="icon-name">code-symbolic</property>
         <property name="title" translatable="yes">Get involved</property>
+
         <child>
-          <object class="AdwStatusPage">
-            <property name="child">
-              <object class="GtkLinkButton">
-                <property name="accessible-role">button</property>
-                <property name="child">
-                  <object class="AdwButtonContent">
-                    <property name="icon-name">external-link-symbolic</property>
-                    <property name="label" translatable="yes">Contribute</property>
-                  </object>
-                </property>
-                <property name="css-classes">pill
-suggested-action</property>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="spacing">12</property>
                 <property name="halign">center</property>
-                <property name="has-frame">True</property>
-                <property name="uri">https://github.com/SwordPuffin/Rewaita</property>
-                <style/>
+                <property name="vexpand">true</property>
+                <property name="valign">center</property>
+
+                <child>
+                  <object class="GtkImage">
+                    <property name="icon-name">leaf-symbolic</property>
+                    <property name="pixel-size">150</property>
+                    <property name="css-classes">success</property>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">
+      Contribute to Rewaita
+                    </property>
+                    <property name="css-classes">title-1
+success
+                    </property>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkLabel">
+                    <property name="wrap">true</property>
+                    <property name="justify">center</property>
+                    <property name="label" translatable="yes">
+      Anyone, regardless of experience or background is welcome to join.
+                    </property>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkLinkButton">
+                    <property name="uri">https://github.com/SwordPuffin/Rewaita</property>
+                    <property name="child">
+                      <object class="AdwButtonContent">
+                        <property name="icon-name">external-link-symbolic</property>
+                        <property name="label" translatable="yes">Contribute</property>
+                      </object>
+                    </property>
+                    <property name="css-classes">pill
+suggested-action</property>
+                    <property name="halign">center</property>
+                  </object>
+                </child>
               </object>
-            </property>
-            <property name="icon-name">leaf-symbolic</property>
-            <property name="description" translatable="yes">Anyone, regardless of experience or background is welcome to join the project.
-            </property>
-            <property name="title" translatable="yes">Contribute to Rewaita</property>
+            </child>
           </object>
         </child>
       </object>
     </child>
   </object>
 </interface>
-
 
