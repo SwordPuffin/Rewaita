@@ -50,7 +50,7 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, modify_gtk3_
     if(app_settings.get_boolean("window")):
         colors["border_color"] = colors["accent_color"]
     else:
-        colors["border_color"] = colors["window_bg_color"]
+        colors["border_color"] = 'transparent'
 
     colors["overview_bg_color"] = colors["window_bg_color"] # overview_bg_color must be opaque
     if(app_settings.get_boolean("transparency")):
