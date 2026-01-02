@@ -57,7 +57,7 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, modify_gtk3_
         for color_to_replace in ["window_bg_color", "headerbar_bg_color", "card_bg_color"]:
             rgb = hex_to_rgb(colors[color_to_replace])
             colors[color_to_replace] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.82)"
-        gtk3_file += ".background { opacity: 0.95; }"
+        gtk3_file += ".background:not(.desktopwindow) { opacity: 0.95; }"
 
     # Panel colors
     colors["panel_bg_color"] = colors["window_bg_color"]
