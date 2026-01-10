@@ -196,9 +196,19 @@ entry labal {
   color: @window_fg_color;
 }
 
-.background:not(.desktopwindow) {
-  color: @window_fg_color;
+.background:not(.nautilus-desktop) {
   background-color: @window_bg_color;
+  color: @window_fg_color;
+}
+
+.background.nemo-window, .nemo-desktop {
+    background-color: transparent;
+	color: @window_fg_color;
+}
+
+.nautilus-desktop,
+NautilusWindow.nautilus-desktop {
+  background-color: transparent;
 }
 
 window.desktopwindow {
