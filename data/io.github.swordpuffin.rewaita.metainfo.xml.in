@@ -73,6 +73,7 @@
             <li>Won't autostart when running in background is disabled</li>
             <li>Fixed issue where Cinnamon's wallpaper got overlayed by a solid color</li>
             <li>'Get Involved' page now loads correctly</li>
+            <li>Minor theming changes</li>
           </ul>
       </description>
     </release>
