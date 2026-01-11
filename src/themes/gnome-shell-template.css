@@ -48,6 +48,10 @@
   background-color: @card_bg_color;
 }
 
+#dashtodockContainer.extended:overview #dash .dash-background {
+  background-color: @overview_bg_color;
+}
+
 #dash .dash-item-container .show-apps .overview-icon,
 #dash .dash-item-container .overview-tile .overview-icon,
 #dash .dash-item-container .grid-search-result .overview-icon {
