@@ -201,7 +201,7 @@ entry labal {
   color: @window_fg_color;
 }
 
-.background.nemo-window, .op {
+.background.nemo-window, .nemo-desktop {
     background-color: transparent;
 	color: @window_fg_color;
 }
