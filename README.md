@@ -1,39 +1,30 @@
-# 🎨 Rewaita
-
 <p align="center">
-  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/icons/hicolor/scalable/apps/io.github.swordpuffin.rewaita.svg" width="400"/>
+  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/icons/hicolor/scalable/apps/io.github.swordpuffin.rewaita.svg" width="100" height=100/>
 </p>
 
-#### <p align="center">Rewaita gives your Adwaita apps a fresh look by tinting them with popular color schemes.</p>
+<h1 align="center">Rewaita</h1>
+
+#### <p align="center">Rewaita brings a fresh look to Adwaita apps using popular color schemes.</p>
 
 <br>
-<p align="center"> 
-    <a href="https://flathub.org/apps/io.github.swordpuffin.rewaita"> 
-       <img width="200" alt="Get it on Flathub" src="https://flathub.org/api/badge?svg&locale=en"/> 
-    </a>
-    <br/>
-    <br/>
-    (AUR build)
-    <br/>
-    <a href="https://aur.archlinux.org/packages/rewaita">
-        <img width="200" alt="Unofficial AUR build" src="https://img.shields.io/aur/version/rewaita?style=for-the-badge">
-    </a>
-
-  <br />
-  <br />
-  (OpenSUSE build)
-  <br />
+<div align="center">
+  <a href="https://flathub.org/apps/io.github.swordpuffin.rewaita">
+    <img width="200" alt="Get it on Flathub" src="https://flathub.org/api/badge?svg&locale=en"/>
+  </a>&nbsp;&nbsp;
+  <a href="https://aur.archlinux.org/packages/rewaita">
+    <img width="280" alt="Unofficial AUR build" src="https://img.shields.io/aur/version/rewaita?style=for-the-badge">
+  </a>&nbsp;&nbsp;
   <a href="https://build.opensuse.org/package/show/home:ericfrs/rewaita">
-    <img width="200" alt="Zypper Package" src="https://img.shields.io/badge/openSUSE-73BA25?logo=opensuse&logoColor=white">
-  </a>
-
-  <br/>
-  <br/>
-  (NixOS build)
-  <br />
+    <img width="250" alt="Zypper Package" src="https://img.shields.io/badge/openSUSE-73BA25?logo=opensuse&logoColor=white">
+  </a>&nbsp;&nbsp;
   <a href="https://search.nixos.org/packages?channel=unstable&show=rewaita&query=adwaita">
-    <img width="190" alt="NixOS Package" src="https://img.shields.io/badge/NixOS-5277C3?logo=nixos&logoColor=fff">
+    <img width="180" alt="NixOS Package" src="https://img.shields.io/badge/NixOS-5277C3?logo=nixos&logoColor=fff">
   </a>
+</div>
+
+<p align="center">
+  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/screenshots/Screenshot1.png" width="450"/>
+  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/screenshots/Screenshot2.png" width="425"/>
 </p>
 
 # ⬇️ Installation 
@@ -86,14 +77,6 @@ sudo flatpak override --filesystem=xdg-config/gtk-4.0:rw
 flatpak --user override --filesystem=xdg-config/gtk-3.0:rw
 flatpak --user override --filesystem=xdg-config/gtk-4.0:rw
 ```
-
-# 🖼️ Screenshots
-
-<p align="center">
-  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/screenshots/Screenshot1.png" width="600"/>
-  <br><br>
-  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/screenshots/Screenshot2.png" width="600"/>
-</p>
 
 ---
 
