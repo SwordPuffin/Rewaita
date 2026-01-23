@@ -713,8 +713,7 @@ StEntry:focus {
 }
 
 .message-list {
-  background-color: @window_bg_color;
-  border-radius: 12px;
+  background-color: transparent;
   color: @window_fg_color !important;
   outline: none;
   border: none;
