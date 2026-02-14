@@ -81,6 +81,13 @@ flatpak --user override --filesystem=xdg-config/gtk-4.0:rw
 ---
 
 # 🐛 Known Bugs
+#### Theme did not go away after Rewaita was deleted:
+Run:
+```bash
+rm ~/.config/gtk-3.0/gtk.css
+rm -rf ~/.config/gtk-3.0/assets
+rm ~/.config/gtk-4.0/gtk.css
+```
 #### Gnome Shell theme is not generating:
 Update Rewaita to v1.0.9 or greater. Or: 
 ```bash
