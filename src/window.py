@@ -26,6 +26,12 @@ from .custom_theme_page import CustomPage
 from .theme_page import ThemePage
 from .window_control_box import WindowControlBox
 
+def read_color_scheme(settings):
+    try:
+        return settings.read_uint("org.freedesktop.appearance", "color-scheme")
+    except:
+        return 1
+
 if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP")):
     bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
     proxy = Gio.DBusProxy.new_sync(
@@ -61,7 +67,12 @@ class RewaitaWindow(Adw.ApplicationWindow):
     delete_button = Gtk.Template.Child()
     endbox = Gtk.Template.Child()
     extra_css = set()
+
     window_control_css = ""
+    light_theme = ""
+    dark_theme = ""
+    pref = 0
+    data_dir = GLib.get_user_data_dir()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -84,16 +95,15 @@ class RewaitaWindow(Adw.ApplicationWindow):
         self.add_action(delete)
 
         if(self.window_control != "default"):
-            self.window_control_css = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", f"{self.window_control}.css")).read()
+            self.window_control_css = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", "gtk4", f"{self.window_control}.css")).read()
         self.portal = Xdp.Portal()
         self.settings = self.portal.get_settings()
-        self.pref = self.settings.read_uint("org.freedesktop.appearance", "color-scheme")
+        self.pref = read_color_scheme(self.settings)
 
         scroll_box = Gtk.ScrolledWindow(hexpand=True)
         self.main_box.append(scroll_box)
 
         self.controls = self.endbox.get_parent().get_last_child() #Gets the window controls
-
         self.theme_page = ThemePage(self)
         self.theme_page.append(WindowControlBox(self, self.window_control))
         self.custom_page = CustomPage(self)
@@ -108,11 +118,6 @@ class RewaitaWindow(Adw.ApplicationWindow):
         box.append(stack)
         scroll_box.set_child(box)
 
-    light_theme = ""
-    dark_theme = ""
-    pref = 0
-    data_dir = GLib.get_user_data_dir()
-
     def on_page_changed(self, stack, _):
         if(stack.get_visible_child_name() == "custom"):
             self.delete_button.set_visible(False)
@@ -123,7 +128,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
     gtk3_template_file_content = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "gtk3-template", "gtk.css")).read()
 
     def on_theme_selected(self):
-        self.pref = self.settings.read_uint("org.freedesktop.appearance", "color-scheme")
+        self.pref = read_color_scheme(self.settings)
         if(self.pref == 1):
             theme_name = self.dark_theme
             theme_type = "dark"
@@ -193,7 +198,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
     def on_window_control_clicked(self, button, control_file, window, flowbox):
         if(control_file != "default"):
-            self.window_control_css = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", f"{control_file}.css")).read()
+            self.window_control_css = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", "gtk4", f"{control_file}.css")).read()
         else:
             self.window_control_css = ""
         for control in flowbox:

@@ -124,12 +124,87 @@ windowcontrols.macos > button:not(.suggested-action):not(.destructive-action) > 
   padding: 0;
 }
 
-windowcontrols.macos > button.minimize:backdrop:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos > button.maximize:backdrop:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos > button.close:backdrop:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos > button.minimize:backdrop:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.minimize:backdrop:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.maximize:backdrop:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.maximize:backdrop:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.close:backdrop:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.close:backdrop:active:not(.suggested-action):not(.destructive-action) {
-    opacity: 0.7;
+windowcontrols.macos > button.minimize:hover:not(.suggested-action):not(.destructive-action):not(:backdrop),
+windowcontrols.macos > button.minimize:active:not(.suggested-action):not(.destructive-action):not(:backdrop),
+windowcontrols.macos > button.maximize:hover:not(.suggested-action):not(.destructive-action):not(:backdrop),
+windowcontrols.macos > button.maximize:active:not(.suggested-action):not(.destructive-action):not(:backdrop),
+windowcontrols.macos > button.close:hover:not(.suggested-action):not(.destructive-action):not(:backdrop),
+windowcontrols.macos > button.close:active:not(.suggested-action):not(.destructive-action):not(:backdrop) {
+  color: @window_bg_color;
+}
+
+windowcontrols.macos > button.minimize:backdrop:hover:not(.suggested-action):not(.destructive-action),
+windowcontrols.macos > button.minimize:backdrop:active:not(.suggested-action):not(.destructive-action),
+windowcontrols.macos > button.maximize:backdrop:hover:not(.suggested-action):not(.destructive-action),
+windowcontrols.macos > button.maximize:backdrop:active:not(.suggested-action):not(.destructive-action),
+windowcontrols.macos > button.close:backdrop:hover:not(.suggested-action):not(.destructive-action),
+windowcontrols.macos > button.close:backdrop:active:not(.suggested-action):not(.destructive-action) {
+  color: @window_fg_color;
+}
+
+
+windowcontrols.macos > button.minimize:backdrop:not(.suggested-action):not(.destructive-action) > image,
+windowcontrols.macos > button.maximize:backdrop:not(.suggested-action):not(.destructive-action) > image,
+windowcontrols.macos > button.close:backdrop:not(.suggested-action):not(.destructive-action) > image {
+  background-color: @card_bg_color;
 }
 
 windowcontrols.macos > button {
   min-height: 17px;
   min-width: 17px;
   padding: 2px;
+}
+
+windowcontrols.breeze > button {
+  padding: 2px;
+}
+
+windowcontrols.breeze image:not(:hover) {
+	background-color: transparent;
+}
+
+windowcontrols.breeze > button.minimize > image {
+	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
+	transform: rotate(180deg);
+	-gtk-icon-transform: scale(0);
+  background-size: 18px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+windowcontrols.breeze > button.maximize > image {
+	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
+	-gtk-icon-transform: scale(0);
+  background-size: 18px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+windowcontrols.breeze > button.close > image:hover {
+	background-color: @red_1;
+	color: @dark_1;
+}
+
+window.maximized > * windowcontrols.breeze > button.maximize > image {
+	background-image: -gtk-icontheme("tool-roundedrect-symbolic");
+	transform: rotate(45deg);
+  background-size: 12px;
+}
+
+windowcontrols.hidden {
+  transform: translate(0px, 999px);
+}
+
+windowcontrols.mint > button {
+  padding: 2px;
+}
+
+windowcontrols.mint > button.minimize:not(:hover) image,
+windowcontrols.mint > button.maximize:not(:hover) image {
+	background-color: transparent;
+}
+
+windowcontrols.mint > button.close > image {
+	background-color: @accent_bg_color;
+	color: @accent_fg_color;
 }

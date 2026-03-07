@@ -23,7 +23,10 @@ from gi.repository import Gtk, Adw
 extras_info = {
     "Default": "default",
     "Colored": "colored",
-    "MacOS style": "macos"
+    "MacOS": "macos",
+    "Breeze": "breeze",
+    "Hidden": "hidden",
+    "Mint": "mint"
 }
 
 class ButtonBox(Gtk.Button):

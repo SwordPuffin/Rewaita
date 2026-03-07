@@ -19,6 +19,7 @@
 
 from PIL import Image
 import numpy as np
+from pyciede2000 import ciede2000
 
 import gi, os, asyncio, random
 gi.require_version('XdpGtk4', '1.0')
@@ -174,76 +175,20 @@ def xyz_to_lab(xyz):
 def rgb_to_lab(rgb):
     return xyz_to_lab(rgb_to_xyz(rgb))
 
-def deltaE2000(lab1, lab2):
-    L1, a1, b1 = lab1
-    L2, a2, b2 = lab2
+def find_closest_color(rgb, palette):
+    def rgb_to_lab(rgb):
+        return xyz_to_lab(rgb_to_xyz(rgb))
 
-    avg_L = (L1 + L2) / 2.0
-    C1 = np.sqrt(a1*a1 + b1*b1)
-    C2 = np.sqrt(a2*a2 + b2*b2)
-    avg_C = (C1 + C2) / 2.0
-
-    G = 0.5 * (1 - np.sqrt((avg_C**7) / (avg_C**7 + 25**7)))
-    a1p = (1 + G) * a1
-    a2p = (1 + G) * a2
-
-    C1p = np.sqrt(a1p*a1p + b1*b1)
-    C2p = np.sqrt(a2p*a2p + b2*b2)
-
-    avg_Cp = (C1p + C2p) / 2.0
-
-    h1p = np.degrees(np.arctan2(b1, a1p)) % 360
-    h2p = np.degrees(np.arctan2(b2, a2p)) % 360
-
-    dhp = h2p - h1p
-    dhp = np.where(dhp > 180, dhp - 360, dhp)
-    dhp = np.where(dhp < -180, dhp + 360, dhp)
-
-    avg_hp = np.where(
-        np.abs(h1p - h2p) > 180,
-        (h1p + h2p + 360) / 2,
-        (h1p + h2p) / 2
-    )
-
-    T = (
-        1
-        - 0.17 * np.cos(np.radians(avg_hp - 30))
-        + 0.24 * np.cos(np.radians(2 * avg_hp))
-        + 0.32 * np.cos(np.radians(3 * avg_hp + 6))
-        - 0.20 * np.cos(np.radians(4 * avg_hp - 63))
-    )
-
-    dLp = L2 - L1
-    dCp = C2p - C1p
-    dHp = 2 * np.sqrt(C1p * C2p) * np.sin(np.radians(dhp / 2))
-
-    S_L = 1 + (0.015 * (avg_L - 50)**2) / np.sqrt(20 + (avg_L - 50)**2)
-    S_C = 1 + 0.045 * avg_Cp
-    S_H = 1 + 0.015 * avg_Cp * T
-
-    Rt = -2 * np.sqrt((avg_Cp**7) / (avg_Cp**7 + 25**7))
-    Rt *= np.sin(np.radians(60 * np.exp(-(((avg_hp - 275) / 25) ** 2))))
-
-    dE = np.sqrt(
-        (dLp / S_L)**2 +
-        (dCp / S_C)**2 +
-        (dHp / S_H)**2 +
-        Rt * (dCp / S_C) * (dHp / S_H)
-    )
-    return dE
-
-def ciede2000(rgb, palette):
-    palette = list(palette)
-
-    palette_rgb = [
-        tuple(int(h[i:i+2], 16) for i in (1,3,5))
-        for h in palette
-    ]
-
-    palette_lab = np.array([rgb_to_lab(c) for c in palette_rgb])
     lab_input = rgb_to_lab(rgb)
+    closest = None
+    min_delta = float('inf')
 
-    diffs = np.array([deltaE2000(lab_input, lab) for lab in palette_lab])
+    for color in palette:
+        color_rgb = hex_to_rgb(color) if isinstance(color, str) else color
+        delta = ciede2000(rgb_to_lab(color_rgb), lab_input)["delta_E_00"]
+        if delta < min_delta:
+            min_delta = delta
+            closest = color
 
-    idx = np.argmin(diffs)
-    return palette[idx]
+    return closest
+
