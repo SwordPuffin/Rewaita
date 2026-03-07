@@ -1,0 +1,40 @@
+button.maximize.titlebutton:not(.suggested-action):not(.destructive-action),
+button.minimize.titlebutton:not(.suggested-action):not(.destructive-action),
+button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
+  min-width: 18px;
+  min-height: 18px;
+  color: @window_fg_color;
+}
+
+button.maximize.titlebutton:not(.suggested-action):not(.destructive-action):not(:hover),
+button.minimize.titlebutton:not(.suggested-action):not(.destructive-action):not(:hover),
+button.close.titlebutton:not(.suggested-action):not(.destructive-action):not(:hover) {
+  background-color: transparent;
+}
+
+button.close.titlebutton:not(.suggested-action):not(.destructive-action):hover {
+  background-color: @red_1;
+  color: @dark_1;
+}
+
+
+button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) {
+	background-image: -gtk-icontheme("go-down-symbolic");
+	padding: 0em 0em;
+	background-repeat: no-repeat no-repeat;
+	min-height: 16px;
+	min-width: 16px;
+}
+
+button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
+	background-image: -gtk-icontheme("go-up-symbolic");
+	padding: 0em 0em;
+	background-repeat: no-repeat no-repeat;
+	min-height: 16px;
+	min-width: 16px;
+}
+
+button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) > image,
+button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) > image {
+  color: transparent;
+}

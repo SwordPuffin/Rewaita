@@ -1,0 +1,35 @@
+windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button {
+  padding: 2px;
+}
+
+windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) image:not(:hover) {
+	background-color: transparent;
+}
+
+windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button.minimize > image {
+	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
+	transform: rotate(180deg);
+	-gtk-icon-transform: scale(0);
+  background-size: 18px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button.maximize > image {
+	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
+	-gtk-icon-transform: scale(0);
+  background-size: 18px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button.close > image:hover {
+	background-color: @red_1;
+	color: @dark_1;
+}
+
+window.maximized > * windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button.maximize > image {
+	background-image: -gtk-icontheme("tool-roundedrect-symbolic");
+	transform: rotate(45deg);
+  background-size: 12px;
+}

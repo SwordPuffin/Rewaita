@@ -1,0 +1,7 @@
+button.maximize.titlebutton:not(.suggested-action):not(.destructive-action),
+button.minimize.titlebutton:not(.suggested-action):not(.destructive-action),
+button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
+	min-width: 0;
+	min-height: 0;
+	opacity: 0;
+}

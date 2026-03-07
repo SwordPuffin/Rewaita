@@ -1,0 +1,3 @@
+windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) {
+  transform: translate(0px, 999px);
+}

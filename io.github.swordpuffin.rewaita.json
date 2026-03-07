@@ -9,11 +9,18 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-		"--filesystem=~/.config/autostart:create",
+	"--filesystem=~/.config/autostart:create",
         "--filesystem=~/.config/gtk-3.0:create",
         "--filesystem=~/.config/gtk-4.0:create",
         "--filesystem=~/.local/share/themes:create",
-        "--talk-name=org.gnome.Shell.Extensions"
+        "--talk-name=org.gnome.Shell.Extensions",
+        "--filesystem=~/.mozilla/firefox",
+        "--filesystem=~/.librewolf",
+        "--filesystem=~/.waterfox",
+        "--filesystem=~/.var/app/org.mozilla.firefox/.mozilla/firefox",
+        "--filesystem=~/.var/app/io.gitlab.librewolf-community/.librewolf",
+        "--filesystem=~/.var/app/net.waterfox.waterfox/.waterfox",
+        "--filesystem=~/snap/firefox/common/.mozilla/firefox"
     ],
     "cleanup" : [
         "/include",
@@ -90,6 +97,20 @@
 			    "type": "file",
 			    "url": "https://files.pythonhosted.org/packages/2b/e9/00d33f62194d30954b101fc382df64c62e4593645d15738cd7bc56d2484c/fortune_python-1.1.2-py3-none-any.whl",
 			    "sha256": "5f64f6fb9f4aae1471bd4ce1c65e99582479b6bc43996120c4064f87f08a13bc"
+			}
+		    ]
+		},
+		{
+		    "name": "python3-pyciede2000",
+		    "buildsystem": "simple",
+		    "build-commands": [
+			"pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"pyciede2000\" --no-build-isolation"
+		    ],
+		    "sources": [
+			{
+			    "type": "file",
+			    "url": "https://files.pythonhosted.org/packages/f9/e3/b52ecf4711a92187ffa16e8f433af0b32fce7bcc3b8c00543f0592abaa72/pyciede2000-0.0.21-py3-none-any.whl",
+			    "sha256": "da570372b2c58902b5627568ec3ca2ac2c523d74790022069f89a3b626083d1a"
 			}
 		    ]
 		}
