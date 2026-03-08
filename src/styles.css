@@ -147,6 +147,7 @@ windowcontrols.macos > button.minimize:backdrop:not(.suggested-action):not(.dest
 windowcontrols.macos > button.maximize:backdrop:not(.suggested-action):not(.destructive-action) > image,
 windowcontrols.macos > button.close:backdrop:not(.suggested-action):not(.destructive-action) > image {
   background-color: @card_bg_color;
+  filter: brightness(150%);
 }
 
 windowcontrols.macos > button {
@@ -167,7 +168,7 @@ windowcontrols.breeze > button.minimize > image {
 	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
 	transform: rotate(180deg);
 	-gtk-icon-transform: scale(0);
-  background-size: 18px;
+  background-size: 16px;
 	background-position: center;
 	background-repeat: no-repeat;
 }
@@ -175,7 +176,7 @@ windowcontrols.breeze > button.minimize > image {
 windowcontrols.breeze > button.maximize > image {
 	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
 	-gtk-icon-transform: scale(0);
-  background-size: 18px;
+  background-size: 16px;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -186,7 +187,7 @@ windowcontrols.breeze > button.close > image:hover {
 }
 
 window.maximized > * windowcontrols.breeze > button.maximize > image {
-	background-image: -gtk-icontheme("tool-roundedrect-symbolic");
+	background-image: -gtk-icontheme("media-playback-stop-symbolic");
 	transform: rotate(45deg);
   background-size: 12px;
 }

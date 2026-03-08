@@ -35,7 +35,7 @@ class ButtonBox(Gtk.Button):
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         for pack_side in [Gtk.PackType.END, Gtk.PackType.START]:
             window_controls = Gtk.WindowControls(side=pack_side, halign=Gtk.Align.CENTER)
-            window_controls.add_css_class(extras_info[control])
+            window_controls.set_css_classes([extras_info[control], "rewaita-display"])
             window_controls_frame = Gtk.Frame(child=window_controls, margin_bottom=12, margin_top=12, halign=Gtk.Align.CENTER)
             window_controls_frame.add_css_class("card")
             box.append(window_controls_frame)

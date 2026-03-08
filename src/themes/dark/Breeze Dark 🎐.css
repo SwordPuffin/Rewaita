@@ -55,10 +55,6 @@
 @define-color light_5 #9a9996;
 @define-color dark_1 #77767b;
 
-@define-color accent_color #3cade9;
-@define-color accent_bg_color #3cade9;
-@define-color accent_fg_color #ffffff;
-
 toast {
   background-color: #2a2e32;
   color: #fcfcfc;

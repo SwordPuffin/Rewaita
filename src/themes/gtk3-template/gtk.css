@@ -196,7 +196,7 @@ entry labal {
   color: @window_fg_color;
 }
 
-.background:not(.nautilus-desktop) {
+.background:not(.nautilus-desktop):not(.desktopwindow) {
   background-color: @window_bg_color;
   color: @window_fg_color;
 }

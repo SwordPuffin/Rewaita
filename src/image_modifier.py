@@ -185,10 +185,13 @@ def find_closest_color(rgb, palette):
 
     for color in palette:
         color_rgb = hex_to_rgb(color) if isinstance(color, str) else color
-        delta = ciede2000(rgb_to_lab(color_rgb), lab_input)["delta_E_00"]
-        if delta < min_delta:
-            min_delta = delta
-            closest = color
+        try:
+            delta = ciede2000(rgb_to_lab(color_rgb), lab_input)["delta_E_00"]
+            if(delta < min_delta):
+                min_delta = delta
+                closest = color
+        except Exception:
+           continue
 
     return closest
 

@@ -1,35 +1,35 @@
-windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button {
+windowcontrols:not(.rewaita-display) > button {
   padding: 2px;
 }
 
-windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) image:not(:hover) {
+windowcontrols:not(.rewaita-display) image:not(:hover) {
 	background-color: transparent;
 }
 
-windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button.minimize > image {
+windowcontrols:not(.rewaita-display) > button.minimize > image {
 	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
 	transform: rotate(180deg);
 	-gtk-icon-transform: scale(0);
-  background-size: 18px;
+  background-size: 16px;
 	background-position: center;
 	background-repeat: no-repeat;
 }
 
-windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button.maximize > image {
+windowcontrols:not(.rewaita-display) > button.maximize > image {
 	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
 	-gtk-icon-transform: scale(0);
-  background-size: 18px;
+  background-size: 16px;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button.close > image:hover {
+windowcontrols:not(.rewaita-display) > button.close > image:hover {
 	background-color: @red_1;
 	color: @dark_1;
 }
 
-window.maximized > * windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button.maximize > image {
-	background-image: -gtk-icontheme("tool-roundedrect-symbolic");
-	transform: rotate(45deg);
-  background-size: 12px;
+window.maximized > * windowcontrols:not(.rewaita-display) > button.maximize > image {
+	background-image: -gtk-icontheme("media-playback-stop-symbolic");
+  transform: rotate(45deg);
+  background-size: 14px;
 }

@@ -107,6 +107,10 @@
   background-color: @card_bg_color;
 }
 
+.page-indicator-icon {
+  background-color: @window_fg_color;
+}
+
 .page-navigation-arrow {
   background-color: @card_bg_color;
 }

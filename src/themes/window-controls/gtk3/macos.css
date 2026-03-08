@@ -35,8 +35,25 @@ button.minimize.titlebutton:backdrop:not(.suggested-action):not(.destructive-act
   color: transparent;
 }
 
-button.minimize.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action), button.minimize.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action), button.maximize.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action), button.maximize.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action), button.close.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action), button.close.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action),
-button.maximize.titlebutton:hover:not(.suggested-action):not(.destructive-action), button.close.titlebutton:hover:not(.suggested-action):not(.destructive-action),
+button.maximize.titlebutton:hover:not(.suggested-action):not(.destructive-action),
+button.close.titlebutton:hover:not(.suggested-action):not(.destructive-action),
 button.minimize.titlebutton:hover:not(.suggested-action):not(.destructive-action) {
   color: @window_bg_color;
 }
+
+button.minimize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action),
+button.maximize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action),
+button.close.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
+  background-color: @card_bg_color;
+  filter: brightness(150%);
+}
+
+button.minimize.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action),
+button.minimize.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action),
+button.maximize.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action),
+button.maximize.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action),
+button.close.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action),
+button.close.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action) {
+  color: @window_fg_color;
+}
+

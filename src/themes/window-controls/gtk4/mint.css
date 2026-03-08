@@ -1,13 +1,13 @@
-windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button {
+windowcontrols:not(.rewaita-display) > button {
   padding: 2px;
 }
 
-windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button.minimize:not(:hover) image,
-windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button.maximize:not(:hover) image {
+windowcontrols:not(.rewaita-display) > button.minimize:not(:hover) image,
+windowcontrols:not(.rewaita-display) > button.maximize:not(:hover) image {
 	background-color: transparent;
 }
 
-windowcontrols:not(.macos):not(.colored):not(.breeze):not(.hidden):not(.mint):not(.default) > button.close > image {
+windowcontrols:not(.rewaita-display) > button.close > image {
 	background-color: @accent_bg_color;
 	color: @accent_fg_color;
 }

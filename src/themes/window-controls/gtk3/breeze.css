@@ -22,19 +22,32 @@ button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) {
 	background-image: -gtk-icontheme("go-down-symbolic");
 	padding: 0em 0em;
 	background-repeat: no-repeat no-repeat;
-	min-height: 16px;
-	min-width: 16px;
+	min-height: 14px;
+	min-width: 14px;
+	-gtk-icon-theme: 'Adwaita';
 }
 
 button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
 	background-image: -gtk-icontheme("go-up-symbolic");
 	padding: 0em 0em;
 	background-repeat: no-repeat no-repeat;
-	min-height: 16px;
-	min-width: 16px;
+	min-height: 14px;
+	min-width: 14px;
+	-gtk-icon-theme: 'Adwaita';
 }
 
 button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) > image,
 button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) > image {
   color: transparent;
+}
+
+window.maximized button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
+	background-image:
+      linear-gradient(to bottom right, transparent 60%, currentColor 40%),
+      linear-gradient(to bottom left,  transparent 60%, currentColor 40%),
+      linear-gradient(to top right,    transparent 60%, currentColor 40%),
+      linear-gradient(to top left,     transparent 60%, currentColor 40%);
+    background-size: 50% 50%;
+    background-position: top left, top right, bottom left, bottom right;
+    background-repeat: no-repeat;
 }
