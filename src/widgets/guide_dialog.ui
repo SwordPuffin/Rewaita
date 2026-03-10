@@ -5,7 +5,6 @@
 
   <object class="AdwPreferencesDialog" id="GuideDialog">
 
-    <!-- ===== User Guide ===== -->
     <child>
       <object class="AdwPreferencesPage">
         <property name="icon-name">dialog-question-symbolic</property>
