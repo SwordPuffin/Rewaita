@@ -4,81 +4,63 @@
   <requires lib="libadwaita" version="1.6"/>
 
   <object class="AdwPreferencesDialog" id="GuideDialog">
+
+    <!-- ===== User Guide ===== -->
     <child>
       <object class="AdwPreferencesPage">
         <property name="icon-name">dialog-question-symbolic</property>
         <property name="title" translatable="yes">User Guide</property>
+
         <child>
           <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Getting Started</property>
+            <property name="description" translatable="yes">After setting a color scheme, go to GNOME Tweaks and set 'Rewaita' as the Shell theme. It will match the active scheme for visual continuity. This can be disabled in preferences.</property>
+
             <child>
-              <object class="GtkBox">
-                <style>
-                  <class name="card"/>
-                </style>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="use-markup">true</property>
-                    <property name="label" translatable="yes">
-After setting a color scheme, go to Gnome Tweaks (or similar) and set 'Rewaita' as the Shell theme. It contains the same colors as the active scheme for continuity. This can be disabled in preferences.
-
-Rewaita will also run in the background for dynamically switching between light/dark mode or when the preferred accent color is changed. This can also be disabled in preferences.
-
-If you find a problem with any theme, would like to suggest another be added, or want to submit your own to be included, please make an issue or a pull request in the upstream repository. Details on contributing are in the next tab.
-                    </property>
-                    <property name="wrap">True</property>
-                    <property name="halign">center</property>
-                    <property name="hexpand">true</property>
-                    <property name="margin-start">12</property>
-                    <property name="margin-end">12</property>
-                  </object>
-                </child>
+              <object class="AdwActionRow">
+                <property name="icon-name">emblem-system-symbolic</property>
+                <property name="title" translatable="yes">Set Shell Theme</property>
+                <property name="subtitle" translatable="yes">Open GNOME Tweaks and select Rewaita under Appearance → Shell</property>
               </object>
             </child>
+
             <child>
-              <object class="GtkBox">
-                <property name="spacing">5</property>
-                <property name="margin-top">12</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="css-name">entry</property>
-                    <property name="margin-top">15</property>
-                    <property name="spacing">5</property>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="icon-name">dialog-warning-symbolic</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="hexpand">True</property>
-                        <property name="justify">fill</property>
-                        <property name="label" translatable="yes">Rewaita only styles GTK-3/4 applications; any other UI libraries will not be affected</property>
-                        <property name="margin-bottom">5</property>
-                        <property name="margin-top">5</property>
-                        <property name="wrap">True</property>
-                        <property name="xalign">0.0</property>
-                      </object>
-                    </child>
-                    <style>
-                      <class name="warning"/>
-                    </style>
-                  </object>
-                </child>
-                <style>
-                  <class name="warning"/>
-                </style>
+              <object class="AdwActionRow">
+                <property name="icon-name">media-playlist-repeat-symbolic</property>
+                <property name="title" translatable="yes">Automatic Switching</property>
+                <property name="subtitle" translatable="yes">Rewaita runs in the background to switch between light/dark mode and accent color changes. This can be disabled in preferences.</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="icon-name">emoji-objects-symbolic</property>
+                <property name="title" translatable="yes">Found a bug or want to contribute?</property>
+                <property name="subtitle" translatable="yes">Open an issue or pull request in the upstream repository. See the Get Involved tab for details.</property>
               </object>
             </child>
           </object>
         </child>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="AdwBanner">
+                <property name="title" translatable="yes">Rewaita only styles GTK-3/4 applications; other UI toolkits will not be affected</property>
+                <property name="revealed">true</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Flatpak Overrides</property>
+            <property name="description" translatable="yes">Run these commands so Flatpak applications can read your GTK theme files.</property>
 
             <child>
               <object class="AdwActionRow">
-                <property name="title">GTK-3.0</property>
-
+                <property name="title">GTK 3.0</property>
                 <child type="suffix">
                   <object class="GtkEntry" id="gtk3_entry">
                     <property name="editable">false</property>
@@ -89,7 +71,6 @@ If you find a problem with any theme, would like to suggest another be added, or
                     </style>
                   </object>
                 </child>
-
                 <child type="suffix">
                   <object class="GtkButton" id="copy_button_gtk3">
                     <property name="icon-name">edit-copy-symbolic</property>
@@ -105,8 +86,7 @@ If you find a problem with any theme, would like to suggest another be added, or
 
             <child>
               <object class="AdwActionRow">
-                <property name="title">GTK-4.0</property>
-
+                <property name="title">GTK 4.0</property>
                 <child type="suffix">
                   <object class="GtkEntry" id="gtk4_entry">
                     <property name="editable">false</property>
@@ -117,7 +97,6 @@ If you find a problem with any theme, would like to suggest another be added, or
                     </style>
                   </object>
                 </child>
-
                 <child type="suffix">
                   <object class="GtkButton" id="copy_button_gtk4">
                     <property name="icon-name">edit-copy-symbolic</property>
@@ -134,10 +113,159 @@ If you find a problem with any theme, would like to suggest another be added, or
         </child>
       </object>
     </child>
+
+    <child>
+      <object class="AdwPreferencesPage">
+        <property name="icon-name">firefox-symbolic</property>
+        <property name="title" translatable="yes">Firefox</property>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Theme Firefox with Rewaita</property>
+            <property name="description" translatable="yes">Firefox requires a userChrome.css file to follow your GTK color scheme. Follow the steps below to set it up.</property>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="icon-name">system-run-symbolic</property>
+                <property name="title" translatable="yes">Step 1 — Enable userChrome.css</property>
+                <property name="subtitle" translatable="yes">Navigate to about:config, search for toolkit.legacyUserProfileCustomizations.stylesheets, and set it to true.</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="icon-name">brush-symbolic</property>
+                <property name="title" translatable="yes">Step 2 — Set any theme</property>
+                <property name="subtitle" translatable="yes">We will do all the heavy lifting.</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="icon-name">extension-symbolic</property>
+                <property name="title" translatable="yes">Step 3 — Firefox Gnome Theme (Optional)</property>
+                <property name="subtitle" translatable="yes">Rewaita is also compatible with the Firefox Gnome Theme by Rafael Mardojai, but the window controls will not be themed.</property>
+                <child type="suffix">
+                  <object class="GtkLinkButton">
+                    <property name="uri">https://github.com/rafaelmardojai/firefox-gnome-theme</property>
+                    <property name="label" translatable="yes">Get it</property>
+                    <property name="valign">center</property>
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="icon-name">view-refresh-symbolic</property>
+                <property name="title" translatable="yes">Step 4 — Restart Firefox</property>
+                <property name="subtitle" translatable="yes">Fully quit and relaunch Firefox for the changes to take effect.</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwPreferencesPage">
+        <property name="icon-name">emoji-symbols-symbolic</property>
+        <property name="title" translatable="yes">GNOME Shell</property>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Apply the Shell Theme</property>
+            <property name="description" translatable="yes">Rewaita includes a matching GNOME Shell theme. Follow these steps to enable it.</property>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="icon-name">extension-symbolic</property>
+                <property name="title" translatable="yes">Step 1 — Install the User Themes extension</property>
+                <property name="subtitle" translatable="yes">GNOME Shell requires the User Themes extension to load custom shell themes.</property>
+                <child type="suffix">
+                  <object class="GtkLinkButton">
+                    <property name="uri">https://extensions.gnome.org/extension/19/user-themes/</property>
+                    <property name="label" translatable="yes">Install</property>
+                    <property name="valign">center</property>
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="icon-name">brush-symbolic</property>
+                <property name="title" translatable="yes">Step 2 — Set any theme</property>
+                <property name="subtitle" translatable="yes">Rewaita will generate the theme automatically and place it in ~/.local/share/themes. This can be disabled in preferences.</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="icon-name">emblem-system-symbolic</property>
+                <property name="title" translatable="yes">Step 3 — Select it in GNOME Tweaks</property>
+                <property name="subtitle" translatable="yes">Open GNOME Tweaks → Appearance → Shell and choose Rewaita from the dropdown.</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Useful Extensions</property>
+            <property name="description" translatable="yes">These extensions pair well with Rewaita.</property>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="icon-name">view-grid-symbolic</property>
+                <property name="title">ArcMenu</property>
+                <property name="subtitle" translatable="yes">Application menu for GNOME Shell.</property>
+                <child type="suffix">
+                  <object class="GtkLinkButton">
+                    <property name="uri">https://extensions.gnome.org/extension/3628/arcmenu/</property>
+                    <property name="label" translatable="yes">Install</property>
+                    <property name="valign">center</property>
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="icon-name">orientation-landscape-symbolic</property>
+                <property name="title">Dash to Dock</property>
+                <property name="subtitle" translatable="yes">Moves the overview dash into a persistent, themeable dock.</property>
+                <child type="suffix">
+                  <object class="GtkLinkButton">
+                    <property name="uri">https://extensions.gnome.org/extension/307/dash-to-dock/</property>
+                    <property name="label" translatable="yes">Install</property>
+                    <property name="valign">center</property>
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+
     <child>
       <object class="AdwPreferencesPage">
         <property name="icon-name">code-symbolic</property>
-        <property name="title" translatable="yes">Get involved</property>
+        <property name="title" translatable="yes">Get Involved</property>
 
         <child>
           <object class="AdwPreferencesGroup">
@@ -148,23 +276,26 @@ If you find a problem with any theme, would like to suggest another be added, or
                 <property name="halign">center</property>
                 <property name="vexpand">true</property>
                 <property name="valign">center</property>
+                <property name="margin-top">24</property>
+                <property name="margin-bottom">24</property>
 
                 <child>
                   <object class="GtkImage">
                     <property name="icon-name">leaf-symbolic</property>
-                    <property name="pixel-size">150</property>
-                    <property name="css-classes">success</property>
+                    <property name="pixel-size">96</property>
+                    <style>
+                      <class name="success"/>
+                    </style>
                   </object>
                 </child>
 
                 <child>
                   <object class="GtkLabel">
-                    <property name="label" translatable="yes">
-      Contribute to Rewaita
-                    </property>
-                    <property name="css-classes">title-1
-success
-                    </property>
+                    <property name="label" translatable="yes">Contribute to Rewaita</property>
+                    <style>
+                      <class name="title-1"/>
+                      <class name="success"/>
+                    </style>
                   </object>
                 </child>
 
@@ -172,9 +303,7 @@ success
                   <object class="GtkLabel">
                     <property name="wrap">true</property>
                     <property name="justify">center</property>
-                    <property name="label" translatable="yes">
-      Anyone, regardless of experience or background is welcome to join.
-                    </property>
+                    <property name="label" translatable="yes">Anyone, regardless of experience or background, is welcome to join. Open an issue to report bugs or suggest themes, or submit a pull request to contribute directly.</property>
                   </object>
                 </child>
 
@@ -183,12 +312,14 @@ success
                     <property name="uri">https://github.com/SwordPuffin/Rewaita</property>
                     <property name="child">
                       <object class="AdwButtonContent">
-                        <property name="icon-name">external-link-symbolic</property>
-                        <property name="label" translatable="yes">Contribute</property>
+                        <property name="icon-name">adw-external-link-symbolic</property>
+                        <property name="label" translatable="yes">Open Repository</property>
                       </object>
                     </property>
-                    <property name="css-classes">pill
-suggested-action</property>
+                    <style>
+                      <class name="pill"/>
+                      <class name="suggested-action"/>
+                    </style>
                     <property name="halign">center</property>
                   </object>
                 </child>
@@ -198,6 +329,6 @@ suggested-action</property>
         </child>
       </object>
     </child>
+
   </object>
 </interface>
-
