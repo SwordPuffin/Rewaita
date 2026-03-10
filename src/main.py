@@ -104,6 +104,7 @@ class RewaitaApplication(Adw.Application):
         guide_dialog.present(parent=self.props.active_window)
         gtk3_entry = builder.get_object("gtk3_entry")
         gtk4_entry = builder.get_object("gtk4_entry")
+        firefox_entry = builder.get_object("firefox_entry")
         self.clipboard = Gdk.Display.get_default().get_clipboard()
 
         def on_copy(button, entry):
@@ -115,6 +116,7 @@ class RewaitaApplication(Adw.Application):
                 button.remove_css_class("suggested-action")
             GLib.timeout_add(1000, remove_success)
 
+        builder.get_object("copy_button_firefox").connect("clicked", on_copy, firefox_entry)
         builder.get_object("copy_button_gtk3").connect("clicked", on_copy, gtk3_entry)
         builder.get_object("copy_button_gtk4").connect("clicked", on_copy, gtk4_entry)
 
