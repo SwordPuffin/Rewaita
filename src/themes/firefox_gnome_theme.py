@@ -1,4 +1,4 @@
-# window_control_box.py
+# firefox_gnome_theme.py
 #
 # Copyright 2026 Nathan Perlman
 #
@@ -19,8 +19,336 @@
 
 from pathlib import Path
 from configparser import ConfigParser
+DEFAULT_TEMPLATE = """
+:root {{
+  --window_bg_color:   {window_bg_color};
+  --window_fg_color:   {window_fg_color};
+  --view_bg_color:     {view_bg_color};
+  --view_fg_color:     {view_fg_color};
+  --headerbar_bg_color:{headerbar_bg_color};
+  --headerbar_fg_color:{headerbar_fg_color};
+  --popover_bg_color:  {popover_bg_color};
+  --popover_fg_color:  {popover_fg_color};
+  --card_bg_color:     {card_bg_color};
+  --card_fg_color:     {card_fg_color};
+  --sidebar_bg_color:  {sidebar_bg_color};
+  --sidebar_fg_color:  {sidebar_fg_color};
+  --dark_1:            {dark_1};
+  --brown_1:           {brown_1};
+  --light_1:           {light_1};
+  --light_5:           {light_5};
+  --blue_1:            {blue_1};
+  --blue_2:            {blue_2};
+  --green_1:           {green_1};
+  --yellow_1:          {yellow_1};
+  --orange_1:          {orange_1};
+  --red_1:             {red_1};
+  --purple_1:          {purple_1};
+  --purple_2:          {purple_2};
+  --accent_color:      {accent_color};
+}}
 
-TEMPLATE = """
+#main-window,
+#browser {{
+  background-color: var(--headerbar_bg_color) !important;
+  color: var(--window_fg_color) !important;
+}}
+
+#star-button {{
+	&[starred] {{
+		fill: var(--accent_color) !important;
+	}}
+}}
+
+input[type="checkbox"],
+checkbox:not(.treenode-checkbox) > .checkbox-check {{
+  appearance: none !important;
+	border: 0 !important;
+	border-radius: 6px !important;
+	background-color: var(--window_bg_color) !important;
+	color: var(--window_fg_color) !important;
+	height: 20px !important;
+	width: 20px !important;
+}}
+
+input[type="checkbox"]:checked,
+checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
+	background-color: var(--accent_color) !important;
+	background-image: -moz-symbolic-icon(checkmark-symbolic) !important;
+	background-size: 14px !important;
+	background-repeat: no-repeat;
+	background-position: center;
+	color: var(--window_bg_color) !important;
+	-moz-context-properties: fill;
+}}
+
+#nav-bar,
+#navigator-toolbox,
+#toolbar-menubar,
+.browser-toolbar {{
+  background-color: var(--headerbar_bg_color) !important;
+  color: var(--headerbar_fg_color) !important;
+  border-color: var(--dark_1) !important;
+}}
+
+#TabsToolbar,
+.tabbrowser-arrowscrollbox {{
+  background-color: var(--window_bg_color) !important;
+}}
+
+.tabbrowser-tab .tab-background {{
+  background-color: var(--window_bg_color) !important;
+}}
+
+.tabbrowser-tab[selected] .tab-background {{
+  background-color: var(--card_bg_color) !important;
+}}
+
+.tabbrowser-tab:not([selected]):hover .tab-background {{
+  background-color: var(--dark_1) !important;
+}}
+
+.tabbrowser-tab .tab-label {{
+  color: var(--light_5) !important;
+}}
+
+.tabbrowser-tab[selected] .tab-label,
+.tabbrowser-tab:not([selected]):hover .tab-label {{
+  color: var(--window_fg_color) !important;
+}}
+
+.tab-close-button {{
+  color: var(--light_5) !important;
+  fill: var(--light_5) !important;
+}}
+
+#tabs-newtab-button,
+.tabs-newtab-button {{
+  color: var(--light_5) !important;
+  fill: var(--light_5) !important;
+}}
+
+#urlbar,
+#urlbar-background {{
+  background-color: var(--card_bg_color) !important;
+  color: var(--window_fg_color) !important;
+  border-color: var(--dark_1) !important;
+}}
+
+#urlbar {{
+    border-radius: 8px;
+}}
+
+#urlbar:focus-within,
+#urlbar[focused="true"] {{
+  background-color: var(--card_bg_color) !important;
+  border-color: var(--accent_color) !important;
+}}
+
+#urlbar-input,
+.urlbar-input {{
+  color: var(--window_fg_color) !important;
+}}
+
+#identity-box,
+#identity-icon {{
+  color: var(--light_5) !important;
+  fill: var(--light_5) !important;
+}}
+
+#tracking-protection-icon-container {{
+  color: var(--accent_color) !important;
+  fill: var(--accent_color) !important;
+}}
+
+toolbar toolbarbutton,
+.toolbarbutton-1 {{
+  color: var(--light_5) !important;
+  fill: var(--light_5) !important;
+  background-color: transparent !important;
+}}
+
+toolbar toolbarbutton:not([disabled]):hover > .toolbarbutton-icon,
+toolbar toolbarbutton:not([disabled]):hover > .toolbarbutton-text,
+toolbar toolbarbutton:not([disabled]):hover > .toolbarbutton-badge-stack,
+.toolbarbutton-1:not([disabled]):hover > .toolbarbutton-icon,
+.toolbarbutton-1:not([disabled]):hover > .toolbarbutton-badge-stack {{
+  color: var(--window_fg_color) !important;
+  fill: var(--window_fg_color) !important;
+}}
+
+toolbar toolbarbutton:not([disabled]):hover,
+.toolbarbutton-1:not([disabled]):hover {{
+  color: var(--window_fg_color) !important;
+  fill: var(--window_fg_color) !important;
+}}
+
+toolbar toolbarbutton:hover,
+.toolbarbutton-1:hover {{
+  background-color: transparent !important;
+}}
+
+.toolbarbutton-1:not([disabled]):hover > .toolbarbutton-icon {{
+  background-color: var(--dark_1) !important;
+}}
+
+toolbar toolbarbutton:active,
+.toolbarbutton-1:active,
+toolbar toolbarbutton[open="true"] {{
+  background-color: transparent !important;
+  color: var(--window_fg_color) !important;
+  fill: var(--window_fg_color) !important;
+}}
+
+#PersonalToolbar,
+#bookmarks-toolbar {{
+  background-color: var(--headerbar_bg_color) !important;
+  border-color: var(--dark_1) !important;
+}}
+
+.bookmark-item,
+#PersonalToolbar toolbarbutton {{
+  color: var(--light_5) !important;
+  fill: var(--light_5) !important;
+}}
+
+.bookmark-item:hover,
+#PersonalToolbar toolbarbutton:hover {{
+  background-color: var(--dark_1) !important;
+  color: var(--window_fg_color) !important;
+}}
+
+menupopup,
+panel,
+.panel-arrowcontent {{
+  color: var(--window_bg_color) !important;
+  border-color: var(--dark_1) !important;
+}}
+
+panel:not([remote]) {{
+	--arrowpanel-background: var(--window_bg_color) !important;
+	--arrowpanel-color: var(--window_fg_color) !important;
+}}
+
+.menupopup-arrowscrollbox:not(#tabgroup-panel-content) {{
+  background: var(--window_bg_color) !important;
+  border-color: var(--window_bg_color) !important;
+}}
+
+menuitem,
+menu {{
+  color: var(--window_fg_color) !important;
+  background-color: transparent !important;
+}}
+
+menuitem:hover,
+menu:hover,
+menuitem[_moz-menuactive="true"],
+menu[_moz-menuactive="true"] {{
+  background-color: var(--dark_1) !important;
+  color: var(--window_fg_color) !important;
+}}
+
+menuseparator {{
+  border-color: var(--window_fg_color) !important;
+}}
+
+#sidebar-box,
+#sidebar {{
+  background-color: var(--sidebar_bg_color) !important;
+  color: var(--sidebar_fg_color) !important;
+  border-color: var(--dark_1) !important;
+}}
+
+#sidebar-header {{
+  background-color: var(--headerbar_bg_color) !important;
+  color: var(--headerbar_fg_color) !important;
+  border-color: var(--dark_1) !important;
+}}
+
+findbar,
+#FindToolbar,
+.findbar-container {{
+  background-color: var(--card_bg_color) !important;
+  color: var(--window_fg_color) !important;
+  border-color: var(--dark_1) !important;
+}}
+
+.findbar-textbox {{
+  background-color: var(--view_bg_color) !important;
+  color: var(--view_fg_color) !important;
+  border-color: var(--dark_1) !important;
+}}
+
+.found-matches {{
+  color: var(--accent_color) !important;
+}}
+
+notification,
+.notificationbox-stack {{
+  background-color: var(--card_bg_color) !important;
+  color: var(--window_fg_color) !important;
+  border-color: var(--dark_1) !important;
+}}
+
+scrollbar {{
+  background-color: var(--card_bg_color) !important;
+}}
+
+scrollbar thumb,
+scrollbarbutton {{
+  background-color: var(--dark_1) !important;
+}}
+
+scrollbar thumb:hover {{
+  background-color: var(--light_5) !important;
+}}
+
+#urlbar-results,
+.urlbarView,
+.urlbar-background,
+.urlbarView-body-inner,
+.urlbarView-body-outer {{
+  background-color: var(--window_bg_color) !important;
+  border-color: var(--window_bg_color) !important;
+}}
+
+.urlbarView-row {{
+  color: var(--window_fg_color) !important;
+}}
+
+.urlbarView-row[selected],
+.urlbarView-row:hover {{
+  background-color: var(--dark_1) !important;
+}}
+
+.urlbarView-url {{
+  color: var(--accent_color) !important;
+}}
+
+.urlbarView-tags,
+.urlbarView-title-separator {{
+  color: var(--light_5) !important;
+}}
+
+.urlbarView-emphasize {{
+  color: var(--purple_2) !important;
+}}
+
+#statuspanel-label {{
+  background-color: var(--card_bg_color) !important;
+  color: var(--window_fg_color) !important;
+  border-color: var(--dark_1) !important;
+}}
+
+#downloads-button[attention],
+#downloads-button[attention="success"] {{
+  color: var(--accent_color) !important;
+  fill: var(--accent_color) !important;
+}}
+"""
+
+FFG_TEMPLATE = """
 * {{
   color: {window_fg_color};
 }}
@@ -54,76 +382,300 @@ TEMPLATE = """
     --gnome-tabbar-tab-active-background:          rgba(255,255,255,0.075);
     --gnome-tabbar-tab-active-hover-background:    rgba(255,255,255,0.100);
     --gnome-tabbar-tab-active-background-contrast: rgba(255,255,255,0.125);
-
-	&:-moz-window-inactive {{
-        --gnome-window-color:                      {window_fg_color};
-	}}
 }}
 
-@-moz-document url-prefix(about:home), url-prefix(about:newtab) {{
- body{{
+:root:-moz-window-inactive {{
+    --gnome-window-color: {window_fg_color};
+}}
+
+@-moz-document url-prefix("about:home"), url-prefix("about:newtab") {{
+ body {{
   --newtab-background-color: #2A2A2E!important;
-  --newtab-border-primary-color: rgba(249, 249, 250, 0.8)!important;
-  --newtab-border-secondary-color: rgba(249, 249, 250, 0.1)!important;
   --newtab-button-primary-color: #0060DF!important;
   --newtab-button-secondary-color: #38383D!important;
-  --newtab-element-active-color: rgba(249, 249, 250, 0.2)!important;
-  --newtab-element-hover-color: rgba(249, 249, 250, 0.1)!important;
-  --newtab-icon-primary-color: rgba(249, 249, 250, 0.8)!important;
-  --newtab-icon-secondary-color: rgba(249, 249, 250, 0.4)!important;
-  --newtab-icon-tertiary-color: rgba(249, 249, 250, 0.4)!important;
-  --newtab-inner-box-shadow-color: rgba(249, 249, 250, 0.2)!important;
   --newtab-link-primary-color: var(--gnome-accent)!important;
-  --newtab-link-secondary-color: #50BCB6!important;
-  --newtab-text-conditional-color: #F9F9FA!important;
   --newtab-text-primary-color: var(--gnome-accent)!important;
-  --newtab-text-secondary-color: rgba(249, 249, 250, 0.8)!important;
   --newtab-textbox-background-color: var(--gnome-toolbar-background)!important;
   --newtab-textbox-border: var(--gnome-inactive-toolbar-border-color)!important;
-  --newtab-textbox-focus-color: #45A1FF!important;
-  --newtab-textbox-focus-boxshadow: 0 0 0 1px #45A1FF, 0 0 0 4px rgba(69, 161, 255, 0.3)!important;
-  --newtab-feed-button-background: #38383D!important;
-  --newtab-feed-button-text: #F9F9FA!important;
-  --newtab-feed-button-background-faded: rgba(56, 56, 61, 0.6)!important;
-  --newtab-feed-button-text-faded: rgba(249, 249, 250, 0)!important;
-  --newtab-feed-button-spinner: #D7D7DB!important;
-  --newtab-contextmenu-background-color: #4A4A4F!important;
-  --newtab-contextmenu-button-color: #2A2A2E!important;
-  --newtab-modal-color: #2A2A2E!important;
-  --newtab-overlay-color: rgba(12, 12, 13, 0.8)!important;
-  --newtab-section-header-text-color: rgba(249, 249, 250, 0.8)!important;
-  --newtab-section-navigation-text-color: rgba(249, 249, 250, 0.8)!important;
-  --newtab-section-active-contextmenu-color: #FFF!important;
   --newtab-search-border-color: rgba(249, 249, 250, 0.2)!important;
   --newtab-search-dropdown-color: #38383D!important;
-  --newtab-search-dropdown-header-color: #4A4A4F!important;
-  --newtab-search-header-background-color: rgba(42, 42, 46, 0.95)!important;
   --newtab-search-icon-color: rgba(249, 249, 250, 0.6)!important;
-  --newtab-search-wordmark-color: #FFF!important;
-  --newtab-topsites-background-color: #38383D!important;
-  --newtab-topsites-icon-shadow: none!important;
-  --newtab-topsites-label-color: rgba(249, 249, 250, 0.8)!important;
-  --newtab-card-active-outline-color: var(--gnome-toolbar-icon-fill)!important;
   --newtab-card-background-color: var(--gnome-toolbar-background)!important;
-  --newtab-card-hairline-color: rgba(249, 249, 250, 0.1)!important;
-  --newtab-card-placeholder-color: #4A4A4F!important;
-  --newtab-card-shadow: 0 1px 8px 0 rgba(12, 12, 13, 0.2)!important;
-  --newtab-snippets-background-color: #38383D!important;
-  --newtab-snippets-hairline-color: rgba(255, 255, 255, 0.1)!important;
-  --trailhead-header-text-color: rgba(255, 255, 255, 0.6)!important;
-  --trailhead-cards-background-color: rgba(12, 12, 13, 0.1)!important;
-  --trailhead-card-button-background-color: rgba(12, 12, 13, 0.3)!important;
-  --trailhead-card-button-background-hover-color: rgba(12, 12, 13, 0.5)!important;
-  --trailhead-card-button-background-active-color: rgba(12, 12, 13, 0.7)!important;
  }}
 }}
 """
 
+COLORED_TEMPLATE = """
+.titlebar-buttonbox {{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}}
+
+
+.titlebar-button {{
+    border-radius: 100%;
+    height: 24px !important;
+    width: 42px !important;
+    margin: 0 -2px !important;
+}}
+
+.titlebar-button.titlebar-close {{
+    background-color: alpha(var(--red_1), 0.85) !important;
+    color: var(--red_1) !important;
+
+    &:not([disabled]):hover {{
+      > image {{
+            display: revert !important;
+            color: var(--red_1) !important;
+            fill: var(--red_1) !important;
+        }}
+    }}
+}}
+
+.titlebar-button.titlebar-min,
+.titlebar-button.titlebar-min:hover {{
+    background-color: alpha(var(--yellow_1), 0.85) !important;
+    color: var(--yellow_1) !important;
+
+    &:not([disabled]):hover {{
+      > image {{
+            display: revert !important;
+            color: var(--yellow_1) !important;
+            fill: var(--yellow_1) !important;
+        }}
+    }}
+}}
+.titlebar-button.titlebar-restore,
+.titlebar-button.titlebar-restore:hover,
+.titlebar-button.titlebar-max,
+.titlebar-button.titlebar-max:hover {{
+    background-color: alpha(var(--green_1), 0.85) !important;
+    color: var(--green_1) !important;
+
+   &:not([disabled]):hover {{
+      > image {{
+            display: revert !important;
+            color: var(--green_1) !important;
+            fill: var(--green_1) !important;
+        }}
+    }}
+}}
+"""
+
+MACOS_TEMPLATE = """
+.titlebar-buttonbox {{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 2px;
+}}
+
+.titlebar-button {{
+    border-radius: 100% !important;
+    height: 17px !important;
+    width: 17px !important;
+    transition: filter 0.1s ease;
+    position: center;
+    margin: 0 4px !important;
+    padding: 0 !important;
+
+    &::-moz-window-inactive {{
+        filter: opacity(0.4) saturate(0);
+    }}
+}}
+
+.titlebar-button:not(:hover) > image {{
+      display: none;
+}}
+
+.titlebar-button.titlebar-close {{
+    background: var(--red_1) !important;
+    &:not([disabled]):hover {{
+        > image {{
+            display: revert !important;
+            color: var(--window_bg_color) !important;
+            fill: var(--window_bg_color) !important;
+        }}
+    }}
+    &:not([disabled]):active {{
+        filter: none;
+    }}
+}}
+
+.titlebar-button.titlebar-min {{
+    background: var(--yellow_1) !important;
+    &:not([disabled]):hover {{
+        > image {{
+            display: revert !important;
+            color: var(--window_bg_color) !important;
+            fill: var(--window_bg_color) !important;
+        }}
+    }}
+    &:not([disabled]):active {{
+        filter: none;
+    }}
+}}
+
+.titlebar-button.titlebar-max {{
+    background: var(--green_1) !important;
+    &:not([disabled]):hover {{
+        > image {{
+            display: revert !important;
+            color: var(--window_bg_color) !important;
+            fill: var(--window_bg_color) !important;
+        }}
+    }}
+    &:not([disabled]):active {{
+        filter: none;
+    }}
+}}
+"""
+
+HIDDEN_TEMPLATE = """
+.titlebar-buttonbox {{
+    display: none;
+}}
+"""
+
+MINT_TEMPLATE = """
+.titlebar-buttonbox {{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}}
+
+.titlebar-button {{
+    border-radius: 100%;
+    height: 24px !important;
+    width: 24px !important;
+    margin: 0 4px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+}}
+
+.titlebar-button.titlebar-close:not(:hover) > image,
+.titlebar-button.titlebar-min:not(:hover) > image,
+.titlebar-button.titlebar-max:not(:hover) > image,
+.titlebar-button.titlebar-restore:not(:hover) > image {{
+    background-color: transparent !important;
+}}
+
+.titlebar-button.titlebar-close {{
+    background-color: var(--accent_color) !important;
+    color: var(--window_bg_color) !important;
+
+    &:not([disabled]):hover {{
+      > image {{
+            display: revert !important;
+            color: var(--window_bg_color) !important;
+            fill: var(--window_bg_color) !important;
+        }}
+    }}
+}}
+"""
+
+BREEZE_TEMPLATE = """
+.titlebar-buttonbox {{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2px !important;
+    margin: 0 8px !important;
+}}
+
+.titlebar-button {{
+    border-radius: 100% !important;
+    margin: 0 3px !important;
+    padding: 0 !important;
+    height: 24px !important;
+    width: 24px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background-color 0.15s ease !important;
+    color: var(--window_fg_color) !important;
+}}
+
+.titlebar-button.titlebar-close > image,
+.titlebar-button.titlebar-min > image,
+.titlebar-button.titlebar-max > image,
+.titlebar-button.titlebar-restore > image {{
+    margin: 0 !important;
+}}
+
+.titlebar-button:not(:hover) > image {{
+    background-color: transparent !important;
+}}
+
+.titlebar-button.titlebar-min:hover > image,
+.titlebar-button.titlebar-max:hover > image {{
+    background-color: var(--card_bg_color) !important;
+}}
+
+.titlebar-button.titlebar-max {{
+  & > .toolbarbutton-icon {{
+    list-style-image: url(chrome://global/skin/icons/arrow-up.svg) !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    fill: var(--window_fg_color) !important;
+    color: transparent !important;
+    width: 18px !important;
+    height: 18px !important;
+  }}
+
+    &:not([disabled]):hover > image {{
+      color: transparent !important;
+    }}
+}}
+
+.titlebar-button.titlebar-close:hover {{
+  background-color: var(--red_1) !important;
+   &:not([disabled]):hover > image {{
+      fill: var(--dark_1) !important;
+      color: var(--dark_1) !important;
+  }}
+}}
+
+.titlebar-button.titlebar-restore {{
+  & > .toolbarbutton-icon {{
+    background-image: -moz-symbolic-icon(media-playback-stop-symbolic) !important;
+    color: var(--window_fg_color);
+    width: 18px !important;
+    height: 18px !important;
+    transform: rotate(45deg);
+  }}
+}}
+
+.titlebar-button.titlebar-min {{
+  & > .toolbarbutton-icon {{
+    list-style-image: url(chrome://global/skin/icons/arrow-down.svg) !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    fill: var(--window_fg_color) !important;
+    color: transparent !important;
+    width: 18px !important;
+    height: 18px !important;
+  }}
+  &:not([disabled]):hover > image {{
+      color: transparent !important;
+  }}
+}}
+"""
+
+window_control_map = {
+    "default": "",
+    "colored": COLORED_TEMPLATE,
+    "macos": MACOS_TEMPLATE,
+    "breeze": BREEZE_TEMPLATE,
+    "hidden": HIDDEN_TEMPLATE,
+    "mint": MINT_TEMPLATE
+}
+
 # This code is taken from the Gradience Project, with adjustments for Rewaita
 # Specifically: https://github.com/GradienceTeam/Plugins/blob/main/firefox_gnome_theme.py
 class FirefoxGnomeThemePlugin():
-    template = TEMPLATE
+    template = ""
     variables = []
+    window_controls = ""
 
     def validate(self):
         return False, None
@@ -189,12 +741,19 @@ class FirefoxGnomeThemePlugin():
                 for result in results:
                     try:
                         if result.resolve().is_dir():
-                            Path(f"{result}/chrome/firefox-gnome-theme").mkdir(mode=0o755, parents=True, exist_ok=True)
-                            with open(
-                                f"{result}/chrome/firefox-gnome-theme/customChrome.css",
-                                "w",
-                            ) as f:
-                                f.write(self.template.format(**self.variables))
+                            if(Path(f"{result}/chrome/firefox-gnome-theme").exists()):
+                                Path(f"{result}/chrome/firefox-gnome-theme").mkdir(mode=0o755, parents=True, exist_ok=True)
+                                with open(
+                                    f"{result}/chrome/firefox-gnome-theme/customChrome.css",
+                                    "w",
+                                ) as f:
+                                    f.write(FFG_TEMPLATE.format(**self.variables))
+                            else:
+                                with open(
+                                    f"{result}/chrome/userChrome.css",
+                                    "w",
+                                ) as f:
+                                    f.write(DEFAULT_TEMPLATE.format(**self.variables) + f"\n{window_control_map[self.window_controls].format(**self.variables)}")
                     except OSError:
                         pass
             except OSError:
