@@ -18,9 +18,9 @@ actions_icons = [
   actions_dir / 'hammer-symbolic.svg',
   actions_dir / 'brush-symbolic.svg',
   actions_dir / 'code-symbolic.svg',
-  actions_dir / 'external-link-symbolic.svg',
+  actions_dir / 'extension-symbolic.svg',
   actions_dir / 'leaf-symbolic.svg',
-  actions_dir / 'folder-open-symbolic.svg'
+  actions_dir / 'firefox-symbolic.svg'
 ]
 
 install_data(
