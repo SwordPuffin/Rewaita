@@ -21,12 +21,9 @@
   background-color: @panel_button_bg_color;
 }
 
-#panel .panel-button:hover {
-  background-color: @panel_hover_bg_color;
-}
-
+#panel .panel-button:hover,
 #panel .panel-button:hover.clock-display .clock {
-  background-color: @panel_hover_bg_color;
+  background-color: alpha(@panel_hover_bg_color, 0.1);
 }
 
 #panel .workspace-dot {
