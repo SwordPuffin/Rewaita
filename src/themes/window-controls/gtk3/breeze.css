@@ -6,6 +6,10 @@ button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
   color: @window_fg_color;
 }
 
+button.close.titlebutton:not(.suggested-action):not(.destructive-action) > image {
+	-gtk-icon-transform: scale(1.15);
+}
+
 button.maximize.titlebutton:not(.suggested-action):not(.destructive-action):not(:hover),
 button.minimize.titlebutton:not(.suggested-action):not(.destructive-action):not(:hover),
 button.close.titlebutton:not(.suggested-action):not(.destructive-action):not(:hover) {
