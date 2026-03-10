@@ -36,7 +36,6 @@ DEFAULT_TEMPLATE = """
   --dark_1:            {dark_1};
   --brown_1:           {brown_1};
   --light_1:           {light_1};
-  --light_5:           {light_5};
   --blue_1:            {blue_1};
   --blue_2:            {blue_2};
   --green_1:           {green_1};
@@ -109,7 +108,7 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 }}
 
 .tabbrowser-tab .tab-label {{
-  color: var(--light_5) !important;
+  color: var(--card_fg_color) !important;
 }}
 
 .tabbrowser-tab[selected] .tab-label,
@@ -118,14 +117,14 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 }}
 
 .tab-close-button {{
-  color: var(--light_5) !important;
-  fill: var(--light_5) !important;
+  color: var(--card_fg_color) !important;
+  fill: var(--card_fg_color) !important;
 }}
 
 #tabs-newtab-button,
 .tabs-newtab-button {{
-  color: var(--light_5) !important;
-  fill: var(--light_5) !important;
+  color: var(--card_fg_color) !important;
+  fill: var(--card_fg_color) !important;
 }}
 
 #urlbar,
@@ -152,8 +151,8 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 
 #identity-box,
 #identity-icon {{
-  color: var(--light_5) !important;
-  fill: var(--light_5) !important;
+  color: var(--card_fg_color) !important;
+  fill: var(--card_fg_color) !important;
 }}
 
 #tracking-protection-icon-container {{
@@ -163,8 +162,8 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 
 toolbar toolbarbutton,
 .toolbarbutton-1 {{
-  color: var(--light_5) !important;
-  fill: var(--light_5) !important;
+  color: var(--card_fg_color) !important;
+  fill: var(--card_fg_color) !important;
   background-color: transparent !important;
 }}
 
@@ -208,8 +207,8 @@ toolbar toolbarbutton[open="true"] {{
 
 .bookmark-item,
 #PersonalToolbar toolbarbutton {{
-  color: var(--light_5) !important;
-  fill: var(--light_5) !important;
+  color: var(--card_fg_color) !important;
+  fill: var(--card_fg_color) !important;
 }}
 
 .bookmark-item:hover,
@@ -301,7 +300,7 @@ scrollbarbutton {{
 }}
 
 scrollbar thumb:hover {{
-  background-color: var(--light_5) !important;
+  background-color: var(--card_fg_color) !important;
 }}
 
 #urlbar-results,
@@ -322,17 +321,14 @@ scrollbar thumb:hover {{
   background-color: var(--dark_1) !important;
 }}
 
-.urlbarView-url {{
+.urlbarView-url,
+.urlbarView-emphasize {{
   color: var(--accent_color) !important;
 }}
 
 .urlbarView-tags,
 .urlbarView-title-separator {{
-  color: var(--light_5) !important;
-}}
-
-.urlbarView-emphasize {{
-  color: var(--purple_2) !important;
+  color: var(--card_fg_color) !important;
 }}
 
 #statuspanel-label {{
@@ -517,7 +513,8 @@ MACOS_TEMPLATE = """
     }}
 }}
 
-.titlebar-button.titlebar-max {{
+.titlebar-button.titlebar-max,
+.titlebar-button.titlebar-restore {{
     background: var(--green_1) !important;
     &:not([disabled]):hover {{
         > image {{
