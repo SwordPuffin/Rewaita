@@ -59,6 +59,16 @@ DEFAULT_TEMPLATE = """
 	}}
 }}
 
+#input:not([type="checkbox"]) {{
+  background-color: var(--card_bg_color) !important;
+  border: none !important;
+  outline: none !important;
+}}
+
+#input:not([type="checkbox"]):focus {{
+  border: 2px var(--accent_color) solid !important;
+}}
+
 input[type="checkbox"],
 checkbox:not(.treenode-checkbox) > .checkbox-check {{
   appearance: none !important;
@@ -125,6 +135,11 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 .tabs-newtab-button {{
   color: var(--card_fg_color) !important;
   fill: var(--card_fg_color) !important;
+}}
+
+#sidebar-main > * #tabs-newtab-button:hover,
+#sidebar-main > * .tabs-newtab-button:hover {{
+  background-color: var(--card_bg_color) !important;
 }}
 
 #urlbar,
