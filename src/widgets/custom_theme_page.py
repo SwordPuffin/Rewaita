@@ -162,7 +162,7 @@ class CustomPage(Gtk.Box):
 
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
         label = Gtk.Label(label=_("Save Folder"))
-        icon = Gtk.Image.new_from_icon_name("folder-open-symbolic")
+        icon = Gtk.Image.new_from_icon_name("folder-symbolic")
         box.append(label); box.append(icon)
         open_folder_button = Gtk.Button(child=box, halign=Gtk.Align.CENTER)
         open_folder_button.set_css_classes(["suggested-action", "pill"])
