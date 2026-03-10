@@ -43,6 +43,9 @@
 
         <child>
           <object class="AdwPreferencesGroup">
+            <style>
+              <class name="warning"/>
+            </style>
             <child>
               <object class="AdwBanner">
                 <property name="title" translatable="yes">Rewaita only styles GTK-3/4 applications; other UI toolkits will not be affected</property>
@@ -120,14 +123,14 @@
 
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="yes">Theme Firefox with Rewaita</property>
-            <property name="description" translatable="yes">Firefox requires a userChrome.css file to follow your GTK color scheme. Follow the steps below to set it up.</property>
+            <property name="title" translatable="yes">Apply Theme to Firefox</property>
+            <property name="description" translatable="yes">Firefox requires a userChrome.css file to follow your color scheme. Follow the steps below to set it up.</property>
 
             <child>
               <object class="AdwActionRow">
                 <property name="icon-name">system-run-symbolic</property>
                 <property name="title" translatable="yes">Step 1 — Enable userChrome.css</property>
-                <property name="subtitle" translatable="yes">Navigate to about:config, search for toolkit.legacyUserProfileCustomizations.stylesheets, and set it to true.</property>
+                <property name="subtitle" translatable="yes">Navigate to about:config, search for toolkit.legacyUserProfileCustomizations.stylesheets, and set it to true. See 'CSS Override' for details.</property>
               </object>
             </child>
 
@@ -162,6 +165,40 @@
                 <property name="icon-name">view-refresh-symbolic</property>
                 <property name="title" translatable="yes">Step 4 — Restart Firefox</property>
                 <property name="subtitle" translatable="yes">Fully quit and relaunch Firefox for the changes to take effect.</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">CSS Override</property>
+            <property name="description" translatable="yes">Search 'about:config', then copy-paste in this property and set it to true.</property>
+
+            <child>
+              <object class="GtkBox">
+                <property name="spacing">12</property>
+                <child>
+                  <object class="GtkEntry" id="firefox_entry">
+                    <property name="editable">false</property>
+                    <property name="hexpand">true</property>
+                    <property name="xalign">0.5</property>
+                    <property name="text">toolkit.legacyUserProfileCustomizations.stylesheets</property>
+                    <style>
+                      <class name="monospace"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="copy_button_firefox">
+                    <property name="icon-name">edit-copy-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Copy to clipboard</property>
+                    <property name="valign">center</property>
+                    <style>
+                      <class name="circular"/>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
@@ -312,7 +349,7 @@
                     <property name="child">
                       <object class="AdwButtonContent">
                         <property name="icon-name">adw-external-link-symbolic</property>
-                        <property name="label" translatable="yes">Open Repository</property>
+                        <property name="label" translatable="yes">Open in Browser</property>
                       </object>
                     </property>
                     <style>
