@@ -9,7 +9,7 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-	"--filesystem=~/.config/autostart:create",
+		"--filesystem=~/.config/autostart:create",
         "--filesystem=~/.config/gtk-3.0:create",
         "--filesystem=~/.config/gtk-4.0:create",
         "--filesystem=~/.local/share/themes:create",
