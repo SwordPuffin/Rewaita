@@ -1,6 +1,6 @@
 # wallpaper_dialog.py
 #
-# Copyright 2025 Nathan Perlman
+# Copyright 2026 Nathan Perlman
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ class WallpaperDialog(Adw.Dialog):
             file_dialog = Gtk.FileDialog(default_filter=file_filter_image)
             file_dialog.open(parent, None, on_image_opened, parent)
 
-        warning_label = Gtk.Label(wrap=True, margin_top=24, justify=Gtk.Justification.CENTER, halign=Gtk.Align.CENTER, label=_("This feature is still under development. Under 4k resolution is recommended."))
+        warning_label = Gtk.Label(wrap=True, margin_top=12, justify=Gtk.Justification.CENTER, halign=Gtk.Align.CENTER, label=_("Under 4k resolution is recommended."))
         warning_label.set_css_classes(["warning", "bold"])
         message_area.append(warning_label)
 
@@ -58,7 +58,7 @@ class WallpaperDialog(Adw.Dialog):
 
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
         label = Gtk.Label(label=_("Save Folder"))
-        icon = Gtk.Image.new_from_icon_name("folder-open-symbolic")
+        icon = Gtk.Image.new_from_icon_name("folder-symbolic")
         box.append(label); box.append(icon)
         dir_button = Gtk.Button(child=box)
         os.makedirs(picture_path, exist_ok=True)
