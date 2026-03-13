@@ -1,6 +1,6 @@
 # main.py
 #
-# Copyright 2025 Nathan Perlman
+# Copyright 2026 Nathan Perlman
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,8 +24,8 @@ gi.require_version('Adw', '1')
 gi.require_version('Xdp', '1.0')
 
 from gi.repository import Gtk, Gdk, Gio, Adw, GLib, Xdp, GObject
+from .utils import preferences
 from .window import RewaitaWindow
-from .pref_dialog import PrefDialog
 
 class RewaitaApplication(Adw.Application):
     def __init__(self):
@@ -34,7 +34,6 @@ class RewaitaApplication(Adw.Application):
                          resource_base_path='/io/github/swordpuffin/rewaita')
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.create_action('pref', self.on_pref_clicked)
         self.create_action('guide', self.on_guide_clicked)
 
         self.add_main_option(
@@ -50,17 +49,17 @@ class RewaitaApplication(Adw.Application):
 
     def grab_prefs(self):
         win = RewaitaWindow
-        win.app_settings = Gio.Settings.new("io.github.swordpuffin.rewaita")
 
-        win.light_theme = win.app_settings.get_string("light-theme")
-        win.dark_theme = win.app_settings.get_string("dark-theme")
-        win.window_control = win.app_settings.get_string("window-controls")
-        win.modify_gtk3_theme = win.app_settings.get_boolean("modify-gtk3-theme")
-        win.modify_gnome_shell = win.app_settings.get_boolean("modify-gnome-shell")
-        win.run_in_background = win.app_settings.get_boolean("run-in-background")
-        win.transparency = win.app_settings.get_boolean("transparency")
-        win.borders = win.app_settings.get_boolean("window")
-        win.sharp = win.app_settings.get_boolean("sharp")
+        win.light_theme = preferences("light-theme", _, "get")
+        win.dark_theme = preferences("dark-theme", _, "get")
+        win.window_control = preferences("window-controls", _, "get")
+        win.modify_gtk3_theme = preferences("modify-gtk3-theme", _, "get")
+        win.modify_gnome_shell = preferences("modify-gnome-shell", _, "get")
+        win.run_in_background = preferences("run-in-background", _, "get")
+        win.transparency = preferences("transparency", _, "get")
+        win.borders = preferences("window", _, "get")
+        win.sharp = preferences("sharp", _, "get")
+        win.light_text = preferences("light-text", _, "get")
 
     def on_close_request(self, window, *args):
         if(window.run_in_background):
@@ -90,13 +89,6 @@ class RewaitaApplication(Adw.Application):
     def on_settings_changed(self, settings, namespace, key, value, win):
         if(namespace == "org.freedesktop.appearance" and key == "color-scheme" or namespace == "org.gnome.desktop.interface" and key == "accent-color"):
             win.on_theme_selected()
-
-    def on_pref_clicked(self, action, _):
-        win = self.props.active_window
-        if not win:
-            win = RewaitaWindow(application=self)
-        dialog = PrefDialog(win)
-        dialog.present(win)
 
     def on_guide_clicked(self, action, _):
         builder = Gtk.Builder().new_from_resource('/io/github/swordpuffin/rewaita/widgets/guide_dialog.ui')
@@ -154,9 +146,9 @@ X-Flatpak=io.github.swordpuffin.rewaita
         about = Adw.AboutDialog(application_name='Rewaita',
                                 application_icon='io.github.swordpuffin.rewaita',
                                 developer_name='Nathan Perlman',
-                                version='1.1.1',
+                                version='1.1.2',
                                 developers=['Nathan Perlman'],
-                                copyright='© 2025 Nathan Perlman')
+                                copyright='© 2026 Nathan Perlman')
         # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
         about.set_translator_credits(_('translator-credits'))
         about.present(self.props.active_window)

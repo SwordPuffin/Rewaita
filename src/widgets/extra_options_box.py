@@ -1,6 +1,6 @@
-# extra_options_box.py
+# extraoptions_box.py
 #
-# Copyright 2025 Nathan Perlman
+# Copyright 2026 Nathan Perlman
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,11 +18,12 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import gi
-from gi.repository import Gtk, Gdk, Adw
+from gi.repository import Gtk, Adw
+from .utils import preferences
 
 transparency_css = """
 .background {
-	opacity: 92%;
+	opacity: 0.92;
 }
 """
 
@@ -31,7 +32,9 @@ window {
   border: none;
 }
 
-window.csd.maximized, window.csd.fullscreen, window.csd.tiled, window.csd.tiled-top, window.csd.tiled-right, window.csd.tiled-bottom, window.csd.tiled-left {
+window.csd.maximized, window.csd.fullscreen, window.csd.tiled,
+window.csd.tiled-top, window.csd.tiled-right, window.csd.tiled-bottom,
+window.csd.tiled-left {
   border-radius: 0;
   border: none;
   transition: none;
@@ -39,12 +42,16 @@ window.csd.maximized, window.csd.fullscreen, window.csd.tiled, window.csd.tiled-
 
 window.csd:backdrop {
   transition: box-shadow 75ms cubic-bezier(0, 0, 0.2, 1);
-  box-shadow: 0 8px 6px -5px rgba(0, 0, 0, 0.2), 0 16px 15px 2px rgba(0, 0, 0, 0.14), 0 6px 18px 5px rgba(0, 0, 0, 0.12), 0 0 0 2px @accent_bg_color, 0 0 36px transparent;
+  box-shadow: 0 8px 6px -5px rgba(0,0,0,0.2), 0 16px 15px 2px rgba(0,0,0,0.14),
+              0 6px 18px 5px rgba(0,0,0,0.12), 0 0 0 2px @accent_bg_color,
+              0 0 36px transparent;
 }
 
 window.csd, window.solid-csd, popover contents, dialog .background {
   transition: none;
-  box-shadow: 0 8px 6px -5px rgba(0, 0, 0, 0.2), 0 16px 15px 2px rgba(0, 0, 0, 0.14), 0 6px 18px 5px rgba(0, 0, 0, 0.12), 0 0 0 2px @accent_bg_color, 0 0 36px transparent;
+  box-shadow: 0 8px 6px -5px rgba(0,0,0,0.2), 0 16px 15px 2px rgba(0,0,0,0.14),
+              0 6px 18px 5px rgba(0,0,0,0.12), 0 0 0 2px @accent_bg_color,
+              0 0 36px transparent;
 }
 """
 
@@ -54,36 +61,68 @@ sharp_corners_css = """
 }
 """
 
-class OptionsBox(Gtk.ListBox):
+options = [
+    (
+        "transparency",
+        _("Transparency"),
+        _("Adds a transparency effect to all window backdrops"),
+        transparency_css,
+    ),
+    (
+        "window",
+        _("Window Borders"),
+        _("Draws an accented border around the window"),
+        border_css,
+    ),
+    (
+        "sharp",
+        _("Sharp Corners"),
+        _("Gives all elements square borders"),
+        sharp_corners_css,
+    ),
+    (
+        "light-text",
+        _("Force Light Text in Overview"),
+        _("Might be useful for Blur my Shell users"),
+        "",
+    ),
+]
+
+keys = {
+    "transparency": "transparency",
+    "window": "borders",
+    "sharp": "sharp",
+    "light-text": "light_text",
+}
+
+
+class OptionsBox(Adw.PreferencesGroup):
     def __init__(self, parent):
-        super().__init__(halign=Gtk.Align.CENTER, selection_mode=Gtk.SelectionMode.NONE)
-        for option, css in zip(["Transparency", "Window borders", "Sharp corners"], [transparency_css, border_css, sharp_corners_css]):
-            row = Adw.ActionRow(height_request=48)
-            row.set_title(_(option))
+        super().__init__(
+            title=_("Extra Options"),
+        )
+        self.parent = parent
 
-            option = option.split()[0].lower()
-            toggle = Gtk.Switch(active=parent.app_settings.get_boolean(option), valign=Gtk.Align.CENTER, hexpand=True, halign=Gtk.Align.END, margin_start=36, margin_end=12)
-            toggle.connect("notify::active", self.on_row_toggled, parent, css, option)
-            row.add_suffix(toggle)
-            self.add_css_class("boxed-list")
-            self.append(row)
+        for key, label, subtitle, css in options:
+            active = preferences(key, _, "get")
 
-            if(parent.app_settings.get_boolean(option)):
-                self.set_active_extra_options(parent, css)
+            row = Adw.SwitchRow(title=label, subtitle=subtitle, active=active)
+            row.connect("notify::active", self.on_row_toggled, css, key)
+            self.add(row)
 
-    def set_active_extra_options(self, parent, css):
-        parent.extra_css.add(css)
+            if(active):
+                self.parent.extra_css.add(css)
 
-    def on_row_toggled(self, switch, args, parent, css, key):
-        if(switch.get_active()):
-            parent.extra_css.add(css)
+    def on_row_toggled(self, row, _pspec, css, key):
+        is_active = row.get_active()
+
+        attr = keys.get(key)
+        if(attr):
+            setattr(self.parent, attr, is_active)
+
+        if(is_active):
+            self.parent.extra_css.add(css)
         else:
-            parent.extra_css.remove(css)
+            self.parent.extra_css.discard(css)
 
-        parent.app_settings.set_boolean(key, switch.get_active())
-        parent.on_theme_selected()
-
-
-
-
-
+        self.parent.on_theme_selected()

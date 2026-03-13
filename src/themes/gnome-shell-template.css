@@ -23,7 +23,7 @@
 
 #panel .panel-button:hover,
 #panel .panel-button:hover.clock-display .clock {
-  background-color: alpha(@panel_hover_bg_color, 0.1);
+  background-color: alpha(@panel_hover_bg_color, 0.9);
 }
 
 #panel .workspace-dot {
@@ -91,11 +91,11 @@
 }
 
 .list-search-result-title, .list-search-provider-details {
-  color: @window_fg_color;
+  color: @search_fg_color;
 }
 
 .list-search-result-description {
-  color: @window_fg_color;
+  color: @search_fg_color;
   font-weight: 300;
 }
 
@@ -223,7 +223,7 @@ StEntry {
 }
 
 StLabel.hint-text:insensitive, .overview-tile {
-  color: @window_fg_color;
+  color: @search_fg_color;
 }
 
 .search-entry:focus,

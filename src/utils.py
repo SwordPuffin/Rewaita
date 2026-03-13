@@ -17,9 +17,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import gi, os, shutil
+import gi, os, shutil, json
 from gi.repository import Gtk, Gdk, GLib, Xdp, Adw
-from .extra_options_box import sharp_corners_css
 from .image_modifier import hex_to_rgb, find_closest_color
 from .firefox_gnome_theme import FirefoxGnomeThemePlugin
 
@@ -51,18 +50,23 @@ def add_css_provider(css, accent_color):
         Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
     )
 
-def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, modify_gtk3_theme, modify_gnome_shell, app_settings, reset_func):
-    if(app_settings.get_boolean("window")):
+def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, modify_gtk3_theme, modify_gnome_shell, reset_func):
+    if(preferences("window", _, "get")):
         colors["border_color"] = colors["accent_color"]
     else:
         colors["border_color"] = 'transparent'
 
     colors["overview_bg_color"] = colors["window_bg_color"] # overview_bg_color must be opaque
-    if(app_settings.get_boolean("transparency")):
+    if(preferences("transparency", _, "get")):
         for color_to_replace in ["window_bg_color", "headerbar_bg_color", "card_bg_color"]:
             rgb = hex_to_rgb(colors[color_to_replace])
             colors[color_to_replace] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.82)"
         gtk3_file += ".background:not(.nautilus-desktop):not(.desktopwindow) { opacity: 0.95; }"
+
+    if(preferences("light-text", _, "get")):
+        colors["search_fg_color"] = "white"
+    else:
+        colors["search_fg_color"] = colors["window_fg_color"]
 
     # Panel colors
     colors["panel_bg_color"] = colors["window_bg_color"]
@@ -71,9 +75,10 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, modify_gtk3_
     colors["panel_hover_bg_color"] = colors["card_bg_color"]
 
     firefox_theme_plugin.variables = colors
+    firefox_theme_plugin.window_controls = preferences("window-controls", _, "get")
     firefox_theme_plugin.apply()
 
-    items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color", "panel_button_bg_color", "panel_hover_bg_color", "overview_bg_color"]
+    items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color", "panel_button_bg_color", "panel_hover_bg_color", "overview_bg_color", "search_fg_color"]
 
     if(modify_gtk3_theme):
         for color in colors.keys():
@@ -91,8 +96,8 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, modify_gtk3_
         os.makedirs(gnome_shell_theme_dir, exist_ok=True)
         file = shutil.copyfile(theme_file, os.path.join(gnome_shell_theme_dir, "gnome-shell.css"))
 
-        if(app_settings.get_boolean("sharp")):
-            gnome_shell_css += f"\n\n{sharp_corners_css}"
+        if(preferences("sharp", _, "get")):
+            gnome_shell_css += f"\n\n* {{border-radius: 0px;}}"
         with open(file, "w") as f:
             f.write(gnome_shell_css)
 
@@ -110,6 +115,7 @@ def set_to_default(config_dirs, theme_type, reset_func, extras):
     gtk_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"default-{theme_type}.css")
     gtk_css = open(gtk_file).read()
     add_css_provider(gtk_css + extras, f"rgb{read_accent_color()}")
+    firefox_theme_plugin.reset()
         
     if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP")):
         reset_func()
@@ -171,3 +177,45 @@ def set_gtk3_theme(gtk3_config_dir, window_control):
         with open(os.path.join(gtk3_config_dir, "gtk.css"), "a") as file:
             with open(window_control_file, "r") as css:
                 file.write(css.read())
+
+
+pref_dir = GLib.get_user_data_dir()
+pref_file = os.path.join(pref_dir, "prefs.json")
+
+def preferences(key, value, action):
+    try:
+        def get_value():
+            with open(pref_file, "r") as f:
+                prefs = json.load(f)
+                return prefs[key]
+
+        def save_values():
+            with open(pref_file, "w") as f:
+                json.dump(value, f, indent=4)
+
+        if(action == "get"):
+            return get_value()
+        elif(action == "set"):
+            change_value()
+        elif(action == "save"):
+            save_values()
+    except:
+        defaults = {
+            "light-theme": "default",
+            "dark-theme": "default",
+            "window-controls": "default",
+            "modify-gtk3-theme": True,
+            "modify-gnome-shell": True,
+            "run-in-background": True,
+            "transparency": False,
+            "window": False,
+            "sharp": False,
+            "light-text": False,
+        }
+
+        with open(pref_file, "w") as f:
+            json.dump(defaults, f, indent=4)
+
+
+
+

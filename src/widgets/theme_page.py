@@ -1,6 +1,6 @@
 # theme_page.py
 #
-# Copyright 2025 Nathan Perlman
+# Copyright 2026 Nathan Perlman
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@ import gi, os, re
 from gi.repository import Gtk, Adw, Gdk, GLib
 from fortune import fortune
 from .wallpaper_dialog import WallpaperDialog
-from .extra_options_box import OptionsBox
 
 def flowbox_sort_func(child1: Gtk.FlowBoxChild, child2: Gtk.FlowBoxChild, _):
     button1 = child1.get_first_child()
@@ -114,9 +113,7 @@ class ThemePage(Gtk.Box):
         image_button.set_css_classes(["pill", "suggested-action"])
         top_box.append(image_button)
 
-        options_listbox = OptionsBox(parent)
         self.append(top_box)
-        self.append(options_listbox)
 
         snippet = self.get_example_text()
         for theme_type in ["light", "dark"]:

@@ -5,6 +5,7 @@
 
   <object class="AdwPreferencesDialog" id="GuideDialog">
 
+    <!-- ===== User Guide ===== -->
     <child>
       <object class="AdwPreferencesPage">
         <property name="icon-name">dialog-question-symbolic</property>
@@ -18,8 +19,8 @@
             <child>
               <object class="AdwActionRow">
                 <property name="icon-name">emblem-system-symbolic</property>
-                <property name="title" translatable="yes">Set Shell Theme</property>
-                <property name="subtitle" translatable="yes">Open GNOME Tweaks and select Rewaita under Appearance → Shell</property>
+                <property name="title" translatable="yes">Run the Flatpak Override Commands</property>
+                <property name="subtitle" translatable="yes">This will ensure Flatpak applications are themed accordingly. See 'Flatpak Overrides' below for details.</property>
               </object>
             </child>
 
@@ -35,7 +36,7 @@
               <object class="AdwActionRow">
                 <property name="icon-name">emoji-objects-symbolic</property>
                 <property name="title" translatable="yes">Found a bug or want to contribute?</property>
-                <property name="subtitle" translatable="yes">Open an issue or pull request in the upstream repository. See the Get Involved tab for details.</property>
+                <property name="subtitle" translatable="yes">Open an issue or pull request in the upstream repository. See the 'Get Involved' tab for details.</property>
               </object>
             </child>
           </object>
@@ -58,11 +59,11 @@
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Flatpak Overrides</property>
-            <property name="description" translatable="yes">Run these commands so Flatpak applications can read your GTK theme files.</property>
+            <property name="description" translatable="yes">Run these commands so Flatpak applications can use your theme.</property>
 
             <child>
               <object class="AdwActionRow">
-                <property name="title">GTK 3.0</property>
+                <property name="title">GTK-3.0</property>
                 <child type="suffix">
                   <object class="GtkEntry" id="gtk3_entry">
                     <property name="editable">false</property>
@@ -88,7 +89,7 @@
 
             <child>
               <object class="AdwActionRow">
-                <property name="title">GTK 4.0</property>
+                <property name="title">GTK-4.0</property>
                 <child type="suffix">
                   <object class="GtkEntry" id="gtk4_entry">
                     <property name="editable">false</property>
@@ -146,7 +147,7 @@
               <object class="AdwActionRow">
                 <property name="icon-name">extension-symbolic</property>
                 <property name="title" translatable="yes">Step 3 — Firefox Gnome Theme (Optional)</property>
-                <property name="subtitle" translatable="yes">Rewaita is also compatible with the Firefox Gnome Theme by Rafael Mardojai, but the window controls will not be themed.</property>
+                <property name="subtitle" translatable="yes">Rewaita is also compatible with the Firefox Gnome Theme, but the window controls will not be themed.</property>
                 <child type="suffix">
                   <object class="GtkLinkButton">
                     <property name="uri">https://github.com/rafaelmardojai/firefox-gnome-theme</property>

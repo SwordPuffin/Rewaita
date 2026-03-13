@@ -1,6 +1,6 @@
 # window.py
 #
-# Copyright 2025 Nathan Perlman
+# Copyright 2026 Nathan Perlman
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,9 +21,10 @@ import os, shutil, gi, re
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
 from collections import defaultdict
-from .utils import parse_gtk_theme, set_to_default, delete_items, set_gtk3_theme, get_accent_color, add_css_provider
+from .utils import parse_gtk_theme, set_to_default, delete_items, set_gtk3_theme, get_accent_color, add_css_provider, preferences
 from .custom_theme_page import CustomPage
 from .theme_page import ThemePage
+from .pref_page import PrefPage
 from .window_control_box import WindowControlBox
 
 def read_color_scheme(settings):
@@ -83,9 +84,6 @@ class RewaitaWindow(Adw.ApplicationWindow):
             Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
         )
 
-        if(os.path.exists(os.path.join(GLib.get_user_data_dir(), "prefs.json"))):
-            os.remove(os.path.join(GLib.get_user_data_dir(), "prefs.json"))
-
         #Makes necessary directories
         for path in [gtk3_config_dir, gtk4_config_dir, gnome_shell_dir]:
             os.makedirs(path, exist_ok=True)
@@ -111,15 +109,16 @@ class RewaitaWindow(Adw.ApplicationWindow):
         stack = Adw.ViewStack(transition_duration=200, vhomogeneous=False)
         stack.connect("notify::visible-child", self.on_page_changed)
         self.switcher.set_stack(stack)
-        stack.add_titled_with_icon(self.theme_page, "settings", _("Theming"), "brush-symbolic")
+        stack.add_titled_with_icon(self.theme_page, "theming", _("Theming"), "brush-symbolic")
         stack.add_titled_with_icon(Adw.Clamp(child=self.custom_page, maximum_size=850), "custom", _("Custom"), "hammer-symbolic")
+        stack.add_titled_with_icon(Adw.Clamp(child=PrefPage(self), maximum_size=850), "pref", _("Fine Tune"), "emblem-system-symbolic")
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         box.append(stack)
         scroll_box.set_child(box)
 
     def on_page_changed(self, stack, _):
-        if(stack.get_visible_child_name() == "custom"):
+        if(stack.get_visible_child_name() != "theming"):
             self.delete_button.set_visible(False)
         else:
             self.delete_button.set_visible(True)
@@ -189,7 +188,6 @@ class RewaitaWindow(Adw.ApplicationWindow):
             self.gtk3_template_file_content,
             self.modify_gtk3_theme,
             self.modify_gnome_shell,
-            self.app_settings,
             reset_shell
         )
 
@@ -238,9 +236,17 @@ class RewaitaWindow(Adw.ApplicationWindow):
         if(button.get_icon_name() != "reload-symbolic"): button.add_css_class("active-scheme")
 
     def save_prefs(self):
-        self.app_settings.set_string("light-theme", self.light_theme)
-        self.app_settings.set_string("dark-theme", self.dark_theme)
-        self.app_settings.set_string("window-controls", self.window_control)
-        self.app_settings.set_boolean("modify-gtk3-theme", self.modify_gtk3_theme)
-        self.app_settings.set_boolean("modify-gnome-shell", self.modify_gnome_shell)
-        self.app_settings.set_boolean("run-in-background", self.run_in_background)
+        values = {
+            "light-theme": self.light_theme,
+            "dark-theme": self.dark_theme,
+            "window-controls": self.window_control,
+            "modify-gtk3-theme": self.modify_gtk3_theme,
+            "modify-gnome-shell": self.modify_gnome_shell,
+            "run-in-background": self.run_in_background,
+            "transparency": self.transparency,
+            "window": self.borders,
+            "sharp": self.sharp,
+            "light-text": self.light_text
+        }
+
+        preferences(_, values, "save")

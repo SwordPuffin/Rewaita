@@ -718,8 +718,11 @@ class FirefoxGnomeThemePlugin():
                         results.append(directory / Path(cp[section]["Path"]))
                 for result in results:
                     try:
-                        if result.resolve().is_dir():
-                            Path(f"{result}/chrome/firefox-gnome-theme/customChrome.css").unlink()
+                        if(Path(f"{result}/chrome/firefox-gnome-theme").exists()):
+                            if result.resolve().is_dir():
+                                Path(f"{result}/chrome/firefox-gnome-theme/customChrome.css").unlink()
+                        else:
+                            Path(f"{result}/chrome/userChrome.css").unlink()
                     except OSError:
                         pass
             except OSError:
