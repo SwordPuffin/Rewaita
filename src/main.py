@@ -118,13 +118,17 @@ class RewaitaApplication(Adw.Application):
             print("Background permission granted")
             path = os.path.join(GLib.getenv("HOME"), ".config", "autostart")
             os.makedirs(path, exist_ok=True)
+            if(portal.running_under_flatpak()):
+                command = "flatpak run io.github.swordpuffin.rewaita --background"
+            else:
+                command = "rewaita -b"
             with open(os.path.join(path, "rewaita.desktop"), "w") as file:
-                file.write("""
+                file.write(f"""
 [Desktop Entry]
 Type=Application
 Name=io.github.swordpuffin.rewaita
 X-XDP-Autostart=io.github.swordpuffin.rewaita
-Exec=flatpak run io.github.swordpuffin.rewaita --background
+Exec={command}
 DBusActivatable=true
 X-Flatpak=io.github.swordpuffin.rewaita
                 """

@@ -1,6 +1,6 @@
 # wallpaper_dialog.py
 #
-# Copyright 2025 Nathan Perlman
+# Copyright 2026 Nathan Perlman
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -45,10 +45,6 @@ class WallpaperDialog(Adw.Dialog):
             file_filter_image.add_mime_type("image/webp")
             file_dialog = Gtk.FileDialog(default_filter=file_filter_image)
             file_dialog.open(parent, None, on_image_opened, parent)
-
-        warning_label = Gtk.Label(wrap=True, margin_top=12, justify=Gtk.Justification.CENTER, halign=Gtk.Align.CENTER, label=_("Under 4k resolution is recommended."))
-        warning_label.set_css_classes(["warning", "bold"])
-        message_area.append(warning_label)
 
         file_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8, hexpand=True, halign=Gtk.Align.CENTER, margin_top=20)
 

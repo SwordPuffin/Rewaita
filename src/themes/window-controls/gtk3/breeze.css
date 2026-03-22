@@ -46,11 +46,12 @@ button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) > im
 }
 
 window.maximized button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
-	background-image:
-      linear-gradient(to bottom right, transparent 60%, currentColor 40%),
-      linear-gradient(to bottom left,  transparent 60%, currentColor 40%),
-      linear-gradient(to top right,    transparent 60%, currentColor 40%),
-      linear-gradient(to top left,     transparent 60%, currentColor 40%);
+    background-image:
+      linear-gradient(to bottom right, transparent 40%, currentColor 40%, currentColor 60%, transparent 60%),
+      linear-gradient(to bottom left,  transparent 40%, currentColor 40%, currentColor 60%, transparent 60%),
+      linear-gradient(to top right,    transparent 40%, currentColor 40%, currentColor 60%, transparent 60%),
+      linear-gradient(to top left,     transparent 40%, currentColor 40%, currentColor 60%, transparent 60%);
+
     background-size: 50% 50%;
     background-position: top left, top right, bottom left, bottom right;
     background-repeat: no-repeat;

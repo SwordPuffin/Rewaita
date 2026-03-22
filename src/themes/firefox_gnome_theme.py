@@ -616,12 +616,14 @@ BREEZE_TEMPLATE = """
     margin: 0 !important;
 }}
 
+
 .titlebar-button:not(:hover) > image {{
     background-color: transparent !important;
 }}
 
-.titlebar-button.titlebar-min:hover > image,
-.titlebar-button.titlebar-max:hover > image {{
+.titlebar-button.titlebar-min:hover,
+.titlebar-button.titlebar-max:hover,
+.titlebar-button.titlebar-restore:hover {{
     background-color: var(--card_bg_color) !important;
 }}
 
@@ -640,6 +642,21 @@ BREEZE_TEMPLATE = """
     }}
 }}
 
+.titlebar-button.titlebar-close {{
+  & > .toolbarbutton-icon {{
+    list-style-image: url(chrome://global/skin/icons/close.svg) !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    fill: var(--window_fg_color) !important;
+    color: transparent !important;
+    width: 13px !important;
+    height: 13px !important;
+  }}
+
+    &:not([disabled]):hover > image {{
+      color: transparent !important;
+    }}
+}}
+
 .titlebar-button.titlebar-close:hover {{
   background-color: var(--red_1) !important;
    &:not([disabled]):hover > image {{
@@ -650,11 +667,13 @@ BREEZE_TEMPLATE = """
 
 .titlebar-button.titlebar-restore {{
   & > .toolbarbutton-icon {{
-    background-image: -moz-symbolic-icon(media-playback-stop-symbolic) !important;
-    color: var(--window_fg_color);
-    width: 18px !important;
-    height: 18px !important;
-    transform: rotate(45deg);
+    background-image: none !important;
+    box-shadow: inset 0 0 0 2px currentColor !important;
+    border-radius: 1px !important;
+    color: var(--window_fg_color) !important;
+    width: 13px !important;
+    height: 13px !important;
+    transform: rotate(45deg) !important;
   }}
 }}
 

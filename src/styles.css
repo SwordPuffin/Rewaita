@@ -186,10 +186,30 @@ windowcontrols.breeze > button.close > image:hover {
 	color: @dark_1;
 }
 
+windowcontrols.breeze > button.close > image {
+	transform: scale(1.1);
+}
+
+window.maximized > * windowcontrols.breeze > button.maximize:hover {
+  background-color: @card_bg_color;
+  border-radius: 100%;
+}
+
+window.maximized > * windowcontrols.breeze > button.maximize {
+	border-radius: 100%;
+  	margin: 3px 0;
+}
+
+window.maximized > * windowcontrols.breeze > button.maximize > image:hover {
+  background-color: transparent;
+}
+
 window.maximized > * windowcontrols.breeze > button.maximize > image {
-	background-image: -gtk-icontheme("media-playback-stop-symbolic");
-	transform: rotate(45deg);
-  background-size: 12px;
+    background-image: none;
+    box-shadow: inset 0 0 0 3px @window_fg_color;
+    border-radius: 1px;
+    color: var(--window_fg_color);
+    transform: rotate(45deg) scale(0.55);
 }
 
 windowcontrols.hidden {

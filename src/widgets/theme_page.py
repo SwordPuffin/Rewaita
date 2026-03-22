@@ -64,7 +64,6 @@ def create_color_thumbnail_button(colors, name, example_text):
     css_provider = Gtk.CssProvider()
     css_provider.load_from_data(f"""
         .background-{rand} {{
-            border-radius: 18px;
             background-color: {colors.get("window_bg_color")};
             color: {colors.get("window_fg_color")};
         }}
