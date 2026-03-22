@@ -5,7 +5,6 @@
 
   <object class="AdwPreferencesDialog" id="GuideDialog">
 
-    <!-- ===== User Guide ===== -->
     <child>
       <object class="AdwPreferencesPage">
         <property name="icon-name">dialog-question-symbolic</property>
@@ -18,9 +17,17 @@
 
             <child>
               <object class="AdwActionRow">
-                <property name="icon-name">emblem-system-symbolic</property>
+                <property name="icon-name">application-x-executable-symbolic</property>
                 <property name="title" translatable="yes">Run the Flatpak Override Commands</property>
                 <property name="subtitle" translatable="yes">This will ensure Flatpak applications are themed accordingly. See 'Flatpak Overrides' below for details.</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="icon-name">emblem-system-symbolic</property>
+                <property name="title" translatable="yes">Change the System Theme</property>
+                <property name="subtitle" translatable="yes">Many Linux distributions will set some custom GTK theme by default. To prevent conflicts, change the application theme to default or 'Adwaita'.</property>
               </object>
             </child>
 
