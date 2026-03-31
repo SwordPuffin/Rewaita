@@ -1,6 +1,6 @@
 # utils.py
 #
-# Copyright 2025 Nathan Perlman
+# Copyright 2026 Nathan Perlman
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -131,7 +131,7 @@ def confirm_delete(dialog, response, button, window):
 def delete_theme(button, window):
     dialog = Adw.AlertDialog()
     button.theme = button.theme.replace('.css', '')
-    dialog.set_heading(_("Delete ") + f"{button.theme}?")
+    dialog.set_heading(_("Delete") + f" {button.theme}?")
     dialog.set_body(_("Are you sure you want to delete that theme?\nThis cannot be undone."))
     
     dialog.add_response("cancel", _("Cancel"))
@@ -215,7 +215,6 @@ def preferences(key, value, action):
 
         with open(pref_file, "w") as f:
             json.dump(defaults, f, indent=4)
-
 
 
 
