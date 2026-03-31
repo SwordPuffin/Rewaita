@@ -1,0 +1,158 @@
+# Translation template for Rewaita
+# yu Qin <imqin_yu@outlook.com>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rewaita\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-05 21:08+0400\n"
+"PO-Revision-Date: 2026-03-31 22:39+0800\n"
+"Last-Translator: yu Qin <imqin_yu@outlook.com>\n"
+"Language-Team: Chinese (China)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Gtranslator 50.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: data/io.github.swordpuffin.rewaita.desktop.in:2
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:7
+msgid "Rewaita"
+msgstr "Rewaita"
+
+#: data/io.github.swordpuffin.rewaita.desktop.in:8
+msgid "gtk;adwaita;gnome;shell;theme"
+msgstr "gtk;adwaita;gnome;shell;主题;"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:8
+msgid "Bring color to Adwaita"
+msgstr "为 Adwaita 带来颜色"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:10
+msgid ""
+"Rewaita is a utility to recolor Gtk4/Adwaita apps to popular color schemes"
+msgstr "Rewaita 是一个用于将 Gtk4/Adwaita 应用重新着流行配色方案的工具"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:11
+msgid ""
+"Changes only affect GTK3/4 applications; Other libraries are NOT supported"
+msgstr "更改仅影响 GTK3/4 应用程序；其它库不受支持"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:15
+msgid "Nathan Perlman"
+msgstr "Nathan Perlman"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:35
+msgid "Browsing through dark themes"
+msgstr "浏览深色主题"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:39
+msgid "Browsing through light themes"
+msgstr "浏览浅色主题"
+
+#. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
+#: src/main.py:52
+msgid "translator-credits"
+msgstr "秦宇"
+
+#: src/utils.py:92
+msgid " has been deleted"
+msgstr " 已删除"
+
+#: src/utils.py:98
+msgid "Delete"
+msgstr "删除"
+
+#: src/utils.py:99
+msgid ""
+"Are you sure you want to delete that theme?\n"
+"This cannot be undone."
+msgstr ""
+"您确定想要删除这个主题吗？\n"
+"此操作无法撤销。"
+
+#: src/custom_theme.py:149
+msgid "Theme name (required)"
+msgstr "主题名称（必填）"
+
+#: src/custom_theme.py:153
+msgid "Emoji (optional)"
+msgstr "Emoji \t（可选）"
+
+#: src/custom_theme.py:157
+msgid "Theme Type"
+msgstr "主题类别"
+
+#: src/custom_theme.py:158
+msgid "Light"
+msgstr "浅色"
+
+#: src/custom_theme.py:159
+msgid "Dark"
+msgstr "深色"
+
+#: src/window.py:92
+msgid "Theming"
+msgstr "主题"
+
+#: src/window.py:120
+msgid ""
+"After setting a color scheme, go to Gnome-Tweaks (or similar) and set "
+"'Rewaita' as your Shell theme. It contains the same colors as the active "
+"scheme for continuity\n"
+"\n"
+"Rewaita also does not style parts of apps like Gnome Builder and BlackBox "
+"which have their own syntax highlighting system\n"
+"\n"
+"If you find a problem with any theme, would like to suggest another be "
+"added, or want to submit your own to be included, please make an issue or a "
+"pull request @ https://github.com/SwordPuffin/Rewaita"
+msgstr ""
+"设置颜色方案后，进入 Gnome-Tweaks（或类似工具），将“Rewaita”设置为您的 Shell "
+"主题。它包含与当前使用的颜色方案相同的颜色以保持一致性。\n"
+"\n"
+"Rewaita 也不会为某些应用程序的部分界面设置样式，例如 Gnome Builder 和 "
+"BlackBox，因为它们有自己的语法高亮系统。\n"
+"\n"
+"如果您发现任何主题有问题、想建议添加其他主题，或者希望提交自己的主题以供收"
+"录，请在 @ https://github.com/SwordPuffin/Rewaita 提交 issue 或 pull "
+"request。"
+
+#: src/window.py:121
+msgid ""
+"**Rewaita will only style GTK3/4 applications; Any other UI libraries are "
+"altogether NOT supported**"
+msgstr "**Rewaita 仅适用于 GTK3/4 应用程序；其他 UI 库软件不受支持**"
+
+#: src/window.py:129
+msgid "For Flatpak application support, run:"
+msgstr "对于 Flatpak 应用支持，请运行："
+
+#: src/window.py:201
+msgid "User Guide"
+msgstr "用户指南"
+
+#: src/window.py:260
+msgid "Reset to default"
+msgstr "重置为默认"
+
+#: src/window.py:328
+msgid "Change GNOME shell theme to 'Rewaita' and reboot for full changes"
+msgstr "将 GNOME shell 主题切换为 “Rewaita” 并重新启动以完全应用更改"
+
+#: src/window.ui:22
+msgid "Main Menu"
+msgstr "主菜单"
+
+#: src/window.ui:44
+msgid "_Keyboard Shortcuts"
+msgstr "键盘快捷键(_K)"
+
+#: src/window.ui:48
+msgid "_About Rewaita"
+msgstr "关于 Rewaita(_A)"
+
+#: src/window.ui:52
+msgid "_Help"
+msgstr "帮助(_H)"
