@@ -643,7 +643,6 @@ button.osd.image-button {
 button.osd {
   color: rgba(255, 255, 255, 0.9);
   border-radius: 5px;
-  color: white;
   border-color: transparent;
   background-color: rgba(0, 0, 0, 0.65);
   background-clip: padding-box;
@@ -651,7 +650,6 @@ button.osd {
   box-shadow: none;
 }
 button.osd:hover {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.25);
   background-clip: padding-box;
@@ -660,7 +658,6 @@ button.osd:hover {
 }
 button.osd:active,
 button.osd:checked {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.2);
   background-clip: padding-box;
@@ -693,14 +690,12 @@ button.osd:backdrop {
 .app-notification button,
 .app-notification.frame button, .csd popover.background.touch-selection button, .csd popover.background.magnifier button, popover.background.touch-selection button, popover.background.magnifier button,
 .osd button {
-  color: white;
   border-color: transparent;
   background-color: rgba(0, 0, 0, 0.65);
   background-clip: padding-box;
 }
 .app-notification button:hover, popover.background.touch-selection button:hover, popover.background.magnifier button:hover,
 .osd button:hover {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.25);
   background-clip: padding-box;
@@ -710,7 +705,6 @@ button.osd:backdrop {
 .osd button:active,
 .osd button:checked:backdrop,
 .osd button:checked {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.2);
   background-clip: padding-box;
@@ -752,7 +746,6 @@ button.osd:backdrop {
 }
 .app-notification button.flat:hover, popover.background.touch-selection button.flat:hover, popover.background.magnifier button.flat:hover,
 .osd button.flat:hover {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.25);
   background-clip: padding-box;
@@ -783,14 +776,12 @@ button.osd:backdrop {
 .app-notification button.flat:active, popover.background.touch-selection button.flat:active, popover.background.magnifier button.flat:active, .app-notification button.flat:checked, popover.background.touch-selection button.flat:checked, popover.background.magnifier button.flat:checked,
 .osd button.flat:active,
 .osd button.flat:checked {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.2);
   background-clip: padding-box;
 }
 
 button.suggested-action {
-  color: white;
   outline-color: alpha(@accent_color,0.5);
   background-color: mix(white,@accent_bg_color,0.9);
 }
@@ -804,13 +795,11 @@ button.suggested-action.flat {
   color: @accent_bg_color;
 }
 button.suggested-action:hover {
-  color: white;
   background-color: mix(white,@accent_bg_color,0.85);
   box-shadow: none;
 }
 button.suggested-action:active,
 button.suggested-action:checked {
-  color: white;
   background-color: mix(white,@accent_bg_color,0.7);
   box-shadow: none;
   text-shadow: none;
@@ -843,13 +832,11 @@ button.suggested-action:disabled:checked {
   box-shadow: none;
 }
 .osd button.suggested-action {
-  color: white;
   border-color: transparent;
   background-color: rgba(0, 0, 0, 0.65);
   background-clip: padding-box;
 }
 .osd button.suggested-action:hover {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.25);
   background-clip: padding-box;
@@ -858,7 +845,6 @@ button.suggested-action:disabled:checked {
 .osd button.suggested-action:active,
 .osd button.suggested-action:checked:backdrop,
 .osd button.suggested-action:checked {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.2);
   background-clip: padding-box;
@@ -941,13 +927,11 @@ button.destructive-action:disabled:checked {
   box-shadow: none;
 }
 .osd button.destructive-action {
-  color: white;
   border-color: transparent;
   background-color: rgba(0, 0, 0, 0.65);
   background-clip: padding-box;
 }
 .osd button.destructive-action:hover {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.25);
   background-clip: padding-box;
@@ -956,7 +940,6 @@ button.destructive-action:disabled:checked {
 .osd button.destructive-action:active,
 .osd button.destructive-action:checked:backdrop,
 .osd button.destructive-action:checked {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.2);
   background-clip: padding-box;
@@ -1601,7 +1584,6 @@ entry:drop(active) {
 }
 .osd spinbutton:not(.vertical),
 .osd entry {
-  color: white;
   border-color: rgba(0, 0, 0, 0.9);
   background-color: rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
@@ -1611,7 +1593,6 @@ entry:drop(active) {
 }
 .osd spinbutton:focus:not(.vertical),
 .osd entry:focus {
-  color: white;
   border-color: @accent_bg_color;
   background-color: rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
@@ -1621,7 +1602,6 @@ entry:drop(active) {
 }
 .osd spinbutton:backdrop:not(.vertical),
 .osd entry:backdrop {
-  color: white;
   border-color: rgba(0, 0, 0, 0.9);
   background-color: rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
@@ -2040,19 +2020,16 @@ spinbutton.vertical button.down {
   border-style: solid none none none;
 }
 .osd spinbutton.vertical button:first-child {
-  color: white;
   border-color: transparent;
   background-color: rgba(0, 0, 0, 0.65);
   background-clip: padding-box;
 }
 .osd spinbutton.vertical button:first-child:hover {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.25);
   background-clip: padding-box;
 }
 .osd spinbutton.vertical button:first-child:active {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.2);
   background-clip: padding-box;
@@ -3365,11 +3342,11 @@ menuitem radio:dir(rtl) {
 popover.background {
   padding: 2px;
   background-color: @popover_bg_color;
-  box-shadow: 0 3px 8px 1px rgba(0, 0, 0, 0.3), 0 0 0 3px shade(mix(currentColor,@border_color,0.85),0.86);
+  box-shadow: 0 3px 8px 1px rgba(0, 0, 0, 0.3), 0 0 0 3px shade(@border_color,0.86);
 }
 
 .csd popover.background, popover.background {
-  border: 2px solid mix(currentColor,@border_color,0.85);
+  border: 2px solid @border_color;
   border-radius: 15px;
 }
 .csd popover.background {
@@ -4118,21 +4095,18 @@ radio:indeterminate:disabled {
 }
 .osd check,
 .osd radio {
-  color: white;
   border-color: transparent;
   background-color: rgba(0, 0, 0, 0.65);
   background-clip: padding-box;
 }
 .osd check:hover,
 .osd radio:hover {
-  color: white;
   border-color: transparent;
   background-color: rgba(0, 0, 0, 0.65);
   background-clip: padding-box;
 }
 .osd check:active,
 .osd radio:active {
-  color: white;
   border-color: transparent;
   background-color: mix(black,currentColor,0.2);
   background-clip: padding-box;
@@ -5453,22 +5427,18 @@ calendar:indeterminate {
 
 messagedialog.csd.background button {
   outline-color: alpha(@accent_color,0.5);
-  color: white;
   background-color: alpha(currentColor,0.1);
 }
 messagedialog.csd.background button:hover {
   outline-color: alpha(@accent_color,0.5);
-  color: white;
   background-color: alpha(currentColor,0.15);
 }
 messagedialog.csd.background button:checked, messagedialog.csd.background button:active {
   outline-color: alpha(@accent_color,0.5);
-  color: white;
   background-color: alpha(currentColor,0.3);
 }
 messagedialog.csd.background button:backdrop {
   outline-color: transparent;
-  color: alpha(white,0.5);
   background-color: alpha(currentColor,0.1);
 }
 messagedialog.csd.background button:backdrop:hover {
@@ -5488,7 +5458,6 @@ messagedialog.csd.background button:backdrop:checked:active {
 }
 messagedialog.csd.background button:disabled {
   outline-color: transparent;
-  color: alpha(white,0.5);
   background-color: alpha(currentColor,0.1);
 }
 messagedialog .titlebar, messagedialog .titlebar:backdrop {
@@ -5886,7 +5855,7 @@ tooltip decoration {
 tooltip * {
   padding: 4px;
   background-color: transparent;
-  color: white;
+	color: @window_fg_color;
 }
 
 colorswatch:drop(active), colorswatch {
@@ -5928,7 +5897,6 @@ colorswatch.dark {
   outline-color: rgba(255, 255, 255, 0.6);
 }
 colorswatch.dark overlay {
-  color: white;
 }
 colorswatch.dark overlay:hover {
   border-color: mix(currentColor,@window_bg_color,0.85);
@@ -6193,11 +6161,11 @@ scrolledwindow list separator.horizontal {
 decoration {
   border-radius: 15px 15px 0 0;
   border-width: 0px;
-  box-shadow: 0 3px 8px 1px rgba(0, 0, 0, 0.3), 0 0 0 2px shade(mix(currentColor,@border_color,0.85),0.86);
+  box-shadow: 0 3px 8px 1px rgba(0, 0, 0, 0.3), 0 0 0 2px shade(@border_color,0.86);
   margin: 10px;
 }
 decoration:backdrop {
-  box-shadow: 0 3px 8px 1px transparent, 0 2px 6px 2px rgba(0, 0, 0, 0.14), 0 0 0 2px shade(mix(currentColor,@border_color,0.85),0.7);
+  box-shadow: 0 3px 8px 1px transparent, 0 2px 6px 2px rgba(0, 0, 0, 0.14), 0 0 0 2px shade(@border_color,0.7);
   transition: 200ms ease-out;
 }
 .maximized decoration, .fullscreen decoration {
@@ -6206,7 +6174,7 @@ decoration:backdrop {
 }
 .tiled decoration, .tiled-top decoration, .tiled-right decoration, .tiled-bottom decoration, .tiled-left decoration {
   border-radius: 0;
-  box-shadow: 0 0 0 2px shade(mix(currentColor,@border_color,0.85),0.86), 0 0 0 20px transparent;
+  box-shadow: 0 0 0 2px shade(@border_color,0.86), 0 0 0 20px transparent;
 }
 .tiled decoration:backdrop, .tiled-top decoration:backdrop, .tiled-right decoration:backdrop, .tiled-bottom decoration:backdrop, .tiled-left decoration:backdrop {
   box-shadow: 0 0 0 2px shade(mix(currentColor,@window_bg_color,0.85),0.7), 0 0 0 20px transparent;
@@ -6215,17 +6183,17 @@ decoration:backdrop {
   box-shadow: none;
 }
 .ssd decoration {
-  box-shadow: 0 0 0 2px shade(mix(currentColor,@border_color,0.85),0.86);
+  box-shadow: 0 0 0 2px shade(@border_color,0.86);
 }
 .ssd decoration:backdrop {
-  box-shadow: 0 0 0 2px shade(mix(currentColor,@border_color,0.85),0.7);
+  box-shadow: 0 0 0 2px shade(@border_color,0.7);
 }
 .ssd.maximized decoration, .ssd.maximized decoration:backdrop {
   box-shadow: none;
 }
 .csd.popup decoration {
   border-radius: 9px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 2px alpha(shade(mix(currentColor,@border_color,0.85),0.86),0.9);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 2px alpha(shade(@border_color,0.86),0.9);
 }
 tooltip.csd decoration {
   border-radius: 5px;
@@ -6233,13 +6201,13 @@ tooltip.csd decoration {
 }
 messagedialog.csd decoration {
   border-radius: 15px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 2px alpha(shade(mix(currentColor,@border_color,0.85),0.86),0.9);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 2px alpha(shade(@border_color,0.86),0.9);
 }
 .solid-csd decoration {
   margin: 0;
   padding: 4px;
   background-color: mix(currentColor,@window_bg_color,0.85);
-  border: solid 2px mix(currentColor,@border_color,0.85);
+  border: solid 2px @border_color;
   border-radius: 0;
   box-shadow: inset 0 0 0 5px mix(currentColor,@window_bg_color,0.85), inset 0 0 0 4px @headerbar_bg_color, inset 0 0 0 1px mix(currentColor,@window_bg_color,0.85);
 }
@@ -7089,7 +7057,6 @@ list .h4 {
   background-color: #dc8add;
 }
 .storage-bar .app image {
-  color: white;
 }
 .storage-bar .audio {
   border-bottom-width: 1px;
@@ -7121,7 +7088,6 @@ list .h4 {
   background-color: #f66151;
 }
 .storage-bar .video image {
-  color: white;
 }
 .storage-bar .legend {
   padding: 8px;
@@ -7144,7 +7110,6 @@ list .h4 {
   background-color: #a51d2d;
 }
 .storage-bar .swap image {
-  color: white;
 }
 .storage-bar .ext4 {
   background-color: #57e389;
@@ -7156,7 +7121,6 @@ list .h4 {
   background-color: #26a269;
 }
 .storage-bar .ext3 image {
-  color: white;
 }
 .storage-bar .ext2 {
   background-color: #8ff0a4;
@@ -7176,7 +7140,6 @@ list .h4 {
   background-color: #1a5fb4;
 }
 .storage-bar .btrfs image {
-  color: white;
 }
 .storage-bar .xfs {
   background-color: #99c1f1;
@@ -7342,18 +7305,15 @@ scale.warmth:dir(rtl) trough {
 .terminal,
 .terminal text {
   background-color: #3d3846;
-  color: white;
   font-family: monospace;
 }
 .terminal selection,
 .terminal text selection {
   background-color: @accent_bg_color;
-  color: white;
 }
 .terminal:backdrop,
 .terminal text:backdrop {
   background-color: #5e5c64;
-  color: white;
 }
 
 label.terminal {

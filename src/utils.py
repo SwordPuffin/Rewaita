@@ -1,6 +1,6 @@
 # utils.py
 #
-# Copyright 2025 Nathan Perlman
+# Copyright 2026 Nathan Perlman
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -73,12 +73,17 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, modify_gtk3_
     colors["panel_fg_color"] = colors["window_fg_color"]
     colors["panel_button_bg_color"] = "transparent"
     colors["panel_hover_bg_color"] = colors["card_bg_color"]
+    rgb = hex_to_rgb(colors["accent_color"])
+    colors["accent_transparent"] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.5)"
 
     firefox_theme_plugin.variables = colors
     firefox_theme_plugin.window_controls = preferences("window-controls", _, "get")
     firefox_theme_plugin.apply()
 
-    items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color", "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color", "panel_button_bg_color", "panel_hover_bg_color", "overview_bg_color", "search_fg_color"]
+    items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color",
+                        "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color",
+                        "panel_button_bg_color", "panel_hover_bg_color", "overview_bg_color", "search_fg_color",
+                        "accent_transparent"]
 
     if(modify_gtk3_theme):
         for color in colors.keys():
@@ -131,7 +136,7 @@ def confirm_delete(dialog, response, button, window):
 def delete_theme(button, window):
     dialog = Adw.AlertDialog()
     button.theme = button.theme.replace('.css', '')
-    dialog.set_heading(_("Delete ") + f"{button.theme}?")
+    dialog.set_heading(_("Delete") + f" {button.theme}?")
     dialog.set_body(_("Are you sure you want to delete that theme?\nThis cannot be undone."))
     
     dialog.add_response("cancel", _("Cancel"))
@@ -215,7 +220,6 @@ def preferences(key, value, action):
 
         with open(pref_file, "w") as f:
             json.dump(defaults, f, indent=4)
-
 
 
 
