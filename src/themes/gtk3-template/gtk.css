@@ -3342,11 +3342,11 @@ menuitem radio:dir(rtl) {
 popover.background {
   padding: 2px;
   background-color: @popover_bg_color;
-  box-shadow: 0 3px 8px 1px rgba(0, 0, 0, 0.3), 0 0 0 3px shade(mix(currentColor,@border_color,0.85),0.86);
+  box-shadow: 0 3px 8px 1px rgba(0, 0, 0, 0.3), 0 0 0 3px shade(@border_color,0.86);
 }
 
 .csd popover.background, popover.background {
-  border: 2px solid mix(currentColor,@border_color,0.85);
+  border: 2px solid @border_color;
   border-radius: 15px;
 }
 .csd popover.background {
@@ -5855,6 +5855,7 @@ tooltip decoration {
 tooltip * {
   padding: 4px;
   background-color: transparent;
+	color: @window_fg_color;
 }
 
 colorswatch:drop(active), colorswatch {
@@ -6160,11 +6161,11 @@ scrolledwindow list separator.horizontal {
 decoration {
   border-radius: 15px 15px 0 0;
   border-width: 0px;
-  box-shadow: 0 3px 8px 1px rgba(0, 0, 0, 0.3), 0 0 0 2px shade(mix(currentColor,@border_color,0.85),0.86);
+  box-shadow: 0 3px 8px 1px rgba(0, 0, 0, 0.3), 0 0 0 2px shade(@border_color,0.86);
   margin: 10px;
 }
 decoration:backdrop {
-  box-shadow: 0 3px 8px 1px transparent, 0 2px 6px 2px rgba(0, 0, 0, 0.14), 0 0 0 2px shade(mix(currentColor,@border_color,0.85),0.7);
+  box-shadow: 0 3px 8px 1px transparent, 0 2px 6px 2px rgba(0, 0, 0, 0.14), 0 0 0 2px shade(@border_color,0.7);
   transition: 200ms ease-out;
 }
 .maximized decoration, .fullscreen decoration {
@@ -6173,7 +6174,7 @@ decoration:backdrop {
 }
 .tiled decoration, .tiled-top decoration, .tiled-right decoration, .tiled-bottom decoration, .tiled-left decoration {
   border-radius: 0;
-  box-shadow: 0 0 0 2px shade(mix(currentColor,@border_color,0.85),0.86), 0 0 0 20px transparent;
+  box-shadow: 0 0 0 2px shade(@border_color,0.86), 0 0 0 20px transparent;
 }
 .tiled decoration:backdrop, .tiled-top decoration:backdrop, .tiled-right decoration:backdrop, .tiled-bottom decoration:backdrop, .tiled-left decoration:backdrop {
   box-shadow: 0 0 0 2px shade(mix(currentColor,@window_bg_color,0.85),0.7), 0 0 0 20px transparent;
@@ -6182,17 +6183,17 @@ decoration:backdrop {
   box-shadow: none;
 }
 .ssd decoration {
-  box-shadow: 0 0 0 2px shade(mix(currentColor,@border_color,0.85),0.86);
+  box-shadow: 0 0 0 2px shade(@border_color,0.86);
 }
 .ssd decoration:backdrop {
-  box-shadow: 0 0 0 2px shade(mix(currentColor,@border_color,0.85),0.7);
+  box-shadow: 0 0 0 2px shade(@border_color,0.7);
 }
 .ssd.maximized decoration, .ssd.maximized decoration:backdrop {
   box-shadow: none;
 }
 .csd.popup decoration {
   border-radius: 9px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 2px alpha(shade(mix(currentColor,@border_color,0.85),0.86),0.9);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 2px alpha(shade(@border_color,0.86),0.9);
 }
 tooltip.csd decoration {
   border-radius: 5px;
@@ -6200,13 +6201,13 @@ tooltip.csd decoration {
 }
 messagedialog.csd decoration {
   border-radius: 15px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 2px alpha(shade(mix(currentColor,@border_color,0.85),0.86),0.9);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 0 0 2px alpha(shade(@border_color,0.86),0.9);
 }
 .solid-csd decoration {
   margin: 0;
   padding: 4px;
   background-color: mix(currentColor,@window_bg_color,0.85);
-  border: solid 2px mix(currentColor,@border_color,0.85);
+  border: solid 2px @border_color;
   border-radius: 0;
   box-shadow: inset 0 0 0 5px mix(currentColor,@window_bg_color,0.85), inset 0 0 0 4px @headerbar_bg_color, inset 0 0 0 1px mix(currentColor,@window_bg_color,0.85);
 }
