@@ -374,7 +374,7 @@ msgstr ""
 msgid "Navigate to about:config, search for toolkit.legacyUserProfileCustomizations.stylesheets, and set it to true. See 'CSS Override' for details."
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:148
+#: src/widgets/guide_dialog.ui:148 src/widgets/guide_dialog.ui:249
 msgid "Step 2 — Set any theme"
 msgstr ""
 
@@ -435,10 +435,6 @@ msgstr ""
 
 #: src/widgets/guide_dialog.ui:232
 msgid "GNOME Shell requires the User Themes extension to load custom shell themes."
-msgstr ""
-
-#: src/widgets/guide_dialog.ui:249
-msgid "Step 2 — Set any theme"
 msgstr ""
 
 #: src/widgets/guide_dialog.ui:250
