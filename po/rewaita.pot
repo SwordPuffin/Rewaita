@@ -156,7 +156,7 @@ msgstr ""
 msgid "Dark"
 msgstr ""
 
-#: src/widgets/custom_theme_page.py:164
+#: src/widgets/wallpaper_dialog.py:56 src/widgets/custom_theme_page.py:164
 msgid "Save Folder"
 msgstr ""
 
@@ -232,7 +232,7 @@ msgstr ""
 msgid "For users who swap between light/dark mode"
 msgstr ""
 
-#: src/widgets/theme_page.py:104
+#: src/widgets/theme_page.py:104 src/widgets/guide_dialog.ui:11
 msgid "User Guide"
 msgstr ""
 
@@ -246,10 +246,6 @@ msgstr ""
 
 #: src/widgets/wallpaper_dialog.py:51
 msgid "Open File"
-msgstr ""
-
-#: src/widgets/wallpaper_dialog.py:56
-msgid "Save Folder"
 msgstr ""
 
 #: src/widgets/wallpaper_dialog.py:72
@@ -298,10 +294,6 @@ msgstr ""
 
 #: src/gtk_help-overlay.ui:20
 msgid "Quit"
-msgstr ""
-
-#: src/widgets/guide_dialog.ui:11
-msgid "User Guide"
 msgstr ""
 
 #: src/widgets/guide_dialog.ui:15
