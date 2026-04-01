@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rewaita\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-05 21:08+0400\n"
-"PO-Revision-Date: 2026-03-31 22:39+0800\n"
+"POT-Creation-Date: 2026-03-31 00:00+0000\n"
+"PO-Revision-Date: 2026-04-01 13:18+0800\n"
 "Last-Translator: yu Qin <imqin_yu@outlook.com>\n"
 "Language-Team: Chinese (China)\n"
 "Language: zh_CN\n"
@@ -52,19 +52,27 @@ msgid "Browsing through light themes"
 msgstr "浏览浅色主题"
 
 #. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
-#: src/main.py:52
+#: src/main.py:157
 msgid "translator-credits"
 msgstr "秦宇"
 
-#: src/utils.py:92
+#: src/utils.py:127
 msgid " has been deleted"
 msgstr " 已删除"
 
-#: src/utils.py:98
+#: src/widgets/custom_theme_page.py:210
+msgid " has been saved"
+msgstr " 已保存"
+
+#: src/utils.py:137
+msgid "Cancel"
+msgstr "取消"
+
+#: src/utils.py:134 src/utils.py:138
 msgid "Delete"
 msgstr "删除"
 
-#: src/utils.py:99
+#: src/utils.py:135
 msgid ""
 "Are you sure you want to delete that theme?\n"
 "This cannot be undone."
@@ -72,87 +80,479 @@ msgstr ""
 "您确定想要删除这个主题吗？\n"
 "此操作无法撤销。"
 
-#: src/custom_theme.py:149
+#: src/image_modifier.py:98
+msgid "Please select a theme first"
+msgstr "请先选择一个主题"
+
+#: src/widgets/loading_dialog.py:31
+msgid "This may take a moment"
+msgstr "这可能需要一些时间"
+
+#: src/widgets/window_control_box.py:53
+msgid "Window Controls"
+msgstr "标题栏按钮"
+
+#: src/widgets/window_control_box.py:24
+msgid "Default"
+msgstr "默认"
+
+#: src/widgets/window_control_box.py:25
+msgid "Colored"
+msgstr "已着色"
+
+#: src/widgets/window_control_box.py:26
+msgid "MacOS"
+msgstr "MacOS"
+
+#: src/widgets/window_control_box.py:27
+msgid "Breeze"
+msgstr "Breeze"
+
+#: src/widgets/window_control_box.py:28
+msgid "Hidden"
+msgstr "隐藏"
+
+#: src/widgets/window_control_box.py:29
+msgid "Mint"
+msgstr "Mint"
+
+#: src/widgets/custom_theme_page.py:140
+msgid "Accent Colors"
+msgstr "强调色"
+
+#: src/widgets/custom_theme_page.py:141
+msgid "Main Colors"
+msgstr "主题色"
+
+#: src/widgets/custom_theme_page.py:142
+msgid "Success Colors"
+msgstr "积极性颜色"
+
+#: src/widgets/custom_theme_page.py:143
+msgid "Destructive Colors"
+msgstr "破坏性颜色"
+
+#: src/widgets/custom_theme_page.py:144
+msgid "Warning Colors"
+msgstr "警告性颜色"
+
+#: src/widgets/custom_theme_page.py:145
+msgid "Interface Colors"
+msgstr "界面性颜色"
+
+#: src/widgets/custom_theme_page.py:146
+msgid "Named Colors"
+msgstr "已命名颜色"
+
+#: src/widgets/custom_theme_page.py:151
 msgid "Theme name (required)"
 msgstr "主题名称（必填）"
 
-#: src/custom_theme.py:153
-msgid "Emoji (optional)"
-msgstr "Emoji \t（可选）"
-
-#: src/custom_theme.py:157
+#: src/widgets/custom_theme_page.py:155
 msgid "Theme Type"
 msgstr "主题类别"
 
-#: src/custom_theme.py:158
+#: src/widgets/custom_theme_page.py:156
 msgid "Light"
 msgstr "浅色"
 
-#: src/custom_theme.py:159
+#: src/widgets/custom_theme_page.py:157
 msgid "Dark"
 msgstr "深色"
 
-#: src/window.py:92
-msgid "Theming"
-msgstr "主题"
+#: src/widgets/wallpaper_dialog.py:56 src/widgets/custom_theme_page.py:164
+msgid "Save Folder"
+msgstr "保存文件夹"
 
-#: src/window.py:120
-msgid ""
-"After setting a color scheme, go to Gnome-Tweaks (or similar) and set "
-"'Rewaita' as your Shell theme. It contains the same colors as the active "
-"scheme for continuity\n"
-"\n"
-"Rewaita also does not style parts of apps like Gnome Builder and BlackBox "
-"which have their own syntax highlighting system\n"
-"\n"
-"If you find a problem with any theme, would like to suggest another be "
-"added, or want to submit your own to be included, please make an issue or a "
-"pull request @ https://github.com/SwordPuffin/Rewaita"
-msgstr ""
-"设置颜色方案后，进入 Gnome-Tweaks（或类似工具），将“Rewaita”设置为您的 Shell "
-"主题。它包含与当前使用的颜色方案相同的颜色以保持一致性。\n"
-"\n"
-"Rewaita 也不会为某些应用程序的部分界面设置样式，例如 Gnome Builder 和 "
-"BlackBox，因为它们有自己的语法高亮系统。\n"
-"\n"
-"如果您发现任何主题有问题、想建议添加其他主题，或者希望提交自己的主题以供收"
-"录，请在 @ https://github.com/SwordPuffin/Rewaita 提交 issue 或 pull "
-"request。"
+#: src/widgets/custom_theme_page.py:177
+msgid "Save"
+msgstr "保存"
 
-#: src/window.py:121
-msgid ""
-"**Rewaita will only style GTK3/4 applications; Any other UI libraries are "
-"altogether NOT supported**"
-msgstr "**Rewaita 仅适用于 GTK3/4 应用程序；其他 UI 库软件不受支持**"
+#: src/widgets/custom_theme_page.py:182
+msgid "/* Enter any extra CSS here */"
+msgstr "/* 在此处编写额外 CSS */"
 
-#: src/window.py:129
-msgid "For Flatpak application support, run:"
-msgstr "对于 Flatpak 应用支持，请运行："
+#: src/widgets/extra_options_box.py:102
+msgid "Extra Options"
+msgstr "附加选项"
 
-#: src/window.py:201
+#: src/widgets/extra_options_box.py:67
+msgid "Transparency"
+msgstr "透明度"
+
+#: src/widgets/extra_options_box.py:68
+msgid "Adds a transparency effect to all window backdrops"
+msgstr "为所有窗口背景添加透明效果"
+
+#: src/widgets/extra_options_box.py:73
+msgid "Window Borders"
+msgstr "窗口边缘"
+
+#: src/widgets/extra_options_box.py:74
+msgid "Draws an accented border around the window"
+msgstr "为窗口边缘增加强调色"
+
+#: src/widgets/extra_options_box.py:79
+msgid "Sharp Corners"
+msgstr "直角边框"
+
+#: src/widgets/extra_options_box.py:80
+msgid "Gives all elements square borders"
+msgstr "给所有元素添加方形边框"
+
+#: src/widgets/extra_options_box.py:85
+msgid "Force Light Text in Overview"
+msgstr "强制概览文字颜色为浅色"
+
+#: src/widgets/extra_options_box.py:86
+msgid "Might be useful for Blur my Shell users"
+msgstr "对 Blur my Shell 插件用户可能很有用"
+
+#: src/widgets/pref_page.py:27
+msgid "Preferences"
+msgstr "首选项"
+
+#: src/widgets/pref_page.py:33
+msgid "Generate GTK-3.0 Theme"
+msgstr "生成 GTK-3.0 主题"
+
+#: src/widgets/pref_page.py:33
+msgid "Highly recommended for all users"
+msgstr "强烈推荐所有用户开启"
+
+#: src/widgets/pref_page.py:34
+msgid "Generate GNOME Shell Theme"
+msgstr "生成 GNOME Shell 主题"
+
+#: src/widgets/pref_page.py:34
+msgid "For GNOME users"
+msgstr "适合 GNOME 用户"
+
+#: src/widgets/pref_page.py:35
+msgid "Run in background"
+msgstr "在后台运行"
+
+#: src/widgets/pref_page.py:35
+msgid "For users who swap between light/dark mode"
+msgstr "适合在浅色/深色模式之间切换的用户"
+
+#: src/widgets/theme_page.py:104 src/widgets/guide_dialog.ui:11
 msgid "User Guide"
 msgstr "用户指南"
 
-#: src/window.py:260
+#: src/widgets/theme_page.py:110
+msgid "Tint Wallpaper"
+msgstr "色调壁纸"
+
+#: src/widgets/theme_page.py:120
 msgid "Reset to default"
 msgstr "重置为默认"
 
-#: src/window.py:328
+#: src/widgets/wallpaper_dialog.py:51
+msgid "Open File"
+msgstr "打开文件"
+
+#: src/widgets/wallpaper_dialog.py:72
+msgid "Drop Image Here"
+msgstr "将图片拖放在这里"
+
+#: src/window.py:112
+msgid "Theming"
+msgstr "主题"
+
+#: src/window.py:113
+msgid "Custom"
+msgstr "自定义"
+
+#: src/window.py:114
+msgid "Fine Tune"
+msgstr "精细调节"
+
+#: src/window.py:153
 msgid "Change GNOME shell theme to 'Rewaita' and reboot for full changes"
 msgstr "将 GNOME shell 主题切换为 “Rewaita” 并重新启动以完全应用更改"
 
-#: src/window.ui:22
+#: src/window.ui:27
 msgid "Main Menu"
 msgstr "主菜单"
 
-#: src/window.ui:44
+#: src/window.ui:19
+msgid "Delete themes"
+msgstr "删除主题"
+
+#: src/window.ui:71
 msgid "_Keyboard Shortcuts"
 msgstr "键盘快捷键(_K)"
 
-#: src/window.ui:48
+#: src/window.ui:75
 msgid "_About Rewaita"
 msgstr "关于 Rewaita(_A)"
 
-#: src/window.ui:52
-msgid "_Help"
-msgstr "帮助(_H)"
+#: src/gtk_help-overlay.ui:11
+msgid "General"
+msgstr "常规"
+
+#: src/gtk_help-overlay.ui:14
+msgid "Show Shortcuts"
+msgstr "键盘快捷键(_K)"
+
+#: src/gtk_help-overlay.ui:20
+msgid "Quit"
+msgstr "退出"
+
+#: src/widgets/guide_dialog.ui:15
+msgid "Getting Started"
+msgstr "入门"
+
+#: src/widgets/guide_dialog.ui:16
+msgid ""
+"After setting a color scheme, go to GNOME Tweaks and set 'Rewaita' as the "
+"Shell theme. It will match the active scheme for visual continuity. This can "
+"be disabled in preferences."
+msgstr ""
+"设置颜色方案后，进入 GNOME 优化，将“Rewaita”设置为 Shell 主题。它将与活动方案"
+"匹配以保持视觉连续性。此功能可在首选项中禁用。"
+
+#: src/widgets/guide_dialog.ui:21
+msgid "Run the Flatpak Override Commands"
+msgstr "运行 Flatpak Override 命令"
+
+#: src/widgets/guide_dialog.ui:22
+msgid ""
+"This will ensure Flatpak applications are themed accordingly. See 'Flatpak "
+"Overrides' below for details."
+msgstr ""
+"这将确保 Flatpak 应用程序的主题设置正确。详情请见下方的“Flatpak Override”。"
+
+#: src/widgets/guide_dialog.ui:29
+msgid "Change the System Theme"
+msgstr "更改系统主题"
+
+#: src/widgets/guide_dialog.ui:30
+msgid ""
+"Many Linux distributions will set some custom GTK theme by default. To "
+"prevent conflicts, change the application theme to default or 'Adwaita'."
+msgstr ""
+"许多 Linux 发行版默认会设置一些自定义的 GTK 主题。为了防止冲突，请将应用程序"
+"主题更改为默认或“Adwaita”。"
+
+#: src/widgets/guide_dialog.ui:37
+msgid "Automatic Switching"
+msgstr "自动切换"
+
+#: src/widgets/guide_dialog.ui:38
+msgid ""
+"Rewaita runs in the background to switch between light/dark mode and accent "
+"color changes. This can be disabled in preferences."
+msgstr ""
+"Rewaita 在后台运行，以切换浅色/深色模式和强调色的变化。可在首选项中禁用此功"
+"能。"
+
+#: src/widgets/guide_dialog.ui:45
+msgid "Found a bug or want to contribute?"
+msgstr "发现了漏洞或想要贡献吗？"
+
+#: src/widgets/guide_dialog.ui:46
+msgid ""
+"Open an issue or pull request in the upstream repository. See the 'Get "
+"Involved' tab for details."
+msgstr "请在上游仓库中打开一个问题或 PR 。详细信息请参阅“参与其中”选项卡。"
+
+#: src/widgets/guide_dialog.ui:59
+msgid ""
+"Rewaita only styles GTK-3/4 applications; other UI toolkits will not be "
+"affected"
+msgstr "Rewaita 仅适用于 GTK3/4 应用程序；其他 UI 库软件不受支持"
+
+#: src/widgets/guide_dialog.ui:68
+msgid "Flatpak Overrides"
+msgstr "Flatpak Overrides"
+
+#: src/widgets/guide_dialog.ui:69
+msgid "Run these commands so Flatpak applications can use your theme."
+msgstr "运行这些命令以便 Flatpak 应用程序可以使用您的主题。"
+
+#: src/widgets/guide_dialog.ui:87 src/widgets/guide_dialog.ui:113
+#: src/widgets/guide_dialog.ui:203
+msgid "Copy to clipboard"
+msgstr "复制到剪贴板"
+
+#: src/widgets/guide_dialog.ui:130
+msgid "Firefox"
+msgstr "Firefox"
+
+#: src/widgets/guide_dialog.ui:134
+msgid "Apply Theme to Firefox"
+msgstr "为 Firefox 应用主题"
+
+#: src/widgets/guide_dialog.ui:135
+msgid ""
+"Firefox requires a userChrome.css file to follow your color scheme. Follow "
+"the steps below to set it up."
+msgstr ""
+"Firefox 要求使用 userChrome.css 文件来遵循您的配色方案。请按以下步骤操作来进"
+"行设置。"
+
+#: src/widgets/guide_dialog.ui:140
+msgid "Step 1 — Enable userChrome.css"
+msgstr "第 1 步 — 启用 userChrome.css"
+
+#: src/widgets/guide_dialog.ui:141
+msgid ""
+"Navigate to about:config, search for "
+"toolkit.legacyUserProfileCustomizations.stylesheets, and set it to true. See "
+"'CSS Override' for details."
+msgstr ""
+"跳转到 about:config ， 搜索 "
+"toolkit.legacyUserProfileCustomizations.stylesheets ， 并将其设置为true。详情"
+"请见 'CSS Override' 。"
+
+#: src/widgets/guide_dialog.ui:148 src/widgets/guide_dialog.ui:249
+msgid "Step 2 — Set any theme"
+msgstr "第 2 步 — 设置任何主题"
+
+#: src/widgets/guide_dialog.ui:149
+msgid "We will do all the heavy lifting."
+msgstr "我们会完成所有繁重工作。"
+
+#: src/widgets/guide_dialog.ui:156
+msgid "Step 3 — Firefox Gnome Theme (Optional)"
+msgstr "第 3 步 — Firefox Gnome 主题 （可选）"
+
+#: src/widgets/guide_dialog.ui:157
+msgid ""
+"Rewaita is also compatible with the Firefox Gnome Theme, but the window "
+"controls will not be themed."
+msgstr "Rewaita 也兼容 Firefox 的 Gnome 主题，但窗口控制按钮不会生效。"
+
+#: src/widgets/guide_dialog.ui:161
+msgid "Get it"
+msgstr "明白"
+
+#: src/widgets/guide_dialog.ui:161 src/widgets/guide_dialog.ui:236
+#: src/widgets/guide_dialog.ui:277 src/widgets/guide_dialog.ui:295
+msgid "Install"
+msgstr "安装"
+
+#: src/widgets/guide_dialog.ui:174
+msgid "Step 4 — Restart Firefox"
+msgstr "第 4 步 — 重新启动 Firefox"
+
+#: src/widgets/guide_dialog.ui:175
+msgid "Fully quit and relaunch Firefox for the changes to take effect."
+msgstr "完全退出并重新启动 Firefox 以使更改生效。"
+
+#: src/widgets/guide_dialog.ui:183
+msgid "CSS Override"
+msgstr "CSS Override"
+
+#: src/widgets/guide_dialog.ui:184
+msgid ""
+"Search 'about:config', then copy-paste in this property and set it to true."
+msgstr "搜索 'about:config'，然后复制并粘贴这些属性并将其设置为 true。"
+
+#: src/widgets/guide_dialog.ui:221
+msgid "GNOME Shell"
+msgstr "GNOME Shell"
+
+#: src/widgets/guide_dialog.ui:225
+msgid "Apply the Shell Theme"
+msgstr "应用 Shell 主题"
+
+#: src/widgets/guide_dialog.ui:226
+msgid ""
+"Rewaita includes a matching GNOME Shell theme. Follow these steps to enable "
+"it."
+msgstr "Rewaita 包含一个适配的 GNOME Shell 主题。请按照以下步骤启用它。"
+
+#: src/widgets/guide_dialog.ui:231
+msgid "Step 1 — Install the User Themes extension"
+msgstr "第 1 步 — 安装 User Themes 扩展"
+
+#: src/widgets/guide_dialog.ui:232
+msgid ""
+"GNOME Shell requires the User Themes extension to load custom shell themes."
+msgstr "GNOME Shell 需要使用 User Themes 扩展来加载自定义 shell 主题。"
+
+#: src/widgets/guide_dialog.ui:250
+msgid ""
+"Rewaita will generate the theme automatically and place it in ~/.local/share/"
+"themes. This can be disabled in preferences."
+msgstr "Rewaita 将会自动在~/.local/share/themes 生成主题。这可在首选项中关闭。"
+
+#: src/widgets/guide_dialog.ui:257
+msgid "Step 3 — Select it in GNOME Tweaks"
+msgstr "第 3 步 - 在 Gnome 优化中选择主题"
+
+#: src/widgets/guide_dialog.ui:258
+msgid ""
+"Open GNOME Tweaks → Appearance → Shell and choose Rewaita from the dropdown."
+msgstr "打开 优化 → 外观 → Shell 然后在下拉菜单中选择 Rewaita。"
+
+#: src/widgets/guide_dialog.ui:266
+msgid "Useful Extensions"
+msgstr "实用扩展"
+
+#: src/widgets/guide_dialog.ui:267
+msgid "These extensions pair well with Rewaita."
+msgstr "这些扩展与 Rewaita 完美兼容。"
+
+#: src/widgets/guide_dialog.ui:273
+msgid "Application menu for GNOME Shell."
+msgstr "Application menu for GNOME Shell."
+
+#: src/widgets/guide_dialog.ui:291
+msgid "Moves the overview dash into a persistent, themeable dock."
+msgstr "将概览面板移动到一个持久且可主题化的 Dash 栏中。"
+
+#: src/widgets/guide_dialog.ui:312
+msgid "Get Involved"
+msgstr "参与其中"
+
+#: src/widgets/guide_dialog.ui:338
+msgid "Contribute to Rewaita"
+msgstr "为 Rewaita 做贡献"
+
+#: src/widgets/guide_dialog.ui:350
+msgid ""
+"Anyone, regardless of experience or background, is welcome to join. Open an "
+"issue to report bugs or suggest themes, or submit a pull request to "
+"contribute directly."
+msgstr ""
+"任何人，无论经验或背景如何，都欢迎加入。可以通过开启问题来报告漏洞、为主题提"
+"供建议或者提交 PR 直接贡献。"
+
+#: src/widgets/guide_dialog.ui:360
+msgid "Open in Browser"
+msgstr "在浏览器中打开"
+
+#~ msgid "Emoji (optional)"
+#~ msgstr "Emoji \t（可选）"
+
+#~ msgid ""
+#~ "After setting a color scheme, go to Gnome-Tweaks (or similar) and set "
+#~ "'Rewaita' as your Shell theme. It contains the same colors as the active "
+#~ "scheme for continuity\n"
+#~ "\n"
+#~ "Rewaita also does not style parts of apps like Gnome Builder and BlackBox "
+#~ "which have their own syntax highlighting system\n"
+#~ "\n"
+#~ "If you find a problem with any theme, would like to suggest another be "
+#~ "added, or want to submit your own to be included, please make an issue or "
+#~ "a pull request @ https://github.com/SwordPuffin/Rewaita"
+#~ msgstr ""
+#~ "设置颜色方案后，进入 Gnome-Tweaks（或类似工具），将“Rewaita”设置为您的 "
+#~ "Shell 主题。它包含与当前使用的颜色方案相同的颜色以保持一致性。\n"
+#~ "\n"
+#~ "Rewaita 也不会为某些应用程序的部分界面设置样式，例如 Gnome Builder 和 "
+#~ "BlackBox，因为它们有自己的语法高亮系统。\n"
+#~ "\n"
+#~ "如果您发现任何主题有问题、想建议添加其他主题，或者希望提交自己的主题以供收"
+#~ "录，请在 @ https://github.com/SwordPuffin/Rewaita 提交 issue 或 pull "
+#~ "request。"
+
+#~ msgid "For Flatpak application support, run:"
+#~ msgstr "对于 Flatpak 应用支持，请运行："
+
+#~ msgid "_Help"
+#~ msgstr "帮助(_H)"
