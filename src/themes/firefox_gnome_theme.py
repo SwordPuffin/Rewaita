@@ -54,11 +54,6 @@ DEFAULT_TEMPLATE = """
   color: var(--window_fg_color) !important;
 }}
 
-#main-window {{
-  border-radius: 10px !important;
-  overflow: hidden !important;
-}}
-
 #star-button {{
 	&[starred] {{
 		fill: var(--accent_color) !important;
