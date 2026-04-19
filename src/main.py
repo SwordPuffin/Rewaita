@@ -24,7 +24,7 @@ gi.require_version('Adw', '1')
 gi.require_version('Xdp', '1.0')
 
 from gi.repository import Gtk, Gdk, Gio, Adw, GLib, Xdp, GObject
-from .utils import preferences
+from .utils import Preferences
 from .window import RewaitaWindow
 
 class RewaitaApplication(Adw.Application):
@@ -49,17 +49,24 @@ class RewaitaApplication(Adw.Application):
 
     def grab_prefs(self):
         win = RewaitaWindow
+        prefs = Preferences()
+        all_prefs = prefs.get_all()
 
-        win.light_theme = preferences("light-theme", _, "get")
-        win.dark_theme = preferences("dark-theme", _, "get")
-        win.window_control = preferences("window-controls", _, "get")
-        win.modify_gtk3_theme = preferences("modify-gtk3-theme", _, "get")
-        win.modify_gnome_shell = preferences("modify-gnome-shell", _, "get")
-        win.run_in_background = preferences("run-in-background", _, "get")
-        win.transparency = preferences("transparency", _, "get")
-        win.borders = preferences("window", _, "get")
-        win.sharp = preferences("sharp", _, "get")
-        win.light_text = preferences("light-text", _, "get")
+        try:
+            win.light_theme = all_prefs["light-theme"]
+            win.dark_theme = all_prefs["dark-theme"]
+            win.window_control = all_prefs["window-controls"]
+            win.modify_gtk3_theme = all_prefs["modify-gtk3-theme"]
+            win.modify_gnome_shell = all_prefs["modify-gnome-shell"]
+            win.run_in_background = all_prefs["run-in-background"]
+            win.transparency = all_prefs["transparency"]
+            win.borders = all_prefs["window"]
+            win.sharp = all_prefs["sharp"]
+            win.firefox_theme = all_prefs["firefox-theme"]
+            win.light_text = all_prefs["light-text"]
+        except:
+            prefs.make_file()
+            self.grab_prefs()
 
     def on_close_request(self, window, *args):
         if(window.run_in_background):
@@ -108,7 +115,6 @@ class RewaitaApplication(Adw.Application):
                 button.remove_css_class("suggested-action")
             GLib.timeout_add(1000, remove_success)
 
-        builder.get_object("copy_button_firefox").connect("clicked", on_copy, firefox_entry)
         builder.get_object("copy_button_gtk3").connect("clicked", on_copy, gtk3_entry)
         builder.get_object("copy_button_gtk4").connect("clicked", on_copy, gtk4_entry)
 

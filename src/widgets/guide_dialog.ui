@@ -128,24 +128,15 @@
       <object class="AdwPreferencesPage">
         <property name="icon-name">firefox-symbolic</property>
         <property name="title" translatable="yes">Firefox</property>
-
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Apply Theme to Firefox</property>
-            <property name="description" translatable="yes">Firefox requires a userChrome.css file to follow your color scheme. Follow the steps below to set it up.</property>
-
-            <child>
-              <object class="AdwActionRow">
-                <property name="icon-name">system-run-symbolic</property>
-                <property name="title" translatable="yes">Step 1 — Enable userChrome.css</property>
-                <property name="subtitle" translatable="yes">Navigate to about:config, search for toolkit.legacyUserProfileCustomizations.stylesheets, and set it to true. See 'CSS Override' for details.</property>
-              </object>
-            </child>
+            <property name="description" translatable="yes">First, enable 'Generate Firefox CSS Theme' in the 'Fine Tune' tab. After that, follow the steps below to set it up.</property>
 
             <child>
               <object class="AdwActionRow">
                 <property name="icon-name">brush-symbolic</property>
-                <property name="title" translatable="yes">Step 2 — Set any theme</property>
+                <property name="title" translatable="yes">Step 1 — Set any theme</property>
                 <property name="subtitle" translatable="yes">We will do all the heavy lifting.</property>
               </object>
             </child>
@@ -153,7 +144,7 @@
             <child>
               <object class="AdwActionRow">
                 <property name="icon-name">extension-symbolic</property>
-                <property name="title" translatable="yes">Step 3 — Firefox Gnome Theme (Optional)</property>
+                <property name="title" translatable="yes">Step 2 — Firefox Gnome Theme (Optional)</property>
                 <property name="subtitle" translatable="yes">Rewaita is also compatible with the Firefox Gnome Theme, but the window controls will not be themed.</property>
                 <child type="suffix">
                   <object class="GtkLinkButton">
@@ -171,42 +162,8 @@
             <child>
               <object class="AdwActionRow">
                 <property name="icon-name">view-refresh-symbolic</property>
-                <property name="title" translatable="yes">Step 4 — Restart Firefox</property>
+                <property name="title" translatable="yes">Step 3 — Restart Firefox</property>
                 <property name="subtitle" translatable="yes">Fully quit and relaunch Firefox for the changes to take effect.</property>
-              </object>
-            </child>
-          </object>
-        </child>
-
-        <child>
-          <object class="AdwPreferencesGroup">
-            <property name="title" translatable="yes">CSS Override</property>
-            <property name="description" translatable="yes">Search 'about:config', then copy-paste in this property and set it to true.</property>
-
-            <child>
-              <object class="GtkBox">
-                <property name="spacing">12</property>
-                <child>
-                  <object class="GtkEntry" id="firefox_entry">
-                    <property name="editable">false</property>
-                    <property name="hexpand">true</property>
-                    <property name="xalign">0.5</property>
-                    <property name="text">toolkit.legacyUserProfileCustomizations.stylesheets</property>
-                    <style>
-                      <class name="monospace"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="copy_button_firefox">
-                    <property name="icon-name">edit-copy-symbolic</property>
-                    <property name="tooltip-text" translatable="yes">Copy to clipboard</property>
-                    <property name="valign">center</property>
-                    <style>
-                      <class name="circular"/>
-                    </style>
-                  </object>
-                </child>
               </object>
             </child>
           </object>

@@ -19,6 +19,7 @@
 
 from pathlib import Path
 from configparser import ConfigParser
+
 DEFAULT_TEMPLATE = """
 :root {{
   --window_bg_color:   {window_bg_color};
@@ -51,6 +52,11 @@ DEFAULT_TEMPLATE = """
 #browser {{
   background-color: var(--headerbar_bg_color) !important;
   color: var(--window_fg_color) !important;
+}}
+
+#main-window {{
+  border-radius: 10px !important;
+  overflow: hidden !important;
 }}
 
 #star-button {{
@@ -356,6 +362,18 @@ scrollbar thumb:hover {{
 #downloads-button[attention="success"] {{
   color: var(--accent_color) !important;
   fill: var(--accent_color) !important;
+}}
+
+popupnotification {{
+  background-color: var(--card_bg_color) !important;
+  color: var(--card_fg_color) !important;
+  border-color: var(--card_bg_color) !important;
+  outline-color: var(--card_bg_color) !important;
+}}
+
+.popup-notification-primary-button {{
+  background-color: var(--accent_color) !important;
+  color: var(--window_bg_color) !important;
 }}
 """
 
@@ -741,7 +759,7 @@ class FirefoxGnomeThemePlugin():
                             if result.resolve().is_dir():
                                 Path(f"{result}/chrome/firefox-gnome-theme/customChrome.css").unlink()
                         else:
-                            Path(f"{result}/chrome/userChrome.css").unlink()
+                            Path(f"{result}/chrome/rewaitaChrome.css").unlink()
                     except OSError:
                         pass
             except OSError:
@@ -752,6 +770,8 @@ class FirefoxGnomeThemePlugin():
                 pass
 
     def apply(self):
+        from .utils import Preferences
+        prefs = Preferences()
         for path in [
             "~/.mozilla/firefox",
             "~/.librewolf",
@@ -777,17 +797,23 @@ class FirefoxGnomeThemePlugin():
                         if result.resolve().is_dir():
                             if(Path(f"{result}/chrome/firefox-gnome-theme").exists()):
                                 Path(f"{result}/chrome/firefox-gnome-theme").mkdir(mode=0o755, parents=True, exist_ok=True)
-                                with open(
-                                    f"{result}/chrome/firefox-gnome-theme/customChrome.css",
-                                    "w",
-                                ) as f:
+                                with open(f"{result}/chrome/firefox-gnome-theme/customChrome.css", "w") as f:
                                     f.write(FFG_TEMPLATE.format(**self.variables))
                             else:
-                                with open(
-                                    f"{result}/chrome/userChrome.css",
-                                    "w",
-                                ) as f:
-                                    f.write(DEFAULT_TEMPLATE.format(**self.variables) + f"\n{window_control_map[self.window_controls].format(**self.variables)}")
+                                Path(f"{result}/chrome").mkdir(mode=0o755, parents=True, exist_ok=True)
+                                with open(f"{result}/user.js", "w") as f:
+                                    f.write("user_pref(\"toolkit.legacyUserProfileCustomizations.stylesheets\", true);\nuser_pref(\"widget.gtk.rounded-bottom-corners.enabled\", true);")
+                                with open(f"{result}/chrome/rewaitaChrome.css", "w") as f:
+                                    sharp_css = ""
+                                    if(prefs.get("sharp")):
+                                        sharp_css += "* { border-radius: 0px !important; }"
+                                    f.write(DEFAULT_TEMPLATE.format(**self.variables) + f"\n{window_control_map[self.window_controls].format(**self.variables)}\n{sharp_css}")
+                                    Path(f"{result}/chrome/userChrome.css").touch()
+
+                                with open(f"{result}/chrome/userChrome.css", "r") as rf:
+                                    if("@import \"rewaitaChrome.css\";" not in rf.read()):
+                                        with open(f"{result}/chrome/userChrome.css", "a") as f:
+                                            f.write("@import \"rewaitaChrome.css\";")
                     except OSError:
                         pass
             except OSError:

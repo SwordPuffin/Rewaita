@@ -1,4 +1,4 @@
-# extraoptions_box.py
+# extra_options_box.py
 #
 # Copyright 2026 Nathan Perlman
 #
@@ -19,7 +19,7 @@
 
 import gi
 from gi.repository import Gtk, Adw
-from .utils import preferences
+from .utils import Preferences
 
 transparency_css = """
 .background {
@@ -103,8 +103,9 @@ class OptionsBox(Adw.PreferencesGroup):
         )
         self.parent = parent
 
+        pref = Preferences()
         for key, label, subtitle, css in options:
-            active = preferences(key, _, "get")
+            active = pref.get(key)
 
             row = Adw.SwitchRow(title=label, subtitle=subtitle, active=active)
             row.connect("notify::active", self.on_row_toggled, css, key)

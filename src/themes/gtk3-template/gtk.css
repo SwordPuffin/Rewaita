@@ -3343,6 +3343,7 @@ popover.background {
   padding: 2px;
   background-color: @popover_bg_color;
   box-shadow: 0 3px 8px 1px rgba(0, 0, 0, 0.3), 0 0 0 3px shade(@border_color,0.86);
+  border-radius: 15px;
 }
 
 .csd popover.background, popover.background {
@@ -6184,6 +6185,7 @@ decoration:backdrop {
 }
 .ssd decoration {
   box-shadow: 0 0 0 2px shade(@border_color,0.86);
+  border-radius: 9px;
 }
 .ssd decoration:backdrop {
   box-shadow: 0 0 0 2px shade(@border_color,0.7);

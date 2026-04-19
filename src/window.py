@@ -21,7 +21,7 @@ import os, shutil, gi, re
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
 from collections import defaultdict
-from .utils import parse_gtk_theme, set_to_default, delete_items, set_gtk3_theme, get_accent_color, add_css_provider, preferences
+from .utils import parse_gtk_theme, set_to_default, delete_items, set_gtk3_theme, get_accent_color, add_css_provider, Preferences
 from .custom_theme_page import CustomPage
 from .theme_page import ThemePage
 from .pref_page import PrefPage
@@ -186,8 +186,6 @@ class RewaitaWindow(Adw.ApplicationWindow):
             self.template_file_content,
             os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css"),
             self.gtk3_template_file_content,
-            self.modify_gtk3_theme,
-            self.modify_gnome_shell,
             reset_shell
         )
 
@@ -246,7 +244,9 @@ class RewaitaWindow(Adw.ApplicationWindow):
             "transparency": self.transparency,
             "window": self.borders,
             "sharp": self.sharp,
+            "firefox-theme": self.firefox_theme,
             "light-text": self.light_text
         }
 
-        preferences(_, values, "save")
+        prefs = Preferences()
+        prefs.save(values)
