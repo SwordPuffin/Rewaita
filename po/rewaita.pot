@@ -208,11 +208,11 @@ msgstr ""
 msgid "Preferences"
 msgstr ""
 
-#: src/widgets/pref_page.py:33
+#: src/widgets/pref_page.py:34
 msgid "Generate GTK-3.0 Theme"
 msgstr ""
 
-#: src/widgets/pref_page.py:33
+#: src/widgets/pref_page.py:34
 msgid "Highly recommended for all users"
 msgstr ""
 
@@ -224,12 +224,20 @@ msgstr ""
 msgid "For GNOME users"
 msgstr ""
 
-#: src/widgets/pref_page.py:35
+#: src/widgets/pref_page.py:34
 msgid "Run in background"
 msgstr ""
 
-#: src/widgets/pref_page.py:35
+#: src/widgets/pref_page.py:34
 msgid "For users who swap between light/dark mode"
+msgstr ""
+
+#: src/widgets/pref_page.py:34
+msgid "Generate Firefox CSS Theme"
+msgstr ""
+
+#: src/widgets/pref_page.py:34
+msgid "May conflict with existing theme"
 msgstr ""
 
 #: src/widgets/theme_page.py:104 src/widgets/guide_dialog.ui:11
@@ -358,63 +366,46 @@ msgstr ""
 msgid "Firefox"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:134
+#: src/widgets/guide_dialog.ui:133
 msgid "Apply Theme to Firefox"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:135
-msgid "Firefox requires a userChrome.css file to follow your color scheme. Follow the steps below to set it up."
+#: src/widgets/guide_dialog.ui:134
+msgid "First, enable 'Generate Firefox CSS Theme' in the 'Fine Tune' tab. After that, follow the steps below to set it up."
+msgstr ""
+
+#: src/widgets/guide_dialog.ui:139
+msgid "Step 1 — Set any theme"
 msgstr ""
 
 #: src/widgets/guide_dialog.ui:140
-msgid "Step 1 — Enable userChrome.css"
-msgstr ""
-
-#: src/widgets/guide_dialog.ui:141
-msgid "Navigate to about:config, search for toolkit.legacyUserProfileCustomizations.stylesheets, and set it to true. See 'CSS Override' for details."
-msgstr ""
-
-#: src/widgets/guide_dialog.ui:148 src/widgets/guide_dialog.ui:249
-msgid "Step 2 — Set any theme"
-msgstr ""
-
-#: src/widgets/guide_dialog.ui:149
 msgid "We will do all the heavy lifting."
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:156
-msgid "Step 3 — Firefox Gnome Theme (Optional)"
+#: src/widgets/guide_dialog.ui:147
+msgid "Step 2 — Firefox Gnome Theme (Optional)"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:157
+#: src/widgets/guide_dialog.ui:148
 msgid "Rewaita is also compatible with the Firefox Gnome Theme, but the window controls will not be themed."
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:161
+#: src/widgets/guide_dialog.ui:152
 msgid "Get it"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:161
-#: src/widgets/guide_dialog.ui:236
+#: src/widgets/guide_dialog.ui:234
 #: src/widgets/guide_dialog.ui:277
 #: src/widgets/guide_dialog.ui:295
 msgid "Install"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:174
-msgid "Step 4 — Restart Firefox"
+#: src/widgets/guide_dialog.ui:165
+msgid "Step 3 — Restart Firefox"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:175
+#: src/widgets/guide_dialog.ui:166
 msgid "Fully quit and relaunch Firefox for the changes to take effect."
-msgstr ""
-
-#: src/widgets/guide_dialog.ui:183
-msgid "CSS Override"
-msgstr ""
-
-#: src/widgets/guide_dialog.ui:184
-msgid "Search 'about:config', then copy-paste in this property and set it to true."
 msgstr ""
 
 #: src/widgets/guide_dialog.ui:221
@@ -435,6 +426,10 @@ msgstr ""
 
 #: src/widgets/guide_dialog.ui:232
 msgid "GNOME Shell requires the User Themes extension to load custom shell themes."
+msgstr ""
+
+#: src/widgets/guide_dialog.ui:249
+msgid "Step 2 — Set any theme"
 msgstr ""
 
 #: src/widgets/guide_dialog.ui:250
