@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/icons/hicolor/scalable/apps/io.github.swordpuffin.rewaita.svg" width="100" height=100/>
+  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/icons/hicolor/scalable/apps/io.github.swordpuffin.rewaita.svg" width="200" height=200/>
 </p>
 
 <h1 align="center">Rewaita</h1>
