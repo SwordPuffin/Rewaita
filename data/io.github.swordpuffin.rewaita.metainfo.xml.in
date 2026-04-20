@@ -64,6 +64,22 @@
   </screenshots>
 
   <releases>
+    <release version="1.1.2" date="2026-04-19">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.1.2</url>
+        <description translate="no">
+          <p>Rewaita v1.1.2</p>
+          <ul>
+            <li>Added Firefox support</li>
+            <li>New window control options: Breeze, hidden, and Mint</li>
+            <li>New theme: Gruvbox Hard (@mssngtxrs)</li>
+            <li>Added Simplified Chinese translations (@Qin_Y)</li>
+            <li>Fixed issue where Ubuntu users wouldn't have the Gnome Shell theme created</li>
+            <li>Added option to force light text in Gnome's overview for readability</li>
+            <li>User guide doesn't suck anymore</li>
+            <li>Minor theming changes and less crashing</li>
+          </ul>
+      </description>
+    </release>
     <release version="1.1.1" date="2026-01-10">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.1.1</url>
         <description translate="no">
