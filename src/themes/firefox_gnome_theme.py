@@ -796,14 +796,19 @@ class FirefoxGnomeThemePlugin():
                                     f.write(FFG_TEMPLATE.format(**self.variables))
                             else:
                                 Path(f"{result}/chrome").mkdir(mode=0o755, parents=True, exist_ok=True)
-                                with open(f"{result}/user.js", "w") as f:
-                                    f.write("user_pref(\"toolkit.legacyUserProfileCustomizations.stylesheets\", true);\nuser_pref(\"widget.gtk.rounded-bottom-corners.enabled\", true);")
+                                Path(f"{result}/chrome/userChrome.css").touch()
+                                Path(f"{result}/user.js").touch()
+                                pref_text = "\nuser_pref(\"toolkit.legacyUserProfileCustomizations.stylesheets\", true);\nuser_pref(\"widget.gtk.rounded-bottom-corners.enabled\", true);"
+                                with open(f"{result}/user.js", "r") as rf:
+                                    if(pref_text not in rf.read()):
+                                        with open(f"{result}/user.js", "a") as f:
+                                            f.write(pref_text)
+
                                 with open(f"{result}/chrome/rewaitaChrome.css", "w") as f:
                                     sharp_css = ""
                                     if(prefs.get("sharp")):
                                         sharp_css += "* { border-radius: 0px !important; }"
                                     f.write(DEFAULT_TEMPLATE.format(**self.variables) + f"\n{window_control_map[self.window_controls].format(**self.variables)}\n{sharp_css}")
-                                    Path(f"{result}/chrome/userChrome.css").touch()
 
                                 with open(f"{result}/chrome/userChrome.css", "r") as rf:
                                     if("@import \"rewaitaChrome.css\";" not in rf.read()):
