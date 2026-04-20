@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rewaita\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-05 21:08+0400\n"
-"PO-Revision-Date: 2025-09-02 11:24+0200\n"
+"POT-Creation-Date: 2026-03-31 00:00+0000\n"
+"PO-Revision-Date: 2026-04-20 16:57+0200\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #: data/io.github.swordpuffin.rewaita.desktop.in:2
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:7
@@ -58,19 +58,27 @@ msgid "Browsing through light themes"
 msgstr "Pagina met lichte thema's"
 
 #. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
-#: src/main.py:52
+#: src/main.py:157
 msgid "translator-credits"
 msgstr "Heimen Stoffels <vistausss@fastmail.com>"
 
-#: src/utils.py:92
+#: src/utils.py:127
 msgid " has been deleted"
 msgstr " is verwijderd"
 
-#: src/utils.py:98
+#: src/widgets/custom_theme_page.py:210
+msgid " has been saved"
+msgstr " opgeslagen"
+
+#: src/utils.py:137
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: src/utils.py:134 src/utils.py:138
 msgid "Delete"
 msgstr "Verwĳderen"
 
-#: src/utils.py:99
+#: src/utils.py:135
 msgid ""
 "Are you sure you want to delete that theme?\n"
 "This cannot be undone."
@@ -78,92 +86,491 @@ msgstr ""
 "Weet u zeker dat u dit thema wilt verwijderen?\n"
 "Herstel is niet mogelijk."
 
-#: src/custom_theme.py:149
+#: src/image_modifier.py:98
+msgid "Please select a theme first"
+msgstr "Kies eerst een thema"
+
+#: src/widgets/loading_dialog.py:31
+msgid "This may take a moment"
+msgstr "Dit kan even duren"
+
+#: src/widgets/window_control_box.py:53
+msgid "Window Controls"
+msgstr "Vensterknoppen"
+
+#: src/widgets/window_control_box.py:24
+msgid "Default"
+msgstr "Standaard"
+
+#: src/widgets/window_control_box.py:25
+msgid "Colored"
+msgstr "Ingekleurd"
+
+#: src/widgets/window_control_box.py:26
+msgid "MacOS"
+msgstr "macOS"
+
+#: src/widgets/window_control_box.py:27
+msgid "Breeze"
+msgstr "Breeze"
+
+#: src/widgets/window_control_box.py:28
+msgid "Hidden"
+msgstr "Verborgen"
+
+#: src/widgets/window_control_box.py:29
+msgid "Mint"
+msgstr "Mint"
+
+#: src/widgets/custom_theme_page.py:140
+msgid "Accent Colors"
+msgstr "Accentkleuren"
+
+#: src/widgets/custom_theme_page.py:141
+msgid "Main Colors"
+msgstr "Hoofdkleuren"
+
+#: src/widgets/custom_theme_page.py:142
+msgid "Success Colors"
+msgstr "Positieve kleuren"
+
+#: src/widgets/custom_theme_page.py:143
+msgid "Destructive Colors"
+msgstr "Negatieve kleuren"
+
+#: src/widgets/custom_theme_page.py:144
+msgid "Warning Colors"
+msgstr "Waarschuwingskleuren"
+
+#: src/widgets/custom_theme_page.py:145
+msgid "Interface Colors"
+msgstr "Vormgevingskleuren"
+
+#: src/widgets/custom_theme_page.py:146
+msgid "Named Colors"
+msgstr "Kleurnamen"
+
+#: src/widgets/custom_theme_page.py:151
 msgid "Theme name (required)"
 msgstr "Themanaam (vereist)"
 
-#: src/custom_theme.py:153
-msgid "Emoji (optional)"
-msgstr "Emoji (optioneel)"
-
-#: src/custom_theme.py:157
+#: src/widgets/custom_theme_page.py:155
 msgid "Theme Type"
 msgstr "Soort thema"
 
-#: src/custom_theme.py:158
+#: src/widgets/custom_theme_page.py:156
 msgid "Light"
 msgstr "Licht"
 
-#: src/custom_theme.py:159
+#: src/widgets/custom_theme_page.py:157
 msgid "Dark"
 msgstr "Donker"
 
-#: src/window.py:92
-msgid "Theming"
-msgstr "Thema"
+#: src/widgets/wallpaper_dialog.py:56 src/widgets/custom_theme_page.py:164
+msgid "Save Folder"
+msgstr "Opslagmap"
 
-#: src/window.py:120
-msgid ""
-"After setting a color scheme, go to Gnome-Tweaks (or similar) and set "
-"'Rewaita' as your Shell theme. It contains the same colors as the active "
-"scheme for continuity\n"
-"\n"
-"Rewaita also does not style parts of apps like Gnome Builder and BlackBox "
-"which have their own syntax highlighting system\n"
-"\n"
-"If you find a problem with any theme, would like to suggest another be "
-"added, or want to submit your own to be included, please make an issue or a "
-"pull request @ https://github.com/SwordPuffin/Rewaita"
-msgstr ""
-"Kies een kleurenschema en open Afstellingen (gnome-tweaks) of een "
-"vergelijkbare toepassing. Stel daar ‘Rewaita’ in als Shell-thema.\n"
-"\n"
-"Rewaita kan niet alle toepassingen van een nieuwe kleur voorzien; GNOME "
-"Builder en Blackbox gebruiken bijvoorbeeld eigen syntaxiskleuren.\n"
-"\n"
-"Als u een probleem ondervindt, ideeën hebt voor thema's die u graag terug "
-"zou willen zien in Rewaita of een eigen thema wilt integreren, open dan een "
-"‘pull request’ op https://github.com/SwordPuffin/Rewaita"
+#: src/widgets/custom_theme_page.py:177
+msgid "Save"
+msgstr "Opslaan"
 
-#: src/window.py:121
-msgid ""
-"**Rewaita will only style GTK3/4 applications; Any other UI libraries are "
-"altogether NOT supported**"
-msgstr ""
-"**Rewaita kan alleen GTK3- en GTK4-toepassingen van andere kleuren voorzien. "
-"Andere toolkits worden NIET ondersteund.**"
+#: src/widgets/custom_theme_page.py:182
+msgid "/* Enter any extra CSS here */"
+msgstr "/* Voer hier aanvullende css-code in */"
 
-#: src/window.py:129
-msgid "For Flatpak application support, run:"
-msgstr "Flatpakondersteuning kan worden ingeschakeld door middel van:"
+#: src/widgets/extra_options_box.py:102
+msgid "Extra Options"
+msgstr "Aanvullende opties"
 
-#: src/window.py:201
+#: src/widgets/extra_options_box.py:67
+msgid "Transparency"
+msgstr "Doorzichtigheid"
+
+#: src/widgets/extra_options_box.py:68
+msgid "Adds a transparency effect to all window backdrops"
+msgstr "Voorzie alle vensterschaduwen van een doorzichtigheidseffect"
+
+#: src/widgets/extra_options_box.py:73
+msgid "Window Borders"
+msgstr "Vensterranden"
+
+#: src/widgets/extra_options_box.py:74
+msgid "Draws an accented border around the window"
+msgstr "Voorzie alle vensters van een rand met accentkleur"
+
+#: src/widgets/extra_options_box.py:79
+msgid "Sharp Corners"
+msgstr "Scherpe hoeken"
+
+#: src/widgets/extra_options_box.py:80
+msgid "Gives all elements square borders"
+msgstr "Voorzie alle elementen van vierkante randen"
+
+#: src/widgets/extra_options_box.py:85
+msgid "Force Light Text in Overview"
+msgstr "Lichte tekst tonen op overzicht"
+
+#: src/widgets/extra_options_box.py:86
+msgid "Might be useful for Blur my Shell users"
+msgstr "Kan handig zijn voor gebruikers van Blur my Shell"
+
+#: src/widgets/pref_page.py:27
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+#: src/widgets/pref_page.py:34
+msgid "Generate GTK-3.0 Theme"
+msgstr "GTK-3.0-thema samenstellen"
+
+#: src/widgets/pref_page.py:34
+msgid "Highly recommended for all users"
+msgstr "Aanbevolen voor alle gebruikers"
+
+#: src/widgets/pref_page.py:34
+msgid "Generate GNOME Shell Theme"
+msgstr "GNOME Shell-thema genereren"
+
+#: src/widgets/pref_page.py:34
+msgid "For GNOME users"
+msgstr "Voor GNOME-gebruikers"
+
+#: src/widgets/pref_page.py:34
+msgid "Run in background"
+msgstr "Uitvoeren op achtergrond"
+
+#: src/widgets/pref_page.py:34
+msgid "For users who swap between light/dark mode"
+msgstr "Voor gebruikers die wisselen tussen het lichte en donkere thema"
+
+#: src/widgets/pref_page.py:34
+msgid "Generate Firefox CSS Theme"
+msgstr "Css-thema voor Firefox samenstellen"
+
+#: src/widgets/pref_page.py:34
+msgid "May conflict with existing theme"
+msgstr "Let op: dit kan botsen met het bestaande thema"
+
+#: src/widgets/theme_page.py:104 src/widgets/guide_dialog.ui:11
 msgid "User Guide"
 msgstr "Gebruikershandleiding"
 
-#: src/window.py:260
+#: src/widgets/theme_page.py:110
+msgid "Tint Wallpaper"
+msgstr "Achtergrond van tint voorzien"
+
+#: src/widgets/theme_page.py:120
 msgid "Reset to default"
 msgstr "Standaardwaarden herstellen"
 
-#: src/window.py:328
+#: src/widgets/wallpaper_dialog.py:51
+msgid "Open File"
+msgstr "Bestand openen"
+
+#: src/widgets/wallpaper_dialog.py:72
+msgid "Drop Image Here"
+msgstr "Sleep een afbeelding hierheen"
+
+#: src/window.py:112
+msgid "Theming"
+msgstr "Thema"
+
+#: src/window.py:113
+msgid "Custom"
+msgstr "Zelfgekozen"
+
+#: src/window.py:114
+msgid "Fine Tune"
+msgstr "Afstellen"
+
+#: src/window.py:153
 msgid "Change GNOME shell theme to 'Rewaita' and reboot for full changes"
 msgstr "Stel Rewaita in als Shell-thema en herstart de computer"
 
-#: src/window.ui:22
+#: src/window.ui:27
 msgid "Main Menu"
 msgstr "Hoofdmenu"
 
-#: src/window.ui:44
+#: src/window.ui:19
+msgid "Delete themes"
+msgstr "Thema's verwĳderen"
+
+#: src/window.ui:71
 msgid "_Keyboard Shortcuts"
 msgstr "_Sneltoetsen"
 
-#: src/window.ui:48
+#: src/window.ui:75
 msgid "_About Rewaita"
 msgstr "Over Rew_aita"
 
-#: src/window.ui:52
-msgid "_Help"
-msgstr "_Hulp"
+#: src/gtk_help-overlay.ui:11
+msgid "General"
+msgstr "Algemeen"
+
+#: src/gtk_help-overlay.ui:14
+msgid "Show Shortcuts"
+msgstr "Sneltoetsen tonen"
+
+#: src/gtk_help-overlay.ui:20
+msgid "Quit"
+msgstr "Afsluiten"
+
+#: src/widgets/guide_dialog.ui:15
+msgid "Getting Started"
+msgstr "Instelhulp"
+
+#: src/widgets/guide_dialog.ui:16
+msgid ""
+"After setting a color scheme, go to GNOME Tweaks and set 'Rewaita' as the "
+"Shell theme. It will match the active scheme for visual continuity. This can "
+"be disabled in preferences."
+msgstr ""
+"Kies een kleurenschema, open GNOME Afstellen en kies ‘Rewaita’ als Shell-"
+"thema. Omwille van consistentie wordt het huidige kleurenschema gebruikt, "
+"maar dit kan worden aangepast in de voorkeuren."
+
+#: src/widgets/guide_dialog.ui:21
+msgid "Run the Flatpak Override Commands"
+msgstr "Flatpak-opdrachten uitvoeren"
+
+#: src/widgets/guide_dialog.ui:22
+msgid ""
+"This will ensure Flatpak applications are themed accordingly. See 'Flatpak "
+"Overrides' below for details."
+msgstr ""
+"Dit zorgt er voor dat Flatpak-programma's het juiste thema toegewezen "
+"krijgen. Zie ook ‘Flatpak-voorrangsregels’ hieronder."
+
+#: src/widgets/guide_dialog.ui:29
+msgid "Change the System Theme"
+msgstr "Systeemthema aanpassen"
+
+#: src/widgets/guide_dialog.ui:30
+msgid ""
+"Many Linux distributions will set some custom GTK theme by default. To "
+"prevent conflicts, change the application theme to default or 'Adwaita'."
+msgstr ""
+"De meeste Linuxdistributies gebruiken een eigen GTK-thema. Om problemen te "
+"voorkomen, dient het toepassingsthema ‘standaard’ of ‘Adwaita’ te zijn."
+
+#: src/widgets/guide_dialog.ui:37
+msgid "Automatic Switching"
+msgstr "Automatisch schakelen"
+
+#: src/widgets/guide_dialog.ui:38
+msgid ""
+"Rewaita runs in the background to switch between light/dark mode and accent "
+"color changes. This can be disabled in preferences."
+msgstr ""
+"Rewaita wordt op de achtergrond uitgevoerd, zodat wĳzigingen aan het lichte "
+"thema, donkere thema en accentkleuren worden toegepast. Dit kan worden "
+"aangepast in de voorkeuren."
+
+#: src/widgets/guide_dialog.ui:45
+msgid "Found a bug or want to contribute?"
+msgstr "Heb je een bug gevonden of wil je bijdragen?"
+
+#: src/widgets/guide_dialog.ui:46
+msgid ""
+"Open an issue or pull request in the upstream repository. See the 'Get "
+"Involved' tab for details."
+msgstr ""
+"Open dan een ‘issue’ of ‘pull request’ in de broncoderepo — zie hiervoor het "
+"tabblad ‘Bijdragen’."
+
+#: src/widgets/guide_dialog.ui:59
+msgid ""
+"Rewaita only styles GTK-3/4 applications; other UI toolkits will not be "
+"affected"
+msgstr ""
+"Rewaita kan alleen GTK3- en GTK4-toepassingen van andere kleuren voorzien. "
+"Andere toolkits worden NIET ondersteund."
+
+#: src/widgets/guide_dialog.ui:68
+msgid "Flatpak Overrides"
+msgstr "Flatpak-voorrangsregels"
+
+#: src/widgets/guide_dialog.ui:69
+msgid "Run these commands so Flatpak applications can use your theme."
+msgstr ""
+"Voer deze opdrachten uit, zodat Flatpak-programma's het door jou gekozen "
+"thema toepassen."
+
+#: src/widgets/guide_dialog.ui:87 src/widgets/guide_dialog.ui:113
+#: src/widgets/guide_dialog.ui:203
+msgid "Copy to clipboard"
+msgstr "Kopiëren naar klembord"
+
+#: src/widgets/guide_dialog.ui:130
+msgid "Firefox"
+msgstr "Firefox"
+
+#: src/widgets/guide_dialog.ui:133
+msgid "Apply Theme to Firefox"
+msgstr "Thema toepassen op Firefox"
+
+#: src/widgets/guide_dialog.ui:134
+msgid ""
+"First, enable 'Generate Firefox CSS Theme' in the 'Fine Tune' tab. After "
+"that, follow the steps below to set it up."
+msgstr ""
+"Open het tabblad ‘Afstellen’ en kies de optie ‘Css-thema voor Firefox "
+"samenstellen’. Volg daarna onderstaande stappen."
+
+#: src/widgets/guide_dialog.ui:139
+msgid "Step 1 — Set any theme"
+msgstr "Stap 1 — Ieder willekeurig thema"
+
+#: src/widgets/guide_dialog.ui:140
+msgid "We will do all the heavy lifting."
+msgstr "Wij doen al het zware werk voor je."
+
+#: src/widgets/guide_dialog.ui:147
+msgid "Step 2 — Firefox Gnome Theme (Optional)"
+msgstr "Stap 2 — GNOME-thema voor Firefox (optioneel)"
+
+#: src/widgets/guide_dialog.ui:148
+msgid ""
+"Rewaita is also compatible with the Firefox Gnome Theme, but the window "
+"controls will not be themed."
+msgstr ""
+"Let op: Rewaita is compatibel met het GNOME-thema voor Firefox, maar de "
+"vensterknoppen worden niet meegenomen."
+
+#: src/widgets/guide_dialog.ui:152
+msgid "Get it"
+msgstr "Aan de slag"
+
+#: src/widgets/guide_dialog.ui:234 src/widgets/guide_dialog.ui:277
+#: src/widgets/guide_dialog.ui:295
+msgid "Install"
+msgstr "Installeren"
+
+#: src/widgets/guide_dialog.ui:165
+msgid "Step 3 — Restart Firefox"
+msgstr "Stap 3 — Herstart Firefox"
+
+#: src/widgets/guide_dialog.ui:166
+msgid "Fully quit and relaunch Firefox for the changes to take effect."
+msgstr ""
+"Sluit Firefox volledig af en start opnieuw om de wijzigingen toe te passen."
+
+#: src/widgets/guide_dialog.ui:221
+msgid "GNOME Shell"
+msgstr "GNOME Shell"
+
+#: src/widgets/guide_dialog.ui:225
+msgid "Apply the Shell Theme"
+msgstr "Shell-thema toepassen"
+
+#: src/widgets/guide_dialog.ui:226
+msgid ""
+"Rewaita includes a matching GNOME Shell theme. Follow these steps to enable "
+"it."
+msgstr ""
+"Rewaita wordt geleverd met een bijpassend GNOME Shell-thema. Volg deze "
+"stappen om het thema te gebruiken."
+
+#: src/widgets/guide_dialog.ui:231
+msgid "Step 1 — Install the User Themes extension"
+msgstr "Stap 1 — Installeer de uitbreiding ‘User Themes’"
+
+#: src/widgets/guide_dialog.ui:232
+msgid ""
+"GNOME Shell requires the User Themes extension to load custom shell themes."
+msgstr ""
+"GNOME Shell kan alleen aangepaste thema's gebruiken door middel van de User "
+"Themes-uitbreiding."
+
+#: src/widgets/guide_dialog.ui:249
+msgid "Step 2 — Set any theme"
+msgstr "Stap 2 — Stel een thema in"
+
+#: src/widgets/guide_dialog.ui:250
+msgid ""
+"Rewaita will generate the theme automatically and place it in ~/.local/share/"
+"themes. This can be disabled in preferences."
+msgstr ""
+"Rewaita stelt het thema's automatisch samen en bewaart het in ~/.local/share/"
+"themes. Dit kan worden aangepast in de voorkeuren."
+
+#: src/widgets/guide_dialog.ui:257
+msgid "Step 3 — Select it in GNOME Tweaks"
+msgstr "Stap 3 — Kies het thema in GNOME Afstellingen"
+
+#: src/widgets/guide_dialog.ui:258
+msgid ""
+"Open GNOME Tweaks → Appearance → Shell and choose Rewaita from the dropdown."
+msgstr "Open GNOME Afstellingen → Uiterlijk → Shell en kies het Rewaita-thema."
+
+#: src/widgets/guide_dialog.ui:266
+msgid "Useful Extensions"
+msgstr "Nuttige uitbreidingen"
+
+#: src/widgets/guide_dialog.ui:267
+msgid "These extensions pair well with Rewaita."
+msgstr "Deze uitbreidingen passen goed bij Rewaita."
+
+#: src/widgets/guide_dialog.ui:273
+msgid "Application menu for GNOME Shell."
+msgstr "Een programmamenu voor GNOME Shell."
+
+#: src/widgets/guide_dialog.ui:291
+msgid "Moves the overview dash into a persistent, themeable dock."
+msgstr ""
+"Verplaatst het vensteroverzicht naar een dock dat altijd wordt getoond."
+
+#: src/widgets/guide_dialog.ui:312
+msgid "Get Involved"
+msgstr "Bijdragen"
+
+#: src/widgets/guide_dialog.ui:338
+msgid "Contribute to Rewaita"
+msgstr "Draai bij aan Rewaita"
+
+#: src/widgets/guide_dialog.ui:350
+msgid ""
+"Anyone, regardless of experience or background, is welcome to join. Open an "
+"issue to report bugs or suggest themes, or submit a pull request to "
+"contribute directly."
+msgstr ""
+"Iedereen kan bijdragen, ongeacht ervaring of achtergrond. Open een ‘issue’ "
+"om bugs te melden of thema's voor te stellen, of openen een ‘pull request’ "
+"om codewijzigingen aan te leveren."
+
+#: src/widgets/guide_dialog.ui:360
+msgid "Open in Browser"
+msgstr "Openen in webbrowser"
+
+#~ msgid "Emoji (optional)"
+#~ msgstr "Emoji (optioneel)"
+
+#~ msgid ""
+#~ "After setting a color scheme, go to Gnome-Tweaks (or similar) and set "
+#~ "'Rewaita' as your Shell theme. It contains the same colors as the active "
+#~ "scheme for continuity\n"
+#~ "\n"
+#~ "Rewaita also does not style parts of apps like Gnome Builder and BlackBox "
+#~ "which have their own syntax highlighting system\n"
+#~ "\n"
+#~ "If you find a problem with any theme, would like to suggest another be "
+#~ "added, or want to submit your own to be included, please make an issue or "
+#~ "a pull request @ https://github.com/SwordPuffin/Rewaita"
+#~ msgstr ""
+#~ "Kies een kleurenschema en open Afstellingen (gnome-tweaks) of een "
+#~ "vergelijkbare toepassing. Stel daar ‘Rewaita’ in als Shell-thema.\n"
+#~ "\n"
+#~ "Rewaita kan niet alle toepassingen van een nieuwe kleur voorzien; GNOME "
+#~ "Builder en Blackbox gebruiken bijvoorbeeld eigen syntaxiskleuren.\n"
+#~ "\n"
+#~ "Als u een probleem ondervindt, ideeën hebt voor thema's die u graag terug "
+#~ "zou willen zien in Rewaita of een eigen thema wilt integreren, open dan "
+#~ "een ‘pull request’ op https://github.com/SwordPuffin/Rewaita"
+
+#~ msgid "For Flatpak application support, run:"
+#~ msgstr "Flatpakondersteuning kan worden ingeschakeld door middel van:"
+
+#~ msgid "_Help"
+#~ msgstr "_Hulp"
 
 #~ msgid "Help"
 #~ msgstr "Hulp"
