@@ -637,7 +637,17 @@ BREEZE_TEMPLATE = """
 .titlebar-button.titlebar-min:hover,
 .titlebar-button.titlebar-max:hover,
 .titlebar-button.titlebar-restore:hover {{
-    background-color: var(--card_bg_color) !important;
+    background-color: var(--window_fg_color) !important;
+    & > .toolbarbutton-icon {{
+        -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+        fill: var(--window_bg_color) !important;
+    }}
+}}
+
+.titlebar-button.titlebar-restore:hover {{
+    & > .toolbarbutton-icon {{
+        box-shadow: inset 0 0 0 2px var(--window_bg_color) !important;
+    }}
 }}
 
 .titlebar-button.titlebar-max {{
@@ -658,7 +668,7 @@ BREEZE_TEMPLATE = """
 .titlebar-button.titlebar-close {{
   & > .toolbarbutton-icon {{
     list-style-image: url(chrome://global/skin/icons/close.svg) !important;
-    -moz-context-properties: fill, fill-opacity, stroke, stroke-opacity !important;
+    -moz-context-properties: fill, fill-opacity, stroke, stroke-width !important;
     fill: var(--window_fg_color) !important;
     color: transparent !important;
     width: 13px !important;
@@ -673,17 +683,15 @@ BREEZE_TEMPLATE = """
 .titlebar-button.titlebar-close:hover {{
   background-color: var(--red_1) !important;
    &:not([disabled]):hover > image {{
-      fill: var(--dark_1) !important;
-      color: var(--dark_1) !important;
+      fill: var(--window_bg_color) !important;
   }}
 }}
 
 .titlebar-button.titlebar-restore {{
   & > .toolbarbutton-icon {{
     background-image: none !important;
-    box-shadow: inset 0 0 0 2px currentColor !important;
+    box-shadow: inset 0 0 0 2px var(--window_fg_color) !important;
     border-radius: 1px !important;
-    color: var(--window_fg_color) !important;
     width: 13px !important;
     height: 13px !important;
     transform: rotate(45deg) !important;

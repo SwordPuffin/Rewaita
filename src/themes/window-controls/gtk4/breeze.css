@@ -6,6 +6,11 @@ windowcontrols:not(.rewaita-display) image:not(:hover) {
 	background-color: transparent;
 }
 
+windowcontrols:not(.rewaita-display) image:hover {
+	background-color: @window_fg_color;
+	color: @window_bg_color;
+}
+
 windowcontrols:not(.rewaita-display) > button.minimize > image {
 	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
 	transform: rotate(180deg);
@@ -25,7 +30,7 @@ windowcontrols:not(.rewaita-display) > button.maximize > image {
 
 windowcontrols:not(.rewaita-display) > button.close > image:hover {
 	background-color: @red_1;
-	color: @dark_1;
+	color: @window_bg_color;
 }
 
 windowcontrols:not(.rewaita-display) > button.close > image {
@@ -33,8 +38,8 @@ windowcontrols:not(.rewaita-display) > button.close > image {
 }
 
 window.maximized > * windowcontrols:not(.rewaita-display) > button.maximize:hover {
-  background-color: @card_bg_color;
-  border-radius: 100%;
+  background-color: @window_fg_color;
+  color: @window_bg_color;
 }
 
 window.maximized > * windowcontrols:not(.rewaita-display) > button.maximize {
@@ -46,10 +51,14 @@ window.maximized > * windowcontrols:not(.rewaita-display) > button.maximize > im
   background-color: transparent;
 }
 
+window.maximized > * windowcontrols:not(.rewaita-display) > button.maximize:hover > image {
+    box-shadow: inset 0 0 0 3px @window_bg_color;
+}
+
 window.maximized > * windowcontrols:not(.rewaita-display) > button.maximize > image {
     background-image: none;
     box-shadow: inset 0 0 0 3px @window_fg_color;
     border-radius: 1px;
-    color: var(--window_fg_color);
-    transform: rotate(45deg) scale(0.55);
+    color: @window_fg_color;
+    transform: rotate(45deg) scale(0.5);
 }
