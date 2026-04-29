@@ -1,3 +1,22 @@
+# custom_theme_page.py
+#
+# Copyright 2026 Nathan Perlman
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 import gi, shutil, os
 gi.require_version("Gtk", "4.0")
 gi.require_version('GtkSource', '5')
@@ -117,11 +136,11 @@ class ColorRow(Adw.ActionRow):
         self.add_suffix(end_box)
 
 class CustomBundle(Gtk.Box):
-    def __init__(self, title: Gtk.Label, bundle: str):
+    def __init__(self, title, bundle):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=10, margin_start=12, margin_end=12)
         self.prepend(title)
         title.add_css_class("title-4")
-        colors = gnome_colors[title.get_label()]
+        colors = gnome_colors[title.title]
         description_label = Gtk.Label(label=colors["description"], wrap=True)
         description_label.add_css_class("dimmed")
         self.append(description_label)
@@ -138,12 +157,19 @@ class CustomPage(Gtk.Box):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=20, margin_top=20)
 
         accent_label = Gtk.Label(label=_("Accent Colors"))
+        accent_label.title = "Accent Colors"
         main_label = Gtk.Label(label=_("Main Colors"))
+        main_label.title = "Main Colors"
         success_label = Gtk.Label(label=_("Success Colors"))
+        success_label.title = "Success Colors"
         destructive_label = Gtk.Label(label=_("Destructive Colors"))
+        destructive_label.title = "Destructive Colors"
         warning_label = Gtk.Label(label=_("Warning Colors"))
+        warning_label.title = "Warning Colors"
         interface_label = Gtk.Label(label=_("Interface Colors"))
+        interface_label.title = "Interface Colors"
         colors_label = Gtk.Label(label=_("Named Colors"))
+        colors_label.title = "Named Colors"
 
         for bundle, title in zip(gnome_colors.keys(), [accent_label, main_label, success_label, destructive_label, warning_label, interface_label, colors_label]):
             self.append(CustomBundle(title, bundle))
