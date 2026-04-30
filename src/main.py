@@ -156,7 +156,7 @@ X-Flatpak=io.github.swordpuffin.rewaita
         about = Adw.AboutDialog(application_name='Rewaita',
                                 application_icon='io.github.swordpuffin.rewaita',
                                 developer_name='Nathan Perlman',
-                                version='1.1.2',
+                                version='1.1.3',
                                 developers=['Nathan Perlman'],
                                 copyright='© 2026 Nathan Perlman')
         # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
