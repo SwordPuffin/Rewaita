@@ -118,7 +118,7 @@ titles = {
 rgba_pickers = []
 
 class ColorRow(Adw.ActionRow):
-    def __init__(self, title: str, variable: str, default_color: str):
+    def __init__(self, title, variable, default_color):
         super().__init__(selectable=False)
         self.set_title(title)
         self.set_subtitle(variable)
