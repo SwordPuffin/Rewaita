@@ -230,7 +230,7 @@
 
 .screenshot-ui-window-selector-window:checked .screenshot-ui-window-selector-check {
   background-color: @accent_color;
-  color: @window_bg_color;
+  color: @accent_fg_color;
 }
 
 .search-entry,
@@ -368,7 +368,7 @@ StEntry:focus {
 
 .quick-toggle:checked {
   background-color: @accent_color !important;
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .quick-toggle:checked:hover {
@@ -386,13 +386,13 @@ StEntry:focus {
 }
 
 .quick-toggle.button:checked {
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .quick-toggle.button:checked:hover {
   background-color: @accent_color !important;
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .quick-toggle-has-menu .quick-toggle-separator {
@@ -415,17 +415,17 @@ StEntry:focus {
 
 .quick-toggle-has-menu .quick-toggle-menu-button:checked {
   background-color: @accent_color !important;
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button:checked:hover {
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button:checked:active {
   background-color: @accent_color !important;
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .device-subtitle {
@@ -444,11 +444,11 @@ StEntry:focus {
 
 
 .quick-toggle-menu-button.icon-button:last-child:checked > StIcon {
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .quick-toggle-menu-button.icon-button:last-child:checked:hover > StIcon {
-  color: @window_bg_color;
+  color: @accent_fg_color;
 }
 
 .quick-slider .icon-button, .quick-slider .message-notification-group .message-collapse-button, .message-notification-group .quick-slider .message-collapse-button, .quick-slider .message .message-header .message-expand-button, .message .message-header .quick-slider .message-expand-button,
@@ -500,7 +500,7 @@ StEntry:focus {
 
 .quick-toggle-menu .header .icon.active {
   background-color: @accent_color !important;
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .quick-settings-system-item .power-item:insensitive {
@@ -653,7 +653,7 @@ StEntry:focus {
 
 .notification-button:hover {
     background-color: @accent_color;
-    color: @window_bg_color;
+    color: @accent_fg_color;
 }
 
 .message-list-clear-button {
@@ -667,7 +667,7 @@ StEntry:focus {
 }
 
 .message-expand-button:hover {
-    color: @window_bg_color;
+    color: @accent_fg_color;
     background-color: @accent_color;
 }
 
@@ -719,7 +719,7 @@ StEntry:focus {
   -barlevel-overdrive-color: @red_1;
   -barlevel-overdrive-separator-width: 2px;
   -barlevel-border-width: 0;
-  -barlevel-border-color: @window_bg_color;
+  -barlevel-border-color: @accent_fg_color;
 }
 
 .osd-window .level-bar {
@@ -766,7 +766,7 @@ StEntry:focus {
 }
 
 .message-close-button:hover {
-  color: @window_bg_color;
+  color: @accent_fg_color;
 }
 
 .message-media-control {
@@ -775,7 +775,7 @@ StEntry:focus {
 
 .message-media-control:hover, .message-media-control:focus {
   background-color: @accent_color;
-  color: @window_bg_color;
+  color: @accent_fg_color;
 }
 
 .modal-dialog .modal-dialog-button-box .modal-dialog-button, .lg-obj-inspector-button, #LookingGlassDialog > #Toolbar .lg-toolbar-button, .candidate-page-button, .message .message-header .flat.message-expand-button,
@@ -786,7 +786,7 @@ StEntry:focus {
 
 .modal-dialog .modal-dialog-button-box .modal-dialog-button:hover, .lg-obj-inspector-button:hover, #LookingGlassDialog > #Toolbar .lg-toolbar-button:hover, .candidate-page-button:hover, .icon-button.flat:hover, .message .message-header .flat.message-expand-button:hover,
 .message .message-header .flat.message-close-button:hover, .message-notification-group .flat.message-collapse-button:hover, .button.flat:hover, .popup-menu .button:hover {
-  color: @window_bg_color;
+  color: @accent_fg_color;
   background-color: @accent_color;
 }
 

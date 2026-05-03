@@ -95,12 +95,25 @@ def read_accent_color():
 def get_accent_color(palette):
     return find_closest_color(read_accent_color(), palette)
 
-def add_css_provider(css, accent_color):
+def compute_accent_fg_color(accent_color, window_bg_color, window_fg_color):
+    """Pick a contrast-safe foreground for use over accent_bg_color.
+
+    Returns window_bg_color when accent is light enough that dark text reads
+    well, otherwise window_fg_color. Uses WCAG-style relative luminance with
+    a 0.4 threshold."""
+    rgb = hex_to_rgb(accent_color) if isinstance(accent_color, str) else accent_color
+    def linearize(c):
+        c = c / 255.0
+        return c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
+    L = 0.2126 * linearize(rgb[0]) + 0.7152 * linearize(rgb[1]) + 0.0722 * linearize(rgb[2])
+    return window_bg_color if L > 0.4 else window_fg_color
+
+def add_css_provider(css, accent_color, accent_fg_color="@window_bg_color"):
     Gtk.StyleContext.remove_provider_for_display(Gdk.Display.get_default(), css_provider)
     css_provider.load_from_data(f"""
         {css}
         @define-color accent_bg_color {accent_color};
-        @define-color accent_fg_color @window_bg_color;
+        @define-color accent_fg_color {accent_fg_color};
     """.encode())
     Gtk.StyleContext.add_provider_for_display(
         Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
@@ -143,9 +156,9 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
         firefox_theme_plugin.reset()
 
     items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color",
-                        "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color",
-                        "panel_button_bg_color", "panel_hover_bg_color", "overview_bg_color", "search_fg_color",
-                        "accent_transparent"]
+                        "accent_color", "accent_fg_color", "border_color", "red_1", "panel_bg_color",
+                        "panel_fg_color", "panel_button_bg_color", "panel_hover_bg_color",
+                        "overview_bg_color", "search_fg_color", "accent_transparent"]
 
     if(all_prefs["modify-gtk3-theme"]):
         for color in colors.keys():

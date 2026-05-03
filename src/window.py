@@ -21,7 +21,7 @@ import os, shutil, gi, re
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
 from collections import defaultdict
-from .utils import parse_gtk_theme, set_to_default, delete_items, set_gtk3_theme, get_accent_color, add_css_provider, Preferences
+from .utils import parse_gtk_theme, set_to_default, delete_items, set_gtk3_theme, get_accent_color, compute_accent_fg_color, add_css_provider, Preferences
 from .custom_theme_page import CustomPage
 from .theme_page import ThemePage
 from .pref_page import PrefPage
@@ -171,7 +171,13 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
         accent_color = get_accent_color(colors.values())
         colors["accent_color"] = accent_color
-        extras = "\n" + extras + f"\n@define-color accent_bg_color {accent_color};\n@define-color accent_fg_color @window_bg_color;"
+        accent_fg_color = compute_accent_fg_color(
+            accent_color,
+            colors.get("window_bg_color", "#000000"),
+            colors.get("window_fg_color", "#FFFFFF"),
+        )
+        colors["accent_fg_color"] = accent_fg_color
+        extras = "\n" + extras + f"\n@define-color accent_bg_color {accent_color};\n@define-color accent_fg_color {accent_fg_color};"
 
         try:
             shutil.copy(theme_file, os.path.join(gtk4_config_dir, "gtk.css"))
@@ -180,7 +186,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
         except Exception as e:
             print(f"Error moving file: {e}")
 
-        add_css_provider(open(theme_file).read() + extras, accent_color)
+        add_css_provider(open(theme_file).read() + extras, accent_color, accent_fg_color)
         parse_gtk_theme(
             colors,
             self.template_file_content,
