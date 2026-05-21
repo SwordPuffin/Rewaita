@@ -33,7 +33,7 @@ def read_color_scheme(settings):
     except:
         return 1
 
-if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP")):
+if("GNOME" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
     bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
     proxy = Gio.DBusProxy.new_sync(
         bus,
