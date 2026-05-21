@@ -140,7 +140,7 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 
 #sidebar-main > * #tabs-newtab-button:hover,
 #sidebar-main > * .tabs-newtab-button:hover {{
-  background-color: var(--card_bg_color) !important;
+  background-color: var(--dark_1) !important;
 }}
 
 #urlbar,
