@@ -155,7 +155,7 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
         with open(gtk3_theme_file, "w") as file:
             file.write(gtk3_file)
 
-    if(all_prefs["modify-gnome-shell"] and "GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP")):
+    if(all_prefs["modify-gnome-shell"] and "GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
         for item in items_to_replace:
             gnome_shell_css = gnome_shell_css.replace(f"@{item}", colors[item])
 
@@ -184,7 +184,7 @@ def set_to_default(config_dirs, theme_type, reset_func, extras):
     add_css_provider(gtk_css + extras, f"rgb{read_accent_color()}")
     firefox_theme_plugin.reset()
         
-    if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP")):
+    if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
         reset_func()
 
 def confirm_delete(dialog, response, button, window):
