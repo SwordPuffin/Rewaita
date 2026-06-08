@@ -1,0 +1,167 @@
+# Translation template for Rewaita
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rewaita\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-05 21:08+0400\n"
+"PO-Revision-Date: 2025-09-21 09:33+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.7\n"
+
+#: data/io.github.swordpuffin.rewaita.desktop.in:2
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:7
+msgid "Rewaita"
+msgstr "Style powłoki GNOME"
+
+#: data/io.github.swordpuffin.rewaita.desktop.in:8
+msgid "gtk;adwaita;gnome;shell;theme"
+msgstr "gtk;adwaita;gnome;shell;theme"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:8
+msgid "Bring color to Adwaita"
+msgstr "Zmień kolorystykę GNOME"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:10
+msgid ""
+"Rewaita is a utility to recolor Gtk4/Adwaita apps to popular color schemes"
+msgstr ""
+"Style powłoki GNOME jest narzędziem do zmiany kolorystyki za pomocą "
+"popularnych szablonów kolorów dla programów opartych o GTK4/Adwaita"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:11
+msgid ""
+"Changes only affect GTK3/4 applications; Other libraries are NOT supported"
+msgstr ""
+"Zmiany będę widoczne tylko dla programów opartych o GTK3/4, pozostałe "
+"biblioteki NIE są wspierane"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:15
+msgid "Nathan Perlman"
+msgstr "Nathan Perlman"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:35
+msgid "Browsing through dark themes"
+msgstr "Przegląd ciemnych motywów"
+
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:39
+msgid "Browsing through light themes"
+msgstr "Przegląd jasnych motywów"
+
+#. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
+#: src/main.py:52
+msgid "translator-credits"
+msgstr "Adam Lewicki"
+
+#: src/utils.py:92
+msgid " has been deleted"
+msgstr " został usunięty"
+
+#: src/utils.py:98
+msgid "Delete"
+msgstr "Usuń"
+
+#: src/utils.py:99
+msgid ""
+"Are you sure you want to delete that theme?\n"
+"This cannot be undone."
+msgstr ""
+"Czy jesteś pewien, że chcesz usunąć ten motyw?\n"
+"Tego nie można cofnąć."
+
+#: src/custom_theme.py:149
+msgid "Theme name (required)"
+msgstr "Nazwa motywu (wymagana)"
+
+#: src/custom_theme.py:153
+msgid "Emoji (optional)"
+msgstr "Emotikona (opcjonalnie)"
+
+#: src/custom_theme.py:157
+msgid "Theme Type"
+msgstr "Typ motywu"
+
+#: src/custom_theme.py:158
+msgid "Light"
+msgstr "Jasny"
+
+#: src/custom_theme.py:159
+msgid "Dark"
+msgstr "Ciemny"
+
+#: src/window.py:92
+msgid "Theming"
+msgstr "Szablony"
+
+#: src/window.py:120
+msgid ""
+"After setting a color scheme, go to Gnome-Tweaks (or similar) and set "
+"'Rewaita' as your Shell theme. It contains the same colors as the active "
+"scheme for continuity\n"
+"\n"
+"Rewaita also does not style parts of apps like Gnome Builder and BlackBox "
+"which have their own syntax highlighting system\n"
+"\n"
+"If you find a problem with any theme, would like to suggest another be "
+"added, or want to submit your own to be included, please make an issue or a "
+"pull request @ https://github.com/SwordPuffin/Rewaita"
+msgstr ""
+"Po ustawieniu schematu kolorów, przejdź do 'Dostrajanie środowiska GNOME' "
+"(lub podobnego programu) i ustaw 'Style powłoki GNOME' jako swój motyw "
+"powłoki. Zawiera on te same kolory, co aktywny schemat, co zapewnia "
+"spójność.\n"
+"\n"
+"'Style powłoki GNOME' nie zmieni również stylu niektórych części programów, "
+"takich jak 'Gnome Builder' i 'BlackBox', które mają własny system "
+"podświetlania składni.\n"
+"\n"
+"Jeśli znajdziesz problem z którymkolwiek motywem, chcesz zasugerować "
+"dodanie innego lub zgłosić swój własny do włączenia, utwórz 'issue' lub "
+"'pull request' na stronie: https://github.com/SwordPuffin/Rewaita"
+
+#: src/window.py:121
+msgid ""
+"**Rewaita will only style GTK3/4 applications; Any other UI libraries are "
+"altogether NOT supported**"
+msgstr ""
+"**Style powłoki GNOME zmieni wygląd tylko dla programów GTK3/4; Żadne inne "
+"NIE są wspierane**"
+
+#: src/window.py:129
+msgid "For Flatpak application support, run:"
+msgstr "Dla programów z repozytorium Flatpak uruchom:"
+
+#: src/window.py:201
+msgid "User Guide"
+msgstr "Przewodnik użytkownika"
+
+#: src/window.py:260
+msgid "Reset to default"
+msgstr "Przywróć do domyślnych"
+
+#: src/window.py:328
+msgid "Change GNOME shell theme to 'Rewaita' and reboot for full changes"
+msgstr ""
+"Zmień motyw powłoki GNOME na 'Style powłoki GNOME\", następnie uruchom "
+"ponownie urządzenie, aby zastosować zmiany"
+
+#: src/window.ui:22
+msgid "Main Menu"
+msgstr "Menu główne"
+
+#: src/window.ui:44
+msgid "_Keyboard Shortcuts"
+msgstr "_Skróty klawiszowe"
+
+#: src/window.ui:48
+msgid "_About Rewaita"
+msgstr "_O programie"
+
+#: src/window.ui:52
+msgid "_Help"
+msgstr "_Pomoc"
