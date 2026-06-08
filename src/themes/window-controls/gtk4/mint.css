@@ -1,0 +1,13 @@
+windowcontrols:not(.rewaita-display) > button {
+  padding: 2px;
+}
+
+windowcontrols:not(.rewaita-display) > button.minimize:not(:hover) image,
+windowcontrols:not(.rewaita-display) > button.maximize:not(:hover) image {
+	background-color: transparent;
+}
+
+windowcontrols:not(.rewaita-display) > button.close > image {
+	background-color: @accent_bg_color;
+	color: @accent_fg_color;
+}

@@ -1,0 +1,23 @@
+windowcontrols.start:not(.rewaita-display) > button.minimize > image {
+    color: @yellow_1;
+}
+
+windowcontrols.start:not(.rewaita-display) > button.maximize > image {
+    color: @green_1;
+}
+
+windowcontrols.start:not(.rewaita-display) > button.close > image {
+    color: @red_1;
+}
+
+windowcontrols.end:not(.rewaita-display) > button.minimize > image {
+    color: @yellow_1;
+}
+
+windowcontrols.end:not(.rewaita-display) > button.maximize > image {
+    color: @green_1;
+}
+
+windowcontrols.end:not(.rewaita-display) > button.close > image {
+    color: @red_1;
+}

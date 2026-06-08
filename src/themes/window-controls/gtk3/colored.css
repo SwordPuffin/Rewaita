@@ -1,0 +1,26 @@
+button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) {
+  background: alpha(@yellow_1,0.1);
+  color: @yellow_1;
+}
+
+button.minimize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
+  color: shade(@yellow_1,0.5);
+}
+
+button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
+  background: alpha(@green_1,0.1);
+  color: @green_1;
+}
+
+button.maximize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
+  color: shade(@green_1,0.5);
+}
+
+button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
+  background: alpha(@red_1,0.1);
+  color: @red_1;
+}
+
+button.close.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
+   color: shade(@red_1,0.5);
+}

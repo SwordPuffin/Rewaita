@@ -1,0 +1,3 @@
+windowcontrols:not(.rewaita-display) {
+  transform: translate(0px, 999px);
+}
