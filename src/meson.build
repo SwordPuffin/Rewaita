@@ -1,9 +1,9 @@
 pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
-moduledir = pkgdatadir / 'rewaita'
+moduledir = pkgdatadir / 'wardrobe'
 gnome = import('gnome')
 
-gnome.compile_resources('rewaita',
-  'rewaita.gresource.xml',
+gnome.compile_resources('wardrobe',
+  'wardrobe.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
@@ -18,53 +18,33 @@ conf.set('localedir', get_option('prefix') / get_option('localedir'))
 conf.set('pkgdatadir', pkgdatadir)
 
 configure_file(
-  input: 'rewaita.in',
-  output: 'rewaita',
+  input: 'wardrobe.in',
+  output: 'wardrobe',
   configuration: conf,
   install: true,
   install_dir: get_option('bindir'),
-  install_mode: 'r-xr-xr-x'
+  install_mode: 'rwxr-xr-x'
 )
 
-rewaita_sources = [
+wardrobe_sources = [
   '__init__.py',
   'main.py',
   'window.py',
-  'styles.css',
   'utils.py',
-  'image_modifier.py',
-  'themes/firefox_gnome_theme.py',
-  'widgets/custom_theme_page.py',
-  'widgets/theme_page.py',
-  'widgets/window_control_box.py',
-  'widgets/pref_page.py',
-  'widgets/loading_dialog.py',
-  'widgets/wallpaper_dialog.py',
-  'widgets/extra_options_box.py'
+  'styles.css'
 ]
 
-install_data(rewaita_sources, install_dir: moduledir)
+install_data(wardrobe_sources, install_dir: moduledir)
 
-template_source = [ 'themes/gnome-shell-template.css', 'themes/default-light.css', 'themes/default-dark.css', 'themes/custom-template.css' ]
+widget_sources = [
+	'widgets/theme_cell.py',
+	'widgets/theme_cell_flowbox.py',
+	'widgets/install_page.py',
+	'widgets/main_page.py',
+	'widgets/search_page.py',
+	'widgets/theme_page.py',
+	'widgets/main_page_banner.py',
+	'widgets/item_carousel.py'
+]
 
-install_data(template_source, install_dir: moduledir)
-
-install_subdir(
-  'themes/window-controls',
-  install_dir: moduledir
-)
-
-install_subdir(
-  'themes/dark',
-  install_dir: moduledir
-)
-
-install_subdir(
-  'themes/light',
-  install_dir: moduledir
-)
-
-install_subdir(
-  'themes/gtk3-template',
-  install_dir: moduledir
-)
+install_data(widget_sources, install_dir: moduledir)

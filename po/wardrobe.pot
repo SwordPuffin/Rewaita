@@ -1,0 +1,140 @@
+# Translation template for Wardrobe
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wardrobe 1.1.5\n"
+"POT-Creation-Date: 2026-06-07 00:00+0000\n"
+"PO-Revision-Date: 2026-06-07 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: \n"
+"X-Poedit-Basepath: ../src\n"
+"X-Poedit-SearchPath-0: main.py\n"
+"X-Poedit-SearchPath-1: main_page.py\n"
+"X-Poedit-SearchPath-2: main_page_banner.py\n"
+"X-Poedit-SearchPath-3: install_page.py\n"
+"X-Poedit-SearchPath-4: search_page.py\n"
+"X-Poedit-SearchPath-5: theme_page.py\n"
+"X-Poedit-SearchPath-6: theme_cell.py\n"
+"X-Poedit-SearchPath-7: theme_cell_flowbox.py\n"
+"X-Poedit-SearchPath-8: item_carousel.py\n"
+"X-Poedit-SearchPath-9: utils.py\n"
+"X-Poedit-SearchPath-10: window.py\n"
+"X-Poedit-SearchPath-11: window.ui\n"
+
+#. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
+#: main.py:37
+msgid "translator-credits"
+msgstr ""
+
+#: main_page.py:110
+msgid "Curated"
+msgstr ""
+
+#: main_page.py:110
+msgid "Most Downloaded"
+msgstr ""
+
+#: main_page.py:110
+msgid "New & Updated"
+msgstr ""
+
+#: main_page.py:40
+msgid "GNOME Shell"
+msgstr ""
+
+#: main_page.py:41
+msgid "Icons"
+msgstr ""
+
+#: main_page.py:42
+msgid "GTK3/4"
+msgstr ""
+
+#: main_page.py:43
+msgid "Cursors"
+msgstr ""
+
+#: main_page.py:44
+msgid "Wallpapers"
+msgstr ""
+
+#: main_page.py:45
+msgid "Search"
+msgstr ""
+
+#: main_page_banner.py:46
+msgid "Get"
+msgstr ""
+
+#: main_page_banner.py:77 install_page.py:81 theme_cell.py:59
+msgid "By: "
+msgstr ""
+
+#: install_page.py:104
+msgid "Downloads"
+msgstr ""
+
+#: install_page.py:104
+msgid "Rating"
+msgstr ""
+
+#: install_page.py:104
+msgid "Last Updated"
+msgstr ""
+
+#: install_page.py:156
+msgid "Show More"
+msgstr ""
+
+#: install_page.py:163
+msgid "Show Less"
+msgstr ""
+
+#: install_page.py:167
+msgid "Read more"
+msgstr ""
+
+#: install_page.py:175
+msgid "Save Folder"
+msgstr ""
+
+#: install_page.py:188
+msgid "Become a supporter"
+msgstr ""
+
+#: install_page.py:268
+msgid "Use"
+msgstr ""
+
+#: search_page.py:35
+msgid "Search Themes"
+msgstr ""
+
+#: search_page.py:58 theme_cell_flowbox.py:37 theme_page.py:51
+msgid "Next Page"
+msgstr ""
+
+#: search_page.py:94
+msgid "Gnome Shell"
+msgstr ""
+
+#: theme_page.py:46
+msgid "Popular"
+msgstr ""
+
+#: theme_page.py:46
+msgid "Alphabetical"
+msgstr ""
+
+#: theme_page.py:46
+msgid "Rating"
+msgstr ""
+
+#: theme_page.py:46
+msgid "Latest"
+msgstr ""

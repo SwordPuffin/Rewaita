@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.swordpuffin.wardrobe</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <name>Wardrobe</name>
+  <summary>Prettify your desktop effortlessly</summary>
+  <description>
+    <p>Wardrobe is a utility for downloading community made GNOME Shell, GTK3/4, icon, and cursor themes as well as wallpapers</p>
+  </description>
+
+  <developer id="io.github.swordpuffin">
+    <name>Nathan Perlman</name>
+  </developer>
+
+  <url type="homepage">https://github.com/SwordPuffin/Wardrobe</url>
+  <url type="vcs-browser">https://github.com/SwordPuffin/Wardrobe</url>
+  <url type="bugtracker">https://github.com/SwordPuffin/Wardrobe/issues</url>
+
+  <translation type="gettext">wardrobe</translation>
+  <launchable type="desktop-id">io.github.swordpuffin.wardrobe.desktop</launchable>
+  <content_rating type="oars-1.1" />
+
+  <branding>
+    <color type="primary" scheme_preference="light">#BBF5F9</color>
+    <color type="primary" scheme_preference="dark">#B7176C</color>
+  </branding>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Browsing for cursor themes</caption>
+      <image>https://raw.githubusercontent.com/SwordPuffin/Wardrobe/main/data/screenshots/Screenshot1.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Searching for a specific theme</caption>
+      <image>https://raw.githubusercontent.com/SwordPuffin/Wardrobe/main/data/screenshots/Screenshot2.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Downloading the Papirus icon pack</caption>
+      <image>https://raw.githubusercontent.com/SwordPuffin/Wardrobe/main/data/screenshots/Screenshot3.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="1.1.5" date="2026-06-10">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.1.5</url>
+      <description translate="no">
+        <p>Wardrobe v1.1.5</p>
+        <ul>
+          <li>Complete rebuild of the entire application's interface</li>
+          <li>Big performance improvements, including a reduction in memory leaks</li>
+          <li>New app icon created by Hylke Bons (https://planetpeanut.studio)</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.1.4" date="2025-12-26">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.1.4</url>
+      <description translate="no">
+        <p>Wardrobe v1.1.4</p>
+        <ul>
+          <li>Fixed loading issue with deprecated opendesktop api</li>
+          <li>Added Vietnamese translations, thanks to @hthienloc</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.1.3" date="2025-11-08">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.1.3</url>
+      <description translate="no">
+        <p>Wardrobe v1.1.3</p>
+        <ul>
+          <li>Update runtime to current</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.1.2" date="2025-07-15">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.1.2</url>
+      <description translate="no">
+        <p>Wardrobe v1.1.2</p>
+        <ul>
+          <li>UI changes</li>
+          <li>Supports autoscroll</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.1.1" date="2025-06-26">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.1.1</url>
+      <description translate="no">
+        <p>Wardrobe v1.1.1</p>
+        <ul>
+          <li>Better sidebar interface</li>
+          <li>Cleaner app icon</li>
+          <li>Thumbnail images can now bo zoomed in on when clicked</li>
+          <li>Minor UI tweaks in the individual theme cells</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.1.0" date="2025-06-18">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.1.0</url>
+      <description translate="no">
+        <p>Wardrobe v1.1.0</p>
+        <ul>
+          <li>Uses a proper sidebar</li>
+          <li>Themes should now always be downloaded correctly</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.9" date="2025-06-14">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.0.9</url>
+      <description translate="no">
+        <p>Wardrobe v1.0.9</p>
+        <ul>
+          <li>Major performance improvements, no more freezing</li>
+          <li>More consistent UI layout</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.8" date="2025-06-10">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.0.8</url>
+      <description translate="no">
+        <p>Wardrobe v1.0.8</p>
+        <ul>
+          <li>Themes can now be activated inside of Wardrobe, no external utility needed</li>
+          <li>Even better file conflict and install error resolution, especially for icons</li>
+          <li>New app icon</li>
+          <li>File extraction is now handled by GnomeAutoAR</li>
+          <li>Much needed quality of life and performance improvements will be in the next update</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.7" date="2025-06-08">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.0.7</url>
+      <description translate="no">
+        <p>Wardrobe v1.0.7</p>
+        <ul>
+          <li>Update</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.6" date="2025-05-18">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.0.6</url>
+      <description translate="no">
+        <p>Wardrobe v1.0.6</p>
+        <ul>
+          <li>Rollback to shutil instead of libarchive for stability</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.5" date="2025-05-18">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.0.5</url>
+      <description translate="no">
+        <p>Wardrobe v1.0.5</p>
+        <ul>
+          <li>Fixed launch error with libarchive</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.4" date="2025-05-17">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.0.4</url>
+      <description translate="no">
+        <p>Wardrobe v1.0.4</p>
+        <ul>
+          <li>Another UI overhaul, adding a sidebar</li>
+          <li>Major optimizations with a new preferences page for more tweaks</li>
+          <li>Better issue resolution for downloaded themes</li>
+          <li>Change to libarchive for 7zip support</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.3" date="2025-04-24">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.0.3</url>
+      <description translate="no">
+        <p>Wardrobe v1.0.3</p>
+        <ul>
+          <li>Total UI overhaul</li>
+          <li>Installed themes should work properly more often</li>
+          <li>General bug fixes</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.2" date="2025-03-23">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.0.2</url>
+      <description translate="no">
+        <p>Wardrobe v1.0.2</p>
+        <ul>
+          <li>Added Dutch translations</li>
+        </ul>
+      </description>
+    </release>
+    <release version="1.0.1" date="2025-03-19">
+      <url type="details">https://github.com/SwordPuffin/Wardrobe/releases/tag/v1.0.1</url>
+      <description translate="no">
+        <p>First release</p>
+        <ul>
+          <li>Gnome customization utility</li>
+          <li>Allows for downloading of Gnome themes in one app</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+</component>

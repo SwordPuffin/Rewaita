@@ -1,6 +1,6 @@
 desktop_file = i18n.merge_file(
-        input: 'io.github.swordpuffin.rewaita.desktop.in',
-       output: 'io.github.swordpuffin.rewaita.desktop',
+        input: 'io.github.swordpuffin.wardrobe.desktop.in',
+       output: 'io.github.swordpuffin.wardrobe.desktop',
          type: 'desktop',
        po_dir: '../po',
       install: true,
@@ -13,8 +13,8 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-        input: 'io.github.swordpuffin.rewaita.metainfo.xml.in',
-       output: 'io.github.swordpuffin.rewaita.metainfo.xml',
+        input: 'io.github.swordpuffin.wardrobe.metainfo.xml.in',
+       output: 'io.github.swordpuffin.wardrobe.metainfo.xml',
        po_dir: '../po',
       install: true,
   install_dir: get_option('datadir') / 'metainfo'
@@ -24,11 +24,11 @@ appstreamcli = find_program('appstreamcli', required: false, disabler: true)
 test('Validate appstream file', appstreamcli,
      args: ['validate', '--no-net', '--explain', appstream_file])
 
-install_data('io.github.swordpuffin.rewaita.gschema.xml',
+install_data('io.github.swordpuffin.wardrobe.gschema.xml',
   install_dir: get_option('datadir') / 'glib-2.0' / 'schemas'
 )
 
-compile_schemas = find_program('glib-compile-schemas', required: false, disabler: true)
+compile_schemas = find_program('glib-compile-schemas', required: true, disabler: true)
 test('Validate schema file',
      compile_schemas,
      args: ['--strict', '--dry-run', meson.current_source_dir()])
@@ -37,8 +37,8 @@ test('Validate schema file',
 service_conf = configuration_data()
 service_conf.set('bindir', get_option('prefix') / get_option('bindir'))
 configure_file(
-  input: 'io.github.swordpuffin.rewaita.service.in',
-  output: 'io.github.swordpuffin.rewaita.service',
+  input: 'io.github.swordpuffin.wardrobe.service.in',
+  output: 'io.github.swordpuffin.wardrobe.service',
   configuration: service_conf,
   install_dir: get_option('datadir') / 'dbus-1' / 'services'
 )

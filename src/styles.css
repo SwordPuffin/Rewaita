@@ -1,239 +1,116 @@
-.shake {
-  animation: shake_animation 0.4s ease-in-out infinite;
+.shell-symbolic {
+  background-image: linear-gradient(
+    135deg,
+    #ffc931,
+    #fd4932
+  );
 }
 
-.drop-area {
-  outline: 2px dashed @card_bg_color;
-  outline-offset: -0.2rem;
+.icon-symbolic {
+  background-color: #2c5aa0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 12px 12px;
+  color: #e8d9a8;
+}
+
+.cursor-symbolic {
+  background-image: linear-gradient(
+    135deg,
+    #e6b980,
+    #7f3fbf
+  );
+}
+
+.interface-symbolic {
+  background-image: linear-gradient(
+    135deg,
+    #d63384,
+    #ff6b6b
+  );
+}
+
+.search-symbolic {
+  background-image: linear-gradient(
+    135deg,
+    #2ecc71,
+    #1e8449
+  );
+}
+
+.wallpaper-symbolic {
+    background-color: #EC4899;
+    color: white;
+    box-shadow: 0 2px 4px rgba(236, 72, 153, 0.3);
+}
+
+.info-row {
+    padding: 6px;
+}
+
+.info-separator {
+    margin: 6px 12px;
+    opacity: 0.3;
+}
+
+.rounded {
   border-radius: 12px;
 }
 
-.active-scheme {
-  outline: 4px solid @accent_color;
+.dim-label {
+    opacity: 0.6;
+    font-size: smaller;
+}
+
+.description-label {
+  font-size: 15px;
 }
 
 .bold {
-  font-weight: 500;
+  font-weight: bold;
 }
 
-.delete-action {
-  background-color: rgba(255, 0, 0, 0.2);
-  color: @window_fg_color;
+.carousel-view {
+	background-color: alpha(@window_fg_color, 0.05);
+  border: 1px solid alpha(@window_fg_color, 0.08);
+  border-radius: 12px;
 }
 
-textview {
-  background-color: @card_bg_color;
-  color: @window_fg_color;
-  border-radius: 6px;
-  font-family: "Fira Code", monospace;
-  font-size: 12pt;
+.featured-banner-scrim {
+  background: linear-gradient( 
+    to bottom, 
+    transparent 10%, 
+    rgba(0, 0, 0, 0.72) 100% 
+  );
+  border-radius: 12px;
 }
 
-gutter {
-  background-color: @headerbar_bg_color;
-  color: @window_fg_color;
+.featured-badge {
+  font-weight: 600;
+  color: #ffffff;
+  padding: 2px 10px;
 }
 
-@keyframes shake_animation {
-  0%   { transform: rotate(-0.75deg); }
-  25%  { transform: rotate(0.75deg); }
-  50%  { transform: rotate(-0.75deg); }
-  75%  { transform: rotate(0.75deg); }
-  100% { transform: rotate(-0.75deg); }
+.featured-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #fff;
 }
 
-windowcontrols.colored > button.minimize > image {
-  color: @yellow_1;
+.featured-meta {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
 }
 
-windowcontrols.colored > button.maximize > image {
-    color: @green_1;
+.search {
+    border-radius: 50px;
+    padding: 6px 12px;
+    background-color: alpha(@card_bg_color, 0.85);
+    border: 1px solid alpha(@borders, 0.5);
+    box-shadow: 0 1px 4px alpha(black, 0.08);
+    transition: border-color 200ms ease,
+                box-shadow 200ms ease,
+                background-color 200ms ease;
 }
 
-windowcontrols.colored > button.close > image {
-    color: @red_1;
-}
-
-windowcontrols.macos > button:not(.suggested-action):not(.destructive-action) {
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 6px;
-  margin-bottom: 2px;
-}
-
-windowcontrols.macos > button.minimize:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.maximize:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.close:not(.suggested-action):not(.destructive-action) {
-  color: transparent;
-  background: none;
-}
-
-windowcontrols.macos > button.minimize:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.minimize:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.maximize:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.maximize:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.close:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos > button.close:active:not(.suggested-action):not(.destructive-action) {
-  box-shadow: none;
-}
-
-windowcontrols.macos > button.minimize:active:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos > button.maximize:active:not(.suggested-action):not(.destructive-action) > image, windowcontrols.macos> button.close:active:not(.suggested-action):not(.destructive-action) > image {
-  box-shadow: inset 0 0 100px 100px rgba(0, 0, 0, 0.6);
-  transition-duration: 350ms;
-  transition-timing-function: ease;
-}
-
-windowcontrols.macos > button.minimize:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.minimize:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.maximize:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.maximize:active:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.close:hover:not(.suggested-action):not(.destructive-action), windowcontrols.macos> button.close:active:not(.suggested-action):not(.destructive-action) {
-  color: @window_bg_color;
-}
-
-windowcontrols.macos > button.minimize:not(.suggested-action):not(.destructive-action) > image {
-  background-color: @yellow_1;
-}
-
-windowcontrols.macos > button.minimize:active:not(.suggested-action):not(.destructive-action) > image {
-  background-color: @yellow_1;
-}
-
-windowcontrols.macos > button.maximize:not(.suggested-action):not(.destructive-action) > image {
-  background-color: @green_1;
-}
-
-windowcontrols.macos > button.maximize:active:not(.suggested-action):not(.destructive-action) > image {
-  background-color: @green_1;
-}
-
-windowcontrols.macos > button.close:not(.suggested-action):not(.destructive-action) > image {
-  background-color: @red_1;
-}
-
-windowcontrols.macos > button.close:active:not(.suggested-action):not(.destructive-action) > image {
-  background-color: @red_1;
-}
-
-windowcontrols.macos {
-  border-spacing: 6px;
-}
-
-windowcontrols.macos:not(.empty).start:dir(ltr), windowcontrols.macos:not(.empty).end:dir(rtl) {
-  margin-right: 6px;
-  margin-left: 6px;
-}
-
-windowcontrols.macos:not(.empty).start:dir(rtl), windowcontrols.macos:not(.empty).end:dir(ltr) {
-  margin-left: 6px;
-  margin-right: 6px;
-}
-
-windowcontrols.macos > button:not(.suggested-action):not(.destructive-action) > image {
-  min-width: 17px;
-  min-height: 17px;
-  padding: 0;
-}
-
-windowcontrols.macos > button.minimize:hover:not(.suggested-action):not(.destructive-action):not(:backdrop),
-windowcontrols.macos > button.minimize:active:not(.suggested-action):not(.destructive-action):not(:backdrop),
-windowcontrols.macos > button.maximize:hover:not(.suggested-action):not(.destructive-action):not(:backdrop),
-windowcontrols.macos > button.maximize:active:not(.suggested-action):not(.destructive-action):not(:backdrop),
-windowcontrols.macos > button.close:hover:not(.suggested-action):not(.destructive-action):not(:backdrop),
-windowcontrols.macos > button.close:active:not(.suggested-action):not(.destructive-action):not(:backdrop) {
-  color: @window_bg_color;
-}
-
-windowcontrols.macos > button.minimize:backdrop:hover:not(.suggested-action):not(.destructive-action),
-windowcontrols.macos > button.minimize:backdrop:active:not(.suggested-action):not(.destructive-action),
-windowcontrols.macos > button.maximize:backdrop:hover:not(.suggested-action):not(.destructive-action),
-windowcontrols.macos > button.maximize:backdrop:active:not(.suggested-action):not(.destructive-action),
-windowcontrols.macos > button.close:backdrop:hover:not(.suggested-action):not(.destructive-action),
-windowcontrols.macos > button.close:backdrop:active:not(.suggested-action):not(.destructive-action) {
-  color: @window_fg_color;
-}
-
-
-windowcontrols.macos > button.minimize:backdrop:not(.suggested-action):not(.destructive-action) > image,
-windowcontrols.macos > button.maximize:backdrop:not(.suggested-action):not(.destructive-action) > image,
-windowcontrols.macos > button.close:backdrop:not(.suggested-action):not(.destructive-action) > image {
-  background-color: @card_bg_color;
-  filter: brightness(150%);
-}
-
-windowcontrols.macos > button {
-  min-height: 17px;
-  min-width: 17px;
-  padding: 2px;
-}
-windowcontrols.breeze > button {
-  padding: 2px;
-}
-
-windowcontrols.breeze image:not(:hover) {
-	background-color: transparent;
-}
-
-windowcontrols.breeze image:hover {
-	background-color: @window_fg_color;
-	color: @window_bg_color;
-}
-
-windowcontrols.breeze > button.minimize > image {
-	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
-	transform: rotate(180deg);
-	-gtk-icon-transform: scale(0);
-  background-size: 16px;
-	background-position: center;
-	background-repeat: no-repeat;
-}
-
-windowcontrols.breeze > button.maximize > image {
-	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
-	-gtk-icon-transform: scale(0);
-  background-size: 16px;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-windowcontrols.breeze > button.close > image:hover {
-	background-color: @red_1;
-	color: @window_bg_color;
-}
-
-windowcontrols.breeze > button.close > image {
-	transform: scale(1.1);
-}
-
-window.maximized > * windowcontrols.breeze > button.maximize:hover {
-  background-color: @window_fg_color;
-  color: @window_bg_color;
-}
-
-window.maximized > * windowcontrols.breeze > button.maximize {
-	border-radius: 100%;
-  	margin: 3px 0;
-}
-
-window.maximized > * windowcontrols.breeze > button.maximize > image:hover {
-  background-color: transparent;
-}
-
-window.maximized > * windowcontrols.breeze > button.maximize:hover > image {
-    box-shadow: inset 0 0 0 3px @window_bg_color;
-}
-
-window.maximized > * windowcontrols.breeze > button.maximize > image {
-    background-image: none;
-    box-shadow: inset 0 0 0 3px @window_fg_color;
-    border-radius: 1px;
-    color: @window_fg_color;
-    transform: rotate(45deg) scale(0.5);
-}
-
-windowcontrols.hidden {
-  transform: translate(0px, 999px);
-}
-
-windowcontrols.mint > button {
-  padding: 2px;
-}
-
-windowcontrols.mint > button.minimize:not(:hover) image,
-windowcontrols.mint > button.maximize:not(:hover) image {
-	background-color: transparent;
-}
-
-windowcontrols.mint > button.close > image {
-	background-color: @accent_bg_color;
-	color: @accent_fg_color;
-}

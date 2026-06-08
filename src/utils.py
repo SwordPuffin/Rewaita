@@ -17,230 +17,226 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import gi, os, shutil, json
-from gi.repository import Gtk, Gdk, GLib, Xdp, Adw
-from .image_modifier import hex_to_rgb, find_closest_color
-from .firefox_gnome_theme import FirefoxGnomeThemePlugin
+import gi, os, random, json
+from gi.repository import GnomeAutoar, Soup, GLib, Gtk, Gdk, Gio, Adw
+from html.parser import HTMLParser
+from pathlib import Path
 
-settings = Xdp.Portal().get_settings()
-css_provider = Gtk.CssProvider()
-firefox_theme_plugin = FirefoxGnomeThemePlugin()
+def soup_get(url, response_func):
+    def on_response(session, result):
+        response_bytes = session.send_and_read_finish(result)
+        try:
+            response_text = response_bytes.get_data().decode()
+        except:
+            response_text = response_bytes.get_data()
+        response_func(response_text)
+    session = Soup.Session()
+    message = Soup.Message.new("GET", url)
+    session.send_and_read_async(message, GLib.PRIORITY_DEFAULT, None, on_response)
 
-class Preferences:
-    DEFAULTS = {
-        "light-theme": "default",
-        "dark-theme": "default",
-        "window-controls": "default",
-        "modify-gtk3-theme": True,
-        "modify-gnome-shell": True,
-        "run-in-background": True,
-        "transparency": False,
-        "window": False,
-        "sharp": False,
-        "firefox-theme": False,
-        "light-text": False,
+def match_theme_type(typeid):
+    category_map = {
+        134: 0, 386: 1, 199: 1, 132: 1, 366: 2, 135: 2, 136: 2,
+        107: 3, 300: 4, 286: 4, 312: 4, 261: 4, 299: 4, 283: 4, 360: 4,
+        287: 4
     }
+    return category_map.get(int(typeid), int(typeid))
 
+def is_picture(file):
+    if(any(ext in file for ext in [".png", ".jpg", ".svg", ".jpeg", ".gif", ".bmp", ".webp", ".tiff", ".tif", ".jxl"])):
+        return True
+    else:
+        return False
+
+def search_for_images(folders):
+    return_val = []
+    for folder in folders:
+        if(os.path.isdir(folder)):
+            for root, dirs, files in os.walk(folder):
+                for file in files:
+                    if(is_picture(file)):
+                        return_val.append(os.path.join(root, file))
+        else:
+            return_val.append(folder)
+    return return_val
+
+class HTMLStripper(HTMLParser):
     def __init__(self):
-        self.pref_dir = GLib.get_user_data_dir()
-        self.pref_file = os.path.join(self.pref_dir, "prefs.json")
-        self.make_file()
+        super().__init__()
+        self.result = []
 
-    def make_file(self):
-        if(not os.path.exists(self.pref_file)):
-            self.save(self.DEFAULTS)
+    def handle_data(self, data):
+        self.result.append(data)
 
-    def get(self, key):
-        try:
-            with open(self.pref_file, "r") as f:
-                prefs = json.load(f)
-                return prefs.get(key, self.DEFAULTS.get(key))
-        except:
-            self.make_file()
-            return self.DEFAULTS.get(key)
+    def handle_starttag(self, tag, attrs):
+        if(tag in ("p", "div", "br", "li")):
+            self.result.append("\n")
 
-    def set(self, key, value):
-        try:
-            with open(self.pref_file, "r") as f:
-                prefs = json.load(f)
-        except:
-            prefs = dict(self.DEFAULTS)
+    def handle_endtag(self, tag):
+        if(tag in ("p", "div", "li")):
+            self.result.append("\n")
 
-        prefs[key] = value
-        self.save(prefs)
+    def get_data(self):
+        return ''.join(self.result)
 
-    def save(self, data):
-        os.makedirs(self.pref_dir, exist_ok=True)
-        with open(self.pref_file, "w") as f:
-            json.dump(data, f, indent=4)
+def strip_html(source):
+    parser = HTMLStripper()
+    parser.feed(source)
+    return parser.get_data()
 
-    def get_all(self):
-        try:
-            with open(self.pref_file, "r") as f:
-                return json.load(f)
-        except:
-            self.make_file()
-            return dict(self.DEFAULTS)
+def resolve_issues(archive_path, typeid, change_func):
+    archive_file = Gio.File.new_for_path(archive_path)
+    output = os.path.dirname(archive_file)
+    from .install_page import folders as theme_dirs
+    theme_dir = os.path.dirname(theme_dirs[typeid])
+    gio_output = Gio.File.new_for_path(output)
+    before = set(os.listdir(output))
+    def arrange_folders(extractor):
+        print("Extraction Complete")
+        folders = {
+            0: ["gnome-shell"],
+            1: ["index.theme"],
+            2: ["gtk-2.0", "gnome-shell", "gtk-3.0", "gtk-4.0", "cinnamon", "xfwm4", "index.theme"],
+            3: ["cursors", "cursors_scalable", "index.theme"]
+        }
 
-def read_accent_color():
-    try:
-        accent = settings.read_value("org.freedesktop.appearance", "accent-color")
-        converted = tuple(int(x * 255) for x in accent)
-        if(any(value < 0 for value in converted) or any(value > 255 for value in converted)):
-            converted = (53, 132, 228) # Default Gnome blue
-    except Exception:
-        converted = (53, 132, 228) # Default Gnome blue
-    return converted
+        after = set(os.listdir(output))
+        added = set()
+        for item in after - before:
+            item_path = os.path.join(output, item)
+            if(os.path.isdir(item_path)):
+                added.add(item_path)
 
-def get_accent_color(palette):
-    return find_closest_color(read_accent_color(), palette)
+        if(typeid == 4):
+            change_func(added, search_for_images(added))
+            return
+        else:
+            important_items = folders.get(typeid)
 
-def add_css_provider(css, accent_color):
-    Gtk.StyleContext.remove_provider_for_display(Gdk.Display.get_default(), css_provider)
-    css_provider.load_from_data(f"""
-        {css}
-        @define-color accent_bg_color {accent_color};
-        @define-color accent_fg_color @window_bg_color;
-    """.encode())
-    Gtk.StyleContext.add_provider_for_display(
-        Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
-    )
+        # I can't tell if this code is very good or very bad
+        important_paths = set()
+        linked_paths = set()
+        for folder in added:
+            for root, dirs, files in os.walk(folder, topdown=False):
+                for folder_name in important_items:
+                    if(folder_name == "index.theme"):
+                        search = files
+                    else:
+                        search = dirs
+                    for item in search:
+                        if(item == folder_name):
+                            important_paths.add(os.path.dirname(os.path.join(root, item)))
+        if(typeid != 1):
+            for path in important_paths:
+                try:
+                    os.symlink(path, os.path.join(theme_dir, os.path.basename(path)))
+                except:
+                    continue
+            linked_paths = important_paths
+        else:
+            for path in important_paths:
+                extension = ""
+                folder = os.path.basename(path)
+                if('dark' in folder.lower()):
+                    extension = '-dark'
+                elif('light' in folder.lower()):
+                    extension = '-light'
 
-def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
-    prefs = Preferences()
-    all_prefs = prefs.get_all()
+                parent_name = os.path.basename(os.path.dirname(path)).lower()
+                correct_folder_name = folder.lower().replace(extension, '')
 
-    if(all_prefs["window"]):
-        colors["border_color"] = colors["accent_color"]
+                if(parent_name in correct_folder_name):
+                    new_folder_name = correct_folder_name + extension
+                elif(correct_folder_name in parent_name):
+                    new_folder_name = parent_name + extension
+                else:
+                    new_folder_name = folder.lower() + '-' + str(random.randint(1, 1000))
+
+                new_path = os.path.join(theme_dir, os.path.basename(new_folder_name))
+                os.symlink(path, new_path)
+                
+                linked_paths.add(new_path)
+        change_func(added, linked_paths)
+
+    if(is_picture(archive_path)):
+        change_func([archive_path], [archive_path])
+    extractor = GnomeAutoar.Extractor.new(archive_file, gio_output)
+    extractor.set_delete_after_extraction(True)
+
+    extractor.start_async()
+    extractor.connect("completed", arrange_folders)
+
+def parse_json(response, flowbox):
+    from .theme_cell import ThemeCell
+    
+    if(isinstance(response, str)):
+        data = json.loads(response)
     else:
-        colors["border_color"] = 'transparent'
+        data = response
+            
+    content = data.get("data", [])
+            
+    for item in content:
+        cell = ThemeCell()
+        cell.page = flowbox.page
 
-    colors["overview_bg_color"] = colors["window_bg_color"] # overview_bg_color must be opaque
-    if(all_prefs["transparency"]):
-        for color_to_replace in ["window_bg_color", "headerbar_bg_color", "card_bg_color"]:
-            rgb = hex_to_rgb(colors[color_to_replace])
-            colors[color_to_replace] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.82)"
-        gtk3_file += ".background:not(.nautilus-desktop):not(.desktopwindow) { opacity: 0.95; }"
+        cell.title = item.get("name", "Unknown")
+        cell.home_page = item.get("detailpage", "")
+        cell.dev = item.get("personid", "Unknown")
+        cell.rating = int(item.get("score", 0)) / 10 if item.get("score") else 0
+        cell.last_update = item.get("changed", "")
+        cell.description = item.get("description", "")
+        cell.downloads = item.get("downloads", "0") if item.get("downloads") else 0
+        cell.theme_type = item.get("typeid", 0)
 
-    if(all_prefs["light-text"]):
-        colors["search_fg_color"] = "white"
-    else:
-        colors["search_fg_color"] = colors["window_fg_color"]
+        # Get download links
+        cell.download_links = []
+        cell.download_names = []
 
-    # Panel colors
-    colors["panel_bg_color"] = colors["window_bg_color"]
-    colors["panel_fg_color"] = colors["window_fg_color"]
-    colors["panel_button_bg_color"] = "transparent"
-    colors["panel_hover_bg_color"] = colors["card_bg_color"]
-    rgb = hex_to_rgb(colors["accent_color"])
-    colors["accent_transparent"] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.5)"
+        i = 1
+        while(True):
+            download_link = item.get(f"downloadlink{i}")
+            download_name = item.get(f"downloadname{i}")
 
-    if(all_prefs["firefox-theme"]):
-        firefox_theme_plugin.variables = colors
-        firefox_theme_plugin.window_controls = all_prefs["window-controls"]
-        firefox_theme_plugin.apply()
-    else:
-        firefox_theme_plugin.reset()
+            if(download_link is None or download_name is None):
+                break
 
-    items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color",
-                        "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color",
-                        "panel_button_bg_color", "panel_hover_bg_color", "overview_bg_color", "search_fg_color",
-                        "accent_transparent"]
+            if(download_link):
+                if("." not in download_name):
+                    i += 1
+                    continue
+                cell.download_links.append(download_link)
+                cell.download_names.append(download_name)
 
-    if(all_prefs["modify-gtk3-theme"]):
-        for color in colors.keys():
-            gtk3_file = gtk3_file.replace(f"@{color}", colors[color])
+            i += 1
 
-        gtk3_theme_file = os.path.join(GLib.getenv("HOME"), ".config", "gtk-3.0", "gtk.css")
-        with open(gtk3_theme_file, "w") as file:
-            file.write(gtk3_file)
-
-    if(all_prefs["modify-gnome-shell"] and "GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
-        for item in items_to_replace:
-            gnome_shell_css = gnome_shell_css.replace(f"@{item}", colors[item])
-
-        gnome_shell_theme_dir = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
-        os.makedirs(gnome_shell_theme_dir, exist_ok=True)
-        file = shutil.copyfile(theme_file, os.path.join(gnome_shell_theme_dir, "gnome-shell.css"))
-
-        if(all_prefs["sharp"]):
-            gnome_shell_css += f"\n\n* {{border-radius: 0px;}}"
-        with open(file, "w") as f:
-            f.write(gnome_shell_css)
-
-        reset_func()
-
-def set_to_default(config_dirs, theme_type, reset_func, extras):
-    for config_dir in config_dirs:
-        with open(os.path.join(config_dir, "gtk.css"), "w") as file:
-            file.write(extras)
-
-    gnome_shell_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
-    if(os.path.exists(os.path.join(gnome_shell_path, "gnome-shell.css"))):
-        os.remove(os.path.join(gnome_shell_path, "gnome-shell.css"))
-
-    gtk_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"default-{theme_type}.css")
-    gtk_css = open(gtk_file).read()
-    add_css_provider(gtk_css + extras, f"rgb{read_accent_color()}")
-    firefox_theme_plugin.reset()
+        # Get image links
+        cell.image_urls = []
+        z = 1
+        while(True):
+            preview = item.get(f"previewpic{z}")
+            if(preview is None):
+                break
+            cell.image_urls.append(preview)
+            z += 1
+        cell.build_cell()
+        flowbox.append(Adw.Clamp(child=cell, maximum_size=375))
+                
+        if(hasattr(flowbox, "get_n_pages")):
+            if(flowbox.get_n_pages() == 7):
+                mid = flowbox.get_n_pages() // 2
+                def scroll(attempts=0):
+                    page = flowbox.get_nth_page(mid)
+                    if(page is None or attempts > 20):
+                        return False
+                    flowbox.scroll_to(page, False)
+                    if(round(flowbox.get_position()) != mid):
+                        GLib.timeout_add(20, scroll, attempts + 1)
+                    return False
+                GLib.idle_add(scroll)
+                break
         
-    if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
-        reset_func()
-
-def confirm_delete(dialog, response, button, window):
-    if(response == "confirm"):
-        window.toast_overlay.dismiss_all()
-        # Bear with me through this
-        window.toast_overlay.add_toast(Adw.Toast(timeout=3, title=button.theme + _(" has been deleted")))
-        button.get_parent().get_parent().remove(button.get_parent())
-        os.remove(button.path)
-
-def delete_theme(button, window):
-    dialog = Adw.AlertDialog()
-    button.theme = button.theme.replace('.css', '')
-    dialog.set_heading(_("Delete") + f" {button.theme}?")
-    dialog.set_body(_("Are you sure you want to delete that theme?\nThis cannot be undone."))
+    if(hasattr(flowbox, "group")):
+        flowbox.group.set_sensitive(True)
     
-    dialog.add_response("cancel", _("Cancel"))
-    dialog.add_response("confirm", _("Delete"))
-    dialog.set_response_appearance("confirm", Adw.ResponseAppearance.DESTRUCTIVE)
-
-    dialog.connect("response", confirm_delete, button, window)
-    dialog.present(window)
     
-def delete_items(action, _, button, window):
-    if(button.has_css_class("destructive-action")):
-        button.remove_css_class("destructive-action")
-        for flowbox in [window.light_flowbox, window.dark_flowbox]:
-            for theme in flowbox:
-                child = theme.get_first_child()
-                if(not child.has_css_class("delete-action")):
-                    child.set_sensitive(True)
-                    window.light_button.set_sensitive(True); window.dark_button.set_sensitive(True);
-                    continue
-                child.remove_css_class("delete-action"); child.remove_css_class("shake")
-                child.disconnect_by_func(delete_theme)
-                child.connect("clicked", window.on_theme_button_clicked, child.theme, child.theme_type)
-    else:
-        button.add_css_class("destructive-action")
-        for flowbox in [window.light_flowbox, window.dark_flowbox]:
-            for theme in flowbox:
-                child = theme.get_first_child()
-                if(child.has_css_class("active-scheme") or child.default):
-                    child.set_sensitive(False)
-                    window.light_button.set_sensitive(False); window.dark_button.set_sensitive(False);
-                    continue
-                child.add_css_class("delete-action")
-                child.add_css_class("shake")
-                child.disconnect_by_func(child.func)
-                child.connect("clicked", delete_theme, window)
-
-def set_gtk3_theme(gtk3_config_dir, window_control):
-    dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gtk3-template")
-    assets = os.path.join(dir, "assets.tar.xz")
-    shutil.unpack_archive(assets, extract_dir=gtk3_config_dir, format="tar")
-    if(window_control != "default"):
-        window_control_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", "gtk3", window_control + ".css")
-        with open(os.path.join(gtk3_config_dir, "gtk.css"), "a") as file:
-            with open(window_control_file, "r") as css:
-                file.write(css.read())

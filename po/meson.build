@@ -1,1 +1,1 @@
-i18n.gettext('rewaita', preset: 'glib')
+i18n.gettext('wardrobe', preset: 'glib')

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=wardrobe
+Exec=wardrobe
+Icon=io.github.swordpuffin.wardrobe
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true

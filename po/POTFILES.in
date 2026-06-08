@@ -1,8 +1,17 @@
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
-data/io.github.swordpuffin.rewaita.desktop.in
-data/io.github.swordpuffin.rewaita.metainfo.xml.in
-data/io.github.swordpuffin.rewaita.gschema.xml
+data/io.github.swordpuffin.wardrobe.desktop.in
+data/io.github.swordpuffin.wardrobe.metainfo.xml.in
+data/io.github.swordpuffin.wardrobe.gschema.xml
+src/widgets/install_page.py
+src/widgets/item_carousel.py
 src/main.py
+src/widgets/main_page.py
+src/widgets/main_page_banner.py
+src/widgets/search_page.py
+src/widgets/theme_cell.py
+src/widgets/theme_cell_flowbox.py
+src/widgets/theme_page.py
+src/utils.py
 src/window.py
 src/window.ui

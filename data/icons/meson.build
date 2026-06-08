@@ -1,4 +1,4 @@
-application_id = 'io.github.swordpuffin.rewaita'
+application_id = 'io.github.swordpuffin.wardrobe'
 
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(
@@ -13,14 +13,20 @@ install_data(
 )
 
 actions_dir = 'hicolor' / 'scalable' / 'actions'
+
 actions_icons = [
-  actions_dir / 'reload-symbolic.svg',
-  actions_dir / 'hammer-symbolic.svg',
-  actions_dir / 'brush-symbolic.svg',
-  actions_dir / 'code-symbolic.svg',
-  actions_dir / 'extension-symbolic.svg',
-  actions_dir / 'leaf-symbolic.svg',
-  actions_dir / 'firefox-symbolic.svg'
+  actions_dir / 'icon-symbolic.svg',
+  actions_dir / 'interface-symbolic.svg',
+  actions_dir / 'shell-symbolic.svg',
+  actions_dir / 'cursor-symbolic.svg',
+  actions_dir / 'search-symbolic.svg',
+  actions_dir / 'wallpaper-symbolic.svg',
+  actions_dir / 'download-symbolic.svg',
+  actions_dir / 'delete-symbolic.svg',
+  actions_dir / 'left-symbolic.svg',
+  actions_dir / 'folder-open-symbolic.svg',
+  actions_dir / 'external-link-symbolic.svg',
+  actions_dir / 'web-symbolic.svg',
 ]
 
 install_data(
