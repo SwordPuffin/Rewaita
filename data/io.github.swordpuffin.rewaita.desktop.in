@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Rewaita
+Exec=rewaita
+Icon=io.github.swordpuffin.rewaita
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=gtk;adwaita;gnome;shell;theme
+StartupNotify=true
+DBusActivatable=true
