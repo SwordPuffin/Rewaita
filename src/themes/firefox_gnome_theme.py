@@ -236,8 +236,12 @@ toolbar toolbarbutton[open="true"] {{
 menupopup,
 panel,
 .panel-arrowcontent {{
-  color: var(--window_bg_color) !important;
-  border-color: var(--dark_1) !important;
+  color: var(--window_fg_color) !important;
+}}
+
+panel > * {{
+    background-color: var(--window_bg_color) !important;
+    color: var(--window_fg_color) !important;
 }}
 
 panel:not([remote]) {{

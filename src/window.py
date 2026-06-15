@@ -33,7 +33,7 @@ def read_color_scheme(settings):
     except:
         return 1
 
-if("GNOME" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
+if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP" or "")):
     bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
     proxy = Gio.DBusProxy.new_sync(
         bus,
@@ -146,32 +146,36 @@ class RewaitaWindow(Adw.ApplicationWindow):
             set_to_default([gtk3_config_dir, gtk4_config_dir], theme_type, reset_shell, extras)
             return
 
-        theme_file = os.path.join(self.data_dir, theme_type, theme_name)
-        self.controls.set_css_classes([self.window_control])
-        gtk_css = open(theme_file).read()
-        self.toast_overlay.dismiss_all()
-        self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Change GNOME shell theme to 'Rewaita' and reboot for full changes"))))
+        if(self.light_theme == "accent" or self.dark_theme == "accent"):
+            pass
+        else:
+            theme_file = os.path.join(self.data_dir, theme_type, theme_name)
+            self.controls.set_css_classes([self.window_control])
+            gtk_css = open(theme_file).read()
+            self.toast_overlay.dismiss_all()
+            self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Change GNOME shell theme to 'Rewaita' and reboot for full changes"))))
 
-        color_pattern = r'@define-color\s+([a-z0-9_]+)\s+(#[a-fA-F0-9]+|@[a-z0-9_]+);'
-        references = defaultdict(list)
-        colors = dict()
+            color_pattern = r'@define-color\s+([a-z0-9_]+)\s+(#[a-fA-F0-9]+|@[a-z0-9_]+);'
+            references = defaultdict(list)
+            colors = dict()
 
-        for match in re.finditer(color_pattern, gtk_css):
-            name, value = match.groups()
-            if(value.startswith('@')):
-                ref_name = value[1:]
-                references[ref_name].append(name)
-            else:
-                colors[name] = value
+            for match in re.finditer(color_pattern, gtk_css):
+                name, value = match.groups()
+                if(value.startswith('@')):
+                    ref_name = value[1:]
+                    references[ref_name].append(name)
+                else:
+                    colors[name] = value
 
-        for ref_name, dependent_names in references.items():
-            if(ref_name in colors):
-                for name in dependent_names:
-                    colors[name] = colors[ref_name]
+            for ref_name, dependent_names in references.items():
+                if(ref_name in colors):
+                    for name in dependent_names:
+                        colors[name] = colors[ref_name]
 
-        accent_color = get_accent_color(colors.values())
+        accent_color, accent_fg = get_accent_color(colors, self)
         colors["accent_color"] = accent_color
-        extras = "\n" + extras + f"\n@define-color accent_bg_color {accent_color};\n@define-color accent_fg_color @window_bg_color;"
+        colors["accent_fg_color"] = accent_fg
+        extras = "\n" + extras + f"\n@define-color accent_bg_color {accent_color};\n@define-color accent_fg_color {accent_fg};"
 
         try:
             shutil.copy(theme_file, os.path.join(gtk4_config_dir, "gtk.css"))
@@ -180,7 +184,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
         except Exception as e:
             print(f"Error moving file: {e}")
 
-        add_css_provider(open(theme_file).read() + extras, accent_color)
+        add_css_provider(open(theme_file).read() + extras, (accent_color, accent_fg))
         parse_gtk_theme(
             colors,
             self.template_file_content,
@@ -244,8 +248,13 @@ class RewaitaWindow(Adw.ApplicationWindow):
             "transparency": self.transparency,
             "window": self.borders,
             "sharp": self.sharp,
+            "accent-fg": self.accent_fg,
             "firefox-theme": self.firefox_theme,
-            "light-text": self.light_text
+            "light-text": self.light_text,
+            "dark-panel": self.dark_panel,
+            "trans-panel": self.trans_panel,
+            "no-pills": self.no_pills,
+            "accent": self.accent
         }
 
         prefs = Preferences()

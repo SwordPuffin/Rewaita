@@ -62,8 +62,13 @@ class RewaitaApplication(Adw.Application):
             win.transparency = all_prefs["transparency"]
             win.borders = all_prefs["window"]
             win.sharp = all_prefs["sharp"]
+            win.accent_fg = all_prefs["accent-fg"]
             win.firefox_theme = all_prefs["firefox-theme"]
             win.light_text = all_prefs["light-text"]
+            win.dark_panel = all_prefs["dark-panel"]
+            win.trans_panel = all_prefs["trans-panel"]
+            win.no_pills = all_prefs["no-pills"]
+            win.accent = all_prefs["accent"]
         except:
             prefs.make_file()
             self.grab_prefs()
@@ -156,7 +161,7 @@ X-Flatpak=io.github.swordpuffin.rewaita
         about = Adw.AboutDialog(application_name='Rewaita',
                                 application_icon='io.github.swordpuffin.rewaita',
                                 developer_name='Nathan Perlman',
-                                version='1.1.3',
+                                version='1.1.2',
                                 developers=['Nathan Perlman'],
                                 copyright='© 2026 Nathan Perlman')
         # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.

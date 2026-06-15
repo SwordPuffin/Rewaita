@@ -21,6 +21,7 @@ import gi, os, re
 from gi.repository import Gtk, Adw, Gdk, GLib
 from fortune import fortune
 from .wallpaper_dialog import WallpaperDialog
+from .accent_box import AccentBox
 
 def flowbox_sort_func(child1: Gtk.FlowBoxChild, child2: Gtk.FlowBoxChild, _):
     button1 = child1.get_first_child()
@@ -113,6 +114,9 @@ class ThemePage(Gtk.Box):
         top_box.append(image_button)
 
         self.append(top_box)
+
+        if("GNOME" not in GLib.getenv("XDG_CURRENT_DESKTOP") and ""):
+            self.append(Adw.Clamp(maximum_size=800, child=AccentBox(parent)))
 
         snippet = self.get_example_text()
         for theme_type in ["light", "dark"]:

@@ -19,7 +19,7 @@
 
 import gi, os, shutil, json
 from gi.repository import Gtk, Gdk, GLib, Xdp, Adw
-from .image_modifier import hex_to_rgb, find_closest_color
+from .image_modifier import hex_to_rgb
 from .firefox_gnome_theme import FirefoxGnomeThemePlugin
 
 settings = Xdp.Portal().get_settings()
@@ -38,7 +38,12 @@ class Preferences:
         "window": False,
         "sharp": False,
         "firefox-theme": False,
+        "accent-fg": False,
         "light-text": False,
+        "dark-panel": False,
+        "trans-panel": False,
+        "no-pills": False,
+        "accent": "'blue'"
     }
 
     def __init__(self):
@@ -82,29 +87,74 @@ class Preferences:
             self.make_file()
             return dict(self.DEFAULTS)
 
-def read_accent_color():
-    try:
-        accent = settings.read_value("org.freedesktop.appearance", "accent-color")
-        converted = tuple(int(x * 255) for x in accent)
-        if(any(value < 0 for value in converted) or any(value > 255 for value in converted)):
-            converted = (53, 132, 228) # Default Gnome blue
-    except Exception:
-        converted = (53, 132, 228) # Default Gnome blue
-    return converted
+def get_accent_color(palette, win):
+    accent_map = {
+        "'blue'": "blue_1", "'teal'": "blue_2", "'green'": "green_1", "'yellow'": "yellow_1",
+        "'orange'": "orange_1", "'red'": "red_1", "'pink'": "purple_1", "'purple'": "purple_2", "'slate'": "dark_1"
+    }
 
-def get_accent_color(palette):
-    return find_closest_color(read_accent_color(), palette)
+    if(win.accent_fg):
+        accent_fg = "#EEEEEE"
+    else:
+        accent_fg = "#222222"
 
-def add_css_provider(css, accent_color):
+    if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+        accent = settings.read_value("org.gnome.desktop.interface", "accent-color")
+        return (palette[accent_map[str(accent)]], accent_fg)
+    else:
+        return (palette[accent_map[win.accent]], accent_fg)
+
+def add_css_provider(css, accent_colors):
     Gtk.StyleContext.remove_provider_for_display(Gdk.Display.get_default(), css_provider)
-    css_provider.load_from_data(f"""
-        {css}
-        @define-color accent_bg_color {accent_color};
-        @define-color accent_fg_color @window_bg_color;
-    """.encode())
-    Gtk.StyleContext.add_provider_for_display(
-        Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
-    )
+    if(accent_colors is not None):
+        css_provider.load_from_data(f"""
+            {css}
+            @define-color accent_bg_color {accent_colors[0]};
+            @define-color accent_fg_color {accent_colors[1]};
+        """.encode())
+        Gtk.StyleContext.add_provider_for_display(
+            Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
+        )
+
+no_pill_css = """
+#panel .panel-button, .search-entry, .clock {
+  border-radius: 12px;
+}
+
+
+.quick-toggle, .quick-toggle-has-menu {
+  border-radius: 12px;
+}
+
+.quick-toggle-has-menu .quick-toggle {
+  min-width: auto;
+  max-width: auto;
+}
+
+.quick-toggle-has-menu .quick-toggle:ltr {
+  border-radius: 12px 0 0 12px;
+}
+
+.quick-toggle-has-menu .quick-toggle:rtl {
+  border-radius: 0 12px 12px 0;
+}
+
+.quick-toggle-has-menu .quick-toggle:ltr:last-child {
+  border-radius: 12px;
+}
+
+.quick-toggle-has-menu .quick-toggle:rtl:last-child {
+  border-radius: 12px;
+}
+
+.quick-toggle-has-menu .quick-toggle-menu-button:ltr {
+  border-radius: 0 12px 12px 0;
+}
+
+.quick-toggle-has-menu .quick-toggle-menu-button:rtl {
+  border-radius: 12px 0 0 12px;
+}
+"""
 
 def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
     prefs = Preferences()
@@ -127,11 +177,18 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
     else:
         colors["search_fg_color"] = colors["window_fg_color"]
 
-    # Panel colors
-    colors["panel_bg_color"] = colors["window_bg_color"]
-    colors["panel_fg_color"] = colors["window_fg_color"]
-    colors["panel_button_bg_color"] = "transparent"
-    colors["panel_hover_bg_color"] = colors["card_bg_color"]
+    if(not all_prefs["dark-panel"] and not all_prefs["trans-panel"]):
+        colors["panel_bg_color"] = colors["window_bg_color"]
+        colors["panel_fg_color"] = colors["window_fg_color"]
+
+    if(all_prefs["trans-panel"]):
+        colors["panel_bg_color"] = "rgba(0, 0, 0, 0)"
+        colors["panel_fg_color"] = "white"
+
+    if(all_prefs["dark-panel"]):
+        colors["panel_bg_color"] = "black"
+        colors["panel_fg_color"] = "white"
+
     rgb = hex_to_rgb(colors["accent_color"])
     colors["accent_transparent"] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.5)"
 
@@ -144,8 +201,7 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
 
     items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color",
                         "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color",
-                        "panel_button_bg_color", "panel_hover_bg_color", "overview_bg_color", "search_fg_color",
-                        "accent_transparent"]
+                        "overview_bg_color", "search_fg_color", "accent_transparent", "accent_fg_color"]
 
     if(all_prefs["modify-gtk3-theme"]):
         for color in colors.keys():
@@ -165,6 +221,10 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
 
         if(all_prefs["sharp"]):
             gnome_shell_css += f"\n\n* {{border-radius: 0px;}}"
+
+        if(all_prefs["no-pills"]):
+            gnome_shell_css += no_pill_css
+
         with open(file, "w") as f:
             f.write(gnome_shell_css)
 
@@ -181,7 +241,7 @@ def set_to_default(config_dirs, theme_type, reset_func, extras):
 
     gtk_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"default-{theme_type}.css")
     gtk_css = open(gtk_file).read()
-    add_css_provider(gtk_css + extras, f"rgb{read_accent_color()}")
+    add_css_provider(gtk_css + extras, None)
     firefox_theme_plugin.reset()
         
     if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):

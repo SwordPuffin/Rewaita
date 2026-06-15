@@ -6,29 +6,27 @@
 /*panel_bg_color: panel background color*/
 /*panel_fg_color: panel text color*/
 /*panel_button_bg_color: panel button background color*/
-/*panel_hover_bg_color: panel button hover background color*/
 /*overview_bg_color: always opaque background color*/
 
 /* Top Bar */
 #panel {
-  background-color: @panel_bg_color;
-  color: @panel_fg_color;
+  background-color: @panel_bg_color !important;
+  color: @panel_fg_color !important;
   font-feature-settings: "tnum";
 }
 
 #panel .panel-button {
-  color: @panel_fg_color;
-  background-color: @panel_button_bg_color;
+  color: @panel_fg_color !important;
 }
 
 #panel .panel-button:hover,
 #panel .panel-button:hover.clock-display .clock {
-  background-color: alpha(currentColor, 0.2);
+  background-color: alpha(currentColor, 0.2) !important;
 }
 
 #panel .workspace-dot {
-  background-color: @panel_fg_color;
-  color: @panel_fg_color;
+  background-color: @panel_fg_color !important;
+  color: @panel_fg_color !important;
 }
 
 .window-close {
@@ -230,7 +228,7 @@
 
 .screenshot-ui-window-selector-window:checked .screenshot-ui-window-selector-check {
   background-color: @accent_color;
-  color: @window_bg_color;
+  color: @accent_fg_color;
 }
 
 .search-entry,
@@ -368,7 +366,7 @@ StEntry:focus {
 
 .quick-toggle:checked {
   background-color: @accent_color !important;
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .quick-toggle:checked:hover {
@@ -385,19 +383,15 @@ StEntry:focus {
   color: @window_fg_color;
 }
 
-.quick-toggle.button:checked {
-  color: @window_bg_color !important;
-}
-
 .quick-toggle.button:checked:hover {
   background-color: @accent_color !important;
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .quick-toggle-has-menu .quick-toggle-separator {
-  background-color: @headerbar_bg_color;
-  opacity: 0.1;
+  background-color: @headerbar_bg_color !important;
+  opacity: 0.1 !important;
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button {
@@ -415,7 +409,7 @@ StEntry:focus {
 
 .quick-toggle-has-menu .quick-toggle-menu-button:checked {
   background-color: @accent_color !important;
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button:checked:hover {
@@ -425,7 +419,7 @@ StEntry:focus {
 
 .quick-toggle-has-menu .quick-toggle-menu-button:checked:active {
   background-color: @accent_color !important;
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .device-subtitle {
@@ -443,12 +437,9 @@ StEntry:focus {
 }
 
 
-.quick-toggle-menu-button.icon-button:last-child:checked > StIcon {
-  color: @window_bg_color !important;
-}
-
+.quick-toggle-menu-button.icon-button:last-child:checked > StIcon,
 .quick-toggle-menu-button.icon-button:last-child:checked:hover > StIcon {
-  color: @window_bg_color;
+  color: @accent_fg_color !important;
 }
 
 .quick-slider .icon-button, .quick-slider .message-notification-group .message-collapse-button, .message-notification-group .quick-slider .message-collapse-button, .quick-slider .message .message-header .message-expand-button, .message .message-header .quick-slider .message-expand-button,
@@ -500,7 +491,7 @@ StEntry:focus {
 
 .quick-toggle-menu .header .icon.active {
   background-color: @accent_color !important;
-  color: @window_bg_color !important;
+  color: @accent_fg_color !important;
 }
 
 .quick-settings-system-item .power-item:insensitive {
@@ -509,62 +500,50 @@ StEntry:focus {
 
 /* Calendar */
 .calendar {
-  background-color: transparent;
-  color: @window_fg_color;
+  background-color: transparent !important;
+  color: @window_fg_color !important;
 }
 
-.calendar .calendar-month-label {
+.calendar .calendar-month-label,
+.calendar .calendar-month-header {
   color: @window_fg_color !important;
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .calendar .pager-button {
-  background-color: transparent;
+  background-color: transparent !important;
   color: @window_fg_color !important;
 }
 
-.calendar .pager-button:hover, .calendar .pager-button:focus {
-  background-color: @card_bg_color;
-}
-
-.calendar .pager-button:active {
-  background-color: @card_bg_color;
+.calendar .pager-button:active,
+.calendar .pager-button:hover,
+.calendar .pager-button:focus {
+  background-color: @card_bg_color !important;
 }
 
 .calendar .calendar-day {
   color: @window_fg_color !important;
   font-feature-settings: "tnum";
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
 .calendar .calendar-day:hover, .calendar .calendar-day:focus {
-  background-color: @card_bg_color;
+  background-color: @card_bg_color !important;
   color: @window_fg_color !important;
 }
 
 .calendar .calendar-day:active, .calendar .calendar-day:selected {
   color: @window_fg_color !important;
-  background-color: @card_bg_color;
+  background-color: @card_bg_color !important;
 }
 
-.calendar .calendar-day.calendar-weekend {
+.calendar .calendar-day.calendar-weekend,
+.calendar .calendar-day,
+.calendar .calendar-nonwork-day,
+.calendar .calendar-day-top,
+.calendar .calendar-day-left,
+.calendar .calendar-day-with-events .calendar-work-day {
   color: @window_fg_color !important;
-}
-
-.calendar .calendar-day {
-  color: @window_fg_color !important;
-}
-
-.calendar .calendar-day-top {
-  color: @window_fg_color !important;
-}
-
-.calendar .calendar-day-left {
-  color: @window_fg_color !important;
-}
-
-.calendar .calendar-nonwork-day {
-  color: @window_fg_color;
 }
 
 .calendar .calendar-today {
@@ -592,25 +571,19 @@ StEntry:focus {
   color: @window_fg_color !important;
 }
 
-.calendar .calendar-day-with-events {
-  color: @window_fg_color;
-}
+/* .calendar .calendar-day-with-events { */
+/*   color: @window_fg_color; */
+/*   background-image: url("resource:///org/gnome/shell/theme/calendar-today-light.svg") !important; */
+/* } */
 
-.calendar .calendar-day-with-events .calendar-work-day {
-  color: @window_fg_color;
-}
-
-.calendar .calendar-other-month {
-  color: @window_fg_color !important;
-}
-
+.calendar .calendar-other-month,
 .calendar .calendar-other-month.calendar-weekend {
   color: @window_fg_color !important;
 }
 
 .calendar .calendar-day-heading {
-  background-color: transparent;
-  color: @window_fg_color;
+  background-color: transparent !important;
+  color: @window_fg_color !important;
 }
 
 .calendar .calendar-week-number {
@@ -653,7 +626,7 @@ StEntry:focus {
 
 .notification-button:hover {
     background-color: @accent_color;
-    color: @window_bg_color;
+    color: @accent_fg_color;
 }
 
 .message-list-clear-button {
@@ -667,13 +640,13 @@ StEntry:focus {
 }
 
 .message-expand-button:hover {
-    color: @window_bg_color;
+    color: @accent_fg_color;
     background-color: @accent_color;
 }
 
 .datemenu-today-button {
-  background: none;
-  color: @window_fg_color;
+  background: none !important;
+  color: @window_fg_color !important;
 }
 
 /* Date/Time Menu */
@@ -762,12 +735,12 @@ StEntry:focus {
 
 .message-close-button {
   background-color: @accent_color;
-  color: @card_bg_color;
+  color: @accent_fg_color;
 }
 
-.message-close-button:hover {
-  color: @window_bg_color;
-}
+/* .message-close-button:hover { */
+/*   color: @window_bg_color; */
+/* } */
 
 .message-media-control {
   color: @window_fg_color;
@@ -775,7 +748,7 @@ StEntry:focus {
 
 .message-media-control:hover, .message-media-control:focus {
   background-color: @accent_color;
-  color: @window_bg_color;
+  color: @accent_fg_color;
 }
 
 .modal-dialog .modal-dialog-button-box .modal-dialog-button, .lg-obj-inspector-button, #LookingGlassDialog > #Toolbar .lg-toolbar-button, .candidate-page-button, .message .message-header .flat.message-expand-button,
@@ -786,7 +759,7 @@ StEntry:focus {
 
 .modal-dialog .modal-dialog-button-box .modal-dialog-button:hover, .lg-obj-inspector-button:hover, #LookingGlassDialog > #Toolbar .lg-toolbar-button:hover, .candidate-page-button:hover, .icon-button.flat:hover, .message .message-header .flat.message-expand-button:hover,
 .message .message-header .flat.message-close-button:hover, .message-notification-group .flat.message-collapse-button:hover, .button.flat:hover, .popup-menu .button:hover {
-  color: @window_bg_color;
+  color: @accent_fg_color;
   background-color: @accent_color;
 }
 
@@ -804,3 +777,191 @@ StEntry:focus {
   color: @window_fg_color;
   background-color: @headerbar_bg_color;
 }
+
+/* Login Dialog */
+#lockDialogGroup {
+  background-color: @window_bg_color !important;
+  color: @window_fg_color !important;
+}
+
+.login-dialog,
+.unlock-dialog {
+  background-color: transparent !important;
+}
+
+.login-dialog StEntry,
+.unlock-dialog > StEntry,
+.login-dialog > StEntry,
+.unlock-dialog > StEntry {
+  background-color: @card_bg_color !important;
+  color: @window_fg_color !important;
+}
+
+.login-dialog StEntry:focus,
+.unlock-dialog StEntry:focus {
+  background-color: @headerbar_bg_color;
+  color: @window_fg_color;
+}
+
+.login-dialog StEntry StLabel.hint-text,
+.unlock-dialog StEntry StLabel.hint-text {
+  color: @window_fg_color !important;
+}
+
+.login-dialog .modal-dialog-button,
+.unlock-dialog .modal-dialog-button {
+  color: @window_fg_color;
+  background-color: @card_bg_color;
+}
+
+.login-dialog .modal-dialog-button:hover,
+.login-dialog .modal-dialog-button:focus,
+.unlock-dialog .modal-dialog-button:hover,
+.unlock-dialog .modal-dialog-button:focus {
+  color: @window_fg_color;
+  background-color: @window_bg_color;
+}
+
+.login-dialog .modal-dialog-button:active,
+.unlock-dialog .modal-dialog-button:active {
+  color: @color_fg_color;
+  background-color: @card_bg_color;
+}
+
+.login-dialog .modal-dialog-button:insensitive,
+.unlock-dialog .modal-dialog-button:insensitive,
+.login-dialog .modal-dialog-button:default,
+.unlock-dialog .modal-dialog-button:default {
+  color: @window_fg_color;
+  background-color: @card_bg_color !important;
+}
+
+.login-dialog .modal-dialog-button:default:hover,
+.login-dialog .modal-dialog-button:default:focus,
+.unlock-dialog .modal-dialog-button:default:hover,
+.unlock-dialog .modal-dialog-button:default:focus {
+  color: @window_fg_color;
+  background-color: @headerbar_bg_color;
+}
+
+.login-dialog .modal-dialog-button:default:active,
+.unlock-dialog .modal-dialog-button:default:active {
+  color: @window_fg_color;
+  background-color: @card_bg_color;
+}
+
+.login-dialog .modal-dialog-button:default:insensitive,
+.unlock-dialog .modal-dialog-button:default:insensitive {
+  color: @window_fg_color;
+  background-color: @card_bg_color;
+}
+
+.login-dialog .cancel-button,
+.login-dialog .switch-user-button,
+.login-dialog .login-dialog-session-list-button,
+.unlock-dialog .cancel-button,
+.unlock-dialog .switch-user-button,
+.unlock-dialog .login-dialog-session-list-button {
+  background-color: @card_bg_color;
+  color: @window_fg_color;
+}
+
+
+.login-dialog .cancel-button:hover,
+.login-dialog .switch-user-button:hover,
+.login-dialog .login-dialog-session-list-button:hover,
+.unlock-dialog .cancel-button:hover,
+.unlock-dialog .switch-user-button:hover,
+.unlock-dialog .login-dialog-session-list-button:hover {
+  background-color: @headerbar_bg_color;
+}
+
+.login-dialog .login-dialog-message-warning,
+.unlock-dialog .login-dialog-message-warning {
+  color: @window_fg_color;
+}
+
+/* .login-dialog-button * { */
+/*   background-color: @window_fg_color; */
+/*   color: @card_bg_color; */
+/* } */
+
+/* .login-dialog-button *:hover { */
+/*   background-color: @headerbar_bg_color; */
+/* } */
+
+.login-dialog-banner {
+  color: @window_fg_color !important;
+}
+
+.login-dialog-not-listed-button {
+  background-color: @card_bg_color !important;
+  color: @window_fg_color !important;
+}
+
+.login-dialog-not-listed-button:focus,
+.login-dialog-not-listed-button:hover {
+  color: @window_fg_color !important;
+  background-color: @headerbar_bg_color !important;
+}
+
+/* .login-dialog-not-listed-button:hover { */
+/*   color: @window_fg_color; */
+/*   background: @headerbar_bg_color; */
+/* } */
+
+.login-dialog-user-list:expanded .login-dialog-user-list-item:selected,
+.login-dialog-user-list:expanded .login-dialog-user-list-item:hover,
+.login-dialog-user-list:expanded .login-dialog-user-list-item:active {
+  color: @window_fg_color !important;
+}
+
+.login-dialog-not-listed-button:active,
+.login-dialog-user-list-item:active,
+.login-dialog-user-list-item:focus:active,
+.login-dialog-user-list-item:insensitive:active {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1) !important;
+}
+
+.login-dialog-user-list-item,
+.login-dialog-user-list-item:default,
+.login-dialog-user-list-item:insensitive {
+  background-color: @card_bg_color !important;
+  color: @window_fg_color !important;
+}
+
+/* .login-dialog-user-list-item:focus { */
+/*   background-color: @headerbar_bg_color !important; */
+/* } */
+
+.login-dialog-user-list-item:hover, .login-dialog-user-list-item:focus:hover {
+  background-color: @headerbar_bg_color !important;
+  color: @window_fg_color !important;
+}
+
+/* .login-dialog-user-list-item:active, .login-dialog-user-list-item:focus:active { */
+/*   background-color: @window_bg_color !important; */
+/*   color: @window_fg_color !important; */
+/* } */
+
+.login-dialog-user-list-item .login-dialog-timed-login-indicator {
+  background-color: @window_bg_color !important;
+}
+
+.user-widget-label {
+  color: @window_fg_color !important;
+}
+
+*.a11y-button {
+  background-color: @card_bg_color !important;
+  color: @window_fg_color !important;
+}
+
+*.a11y-button:hover {
+  background-color: @headerbar_bg_color !important;
+}
+
+.login-dialog-prompt-label {
+  color: @window_fg_color !important;
+}
+

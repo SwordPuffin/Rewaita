@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import gi
-from gi.repository import Gtk, Adw
+from gi.repository import Gtk, Adw, GLib
 from .utils import Preferences
 
 transparency_css = """
@@ -81,9 +81,33 @@ options = [
         sharp_corners_css,
     ),
     (
+        "accent-fg",
+        _("Use Light Accent Foreground Color"),
+        _("May work better for some themes or accents"),
+        "",
+    ),
+    (
         "light-text",
         _("Force Light Text in Overview"),
         _("Might be useful for Blur my Shell users"),
+        "",
+    ),
+    (
+        "dark-panel",
+        _("Keep Top Panel Dark"),
+        _("The bar will stay dark regardless of theme"),
+        "",
+    ),
+    (
+        "trans-panel",
+        _("Transparent Top Panel"),
+        _("Makes the Top Panel Background Transparent"),
+        "",
+    ),
+    (
+        "no-pills",
+        _("Reduce Rounding on Pill Buttons"),
+        _("Smoothens all pill button on the top panel"),
         "",
     ),
 ]
@@ -92,9 +116,12 @@ keys = {
     "transparency": "transparency",
     "window": "borders",
     "sharp": "sharp",
+    "accent-fg": "accent_fg",
     "light-text": "light_text",
+    "dark-panel": "dark_panel",
+    "trans-panel": "trans_panel",
+    "no-pills": "no_pills"
 }
-
 
 class OptionsBox(Adw.PreferencesGroup):
     def __init__(self, parent):

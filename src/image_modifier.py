@@ -1,6 +1,6 @@
 # image_modifier.py
 #
-# Copyright 2025 Nathan Perlman
+# Copyright 2026 Nathan Perlman
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
 
 from PIL import Image
 import numpy as np
-from pyciede2000 import ciede2000
 
 import gi, os, asyncio, random
 gi.require_version('XdpGtk4', '1.0')
@@ -27,53 +26,83 @@ from gi.repository import Gtk, GLib, Gio, Xdp, XdpGtk4, Adw, Gdk
 from .loading_dialog import LoadingDialog
 
 picture_path = os.path.join(GLib.get_user_data_dir(), "wallpapers")
-
 def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
-def compute_centroids(arr, n_clusters):
-    centroids = []
-    centroids.append(arr[np.random.choice(len(arr))])
-    for _ in range(1, n_clusters):
-        dists = np.min(np.linalg.norm(arr[:, None] - np.array(centroids)[None, :], axis=2), axis=1)
-        probs = dists / np.sum(dists)
-        next_centroid = arr[np.random.choice(len(arr), p=probs)]
-        centroids.append(next_centroid)
-    return np.array(centroids)
+def srgb_to_linear(c_uint8: np.ndarray) -> np.ndarray:
+    c = c_uint8 / 255.0
+    return np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
 
-def simple_kmeans(arr, n_clusters=8, max_iter=10):
-    centroids = compute_centroids(arr, n_clusters)
+def linear_to_oklab(rgb_lin: np.ndarray) -> np.ndarray:
+    r, g, b = rgb_lin[:, 0], rgb_lin[:, 1], rgb_lin[:, 2]
+    l = 0.4122214708*r + 0.5363325363*g + 0.0514459929*b
+    m = 0.2119034982*r + 0.6806995451*g + 0.1073969566*b
+    s = 0.0883024619*r + 0.2817188376*g + 0.6299787005*b
+    l_, m_, s_ = np.cbrt(l), np.cbrt(m), np.cbrt(s)
+    return np.stack([
+        0.2104542553*l_ + 0.7936177850*m_ - 0.0040720468*s_,
+        1.9779984951*l_ - 2.4285922050*m_ + 0.4505937099*s_,
+        0.0259040371*l_ + 0.7827717662*m_ - 0.8086757660*s_,
+    ], axis=1)
+
+def to_lab(arr_uint8: np.ndarray) -> np.ndarray:
+    return linear_to_oklab(srgb_to_linear(arr_uint8.astype(np.float32)))
+
+def kmeans_plus_plus(sample: np.ndarray, k: int) -> np.ndarray:
+    centroids = [sample[np.random.randint(len(sample))]]
+    for _ in range(1, k):
+        diff = sample[:, None, :] - np.array(centroids)[None, :, :]
+        dists = np.einsum('ijk,ijk->ij', diff, diff).min(axis=1)
+        probs = dists / dists.sum()
+        centroids.append(sample[np.random.choice(len(sample), p=probs)])
+    return np.array(centroids, dtype=np.float32)
+
+def kmeans(sample: np.ndarray, k: int, max_iter: int) -> np.ndarray:
+    centroids = kmeans_plus_plus(sample, k)
     for _ in range(max_iter):
-        distances = np.linalg.norm(arr[:, None] - centroids[None, :], axis=2)
-        labels = np.argmin(distances, axis=1)
+        diff = sample[:, None, :] - centroids[None, :, :]
+        labels = np.einsum('ijk,ijk->ij', diff, diff).argmin(axis=1)
         new_centroids = np.array([
-            arr[labels == i].mean(axis=0) if np.any(labels == i) else centroids[i]
-            for i in range(n_clusters)
-        ])
-        if(np.allclose(centroids, new_centroids, atol=1e-2)):
+            sample[labels == i].mean(axis=0) if np.any(labels == i) else centroids[i]
+            for i in range(k)
+        ], dtype=np.float32)
+        if(np.allclose(centroids, new_centroids, atol=1e-8)):
             break
         centroids = new_centroids
-    return labels, centroids
+    return centroids
 
-async def remap_palette(image_path, target_palette_hex, n_colors=8, blend=1.0):
-    target_palette = [hex_to_rgb(h) for h in target_palette_hex]
-
+async def remap_palette(image_path, target_palette_hex, n_colors=36, blend=1.0, max_iter=100, sample_size=10000):
     img = Image.open(image_path).convert("RGB")
-    arr = np.array(img).reshape(-1, 3)
+    arr = np.array(img, dtype=np.float32).reshape(-1, 3)
 
-    labels, centers = simple_kmeans(arr, n_clusters=n_colors)
+    arr_lab = to_lab(arr)
+    pal_rgb = np.array([hex_to_rgb(h) for h in target_palette_hex], dtype=np.float32)
+    pal_lab = to_lab(pal_rgb)
 
-    palette_arr = np.array(target_palette)
-    dists = np.linalg.norm(centers[:, None] - palette_arr[None, :], axis=2)
-    closest_palette_idx = np.argmin(dists, axis=1)
-    mapped_palette = palette_arr[closest_palette_idx]
+    idx = np.random.choice(len(arr_lab), size=min(sample_size, len(arr_lab)), replace=False)
+    sample = arr_lab[idx]
+    centroids_lab = kmeans(sample, n_colors, max_iter)
 
-    blended_colors = (mapped_palette * blend + centers * (1.0 - blend)).astype(np.uint8)
+    diff = arr_lab[:, None, :] - centroids_lab[None, :, :]
+    all_labels = np.einsum('ijk,ijk->ij', diff, diff).argmin(axis=1)
 
-    recolored = blended_colors[labels].reshape(img.size[1], img.size[0], 3)
-    recolored = np.clip(recolored, 0, 255)
+    diff_p = centroids_lab[:, None, :] - pal_lab[None, :, :]
+    closest_pal_idx = np.einsum('ijk,ijk->ij', diff_p, diff_p).argmin(axis=1)
+    mapped_palette_rgb = pal_rgb[closest_pal_idx]
 
+    if(blend < 1.0):
+        centroids_rgb = np.array([
+            arr[all_labels == i].mean(axis=0) if np.any(all_labels == i) else np.zeros(3)
+            for i in range(n_colors)
+        ], dtype=np.float32)
+        blended = mapped_palette_rgb * blend + centroids_rgb * (1.0 - blend)
+    else:
+        blended = mapped_palette_rgb
+
+    blended = np.clip(blended, 0, 255).astype(np.uint8)
+
+    recolored = blended[all_labels].reshape(img.size[1], img.size[0], 3)
     return Image.fromarray(recolored)
 
 def make_new_image(parent, file_path):
@@ -138,60 +167,3 @@ def on_image_opened(file_dialog, result, parent):
     file = file_dialog.open_finish(result)
     file_path = file.get_path()
     make_new_image(parent, file_path)
-
-# ciede2000 Implementation
-
-def rgb_to_xyz(rgb):
-    rgb = np.array(rgb) / 255.0
-
-    mask = rgb > 0.04045
-    rgb_lin = np.where(mask, ((rgb + 0.055) / 1.055) ** 2.4, rgb / 12.92)
-
-    M = np.array([
-        [0.4124564, 0.3575761, 0.1804375],
-        [0.2126729, 0.7151522, 0.0721750],
-        [0.0193339, 0.1191920, 0.9503041]
-    ])
-
-    return np.dot(M, rgb_lin) * 100
-
-def xyz_to_lab(xyz):
-    xyz = np.array(xyz)
-    ref = np.array([95.047, 100.0, 108.883])
-
-    xyz = xyz / ref
-
-    def f(t):
-        return np.where(t > 0.008856, t ** (1/3), 7.787 * t + 16/116)
-
-    fx, fy, fz = f(xyz[0]), f(xyz[1]), f(xyz[2])
-
-    L = 116 * fy - 16
-    a = 500 * (fx - fy)
-    b = 200 * (fy - fz)
-
-    return np.array([L, a, b])
-
-def rgb_to_lab(rgb):
-    return xyz_to_lab(rgb_to_xyz(rgb))
-
-def find_closest_color(rgb, palette):
-    def rgb_to_lab(rgb):
-        return xyz_to_lab(rgb_to_xyz(rgb))
-
-    lab_input = rgb_to_lab(rgb)
-    closest = None
-    min_delta = float('inf')
-
-    for color in palette:
-        color_rgb = hex_to_rgb(color) if isinstance(color, str) else color
-        try:
-            delta = ciede2000(rgb_to_lab(color_rgb), lab_input)["delta_E_00"]
-            if(delta < min_delta):
-                min_delta = delta
-                closest = color
-        except Exception:
-           continue
-
-    return closest
-
