@@ -1,107 +1,110 @@
-/* Dracula Light Palette */
-@define-color window_bg_color #f8f8f2; /* foreground becomes bg */
-@define-color window_fg_color #282a36; /* background becomes fg */
+:root {
+  /* Base */
+  --window-bg-color: #f8f8f2;
+  --window-fg-color: #282a36;
 
-/* View styling */
-@define-color view_bg_color #f8f8f2;
-@define-color view_fg_color #282a36;
+  /* View styling */
+  --view-bg-color: #f8f8f2;
+  --view-fg-color: #282a36;
 
-/* Header bar */
-@define-color headerbar_bg_color #e2e2dc;
-@define-color headerbar_backdrop_color #e2e2dc;
-@define-color headerbar_fg_color #282a36;
+  /* Header bar */
+  --headerbar-bg-color: #e2e2dc;
+  --headerbar-backdrop-color: #e2e2dc;
+  --headerbar-fg-color: #282a36;
 
-/* Popovers and dialogs */
-@define-color popover_bg_color #f8f8f2;
-@define-color popover_fg_color #282a36;
+  /* Popovers & dialogs */
+  --popover-bg-color: #f8f8f2;
+  --popover-fg-color: #282a36;
 
-@define-color dialog_bg_color @popover_bg_color;
-@define-color dialog_fg_color @popover_fg_color;
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
 
-/* Cards and sidebars */
-@define-color card_bg_color #e3e3df;
-@define-color card_fg_color #282a36;
+  /* Cards & sidebars */
+  --card-bg-color: #e3e3df;
+  --card-fg-color: #282a36;
 
-@define-color sidebar_bg_color #f8f8f2;
-@define-color sidebar_fg_color #282a36;
-@define-color sidebar_backdrop_color @sidebar_bg_color;
-@define-color sidebar_border_color #e2e2dc;
+  --sidebar-bg-color: #f8f8f2;
+  --sidebar-fg-color: #282a36;
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: #e2e2dc;
 
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
-@define-color secondary_sidebar_fg_color @sidebar_fg_color;
-@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
-@define-color secondary_sidebar_border_color @sidebar_border_color;
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
 
-@define-color panel_bg_color @window_bg_color;
-@define-color panel_fg_color @window_fg_color;
-@define-color panel_button_bg_color transparent;
-@define-color panel_hover_bg_color @card_bg_color;
+  /* Panel */
+  --panel-bg-color: var(--window-bg-color);
+  --panel-fg-color: var(--window-fg-color);
+  --panel-button-bg-color: transparent;
+  --panel-hover-bg-color: #e3e3df;
 
-/* Alucard accent colors (mostly same as Dracula dark) */
-@define-color blue_1 #6272a4;
-@define-color blue_2 #0274b3;
-@define-color blue_3 #50fa7b;
-@define-color blue_4 #bd93f9;
-@define-color blue_5 #ff79c6;
+  /* Accents */
+  --blue-1: #6272a4;
+  --blue-2: #0274b3;
+  --blue-3: #50fa7b;
+  --blue-4: #bd93f9;
+  --blue-5: #ff79c6;
 
-@define-color green_1 #1f7c0b;
-@define-color green_2 #8be9fd;
-@define-color green_3 #f1fa8c;
-@define-color green_4 #ffb86c;
-@define-color green_5 #ff79c6;
+  --green-1: #1f7c0b;
+  --green-2: #8be9fd;
+  --green-3: #f1fa8c;
+  --green-4: #ffb86c;
+  --green-5: #ff79c6;
 
-@define-color yellow_1 #ffbb30;
-@define-color yellow_2 #ffb86c;
-@define-color yellow_3 #ff5555;
-@define-color yellow_4 #bd93f9;
-@define-color yellow_5 #6272a4;
+  --yellow-1: #ffbb30;
+  --yellow-2: #ffb86c;
+  --yellow-3: #ff5555;
+  --yellow-4: #bd93f9;
+  --yellow-5: #6272a4;
 
-@define-color orange_1 #ffb86c;
-@define-color orange_2 #ff5555;
-@define-color orange_3 #ff79c6;
-@define-color orange_4 #f1fa8c;
-@define-color orange_5 #50fa7b;
+  --orange-1: #ffb86c;
+  --orange-2: #ff5555;
+  --orange-3: #ff79c6;
+  --orange-4: #f1fa8c;
+  --orange-5: #50fa7b;
 
-@define-color red_1 #ff5555;
-@define-color red_2 #ff79c6;
-@define-color red_3 #bd93f9;
-@define-color red_4 #8be9fd;
-@define-color red_5 #50fa7b;
+  --red-1: #ff5555;
+  --red-2: #ff79c6;
+  --red-3: #bd93f9;
+  --red-4: #8be9fd;
+  --red-5: #50fa7b;
 
-@define-color purple_1 #ff79c6;
-@define-color purple_2 #bd93f9;
-@define-color purple_3 #ff5555;
-@define-color purple_4 #ffb86c;
-@define-color purple_5 #f1fa8c;
+  --purple-1: #ff79c6;
+  --purple-2: #bd93f9;
+  --purple-3: #ff5555;
+  --purple-4: #ffb86c;
+  --purple-5: #f1fa8c;
 
-@define-color brown_1 #6272a4;
-@define-color brown_2 #e2e2dc;
-@define-color brown_3 #cccccc;
-@define-color brown_4 #f8f8f2;
-@define-color brown_5 #ffffff;
+  --brown-1: #6272a4;
+  --brown-2: #e2e2dc;
+  --brown-3: #cccccc;
+  --brown-4: #f8f8f2;
+  --brown-5: #ffffff;
 
-@define-color light_1 #282a36;
-@define-color light_2 #44475a;
-@define-color light_3 #343746;
-@define-color light_4 #bd93f9;
-@define-color light_5 #6272a4;
+  --light-1: #282a36;
+  --light-2: #44475a;
+  --light-3: #343746;
+  --light-4: #bd93f9;
+  --light-5: #6272a4;
 
-@define-color dark_1 #e2e2dc;
-@define-color dark_2 #cccccc;
-@define-color dark_3 #f8f8f2;
-@define-color dark_4 #ffffff;
-@define-color dark_5 #fafafa;
+  --dark-1: #e2e2dc;
+  --dark-2: #cccccc;
+  --dark-3: #f8f8f2;
+  --dark-4: #ffffff;
+  --dark-5: #fafafa;
+}
 
 toast {
-  background-color: @window_bg_color;
-  color: @window_fg_color;
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
 
 toggle:checked {
-  background-color: @card_bg_color;
-  color: @window_fg_color;
+  background-color: var(--window-fg-color);
+  color: var(--window-bg-color);
 }
 
 .inline {
-	background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }

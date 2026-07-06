@@ -1,62 +1,75 @@
 /* Kanagawa Light Palette */
-@define-color window_bg_color #dcd7ba;
-@define-color window_fg_color #1f1f28;
 
-@define-color view_bg_color #fffedf;
-@define-color view_fg_color #1f1f28;
+:root {
+  /* Base Colors */
+  --window-bg-color: #dcd7ba;
+  --window-fg-color: #1f1f28;
 
-@define-color headerbar_bg_color #f2ecbc;
-@define-color headerbar_backdrop_color #f2ecbc;
-@define-color headerbar_fg_color #1f1f28;
+  /* View Styling */
+  --view-bg-color: #fffedf;
+  --view-fg-color: #1f1f28;
 
-@define-color popover_bg_color #fffedf;
-@define-color popover_fg_color #1f1f28;
+  /* Header Bar */
+  --headerbar-bg-color: #f2ecbc;
+  --headerbar-backdrop-color: #f2ecbc;
+  --headerbar-fg-color: #1f1f28;
 
-@define-color dialog_bg_color @popover_bg_color;
-@define-color dialog_fg_color @popover_fg_color;
+  /* Popovers & Dialogs */
+  --popover-bg-color: #fffedf;
+  --popover-fg-color: #1f1f28;
 
-@define-color card_bg_color #ddd8ad;
-@define-color card_fg_color #1f1f28;
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
 
-@define-color sidebar_bg_color #f2ecbc;
-@define-color sidebar_fg_color #1f1f28;
-@define-color sidebar_backdrop_color @sidebar_bg_color;
-@define-color sidebar_border_color #c8c093;
+  /* Cards & Sidebars */
+  --card-bg-color: #ddd8ad;
+  --card-fg-color: #1f1f28;
 
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
-@define-color secondary_sidebar_fg_color @sidebar_fg_color;
-@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
-@define-color secondary_sidebar_border_color @sidebar_border_color;
+  --sidebar-bg-color: #f2ecbc;
+  --sidebar-fg-color: #1f1f28;
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: #c8c093;
 
-@define-color panel_bg_color @window_bg_color;
-@define-color panel_fg_color @window_fg_color;
-@define-color panel_button_bg_color transparent;
-@define-color panel_hover_bg_color @card_bg_color;
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
 
-/* Accents */
-@define-color blue_1 #34548a;
-@define-color blue_2 #7fb4ca;
-@define-color green_1 #76946a;
-@define-color yellow_1 #dca561;
-@define-color orange_1 #ffa066;
-@define-color red_1 #c34043;
-@define-color purple_1 #957fb8;
-@define-color brown_1 #c8c093;
-@define-color light_1 #f2ecbc;
-@define-color light_2 #dcd7ba;
-@define-color dark_1 #1f1f28;
-@define-color dark_2 #2a2a37;
+  /* Panel */
+  --panel-bg-color: var(--window-bg-color);
+  --panel-fg-color: var(--window-fg-color);
+  --panel-button-bg-color: transparent;
+  --panel-hover-bg-color: var(--card-bg-color);
 
+  /* Accents */
+  --blue-1: #34548a;
+  --blue-2: #7fb4ca;
+
+  --green-1: #76946a;
+  --yellow-1: #dca561;
+  --orange-1: #ffa066;
+  --red-1: #c34043;
+  --purple-1: #957fb8;
+  --brown-1: #c8c093;
+
+  --light-1: #f2ecbc;
+  --light-2: #dcd7ba;
+
+  --dark-1: #1f1f28;
+  --dark-2: #2a2a37;
+
+  /* Active Toggle (requested) */
+  --active-toggle-fg-color: var(--window-bg-color);
+  --active-toggle-bg-color: var(--window-fg-color);
+}
+
+/* Toast */
 toast {
-  background-color: @window_bg_color;
-  color: @window_fg_color;
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
 
-toggle:checked {
-  background-color: @card_bg_color;
-  color: @window_fg_color;
-}
-
+/* Inline helper */
 .inline {
-	background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }

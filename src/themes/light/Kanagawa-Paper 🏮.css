@@ -1,103 +1,104 @@
-/* Kanagawa Paper/Canvas Palette */
-@define-color window_bg_color #e1e1de;
-@define-color window_fg_color #73787d; /* canvasGray3 */
+:root {
+  /* Base */
+  --window-bg-color: #e1e1de;
+  --window-fg-color: #73787d;
 
-/* View styling */
-@define-color view_bg_color #d1cfc5;
-@define-color view_fg_color #73787d;
+  /* View styling */
+  --view-bg-color: #d1cfc5;
+  --view-fg-color: #73787d;
 
-/* Header bar */
-@define-color headerbar_bg_color #cbc8bc;
-@define-color headerbar_backdrop_color #cbc8bc;
-@define-color headerbar_fg_color #73787d;
+  /* Header bar */
+  --headerbar-bg-color: #cbc8bc;
+  --headerbar-backdrop-color: #cbc8bc;
+  --headerbar-fg-color: #73787d;
 
-/* Popovers and dialogs */
-@define-color popover_bg_color #e1e1de;
-@define-color popover_fg_color #73787d;
+  /* Popovers & dialogs */
+  --popover-bg-color: #e1e1de;
+  --popover-fg-color: #73787d;
 
-@define-color dialog_bg_color @popover_bg_color;
-@define-color dialog_fg_color @popover_fg_color;
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
 
-/* Cards and sidebars */
-@define-color card_bg_color #d1cfc5;
-@define-color card_fg_color #73787d;
+  /* Cards & sidebars */
+  --card-bg-color: #d1cfc5;
+  --card-fg-color: #73787d;
 
-@define-color sidebar_bg_color #d1cfc5;
-@define-color sidebar_fg_color #73787d;
-@define-color sidebar_backdrop_color @sidebar_bg_color;
-@define-color sidebar_border_color #cbc8bc;
+  --sidebar-bg-color: #d1cfc5;
+  --sidebar-fg-color: #73787d;
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: #cbc8bc;
 
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
-@define-color secondary_sidebar_fg_color @sidebar_fg_color;
-@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
-@define-color secondary_sidebar_border_color @sidebar_border_color;
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
 
-/* Kanagawa accent colors */
-@define-color blue_1 #7e9cd8; /* dragon blue */
-@define-color blue_2 #6585cf;
-@define-color blue_3 #7fb4ca; /* wave blue 2 */
-@define-color blue_4 #9cabca; /* lotus blue */
-@define-color blue_5 #c0a36e; /* autumn yellow */
+  /* Kanagawa accent colors */
+  --blue-1: #7e9cd8;
+  --blue-2: #6585cf;
+  --blue-3: #7fb4ca;
+  --blue-4: #9cabca;
+  --blue-5: #c0a36e;
 
-@define-color green_1 #6a9589; /* wave aqua 1 */
-@define-color green_2 #7aa89f; /* wave aqua 2 */
-@define-color green_3 #98bb6c; /* spring green */
-@define-color green_4 #c0a36e; /* autumn yellow */
-@define-color green_5 #d27e99; /* sakura pink */
+  --green-1: #6a9589;
+  --green-2: #7aa89f;
+  --green-3: #98bb6c;
+  --green-4: #c0a36e;
+  --green-5: #d27e99;
 
-@define-color yellow_1 #c0a36e; /* autumn yellow */
-@define-color yellow_2 #dca561; /* peach red */
-@define-color yellow_3 #ff5d62; /* samurai red */
-@define-color yellow_4 #957fb8; /* orchid */
-@define-color yellow_5 #7e9cd8; /* dragon blue */
+  --yellow-1: #c0a36e;
+  --yellow-2: #dca561;
+  --yellow-3: #ff5d62;
+  --yellow-4: #957fb8;
+  --yellow-5: #7e9cd8;
 
-@define-color orange_1 #dca561; /* peach red */
-@define-color orange_2 #ff5d62; /* samurai red */
-@define-color orange_3 #d27e99; /* sakura pink */
-@define-color orange_4 #98bb6c; /* spring green */
-@define-color orange_5 #6a9589; /* wave aqua 1 */
+  --orange-1: #dca561;
+  --orange-2: #ff5d62;
+  --orange-3: #d27e99;
+  --orange-4: #98bb6c;
+  --orange-5: #6a9589;
 
-@define-color red_1 #ff5d62; /* samurai red */
-@define-color red_2 #d27e99; /* sakura pink */
-@define-color red_3 #957fb8; /* orchid */
-@define-color red_4 #7aa89f; /* wave aqua 2 */
-@define-color red_5 #98bb6c; /* spring green */
+  --red-1: #ff5d62;
+  --red-2: #d27e99;
+  --red-3: #957fb8;
+  --red-4: #7aa89f;
+  --red-5: #98bb6c;
 
-@define-color purple_1 #d27e99; /* sakura pink */
-@define-color purple_2 #957fb8; /* orchid */
-@define-color purple_3 #ff5d62; /* samurai red */
-@define-color purple_4 #dca561; /* peach red */
-@define-color purple_5 #98bb6c; /* spring green */
+  --purple-1: #d27e99;
+  --purple-2: #957fb8;
+  --purple-3: #ff5d62;
+  --purple-4: #dca561;
+  --purple-5: #98bb6c;
 
-@define-color brown_1 #7e9cd8; /* dragon blue */
-@define-color brown_2 #cbc8bc; /* autumn yellow light */
-@define-color brown_3 #d1cfc5;
-@define-color brown_4 #d1cfc5; /* paper */
-@define-color brown_5 #ffffff;
+  --brown-1: #7e9cd8;
+  --brown-2: #cbc8bc;
+  --brown-3: #d1cfc5;
+  --brown-4: #d1cfc5;
+  --brown-5: #ffffff;
 
-@define-color light_1 #73787d; /* sumi ink 4 */
-@define-color light_2 #727169; /* sumi ink 3 */
-@define-color light_3 #938aa9; /* fuji gray */
-@define-color light_4 #957fb8; /* orchid */
-@define-color light_5 #7e9cd8; /* dragon blue */
+  --light-1: #73787d;
+  --light-2: #727169;
+  --light-3: #938aa9;
+  --light-4: #957fb8;
+  --light-5: #7e9cd8;
 
-@define-color dark_1 #cbc8bc; /* autumn yellow light */
-@define-color dark_2 #d1cfc5;
-@define-color dark_3 #d1cfc5; /* paper */
-@define-color dark_4 #ffffff;
-@define-color dark_5 #fefcf8;
+  --dark-1: #cbc8bc;
+  --dark-2: #d1cfc5;
+  --dark-3: #d1cfc5;
+  --dark-4: #ffffff;
+  --dark-5: #fefcf8;
+
+  /* Active toggle state */
+  --active-toggle-fg-color: var(--window-bg-color);
+  --active-toggle-bg-color: var(--window-fg-color);
+}
 
 /* UI element styling */
 toast {
-  background-color: @window_bg_color;
-  color: @window_fg_color;
-}
-
-toggle:checked {
-  background-color: @card_bg_color;
-  color: @window_fg_color;
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
 
 .inline {
-	background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }

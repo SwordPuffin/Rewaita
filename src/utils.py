@@ -26,6 +26,52 @@ settings = Xdp.Portal().get_settings()
 css_provider = Gtk.CssProvider()
 firefox_theme_plugin = FirefoxGnomeThemePlugin()
 
+no_pill_css = """
+#panel .panel-button, .search-entry, .clock {
+  border-radius: 12px;
+}
+
+.quick-toggle, .quick-toggle-has-menu {
+  border-radius: 12px;
+}
+
+.quick-toggle-has-menu .quick-toggle {
+  min-width: auto;
+  max-width: auto;
+}
+
+.quick-toggle-has-menu .quick-toggle:ltr {
+  border-radius: 12px 0 0 12px;
+}
+
+.quick-toggle-has-menu .quick-toggle:rtl {
+  border-radius: 0 12px 12px 0;
+}
+
+.quick-toggle-has-menu .quick-toggle:ltr:last-child {
+  border-radius: 12px;
+}
+
+.quick-toggle-has-menu .quick-toggle:rtl:last-child {
+  border-radius: 12px;
+}
+
+.quick-toggle-has-menu .quick-toggle-menu-button:ltr {
+  border-radius: 0 12px 12px 0;
+}
+
+.quick-toggle-has-menu .quick-toggle-menu-button:rtl {
+  border-radius: 12px 0 0 12px;
+}
+"""
+
+accent_tab_css_gs = """
+#panel .panel-button:hover, .clock:hover,
+#panel .panel-button:active, .clock:active{
+  color: @accent-color !important;
+}
+"""
+
 class Preferences:
     DEFAULTS = {
         "light-theme": "default",
@@ -39,6 +85,7 @@ class Preferences:
         "sharp": False,
         "firefox-theme": False,
         "accent-fg": False,
+        "accent-tabs": False,
         "light-text": False,
         "dark-panel": False,
         "trans-panel": False,
@@ -89,8 +136,8 @@ class Preferences:
 
 def get_accent_color(palette, win):
     accent_map = {
-        "'blue'": "blue_1", "'teal'": "blue_2", "'green'": "green_1", "'yellow'": "yellow_1",
-        "'orange'": "orange_1", "'red'": "red_1", "'pink'": "purple_1", "'purple'": "purple_2", "'slate'": "dark_1"
+        "'blue'": "blue-1", "'teal'": "blue-2", "'green'": "green-1", "'yellow'": "yellow-1",
+        "'orange'": "orange-1", "'red'": "red-1", "'pink'": "purple-1", "'purple'": "purple-2", "'slate'": "dark-1"
     }
 
     if(win.accent_fg):
@@ -107,90 +154,62 @@ def get_accent_color(palette, win):
 def add_css_provider(css, accent_colors):
     Gtk.StyleContext.remove_provider_for_display(Gdk.Display.get_default(), css_provider)
     if(accent_colors is not None):
-        css_provider.load_from_data(f"""
-            {css}
-            @define-color accent_bg_color {accent_colors[0]};
-            @define-color accent_fg_color {accent_colors[1]};
-        """.encode())
-        Gtk.StyleContext.add_provider_for_display(
-            Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
-        )
+        css += f"\n:root {{ --accent-bg-color: {accent_colors[0]};\n--accent-fg-color: {accent_colors[1]};\n}}"
+    css_provider.load_from_data(f"""
+        {css}
+    """.encode())
+    Gtk.StyleContext.add_provider_for_display(
+        Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
+    )
 
-no_pill_css = """
-#panel .panel-button, .search-entry, .clock {
-  border-radius: 12px;
-}
-
-
-.quick-toggle, .quick-toggle-has-menu {
-  border-radius: 12px;
-}
-
-.quick-toggle-has-menu .quick-toggle {
-  min-width: auto;
-  max-width: auto;
-}
-
-.quick-toggle-has-menu .quick-toggle:ltr {
-  border-radius: 12px 0 0 12px;
-}
-
-.quick-toggle-has-menu .quick-toggle:rtl {
-  border-radius: 0 12px 12px 0;
-}
-
-.quick-toggle-has-menu .quick-toggle:ltr:last-child {
-  border-radius: 12px;
-}
-
-.quick-toggle-has-menu .quick-toggle:rtl:last-child {
-  border-radius: 12px;
-}
-
-.quick-toggle-has-menu .quick-toggle-menu-button:ltr {
-  border-radius: 0 12px 12px 0;
-}
-
-.quick-toggle-has-menu .quick-toggle-menu-button:rtl {
-  border-radius: 12px 0 0 12px;
-}
-"""
+def add_gtk3_window_controls(window_controls, gtk_css):
+    if(window_controls != "default"):
+        window_control_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", "gtk3", window_controls + ".css")
+        with open(window_control_file, "r") as wcf:
+            css = wcf.read()
+    else:
+        css = ""
+    with open(os.path.join(os.path.expanduser("~/.config"), "gtk-3.0", "gtk.css"), "a") as file:
+        file.write(gtk_css + css)
 
 def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
     prefs = Preferences()
     all_prefs = prefs.get_all()
 
     if(all_prefs["window"]):
-        colors["border_color"] = colors["accent_color"]
+        colors["border-color"] = colors["accent-color"]
     else:
-        colors["border_color"] = 'transparent'
+        colors["border-color"] = 'transparent'
 
-    colors["overview_bg_color"] = colors["window_bg_color"] # overview_bg_color must be opaque
+    colors["overview-bg-color"] = colors["window-bg-color"] # overview_bg_color must be opaque
     if(all_prefs["transparency"]):
-        for color_to_replace in ["window_bg_color", "headerbar_bg_color", "card_bg_color"]:
+        for color_to_replace in ["window-bg-color", "headerbar-bg-color", "card-bg-color"]:
             rgb = hex_to_rgb(colors[color_to_replace])
             colors[color_to_replace] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.82)"
         gtk3_file += ".background:not(.nautilus-desktop):not(.desktopwindow) { opacity: 0.95; }"
 
     if(all_prefs["light-text"]):
-        colors["search_fg_color"] = "white"
+        colors["search-fg-color"] = "white"
     else:
-        colors["search_fg_color"] = colors["window_fg_color"]
+        colors["search-fg-color"] = colors["window-fg-color"]
+
+    if(all_prefs["accent-tabs"]):
+        gnome_shell_css += accent_tab_css_gs
 
     if(not all_prefs["dark-panel"] and not all_prefs["trans-panel"]):
-        colors["panel_bg_color"] = colors["window_bg_color"]
-        colors["panel_fg_color"] = colors["window_fg_color"]
+        colors["panel-bg-color"] = colors["window-bg-color"]
+        colors["panel-fg-color"] = colors["window-fg-color"]
 
     if(all_prefs["trans-panel"]):
-        colors["panel_bg_color"] = "rgba(0, 0, 0, 0)"
-        colors["panel_fg_color"] = "white"
+        colors["panel-bg-color"] = "transparent"
+        colors["panel-fg-color"] = "white"
 
     if(all_prefs["dark-panel"]):
-        colors["panel_bg_color"] = "black"
-        colors["panel_fg_color"] = "white"
+        colors["panel-bg-color"] = "black"
+        colors["panel-fg-color"] = "white"
 
-    rgb = hex_to_rgb(colors["accent_color"])
-    colors["accent_transparent"] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.5)"
+    rgb = hex_to_rgb(colors["accent-color"])
+    colors["accent-transparent"] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.5)"
 
     if(all_prefs["firefox-theme"]):
         firefox_theme_plugin.variables = colors
@@ -199,13 +218,16 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
     else:
         firefox_theme_plugin.reset()
 
-    items_to_replace = ["window_bg_color", "window_fg_color", "card_bg_color", "headerbar_bg_color",
-                        "accent_color", "border_color", "red_1", "panel_bg_color", "panel_fg_color",
-                        "overview_bg_color", "search_fg_color", "accent_transparent", "accent_fg_color"]
+    items_to_replace = ["window-bg-color", "window-fg-color", "card-bg-color", "headerbar-bg-color",
+                        "accent-color", "border-color", "red-1", "panel-bg-color", "panel-fg-color",
+                        "overview-bg-color", "search-fg-color", "accent-transparent", "accent-fg-color"]
 
     if(all_prefs["modify-gtk3-theme"]):
         for color in colors.keys():
             gtk3_file = gtk3_file.replace(f"@{color}", colors[color])
+
+        if(all_prefs["sharp"]):
+            gtk3_file += f"\n\n* {{border-radius: 0px;}}\n\n"
 
         gtk3_theme_file = os.path.join(GLib.getenv("HOME"), ".config", "gtk-3.0", "gtk.css")
         with open(gtk3_theme_file, "w") as file:
@@ -220,7 +242,7 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
         file = shutil.copyfile(theme_file, os.path.join(gnome_shell_theme_dir, "gnome-shell.css"))
 
         if(all_prefs["sharp"]):
-            gnome_shell_css += f"\n\n* {{border-radius: 0px;}}"
+            gnome_shell_css += f"\n\n* {{border-radius: 0px !important;}}"
 
         if(all_prefs["no-pills"]):
             gnome_shell_css += no_pill_css
@@ -230,10 +252,9 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
 
         reset_func()
 
-def set_to_default(config_dirs, theme_type, reset_func, extras):
-    for config_dir in config_dirs:
-        with open(os.path.join(config_dir, "gtk.css"), "w") as file:
-            file.write(extras)
+def set_to_default(gtk4_config_dir, theme_type, reset_func, extras, modify_gtk3_theme):
+    with open(os.path.join(gtk4_config_dir, "gtk.css"), "w") as file:
+        file.write(extras[0])
 
     gnome_shell_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
     if(os.path.exists(os.path.join(gnome_shell_path, "gnome-shell.css"))):
@@ -241,8 +262,11 @@ def set_to_default(config_dirs, theme_type, reset_func, extras):
 
     gtk_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"default-{theme_type}.css")
     gtk_css = open(gtk_file).read()
-    add_css_provider(gtk_css + extras, None)
+    add_css_provider(gtk_css + extras[0], None)
     firefox_theme_plugin.reset()
+
+    if(modify_gtk3_theme):
+        add_gtk3_window_controls(extras[1], gtk_css)
         
     if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
         reset_func()
@@ -295,12 +319,23 @@ def delete_items(action, _, button, window):
                 child.disconnect_by_func(child.func)
                 child.connect("clicked", delete_theme, window)
 
-def set_gtk3_theme(gtk3_config_dir, window_control):
-    dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gtk3-template")
-    assets = os.path.join(dir, "assets.tar.xz")
-    shutil.unpack_archive(assets, extract_dir=gtk3_config_dir, format="tar")
-    if(window_control != "default"):
-        window_control_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", "gtk3", window_control + ".css")
-        with open(os.path.join(gtk3_config_dir, "gtk.css"), "a") as file:
-            with open(window_control_file, "r") as css:
-                file.write(css.read())
+def change_autostart(state):
+    if(state == False):
+        path = os.path.join(GLib.getenv("HOME"), ".config", "autostart", "rewaita.desktop")
+        if(os.path.exists(path)):
+            os.remove(path)
+    else:
+        with open(os.path.join(GLib.getenv("HOME"), ".config", "autostart", "rewaita.desktop"), "w") as file:
+            if(Xdp.Portal().running_under_flatpak()):
+                command = "flatpak run io.github.swordpuffin.rewaita --background"
+            else:
+                command = "rewaita --background"
+            file.write(f"""
+[Desktop Entry]
+Type=Application
+Name=io.github.swordpuffin.rewaita
+X-XDP-Autostart=io.github.swordpuffin.rewaita
+Exec={command}
+DBusActivatable=true
+X-Flatpak=io.github.swordpuffin.rewaita
+                """)

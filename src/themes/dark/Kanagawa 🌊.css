@@ -1,59 +1,66 @@
-/* Kanagawa Dark Palette */
-@define-color window_bg_color #1f1f28;
-@define-color window_fg_color #dcd7ba;
+:root {
+  --window-bg-color: #1f1f28;
+  --window-fg-color: #dcd7ba;
 
-@define-color view_bg_color #1f1f28;
-@define-color view_fg_color #dcd7ba;
+  --view-bg-color: #1f1f28;
+  --view-fg-color: #dcd7ba;
 
-@define-color headerbar_bg_color #2a2a37;
-@define-color headerbar_backdrop_color #2a2a37;
-@define-color headerbar_fg_color #dcd7ba;
+  --headerbar-bg-color: #2a2a37;
+  --headerbar-backdrop-color: #2a2a37;
+  --headerbar-fg-color: #dcd7ba;
 
-@define-color popover_bg_color #1f1f28;
-@define-color popover_fg_color #dcd7ba;
+  --popover-bg-color: #1f1f28;
+  --popover-fg-color: #dcd7ba;
 
-@define-color dialog_bg_color @popover_bg_color;
-@define-color dialog_fg_color @popover_fg_color;
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
 
-@define-color card_bg_color #323137;
-@define-color card_fg_color #dcd7ba;
+  --card-bg-color: #323137;
+  --card-fg-color: #dcd7ba;
 
-@define-color sidebar_bg_color #1f1f28;
-@define-color sidebar_fg_color #dcd7ba;
-@define-color sidebar_backdrop_color @sidebar_bg_color;
-@define-color sidebar_border_color #2a2a37;
+  --sidebar-bg-color: #1f1f28;
+  --sidebar-fg-color: #dcd7ba;
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: #2a2a37;
 
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
-@define-color secondary_sidebar_fg_color @sidebar_fg_color;
-@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
-@define-color secondary_sidebar_border_color @sidebar_border_color;
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
 
-/* Accents */
-@define-color blue_1 #7e9cd8;
-@define-color blue_2 #658594;
-@define-color green_1 #98bb6c;
-@define-color yellow_1 #c0a36e;
-@define-color orange_1 #ffa066;
-@define-color red_1 #e46876;
-@define-color purple_1 #d27e99;
-@define-color purple_2 #957fb8;
-@define-color brown_1 #c8c093;
-@define-color light_1 #dcd7ba;
-@define-color light_2 #c8c093;
-@define-color light_5 #658594;
-@define-color dark_1 #2a2a37;
-@define-color dark_2 #1f1f28;
+  /* Kanagawa accents */
+  --blue-1: #7e9cd8;
+  --blue-2: #658594;
 
-toast {
-  background-color: @window_bg_color;
-  color: @window_fg_color;
+  --green-1: #98bb6c;
+
+  --yellow-1: #c0a36e;
+
+  --orange-1: #ffa066;
+
+  --red-1: #e46876;
+
+  --purple-1: #d27e99;
+  --purple-2: #957fb8;
+
+  --brown-1: #c8c093;
+
+  --light-1: #dcd7ba;
+  --light-2: #c8c093;
+  --light-5: #658594;
+
+  --dark-1: #2a2a37;
+  --dark-2: #1f1f28;
+
+  --active-toggle-bg-color: var(--window-fg-color);
+  --active-toggle-fg-color: var(--window-bg-color);
 }
 
-toggle:checked {
-  background-color: @card_bg_color;
-  color: @window_fg_color;
+toast {
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
 
 .inline {
-	background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }

@@ -4,12 +4,21 @@ button.minimize.titlebutton:not(.suggested-action):not(.destructive-action):not(
 }
 
 button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
-  background-color: @accent_bg_color;
-  color: @accent_fg_color;
+  background-color: @accent-bg-color;
+  color: @accent-fg-color;
+}
+
+button.close.titlebutton:not(.suggested-action):not(.destructive-action):hover {
+  background-color: mix(@accent-bg-color, black, 0.2);
+}
+
+
+button.close.titlebutton:not(.suggested-action):not(.destructive-action) > image {
+	color: @accent-fg-color;
 }
 
 button.close.titlebutton:not(.suggested-action):not(.destructive-action):backdrop {
-  background-color: shade(@accent_bg_color, 0.5);
-  color: @accent_fg_color;
+  background-color: shade(@accent-bg-color, 0.5);
+  color: @accent-fg-color;
 }
 

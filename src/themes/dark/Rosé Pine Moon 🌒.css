@@ -1,102 +1,103 @@
-/* Rosé Pine Moon Palette */
-@define-color window_bg_color #232136; /* base */
-@define-color window_fg_color #e0def4; /* text */
+:root {
+  /* Window */
+  --window-bg-color: #232136;
+  --window-fg-color: #e0def4;
 
-/* View styling */
-@define-color view_bg_color #232136;
-@define-color view_fg_color #e0def4;
+  /* View styling */
+  --view-bg-color: #232136;
+  --view-fg-color: #e0def4;
 
-/* Header bar */
-@define-color headerbar_bg_color #2a273f; /* surface */
-@define-color headerbar_backdrop_color #2a273f;
-@define-color headerbar_fg_color #e0def4;
+  /* Header bar */
+  --headerbar-bg-color: #2a273f;
+  --headerbar-backdrop-color: #2a273f;
+  --headerbar-fg-color: #e0def4;
 
-/* Popovers and dialogs */
-@define-color popover_bg_color #232136;
-@define-color popover_fg_color #e0def4;
+  /* Popovers and dialogs */
+  --popover-bg-color: #232136;
+  --popover-fg-color: #e0def4;
 
-@define-color dialog_bg_color @popover_bg_color;
-@define-color dialog_fg_color @popover_fg_color;
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
 
-/* Cards and sidebars */
-@define-color card_bg_color #393552; /* overlay */
-@define-color card_fg_color #e0def4;
+  /* Cards and sidebars */
+  --card-bg-color: #393552;
+  --card-fg-color: #e0def4;
 
-@define-color sidebar_bg_color #232136;
-@define-color sidebar_fg_color #e0def4;
-@define-color sidebar_backdrop_color @sidebar_bg_color;
-@define-color sidebar_border_color #393552; /* overlay */
+  --sidebar-bg-color: #232136;
+  --sidebar-fg-color: #e0def4;
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: #393552;
 
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
-@define-color secondary_sidebar_fg_color @sidebar_fg_color;
-@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
-@define-color secondary_sidebar_border_color @sidebar_border_color;
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
 
-/* Rosé Pine Moon accent colors */
-@define-color blue_1 #9ccfd8; /* foam */
-@define-color blue_2 #c4a7e7; /* iris */
-@define-color blue_3 #3e8fb0; /* pine */
-@define-color blue_4 #3e8fb0; /* pine */
-@define-color blue_5 #3e8fb0; /* pine */
+  /* Accents */
+  --blue-1: #9ccfd8;
+  --blue-2: #c4a7e7;
+  --blue-3: #3e8fb0;
+  --blue-4: #3e8fb0;
+  --blue-5: #3e8fb0;
 
-@define-color green_1 #3e8fb0; /* pine */
-@define-color green_2 #9ccfd8; /* foam */
-@define-color green_3 #3e8fb0; /* pine */
-@define-color green_4 #9ccfd8; /* foam */
-@define-color green_5 #3e8fb0; /* pine */
+  --green-1: #3e8fb0;
+  --green-2: #9ccfd8;
+  --green-3: #3e8fb0;
+  --green-4: #9ccfd8;
+  --green-5: #3e8fb0;
 
-@define-color yellow_1 #f6c177; /* gold */
-@define-color yellow_2 #f6c177; /* gold */
-@define-color yellow_3 #ea9a97; /* rose */
-@define-color yellow_4 #ea9a97; /* rose */
-@define-color yellow_5 #ea9a97; /* rose */
+  --yellow-1: #f6c177;
+  --yellow-2: #f6c177;
+  --yellow-3: #ea9a97;
+  --yellow-4: #ea9a97;
+  --yellow-5: #ea9a97;
 
-@define-color orange_1 #ea9a97; /* rose */
-@define-color orange_2 #ea9a97; /* rose */
-@define-color orange_3 #eb6f92; /* love */
-@define-color orange_4 #f6c177; /* gold */
-@define-color orange_5 #f6c177; /* gold */
+  --orange-1: #ea9a97;
+  --orange-2: #ea9a97;
+  --orange-3: #eb6f92;
+  --orange-4: #f6c177;
+  --orange-5: #f6c177;
 
-@define-color red_1 #eb6f92; /* love */
-@define-color red_2 #eb6f92; /* love */
-@define-color red_3 #eb6f92; /* love */
-@define-color red_4 #ea9a97; /* rose */
-@define-color red_5 #ea9a97; /* rose */
+  --red-1: #eb6f92;
+  --red-2: #eb6f92;
+  --red-3: #eb6f92;
+  --red-4: #ea9a97;
+  --red-5: #ea9a97;
 
-@define-color purple_1 #c4a7e7; /* iris */
-@define-color purple_2 #908caa; /* subtle */
-@define-color purple_3 #6e6a86; /* muted */
-@define-color purple_4 #9ccfd8; /* foam */
-@define-color purple_5 #3e8fb0; /* pine */
+  --purple-1: #c4a7e7;
+  --purple-2: #908caa;
+  --purple-3: #6e6a86;
+  --purple-4: #9ccfd8;
+  --purple-5: #3e8fb0;
 
-@define-color brown_1 #6e6a86; /* muted */
-@define-color brown_2 #6e6a86; /* muted */
-@define-color brown_3 #908caa; /* subtle */
-@define-color brown_4 #c4a7e7; /* iris */
-@define-color brown_5 #6e6a86; /* muted */
+  --brown-1: #6e6a86;
+  --brown-2: #6e6a86;
+  --brown-3: #908caa;
+  --brown-4: #c4a7e7;
+  --brown-5: #6e6a86;
 
-@define-color light_1 #e0def4; /* text */
-@define-color light_2 #908caa; /* subtle */
-@define-color light_3 #6e6a86; /* muted */
-@define-color light_4 #c4a7e7; /* iris */
-@define-color light_5 #6e6a86; /* muted */
+  --light-1: #e0def4;
+  --light-2: #908caa;
+  --light-3: #6e6a86;
+  --light-4: #c4a7e7;
+  --light-5: #6e6a86;
 
-@define-color dark_1 #393552; /* overlay */
-@define-color dark_2 #2a273f; /* surface */
-@define-color dark_3 #232136; /* base */
-@define-color dark_4 #232136; /* base */
-@define-color dark_5 #232136; /* base */
+  --dark-1: #393552;
+  --dark-2: #2a273f;
+  --dark-3: #232136;
+  --dark-4: #232136;
+  --dark-5: #232136;
 
-toast {
-    background-color: @window_bg_color;
-    color: @window_fg_color;
+  /* Active toggle colors */
+  --active-toggle-bg-color: var(--window-bg-color);
+  --active-toggle-fg-color: var(--window-fg-color);
 }
 
-toggle:checked {
-  background-color: @card_bg_color;
-  color: @window_fg_color;
+toast {
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
 
 .inline {
-	background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }

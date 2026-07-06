@@ -175,7 +175,7 @@
     <child>
       <object class="AdwPreferencesPage">
         <property name="icon-name">emoji-symbols-symbolic</property>
-        <property name="title" translatable="yes">GNOME Shell</property>
+        <property name="title" translatable="yes">GNOME</property>
 
         <child>
           <object class="AdwPreferencesGroup">
@@ -184,7 +184,6 @@
 
             <child>
               <object class="AdwActionRow">
-                <property name="icon-name">extension-symbolic</property>
                 <property name="title" translatable="yes">Step 1 — Install the User Themes extension</property>
                 <property name="subtitle" translatable="yes">GNOME Shell requires the User Themes extension to load custom shell themes.</property>
                 <child type="suffix">
@@ -202,7 +201,6 @@
 
             <child>
               <object class="AdwActionRow">
-                <property name="icon-name">brush-symbolic</property>
                 <property name="title" translatable="yes">Step 2 — Set any theme</property>
                 <property name="subtitle" translatable="yes">Rewaita will generate the theme automatically and place it in ~/.local/share/themes. This can be disabled in preferences.</property>
               </object>
@@ -210,9 +208,110 @@
 
             <child>
               <object class="AdwActionRow">
-                <property name="icon-name">emblem-system-symbolic</property>
                 <property name="title" translatable="yes">Step 3 — Select it in GNOME Tweaks</property>
                 <property name="subtitle" translatable="yes">Open GNOME Tweaks → Appearance → Shell and choose Rewaita from the dropdown.</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Apply GDM Theme</property>
+            <property name="description" translatable="yes">While Rewaita's theme is compatible with GDM, this process must be done manually. Step 3 needs to be repeated anytime you change themes.</property>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Step 1 — Install GDM Settings</property>
+                <property name="subtitle" translatable="yes">This is required to activate the theme safely.</property>
+                <child type="suffix">
+                  <object class="GtkLinkButton">
+                    <property name="uri">https://flathub.org/en/apps/io.github.realmazharhussain.GdmSettings</property>
+                    <property name="label" translatable="yes">Install</property>
+                    <property name="valign">center</property>
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Step 2 — Overrides</property>
+                <property name="subtitle" translatable="yes">After setting any theme, run these commands to give GDM Settings access to it:</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <child type="center">
+                  <object class="GtkBox">
+                    <property name="spacing">8</property>
+                    <property name="margin-start">8</property>
+                    <property name="margin-end">8</property>
+                    <child>
+                      <object class="GtkEntry" id="fp_entry">
+                        <property name="editable">false</property>
+                        <property name="hexpand">true</property>
+                        <property name="text">sudo flatpak override io.github.realmazharhussain.GdmSettings --filesystem=~/.local/share/themes/rewaita:ro</property>
+                        <style>
+                          <class name="monospace"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="copy_button_fp">
+                        <property name="icon-name">edit-copy-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Copy to clipboard</property>
+                        <property name="valign">center</property>
+                        <style>
+                          <class name="circular"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <child type="center">
+                  <object class="GtkBox">
+                    <property name="spacing">8</property>
+                    <property name="margin-start">8</property>
+                    <property name="margin-end">8</property>
+                    <child>
+                      <object class="GtkEntry" id="ln_entry">
+                        <property name="editable">false</property>
+                        <property name="hexpand">true</property>
+                        <property name="text">sudo ln -sf ~/.local/share/themes/rewaita /usr/share/themes</property>
+                        <style>
+                          <class name="monospace"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="copy_button_ln">
+                        <property name="icon-name">edit-copy-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Copy to clipboard</property>
+                        <property name="valign">center</property>
+                        <style>
+                          <class name="circular"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Step 3 — Choose the theme in GDM Settings</property>
+                <property name="subtitle" translatable="yes">Open GDM Settings → Appearance → Shell and choose Rewaita from the dropdown.</property>
               </object>
             </child>
           </object>
@@ -333,3 +432,4 @@
 
   </object>
 </interface>
+

@@ -1,103 +1,113 @@
-/* Base Colors */
-@define-color window_bg_color #2b213a;  
-@define-color window_fg_color #f4eee4;  
+:root {
+  /* Base */
+  --window-bg-color: #2b213a;
+  --window-fg-color: #f4eee4;
 
-/* View Styling */
-@define-color view_bg_color #262335;
-@define-color view_fg_color #f4eee4;
+  /* View */
+  --view-bg-color: #262335;
+  --view-fg-color: #f4eee4;
 
-/* Header Bar */
-@define-color headerbar_bg_color #241b30; 
-@define-color headerbar_backdrop_color #1a1626;
-@define-color headerbar_fg_color #f4eee4;
-@define-color headerbar_border_color #241b30; 
+  /* Header */
+  --headerbar-bg-color: #241b30;
+  --headerbar-backdrop-color: #1a1626;
+  --headerbar-fg-color: #f4eee4;
+  --headerbar-border-color: #241b30;
 
-/* Popovers & Dialogs */
-@define-color popover_bg_color #2a2139; 
-@define-color popover_fg_color #f4eee4;
+  /* Popovers / dialogs */
+  --popover-bg-color: #2a2139;
+  --popover-fg-color: #f4eee4;
 
-@define-color dialog_bg_color @popover_bg_color;
-@define-color dialog_fg_color @popover_fg_color;
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
 
-/* Cards & Sidebars */
-@define-color card_bg_color #3a2d52;  
-@define-color card_fg_color #f4eee4;
+  /* Cards / sidebars */
+  --card-bg-color: #3a2d52;
+  --card-fg-color: #f4eee4;
 
-@define-color sidebar_bg_color #1a1626;
-@define-color sidebar_fg_color #f4eee4;
-@define-color sidebar_backdrop_color @sidebar_bg_color;
-@define-color sidebar_border_color  #3a2d52;
+  --sidebar-bg-color: #1a1626;
+  --sidebar-fg-color: #f4eee4;
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: #3a2d52;
 
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
-@define-color secondary_sidebar_fg_color @sidebar_fg_color;
-@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
-@define-color secondary_sidebar_border_color @sidebar_border_color;
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
 
-/* Synthwave '84 Accent Colors */
-@define-color blue_1 #2c75e7;  /* Electric blue */
-@define-color blue_2 #5ed7ff;  /* Bright cyan */
-@define-color blue_3 #3e6af8;  /* Neon blue */
-@define-color blue_4 #7e57c2;  /* Purple */
-@define-color blue_5 #b399ff;  /* Lavender */
+  /* Accents - Blue */
+  --blue-1: #2c75e7;
+  --blue-2: #5ed7ff;
+  --blue-3: #3e6af8;
+  --blue-4: #7e57c2;
+  --blue-5: #b399ff;
 
-@define-color green_1 #72f1b8;  /* Teal */
-@define-color green_2 #5ed7ff;  /* Cyan */
-@define-color green_3 #3e6af8;  /* Blue */
-@define-color green_4 #ff7edb;  /* Pink */
-@define-color green_5 #ff8b39;  /* Orange */
+  /* Green */
+  --green-1: #72f1b8;
+  --green-2: #5ed7ff;
+  --green-3: #3e6af8;
+  --green-4: #ff7edb;
+  --green-5: #ff8b39;
 
-@define-color yellow_1 #fede5d;  /* Bright yellow */
-@define-color yellow_2 #ff8b39;  /* Orange */
-@define-color yellow_3 #ff7edb;  /* Pink */
-@define-color yellow_4 #b399ff;  /* Lavender */
-@define-color yellow_5 #3e6af8;  /* Blue */
+  /* Yellow */
+  --yellow-1: #fede5d;
+  --yellow-2: #ff8b39;
+  --yellow-3: #ff7edb;
+  --yellow-4: #b399ff;
+  --yellow-5: #3e6af8;
 
-@define-color orange_1 #ff8b39;  /* Neon orange */
-@define-color orange_2 #ff7edb;  /* Pink */
-@define-color orange_3 #fede5d;  /* Yellow */
-@define-color orange_4 #72f1b8;  /* Teal */
-@define-color orange_5 #5ed7ff;  /* Cyan */
+  /* Orange */
+  --orange-1: #ff8b39;
+  --orange-2: #ff7edb;
+  --orange-3: #fede5d;
+  --orange-4: #72f1b8;
+  --orange-5: #5ed7ff;
 
-@define-color red_1 #d92c95;  /* Red */
-@define-color red_2 #ff4d9e;  /* Deeper pink */
-@define-color red_3 #ff2d7a;  /* Intense pink */
-@define-color red_4 #f92aad;  /* Magenta */
-@define-color red_5 #d926b6;  /* Purple-pink */
+  /* Red */
+  --red-1: #d92c95;
+  --red-2: #ff4d9e;
+  --red-3: #ff2d7a;
+  --red-4: #f92aad;
+  --red-5: #d926b6;
 
-@define-color purple_1 #b399ff;  /* Lavender */
-@define-color purple_2 #9e7cff;  /* Bright purple */
-@define-color purple_3 #7e57c2;  /* Synthwave purple */
-@define-color purple_4 #5e2d9c;  /* Deep purple */
-@define-color purple_5 #3e1a7a;  /* Dark purple */
+  /* Purple */
+  --purple-1: #b399ff;
+  --purple-2: #9e7cff;
+  --purple-3: #7e57c2;
+  --purple-4: #5e2d9c;
+  --purple-5: #3e1a7a;
 
-@define-color brown_1 #3a2d52;  /* Glow purple */
-@define-color brown_2 #2a2139;  /* Muted purple */
-@define-color brown_3 #1a1626;  /* Dark purple */
-@define-color brown_4 #110d1c;  /* Near-black */
-@define-color brown_5 #0a0812;  /* Full black */
+  /* Brown */
+  --brown-1: #3a2d52;
+  --brown-2: #2a2139;
+  --brown-3: #1a1626;
+  --brown-4: #110d1c;
+  --brown-5: #0a0812;
 
-@define-color light_1 #f4eee4;  /* Off-white */
-@define-color light_2 #d8d0c0;  /* Light gray */
-@define-color light_3 #bcb4a4;  /* Medium gray */
-@define-color light_4 #a09888;  /* Dark gray */
-@define-color light_5 #847c6c;  /* Slate */
+  /* Light */
+  --light-1: #f4eee4;
+  --light-2: #d8d0c0;
+  --light-3: #bcb4a4;
+  --light-4: #a09888;
+  --light-5: #847c6c;
 
-@define-color dark_1 #3a2d52;  /* Glow purple */
-@define-color dark_2 #2a2139;  /* Muted purple */
-@define-color dark_3 #1a1626;  /* Dark purple */
-@define-color dark_4 #110d1c;  /* Near-black */
-@define-color dark_5 #0a0812;  /* Full black */
+  /* Dark */
+  --dark-1: #3a2d52;
+  --dark-2: #2a2139;
+  --dark-3: #1a1626;
+  --dark-4: #110d1c;
+  --dark-5: #0a0812;
 
-toast {
-  background-color: @window_bg_color;
-  color: @window_fg_color;
+  /* Toggle state */
+  --active-toggle-bg-color: var(--window-bg-color);
+  --active-toggle-fg-color: var(--window-fg-color);
 }
 
-toggle:checked {
-  background-color: @card_bg_color;  
-  color: @window_fg_color;
+/* Toast */
+toast {
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
 
 .inline {
-	background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }

@@ -1,6 +1,6 @@
 # window_control_box.py
 #
-# Copyright 2025 Nathan Perlman
+# Copyright 2026 Nathan Perlman
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

@@ -43,14 +43,14 @@ window.csd.tiled-left {
 window.csd:backdrop {
   transition: box-shadow 75ms cubic-bezier(0, 0, 0.2, 1);
   box-shadow: 0 8px 6px -5px rgba(0,0,0,0.2), 0 16px 15px 2px rgba(0,0,0,0.14),
-              0 6px 18px 5px rgba(0,0,0,0.12), 0 0 0 2px @accent_bg_color,
+              0 6px 18px 5px rgba(0,0,0,0.12), 0 0 0 2px @accent-bg-color,
               0 0 36px transparent;
 }
 
 window.csd, window.solid-csd, popover contents, dialog .background {
   transition: none;
   box-shadow: 0 8px 6px -5px rgba(0,0,0,0.2), 0 16px 15px 2px rgba(0,0,0,0.14),
-              0 6px 18px 5px rgba(0,0,0,0.12), 0 0 0 2px @accent_bg_color,
+              0 6px 18px 5px rgba(0,0,0,0.12), 0 0 0 2px @accent-bg-color,
               0 0 36px transparent;
 }
 """
@@ -58,6 +58,17 @@ window.csd, window.solid-csd, popover contents, dialog .background {
 sharp_corners_css = """
 * {
    border-radius: 0px;
+}
+"""
+
+accent_tab_css_gtk4 = """
+*:selected {
+    color: var(--accent-bg-color);
+}
+
+*:checked:not(expander) {
+    color: var(--accent-fg-color);
+    background-color: var(--accent-bg-color);
 }
 """
 
@@ -85,6 +96,12 @@ options = [
         _("Use Light Accent Foreground Color"),
         _("May work better for some themes or accents"),
         "",
+    ),
+    (
+        "accent-tabs",
+        _("Use Accent Color for Selected Tabs"),
+        _("Only applies to GTK3/4 application"),
+        accent_tab_css_gtk4,
     ),
     (
         "light-text",
@@ -117,6 +134,7 @@ keys = {
     "window": "borders",
     "sharp": "sharp",
     "accent-fg": "accent_fg",
+    "accent-tabs": "accent_tabs",
     "light-text": "light_text",
     "dark-panel": "dark_panel",
     "trans-panel": "trans_panel",
@@ -132,8 +150,10 @@ class OptionsBox(Adw.PreferencesGroup):
 
         pref = Preferences()
         for key, label, subtitle, css in options:
-            active = pref.get(key)
+            if(key == "light-text" and not "GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+                break
 
+            active = pref.get(key)
             row = Adw.SwitchRow(title=label, subtitle=subtitle, active=active)
             row.connect("notify::active", self.on_row_toggled, css, key)
             self.add(row)

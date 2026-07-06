@@ -1,11 +1,15 @@
 import gi, os, shutil
-from gi.repository import Gtk, Adw, GLib
+from gi.repository import Gtk, Adw, GLib, Xdp
 from .extra_options_box import OptionsBox
+from .accent_box import AccentBox
+from .utils import change_autostart
 
 class PrefPage(Gtk.Box):
     def __init__(self, win):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, valign=Gtk.Align.CENTER, spacing=32, margin_start=12, margin_end=12)
 
+        if(not "GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+            self.append(Adw.Clamp(maximum_size=800, child=AccentBox(win)))
         self.append(OptionsBox(win))
         prefs_page = Adw.PreferencesGroup()
         prefs_page.set_title(_("Preferences"))
@@ -49,7 +53,7 @@ class PrefPage(Gtk.Box):
         elif(title == "Generate GNOME Shell Theme"):
             self.clear_gnome_shell(state, win)
         elif(title == "Run in background"):
-            self.change_autostart(state)
+            change_autostart(state)
         else:
             win.on_theme_selected()
 
@@ -74,20 +78,3 @@ class PrefPage(Gtk.Box):
                 reset_shell()
         else:
             win.on_theme_selected()
-
-    def change_autostart(self, state):
-        if(state == False):
-            path = os.path.join(GLib.getenv("HOME"), ".config", "autostart", "rewaita.desktop")
-            if(os.path.exists(path)):
-                os.remove(os.path.join(GLib.getenv("HOME"), ".config", "autostart", "rewaita.desktop"))
-        else:
-            with open(os.path.join(GLib.getenv("HOME"), ".config", "autostart", "rewaita.desktop"), "w") as file:
-                file.write("""
-[Desktop Entry]
-Type=Application
-Name=io.github.swordpuffin.rewaita
-X-XDP-Autostart=io.github.swordpuffin.rewaita
-Exec=flatpak run io.github.swordpuffin.rewaita --background
-DBusActivatable=true
-X-Flatpak=io.github.swordpuffin.rewaita
-                """)

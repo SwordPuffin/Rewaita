@@ -24,7 +24,7 @@ gi.require_version('Adw', '1')
 gi.require_version('Xdp', '1.0')
 
 from gi.repository import Gtk, Gdk, Gio, Adw, GLib, Xdp, GObject
-from .utils import Preferences
+from .utils import Preferences, change_autostart
 from .window import RewaitaWindow
 
 class RewaitaApplication(Adw.Application):
@@ -42,6 +42,15 @@ class RewaitaApplication(Adw.Application):
             GLib.OptionFlags.NONE,
             GLib.OptionArg.NONE,
             "Checks for when the accent color or light/dark mode changes",
+            None,
+        )
+
+        self.add_main_option(
+            "theme",
+            ord("t"),
+            GLib.OptionFlags.NONE,
+            GLib.OptionArg.NONE,
+            "Sets the theme through CLI",
             None,
         )
 
@@ -63,6 +72,7 @@ class RewaitaApplication(Adw.Application):
             win.borders = all_prefs["window"]
             win.sharp = all_prefs["sharp"]
             win.accent_fg = all_prefs["accent-fg"]
+            win.accent_tabs = all_prefs["accent-tabs"]
             win.firefox_theme = all_prefs["firefox-theme"]
             win.light_text = all_prefs["light-text"]
             win.dark_panel = all_prefs["dark-panel"]
@@ -106,9 +116,6 @@ class RewaitaApplication(Adw.Application):
         builder = Gtk.Builder().new_from_resource('/io/github/swordpuffin/rewaita/widgets/guide_dialog.ui')
         guide_dialog = builder.get_object("GuideDialog")
         guide_dialog.present(parent=self.props.active_window)
-        gtk3_entry = builder.get_object("gtk3_entry")
-        gtk4_entry = builder.get_object("gtk4_entry")
-        firefox_entry = builder.get_object("firefox_entry")
         self.clipboard = Gdk.Display.get_default().get_clipboard()
 
         def on_copy(button, entry):
@@ -120,32 +127,18 @@ class RewaitaApplication(Adw.Application):
                 button.remove_css_class("suggested-action")
             GLib.timeout_add(1000, remove_success)
 
-        builder.get_object("copy_button_gtk3").connect("clicked", on_copy, gtk3_entry)
-        builder.get_object("copy_button_gtk4").connect("clicked", on_copy, gtk4_entry)
+        builder.get_object("copy_button_gtk3").connect("clicked", on_copy, builder.get_object("gtk3_entry"))
+        builder.get_object("copy_button_gtk4").connect("clicked", on_copy, builder.get_object("gtk4_entry"))
+        builder.get_object("copy_button_fp").connect("clicked", on_copy, builder.get_object("fp_entry"))
+        builder.get_object("copy_button_ln").connect("clicked", on_copy, builder.get_object("ln_entry"))
 
     def on_background_response(self, portal, result):
         success = portal.request_background_finish(result)
         if(success):
             print("Background permission granted")
-            path = os.path.join(GLib.getenv("HOME"), ".config", "autostart")
-            os.makedirs(path, exist_ok=True)
-            if(portal.running_under_flatpak()):
-                command = "flatpak run io.github.swordpuffin.rewaita --background"
-            else:
-                command = "rewaita -b"
-            with open(os.path.join(path, "rewaita.desktop"), "w") as file:
-                file.write(f"""
-[Desktop Entry]
-Type=Application
-Name=io.github.swordpuffin.rewaita
-X-XDP-Autostart=io.github.swordpuffin.rewaita
-Exec={command}
-DBusActivatable=true
-X-Flatpak=io.github.swordpuffin.rewaita
-                """
-                )
         else:
             print("Background permission denied")
+        change_autostart(success)
 
     def do_command_line(self, args):
         options = args.get_options_dict().end().unpack()
@@ -154,8 +147,16 @@ X-Flatpak=io.github.swordpuffin.rewaita
             win = RewaitaWindow(application=self)
 
         self.activate()
+
         if("background" in options):
             win.emit("close-request")
+
+        if("theme" in options):
+            for arg in sys.argv: # For whatever reason, options doesn't include the value of --theme=, just that it is a flag'
+                if("--theme=" in arg):
+                    theme = arg.split("=")[1]
+                    print(theme)
+                    break
 
     def on_about_action(self, *args):
         about = Adw.AboutDialog(application_name='Rewaita',

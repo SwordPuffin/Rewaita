@@ -20,41 +20,41 @@
 import gi
 from gi.repository import Gtk, Adw, GLib
 from .utils import Preferences
-import colorsys
+# import colorsys
 
-def hex_to_rgb(hex_color):
-    hex_color = hex_color.lstrip("#")
-    return tuple(int(hex_color[i:i+2], 16) / 255.0 for i in (0, 2, 4))
+# def hex_to_rgb(hex_color):
+#     hex_color = hex_color.lstrip("#")
+#     return tuple(int(hex_color[i:i+2], 16) / 255.0 for i in (0, 2, 4))
 
-def rgb_to_hex(r, g, b):
-    return "#{:02x}{:02x}{:02x}".format(int(r*255), int(g*255), int(b*255))
+# def rgb_to_hex(r, g, b):
+#     return "#{:02x}{:02x}{:02x}".format(int(r*255), int(g*255), int(b*255))
 
-def mix(hex_a, hex_b, t=0.3):
-    r1, g1, b1 = hex_to_rgb(hex_a)
-    r2, g2, b2 = hex_to_rgb(hex_b)
-    return rgb_to_hex(
-        r1 + (r2 - r1) * t,
-        g1 + (g2 - g1) * t,
-        b1 + (b2 - b1) * t,
-    )
+# def mix(hex_a, hex_b, t=0.3):
+#     r1, g1, b1 = hex_to_rgb(hex_a)
+#     r2, g2, b2 = hex_to_rgb(hex_b)
+#     return rgb_to_hex(
+#         r1 + (r2 - r1) * t,
+#         g1 + (g2 - g1) * t,
+#         b1 + (b2 - b1) * t,
+#     )
 
-def palette_to_css(palette):
-    return "\n".join(f"@define-color {k} {v};" for k, v in palette.items())
+# def palette_to_css(palette):
+#     return "\n".join(f"@define-color {k} {v};" for k, v in palette.items())
 
-def generate_tint_palette(hex_color):
-    r, g, b = hex_to_rgb(hex_color)
-    h, s, v = colorsys.rgb_to_hsv(r, g, b)
-    bg_r, bg_g, bg_b = colorsys.hsv_to_rgb(h, 0.06, 0.97)
-    return palette_to_css({
-        "accent_color": hex_color,
-        "accent_bg_color": hex_color,
-        "accent_fg_color": mix("#ffffff", hex_color),
-        "window_bg_color": mix("#222226", hex_color, 0.1),
-        "window_fg_color": mix("#ffffff", hex_color),
-        "headerbar_bg_color": mix("#2e2e32", hex_color, 0.4),
-        "headerbar_fg_color": mix("#ffffff", hex_color),
-        "sidebar_bg_color": rgb_to_hex(bg_r*0.8, bg_g*0.8, bg_b*0.8),
-    })
+# def generate_tint_palette(hex_color):
+#     r, g, b = hex_to_rgb(hex_color)
+#     h, s, v = colorsys.rgb_to_hsv(r, g, b)
+#     bg_r, bg_g, bg_b = colorsys.hsv_to_rgb(h, 0.06, 0.97)
+#     return palette_to_css({
+#         "accent_color": hex_color,
+#         "accent_bg_color": hex_color,
+#         "accent_fg_color": mix("#ffffff", hex_color),
+#         "window_bg_color": mix("#222226", hex_color, 0.1),
+#         "window_fg_color": mix("#ffffff", hex_color),
+#         "headerbar_bg_color": mix("#2e2e32", hex_color, 0.4),
+#         "headerbar_fg_color": mix("#ffffff", hex_color),
+#         "sidebar_bg_color": rgb_to_hex(bg_r*0.8, bg_g*0.8, bg_b*0.8),
+#     })
 
 class AccentBox(Gtk.Box):
     accents = [
@@ -73,6 +73,10 @@ class AccentBox(Gtk.Box):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=12, halign=Gtk.Align.CENTER)
         prefs = Preferences()
         accent = prefs.get("accent")
+
+        title = Gtk.Label(label=_("Accent Color"), xalign=0.0)
+        title.add_css_class("heading")
+        self.append(title)
 
         buttons = Gtk.Box()
         buttons.add_css_class("card")

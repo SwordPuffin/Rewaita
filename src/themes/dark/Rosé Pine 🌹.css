@@ -1,102 +1,103 @@
-/* Rosé Pine Dark Palette */
-@define-color window_bg_color #232136; /* base */
-@define-color window_fg_color #e0def4; /* text */
+:root {
+  /* Window */
+  --window-bg-color: #232136;
+  --window-fg-color: #e0def4;
 
-/* View styling */
-@define-color view_bg_color #232136;
-@define-color view_fg_color #e0def4;
+  /* View styling */
+  --view-bg-color: #232136;
+  --view-fg-color: #e0def4;
 
-/* Header bar */
-@define-color headerbar_bg_color #2a273f;
-@define-color headerbar_backdrop_color #2a273f;
-@define-color headerbar_fg_color #e0def4;
+  /* Header bar */
+  --headerbar-bg-color: #2a273f;
+  --headerbar-backdrop-color: #2a273f;
+  --headerbar-fg-color: #e0def4;
 
-/* Popovers and dialogs */
-@define-color popover_bg_color #232136;
-@define-color popover_fg_color #e0def4;
+  /* Popovers and dialogs */
+  --popover-bg-color: #232136;
+  --popover-fg-color: #e0def4;
 
-@define-color dialog_bg_color @popover_bg_color;
-@define-color dialog_fg_color @popover_fg_color;
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
 
-/* Cards and sidebars */
-@define-color card_bg_color #363449;
-@define-color card_fg_color #e0def4;
+  /* Cards and sidebar */
+  --card-bg-color: #363449;
+  --card-fg-color: #e0def4;
 
-@define-color sidebar_bg_color #232136;
-@define-color sidebar_fg_color #e0def4;
-@define-color sidebar_backdrop_color @sidebar_bg_color;
-@define-color sidebar_border_color #393552;
+  --sidebar-bg-color: #232136;
+  --sidebar-fg-color: #e0def4;
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: #393552;
 
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
-@define-color secondary_sidebar_fg_color @sidebar_fg_color;
-@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
-@define-color secondary_sidebar_border_color @sidebar_border_color;
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
 
-/* Rosé Pine accent colors */
-@define-color blue_1 #9ccfd8;
-@define-color blue_2 #c4a7e7;
-@define-color blue_3 #3e8fb0;
-@define-color blue_4 #569fba;
-@define-color blue_5 #6c77bb;
+  /* Rosé Pine accents */
+  --blue-1: #9ccfd8;
+  --blue-2: #c4a7e7;
+  --blue-3: #3e8fb0;
+  --blue-4: #569fba;
+  --blue-5: #6c77bb;
 
-@define-color green_1 #ea9a97;
-@define-color green_2 #ebbcba;
-@define-color green_3 #3e8fb0;
-@define-color green_4 #9ccfd8;
-@define-color green_5 #569fba;
+  --green-1: #ea9a97;
+  --green-2: #ebbcba;
+  --green-3: #3e8fb0;
+  --green-4: #9ccfd8;
+  --green-5: #569fba;
 
-@define-color yellow_1 #f6c177;
-@define-color yellow_2 #ea9d34;
-@define-color yellow_3 #ebbcba;
-@define-color yellow_4 #d7827e;
-@define-color yellow_5 #ea9a97;
+  --yellow-1: #f6c177;
+  --yellow-2: #ea9d34;
+  --yellow-3: #ebbcba;
+  --yellow-4: #d7827e;
+  --yellow-5: #ea9a97;
 
-@define-color orange_1 #ea9a97;
-@define-color orange_2 #d7827e;
-@define-color orange_3 #eb6f92;
-@define-color orange_4 #f6c177;
-@define-color orange_5 #ea9d34;
+  --orange-1: #ea9a97;
+  --orange-2: #d7827e;
+  --orange-3: #eb6f92;
+  --orange-4: #f6c177;
+  --orange-5: #ea9d34;
 
-@define-color red_1 #eb6f92;
-@define-color red_2 #b4637a;
-@define-color red_3 #eb6f92;
-@define-color red_4 #d7827e;
-@define-color red_5 #ea9a97;
+  --red-1: #eb6f92;
+  --red-2: #b4637a;
+  --red-3: #eb6f92;
+  --red-4: #d7827e;
+  --red-5: #ea9a97;
 
-@define-color purple_1 #c4a7e7;
-@define-color purple_2 #908caa;
-@define-color purple_3 #6e6a86;
-@define-color purple_4 #9ccfd8;
-@define-color purple_5 #3e8fb0;
+  --purple-1: #c4a7e7;
+  --purple-2: #908caa;
+  --purple-3: #6e6a86;
+  --purple-4: #9ccfd8;
+  --purple-5: #3e8fb0;
 
-@define-color brown_1 #555169;
-@define-color brown_2 #6e6a86;
-@define-color brown_3 #908caa;
-@define-color brown_4 #c4a7e7;
-@define-color brown_5 #555169;
+  --brown-1: #555169;
+  --brown-2: #6e6a86;
+  --brown-3: #908caa;
+  --brown-4: #c4a7e7;
+  --brown-5: #555169;
 
-@define-color light_1 #e0def4;
-@define-color light_2 #908caa;
-@define-color light_3 #6e6a86;
-@define-color light_4 #c4a7e7;
-@define-color light_5 #555169;
+  --light-1: #e0def4;
+  --light-2: #908caa;
+  --light-3: #6e6a86;
+  --light-4: #c4a7e7;
+  --light-5: #555169;
 
-@define-color dark_1 #393552;
-@define-color dark_2 #2a273f;
-@define-color dark_3 #232136;
-@define-color dark_4 #191724;
-@define-color dark_5 #16141f;
+  --dark-1: #393552;
+  --dark-2: #2a273f;
+  --dark-3: #232136;
+  --dark-4: #191724;
+  --dark-5: #16141f;
 
-toast {
-    background-color: @window_bg_color;
-    color: @window_fg_color;
+  /* Active toggle */
+  --active-toggle-bg-color: var(--window-fg-color);
+  --active-toggle-fg-color: var(--window-bg-color);
 }
 
-toggle:checked {
-  background-color: @card_bg_color;
-  color: @window_fg_color;
+toast {
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
 
 .inline {
-	background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }

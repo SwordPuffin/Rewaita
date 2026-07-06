@@ -1,102 +1,112 @@
-/* Tokyo Night Dark Palette */
-@define-color window_bg_color #1a1b26; /* bg */
-@define-color window_fg_color #a9b1d6; /* fg */
+:root {
+  /* Window */
+  --window-bg-color: #1a1b26;
+  --window-fg-color: #a9b1d6;
 
-/* View styling */
-@define-color view_bg_color #1a1b26;
-@define-color view_fg_color #a9b1d6;
+  /* View */
+  --view-bg-color: #1a1b26;
+  --view-fg-color: #a9b1d6;
 
-/* Header bar */
-@define-color headerbar_bg_color #16161e;
-@define-color headerbar_backdrop_color #16161e;
-@define-color headerbar_fg_color #a9b1d6;
+  /* Header bar */
+  --headerbar-bg-color: #16161e;
+  --headerbar-backdrop-color: #16161e;
+  --headerbar-fg-color: #a9b1d6;
 
-/* Popovers and dialogs */
-@define-color popover_bg_color #1a1b26;
-@define-color popover_fg_color #a9b1d6;
+  /* Popovers / dialogs */
+  --popover-bg-color: #1a1b26;
+  --popover-fg-color: #a9b1d6;
 
-@define-color dialog_bg_color @popover_bg_color;
-@define-color dialog_fg_color @popover_fg_color;
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
 
-/* Cards and sidebars */
-@define-color card_bg_color #282a38;
-@define-color card_fg_color #a9b1d6;
+  /* Cards / sidebars */
+  --card-bg-color: #282a38;
+  --card-fg-color: #a9b1d6;
 
-@define-color sidebar_bg_color #12131b;
-@define-color sidebar_fg_color #a9b1d6;
-@define-color sidebar_backdrop_color @sidebar_bg_color;
-@define-color sidebar_border_color #2f334d;
+  --sidebar-bg-color: #12131b;
+  --sidebar-fg-color: #a9b1d6;
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: #2f334d;
 
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
-@define-color secondary_sidebar_fg_color @sidebar_fg_color;
-@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
-@define-color secondary_sidebar_border_color @sidebar_border_color;
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
 
-/* Tokyo Night accent colors (Dark variant) */
-@define-color blue_1 #7aa2f7;
-@define-color blue_2 #7dcfff;
-@define-color blue_3 #2ac3de;
-@define-color blue_4 #0db9d7;
-@define-color blue_5 #89ddff;
+  /* Blue */
+  --blue-1: #7aa2f7;
+  --blue-2: #7dcfff;
+  --blue-3: #2ac3de;
+  --blue-4: #0db9d7;
+  --blue-5: #89ddff;
 
-@define-color green_1 #9ece6a;
-@define-color green_2 #b9f27c;
-@define-color green_3 #73daca;
-@define-color green_4 #41a6b5;
-@define-color green_5 #1abc9c;
+  /* Green */
+  --green-1: #9ece6a;
+  --green-2: #b9f27c;
+  --green-3: #73daca;
+  --green-4: #41a6b5;
+  --green-5: #1abc9c;
 
-@define-color yellow_1 #e0af68;
-@define-color yellow_2 #ff9e64;
-@define-color yellow_3 #f6c177;
-@define-color yellow_4 #dca561;
-@define-color yellow_5 #c0a36e;
+  /* Yellow */
+  --yellow-1: #e0af68;
+  --yellow-2: #ff9e64;
+  --yellow-3: #f6c177;
+  --yellow-4: #dca561;
+  --yellow-5: #c0a36e;
 
-@define-color orange_1 #ff9e64;
-@define-color orange_2 #ffad87;
-@define-color orange_3 #f7768e;
-@define-color orange_4 #ff7a93;
-@define-color orange_5 #ff5370;
+  /* Orange */
+  --orange-1: #ff9e64;
+  --orange-2: #ffad87;
+  --orange-3: #f7768e;
+  --orange-4: #ff7a93;
+  --orange-5: #ff5370;
 
-@define-color red_1 #f7768e;
-@define-color red_2 #db4b4b;
-@define-color red_3 #c53b53;
-@define-color red_4 #bf616a;
-@define-color red_5 #a54242;
+  /* Red */
+  --red-1: #f7768e;
+  --red-2: #db4b4b;
+  --red-3: #c53b53;
+  --red-4: #bf616a;
+  --red-5: #a54242;
 
-@define-color purple_1 #bb9af7;
-@define-color purple_2 #cfc9ff;
-@define-color purple_3 #9d7cd8;
-@define-color purple_4 #7e9cd8;
-@define-color purple_5 #a9a1e1;
+  /* Purple */
+  --purple-1: #bb9af7;
+  --purple-2: #cfc9ff;
+  --purple-3: #9d7cd8;
+  --purple-4: #7e9cd8;
+  --purple-5: #a9a1e1;
 
-@define-color brown_1 #cfc9c2;
-@define-color brown_2 #ab7967;
-@define-color brown_3 #986c6c;
-@define-color brown_4 #836060;
-@define-color brown_5 #5c4033;
+  /* Brown */
+  --brown-1: #cfc9c2;
+  --brown-2: #ab7967;
+  --brown-3: #986c6c;
+  --brown-4: #836060;
+  --brown-5: #5c4033;
 
-@define-color light_1 #a9b1d6;
-@define-color light_2 #c0caf5;
-@define-color light_3 #9aa5ce;
-@define-color light_4 #7aa2f7;
-@define-color light_5 #565f89;
+  /* Light */
+  --light-1: #a9b1d6;
+  --light-2: #c0caf5;
+  --light-3: #9aa5ce;
+  --light-4: #7aa2f7;
+  --light-5: #565f89;
 
-@define-color dark_1 #414868;
-@define-color dark_2 #2f334d;
-@define-color dark_3 #24283b;
-@define-color dark_4 #16161e;
-@define-color dark_5 #101012;
+  /* Dark */
+  --dark-1: #414868;
+  --dark-2: #2f334d;
+  --dark-3: #24283b;
+  --dark-4: #16161e;
+  --dark-5: #101012;
 
-toast {
-  background-color: @window_bg_color;
-  color: @window_fg_color;
+  /* Toggle state */
+  --active-toggle-bg-color: var(--window-bg-color);
+  --active-toggle-fg-color: var(--window-fg-color);
 }
 
-toggle:checked {
-  background-color: @card_bg_color;
-  color: @window_fg_color;
+/* Toast */
+toast {
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
 
 .inline {
-	background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }

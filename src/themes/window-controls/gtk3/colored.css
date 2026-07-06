@@ -1,26 +1,38 @@
 button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) {
-  background: alpha(@yellow_1,0.1);
-  color: @yellow_1;
+  background: alpha(@yellow-1,0.15);
+  color: @yellow-1;
+}
+
+button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) > image {
+	color: @yellow-1;
 }
 
 button.minimize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
-  color: shade(@yellow_1,0.5);
+  color: shade(@yellow-1,0.5);
 }
 
 button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
-  background: alpha(@green_1,0.1);
-  color: @green_1;
+  background: alpha(@green-1,0.15);
+  color: @green-1;
+}
+
+button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) > image {
+	color: @green-1;
 }
 
 button.maximize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
-  color: shade(@green_1,0.5);
+  color: shade(@green-1,0.5);
 }
 
 button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
-  background: alpha(@red_1,0.1);
-  color: @red_1;
+  background: alpha(@red-1,0.15);
+  color: @red-1;
 }
 
 button.close.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
-   color: shade(@red_1,0.5);
+   color: shade(@red-1,0.5);
+}
+
+button.close.titlebutton:not(.suggested-action):not(.destructive-action) > image {
+	color: @red-1;
 }

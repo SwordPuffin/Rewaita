@@ -1,107 +1,104 @@
-/* Nord Light Palette */
-@define-color window_bg_color #eceff4; /* nord6 */
-@define-color window_fg_color #3b4252; /* nord1 */
+:root {
+  /* Base */
+  --window-bg-color: #eceff4;
+  --window-fg-color: #3b4252;
 
-/* View styling */
-@define-color view_bg_color #eceff4;
-@define-color view_fg_color #3b4252;
+  /* View styling */
+  --view-bg-color: #eceff4;
+  --view-fg-color: #3b4252;
 
-/* Header bar */
-@define-color headerbar_bg_color #e5e9f0; /* nord5 */
-@define-color headerbar_backdrop_color #e5e9f0;
-@define-color headerbar_fg_color #3b4252;
+  /* Header bar */
+  --headerbar-bg-color: #e5e9f0;
+  --headerbar-backdrop-color: #e5e9f0;
+  --headerbar-fg-color: #3b4252;
 
-/* Popovers and dialogs */
-@define-color popover_bg_color #eceff4;
-@define-color popover_fg_color #3b4252;
+  /* Popovers & dialogs */
+  --popover-bg-color: #eceff4;
+  --popover-fg-color: #3b4252;
 
-@define-color dialog_bg_color @popover_bg_color;
-@define-color dialog_fg_color @popover_fg_color;
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
 
-/* Cards and sidebars */
-@define-color card_bg_color #dadee4;
-@define-color card_fg_color #3b4252;
+  /* Cards & sidebars */
+  --card-bg-color: #dadee4;
+  --card-fg-color: #3b4252;
 
-@define-color sidebar_bg_color #eceff4;
-@define-color sidebar_fg_color #3b4252;
-@define-color sidebar_backdrop_color @sidebar_bg_color;
-@define-color sidebar_border_color #d8dee9; /* nord4 */
+  --sidebar-bg-color: #eceff4;
+  --sidebar-fg-color: #3b4252;
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: #d8dee9;
 
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
-@define-color secondary_sidebar_fg_color @sidebar_fg_color;
-@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
-@define-color secondary_sidebar_border_color @sidebar_border_color;
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
 
-@define-color panel_bg_color @window_bg_color;
-@define-color panel_fg_color @window_fg_color;
-@define-color panel_button_bg_color transparent;
-@define-color panel_hover_bg_color @card_bg_color;
+  /* Nord accents */
+  --blue-1: #5e81ac;
+  --blue-2: #81a1c1;
+  --blue-3: #88c0d0;
+  --blue-4: #8fbcbb;
+  --blue-5: #3b4252;
 
-/* Nord accent colors (same colors as dark but inverted background) */
-@define-color blue_1 #5e81ac; /* nord9 */
-@define-color blue_2 #81a1c1; /* nord10 */
-@define-color blue_3 #88c0d0; /* nord7 */
-@define-color blue_4 #8fbcbb; /* nord8 */
-@define-color blue_5 #3b4252; /* nord1 */
+  --green-1: #a3be8c;
+  --green-2: #8fbcbb;
+  --green-3: #88c0d0;
+  --green-4: #81a1c1;
+  --green-5: #5e81ac;
 
-@define-color green_1 #a3be8c; /* nord14 */
-@define-color green_2 #8fbcbb; /* nord8 */
-@define-color green_3 #88c0d0; /* nord7 */
-@define-color green_4 #81a1c1; /* nord10 */
-@define-color green_5 #5e81ac; /* nord9 */
+  --yellow-1: #ebcb8b;
+  --yellow-2: #d08770;
+  --yellow-3: #4c566a;
+  --yellow-4: #434c5e;
+  --yellow-5: #bf616a;
 
-@define-color yellow_1 #ebcb8b; /* nord13 */
-@define-color yellow_2 #d08770; /* nord12 */
-@define-color yellow_3 #4c566a; /* nord3 */
-@define-color yellow_4 #434c5e; /* nord2 */
-@define-color yellow_5 #bf616a; /* nord11 */
+  --orange-1: #d08770;
+  --orange-2: #bf616a;
+  --orange-3: #5e81ac;
+  --orange-4: #ebcb8b;
+  --orange-5: #a3be8c;
 
-@define-color orange_1 #d08770; /* nord12 */
-@define-color orange_2 #bf616a; /* nord11 */
-@define-color orange_3 #5e81ac; /* nord9 */
-@define-color orange_4 #ebcb8b; /* nord13 */
-@define-color orange_5 #a3be8c; /* nord14 */
+  --red-1: #bf616a;
+  --red-2: #d08770;
+  --red-3: #5e81ac;
+  --red-4: #81a1c1;
+  --red-5: #8fbcbb;
 
-@define-color red_1 #bf616a; /* nord11 */
-@define-color red_2 #d08770; /* nord12 */
-@define-color red_3 #5e81ac; /* nord9 */
-@define-color red_4 #81a1c1; /* nord10 */
-@define-color red_5 #8fbcbb; /* nord8 */
+  --purple-1: #b48ead;
+  --purple-2: #81a1c1;
+  --purple-3: #5e81ac;
+  --purple-4: #d08770;
+  --purple-5: #ebcb8b;
 
-@define-color purple_1 #b48ead; /* nord15 */
-@define-color purple_2 #81a1c1; /* nord10 */
-@define-color purple_3 #5e81ac; /* nord9 */
-@define-color purple_4 #d08770; /* nord12 */
-@define-color purple_5 #ebcb8b; /* nord13 */
+  --brown-1: #d8dee9;
+  --brown-2: #e5e9f0;
+  --brown-3: #eceff4;
+  --brown-4: #3b4252;
+  --brown-5: #4c566a;
 
-@define-color brown_1 #d8dee9; /* nord4 */
-@define-color brown_2 #e5e9f0; /* nord5 */
-@define-color brown_3 #eceff4; /* nord6 */
-@define-color brown_4 #3b4252; /* nord1 */
-@define-color brown_5 #4c566a; /* nord3 */
+  --light-1: #3b4252;
+  --light-2: #434c5e;
+  --light-3: #4c566a;
+  --light-4: #d8dee9;
+  --light-5: #5e81ac;
 
-@define-color light_1 #3b4252; /* nord1 */
-@define-color light_2 #434c5e; /* nord2 */
-@define-color light_3 #4c566a; /* nord3 */
-@define-color light_4 #d8dee9; /* nord4 */
-@define-color light_5 #5e81ac; /* nord9 */
+  --dark-1: #d8dee9;
+  --dark-2: #e5e9f0;
+  --dark-3: #eceff4;
+  --dark-4: #f8fafc;
+  --dark-5: #ffffff;
 
-@define-color dark_1 #d8dee9; /* nord4 */
-@define-color dark_2 #e5e9f0; /* nord5 */
-@define-color dark_3 #eceff4; /* nord6 */
-@define-color dark_4 #f8fafc;
-@define-color dark_5 #ffffff;
-
-toast {
-  background-color: @window_bg_color;
-  color: @window_fg_color;
+  /* Active toggle state */
+  --active-toggle-fg-color: var(--window-bg-color);
+  --active-toggle-bg-color: var(--window-fg-color);
 }
 
-toggle:checked {
-  background-color: @card_bg_color;
-  color: @window_fg_color;
+/* UI element styling */
+toast {
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
 
 .inline {
-	background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }

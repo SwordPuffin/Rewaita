@@ -11,3 +11,11 @@ windowcontrols:not(.rewaita-display) > button.close > image {
 	background-color: @accent_bg_color;
 	color: @accent_fg_color;
 }
+
+windowcontrols:not(.rewaita-display) > button.close > image:hover {
+  filter: brightness(90%);
+}
+
+windowcontrols:not(.rewaita-display) > button.close > image:active {
+  filter: brightness(80%);
+}

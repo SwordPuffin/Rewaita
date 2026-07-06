@@ -1,107 +1,110 @@
-/* Catppuccin Latte Palette */
-@define-color window_bg_color #eff1f5; /* base */
-@define-color window_fg_color #4c4f69; /* text */
+:root {
+  /* Base */
+  --window-bg-color: #eff1f5;
+  --window-fg-color: #4c4f69;
 
-/* View styling */
-@define-color view_bg_color #eff1f5;
-@define-color view_fg_color #4c4f69;
+  /* View styling */
+  --view-bg-color: #eff1f5;
+  --view-fg-color: #4c4f69;
 
-/* Header bar */
-@define-color headerbar_bg_color #e6e9ef; /* mantle */
-@define-color headerbar_backdrop_color #e6e9ef;
-@define-color headerbar_fg_color #4c4f69;
+  /* Header bar */
+  --headerbar-bg-color: #e6e9ef;
+  --headerbar-backdrop-color: #e6e9ef;
+  --headerbar-fg-color: #4c4f69;
 
-/* Popovers and dialogs */
-@define-color popover_bg_color #eff1f5;
-@define-color popover_fg_color #4c4f69;
+  /* Popovers & dialogs */
+  --popover-bg-color: #eff1f5;
+  --popover-fg-color: #4c4f69;
 
-@define-color dialog_bg_color @popover_bg_color;
-@define-color dialog_fg_color @popover_fg_color;
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
 
-/* Cards and sidebars */
-@define-color card_bg_color #dfe1e7;
-@define-color card_fg_color #4c4f69;
+  /* Cards & sidebars */
+  --card-bg-color: #dfe1e7;
+  --card-fg-color: #4c4f69;
 
-@define-color sidebar_bg_color #eff1f5;
-@define-color sidebar_fg_color #4c4f69;
-@define-color sidebar_backdrop_color @sidebar_bg_color;
-@define-color sidebar_border_color #ccd0da; /* surface0 */
+  --sidebar-bg-color: #eff1f5;
+  --sidebar-fg-color: #4c4f69;
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: #ccd0da;
 
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
-@define-color secondary_sidebar_fg_color @sidebar_fg_color;
-@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
-@define-color secondary_sidebar_border_color @sidebar_border_color;
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
 
-@define-color panel_bg_color @window_bg_color;
-@define-color panel_fg_color @window_fg_color;
-@define-color panel_button_bg_color transparent;
-@define-color panel_hover_bg_color @card_bg_color;
+  /* Panel */
+  --panel-bg-color: var(--window-bg-color);
+  --panel-fg-color: var(--window-fg-color);
+  --panel-button-bg-color: transparent;
+  --panel-hover-bg-color: var(--card-bg-color);
 
-/* Catppuccin Latte accent colors */
-@define-color blue_1 #1e66f5; /* blue */
-@define-color blue_2 #179299; /* teal */
-@define-color blue_3 #04a5e5; /* sky */
-@define-color blue_4 #209fb5; /* sapphire */
-@define-color blue_5 #7287fd; /* lavender */
+  /* Accents */
+  --blue-1: #1e66f5;
+  --blue-2: #179299;
+  --blue-3: #04a5e5;
+  --blue-4: #209fb5;
+  --blue-5: #7287fd;
 
-@define-color green_1 #40a02b; /* green */
-@define-color green_2 #179299; /* teal */
-@define-color green_3 #04a5e5; /* sky */
-@define-color green_4 #209fb5; /* sapphire */
-@define-color green_5 #1e66f5; /* blue */
+  --green-1: #40a02b;
+  --green-2: #179299;
+  --green-3: #04a5e5;
+  --green-4: #209fb5;
+  --green-5: #1e66f5;
 
-@define-color yellow_1 #df8e1d; /* yellow */
-@define-color yellow_2 #fe640b; /* peach */
-@define-color yellow_3 #df8e1d; /* yellow */
-@define-color yellow_4 #d20f39; /* red */
-@define-color yellow_5 #e64553; /* maroon */
+  --yellow-1: #df8e1d;
+  --yellow-2: #fe640b;
+  --yellow-3: #df8e1d;
+  --yellow-4: #d20f39;
+  --yellow-5: #e64553;
 
-@define-color orange_1 #fe640b; /* peach */
-@define-color orange_2 #d20f39; /* red */
-@define-color orange_3 #e64553; /* maroon */
-@define-color orange_4 #df8e1d; /* yellow */
-@define-color orange_5 #40a02b; /* green */
+  --orange-1: #fe640b;
+  --orange-2: #d20f39;
+  --orange-3: #e64553;
+  --orange-4: #df8e1d;
+  --orange-5: #40a02b;
 
-@define-color red_1 #d20f39; /* red */
-@define-color red_2 #e64553; /* maroon */
-@define-color red_3 #ea76cb; /* pink */
-@define-color red_4 #dd7878; /* flamingo */
-@define-color red_5 #dc8a78; /* rosewater */
+  --red-1: #d20f39;
+  --red-2: #e64553;
+  --red-3: #ea76cb;
+  --red-4: #dd7878;
+  --red-5: #dc8a78;
 
-@define-color purple_1 #8839ef; /* mauve */
-@define-color purple_2 #7287fd; /* lavender */
-@define-color purple_3 #ea76cb; /* pink */
-@define-color purple_4 #dd7878; /* flamingo */
-@define-color purple_5 #dc8a78; /* rosewater */
+  --purple-1: #8839ef;
+  --purple-2: #7287fd;
+  --purple-3: #ea76cb;
+  --purple-4: #dd7878;
+  --purple-5: #dc8a78;
 
-@define-color brown_1 #acb0be; /* surface2 */
-@define-color brown_2 #9ca0b0; /* overlay0 */
-@define-color brown_3 #8c8fa1; /* overlay1 */
-@define-color brown_4 #7c7f93; /* overlay2 */
-@define-color brown_5 #5c5f77; /* subtext1 */
+  --brown-1: #acb0be;
+  --brown-2: #9ca0b0;
+  --brown-3: #8c8fa1;
+  --brown-4: #7c7f93;
+  --brown-5: #5c5f77;
 
-@define-color light_1 #4c4f69; /* text */
-@define-color light_2 #6c6f85; /* subtext0 */
-@define-color light_3 #5c5f77; /* subtext1 */
-@define-color light_4 #1e66f5; /* blue */
-@define-color light_5 #9ca0b0; /* overlay0 */
+  --light-1: #4c4f69;
+  --light-2: #6c6f85;
+  --light-3: #5c5f77;
+  --light-4: #1e66f5;
+  --light-5: #9ca0b0;
 
-@define-color dark_1 #ccd0da; /* surface0 */
-@define-color dark_2 #bcc0cc; /* surface1 */
-@define-color dark_3 #acb0be; /* surface2 */
-@define-color dark_4 #e6e9ef; /* mantle */
-@define-color dark_5 #dce0e8; /* crust */
+  --dark-1: #ccd0da;
+  --dark-2: #bcc0cc;
+  --dark-3: #acb0be;
+  --dark-4: #e6e9ef;
+  --dark-5: #dce0e8;
+}
 
 toast {
-  background-color: @window_bg_color;
-  color: @window_fg_color;
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
 
 toggle:checked {
-  background-color: @card_bg_color;
-  color: @window_fg_color;
+  background-color: var(--window-fg-color);
+  color: var(--window-bg-color);
 }
 
 .inline {
-	background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }

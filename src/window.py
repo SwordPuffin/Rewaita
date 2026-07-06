@@ -21,7 +21,7 @@ import os, shutil, gi, re
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
 from collections import defaultdict
-from .utils import parse_gtk_theme, set_to_default, delete_items, set_gtk3_theme, get_accent_color, add_css_provider, Preferences
+from .utils import parse_gtk_theme, set_to_default, delete_items, get_accent_color, add_gtk3_window_controls, add_css_provider, Preferences
 from .custom_theme_page import CustomPage
 from .theme_page import ThemePage
 from .pref_page import PrefPage
@@ -141,40 +141,36 @@ class RewaitaWindow(Adw.ApplicationWindow):
         for item in self.extra_css:
             extra_css_string += item
         extras = self.window_control_css + extra_css_string
-
-        if(theme_name.lower() == "default"):
-            set_to_default([gtk3_config_dir, gtk4_config_dir], theme_type, reset_shell, extras)
+        if(theme_name == "default"):
+            set_to_default(gtk4_config_dir, theme_type, reset_shell, [extras, self.window_control], self.modify_gtk3_theme)
             return
 
-        if(self.light_theme == "accent" or self.dark_theme == "accent"):
-            pass
-        else:
-            theme_file = os.path.join(self.data_dir, theme_type, theme_name)
-            self.controls.set_css_classes([self.window_control])
-            gtk_css = open(theme_file).read()
-            self.toast_overlay.dismiss_all()
-            self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Change GNOME shell theme to 'Rewaita' and reboot for full changes"))))
+        theme_file = os.path.join(self.data_dir, theme_type, theme_name)
+        self.controls.set_css_classes([self.window_control])
+        gtk_css = open(theme_file).read()
+        self.toast_overlay.dismiss_all()
+        self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Change GNOME shell theme to 'Rewaita' and reboot for full changes"))))
 
-            color_pattern = r'@define-color\s+([a-z0-9_]+)\s+(#[a-fA-F0-9]+|@[a-z0-9_]+);'
-            references = defaultdict(list)
-            colors = dict()
+        color_pattern = r'--([a-z0-9-]+)\s*:\s*(#[a-fA-F0-9]+|[a-z0-9_-]+(?:\([^)]*\))?)\s*;'
+        references = defaultdict(list)
+        colors = dict()
 
-            for match in re.finditer(color_pattern, gtk_css):
-                name, value = match.groups()
-                if(value.startswith('@')):
-                    ref_name = value[1:]
-                    references[ref_name].append(name)
-                else:
-                    colors[name] = value
+        for match in re.finditer(color_pattern, gtk_css):
+            name, value = match.groups()
+            if(value.startswith('@')):
+                ref_name = value[1:]
+                references[ref_name].append(name)
+            else:
+                colors[name] = value
 
-            for ref_name, dependent_names in references.items():
-                if(ref_name in colors):
-                    for name in dependent_names:
-                        colors[name] = colors[ref_name]
+        for ref_name, dependent_names in references.items():
+            if(ref_name in colors):
+                for name in dependent_names:
+                    colors[name] = colors[ref_name]
 
         accent_color, accent_fg = get_accent_color(colors, self)
-        colors["accent_color"] = accent_color
-        colors["accent_fg_color"] = accent_fg
+        colors["accent-color"] = accent_color
+        colors["accent-fg-color"] = accent_fg
         extras = "\n" + extras + f"\n@define-color accent_bg_color {accent_color};\n@define-color accent_fg_color {accent_fg};"
 
         try:
@@ -192,9 +188,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
             self.gtk3_template_file_content,
             reset_shell
         )
-
-        if(self.modify_gtk3_theme):
-            set_gtk3_theme(gtk3_config_dir, self.window_control)
+        add_gtk3_window_controls(self.window_control, "")
 
     def on_window_control_clicked(self, button, control_file, window, flowbox):
         if(control_file != "default"):
@@ -235,7 +229,10 @@ class RewaitaWindow(Adw.ApplicationWindow):
             for theme in flowbox:
                 theme.remove_css_class("active-scheme")
 
-        if(button.get_icon_name() != "reload-symbolic"): button.add_css_class("active-scheme")
+        if(not button):
+            return
+        if(button.get_icon_name() != "reload-symbolic"):
+            button.add_css_class("active-scheme")
 
     def save_prefs(self):
         values = {
@@ -249,6 +246,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
             "window": self.borders,
             "sharp": self.sharp,
             "accent-fg": self.accent_fg,
+            "accent-tabs": self.accent_tabs,
             "firefox-theme": self.firefox_theme,
             "light-text": self.light_text,
             "dark-panel": self.dark_panel,

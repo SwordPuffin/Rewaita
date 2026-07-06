@@ -21,7 +21,6 @@ import gi, os, re
 from gi.repository import Gtk, Adw, Gdk, GLib
 from fortune import fortune
 from .wallpaper_dialog import WallpaperDialog
-from .accent_box import AccentBox
 
 def flowbox_sort_func(child1: Gtk.FlowBoxChild, child2: Gtk.FlowBoxChild, _):
     button1 = child1.get_first_child()
@@ -38,11 +37,11 @@ def flowbox_sort_func(child1: Gtk.FlowBoxChild, child2: Gtk.FlowBoxChild, _):
 
 def load_colors_from_css(file_path):
     colors = {}
-    define_re = re.compile(r"@define-color\s+(\S+)\s+([^;]+);")
+    color_pattern = re.compile(r'--([a-z0-9-]+)\s*:\s*(#[a-fA-F0-9]+|[a-z0-9_-]+(?:\([^)]*\))?)\s*;')
 
     with open(file_path, "r") as f:
         for line in f:
-            match = define_re.search(line)
+            match = color_pattern.search(line)
             if(match):
                 name, color = match.groups()
                 colors[name] = color.strip()
@@ -54,7 +53,7 @@ def create_color_thumbnail_button(colors, name, example_text):
     dots = Gtk.Label(vexpand=True, valign=Gtk.Align.END, use_markup=True)
     dot_txt = ""
 
-    keys_to_show = ["red_1", "orange_1", "yellow_1", "green_1", "blue_1", "dark_1", "light_1"]
+    keys_to_show = ["red-1", "orange-1", "yellow-1", "green-1", "blue-1", "dark-1", "light-1"]
     for key in keys_to_show:
         color = colors.get(key)
         if(color):
@@ -65,8 +64,8 @@ def create_color_thumbnail_button(colors, name, example_text):
     css_provider = Gtk.CssProvider()
     css_provider.load_from_data(f"""
         .background-{rand} {{
-            background-color: {colors.get("window_bg_color")};
-            color: {colors.get("window_fg_color")};
+            background-color: {colors.get("window-bg-color")};
+            color: {colors.get("window-fg-color")};
         }}
     """.encode())
     Gtk.StyleContext.add_provider_for_display(
@@ -114,9 +113,6 @@ class ThemePage(Gtk.Box):
         top_box.append(image_button)
 
         self.append(top_box)
-
-        if("GNOME" not in GLib.getenv("XDG_CURRENT_DESKTOP") and ""):
-            self.append(Adw.Clamp(maximum_size=800, child=AccentBox(parent)))
 
         snippet = self.get_example_text()
         for theme_type in ["light", "dark"]:
@@ -174,3 +170,4 @@ class ThemePage(Gtk.Box):
             example = fortune()
             if(len(example) < 70 and not "<" in example and ">" not in example):
                 return example
+

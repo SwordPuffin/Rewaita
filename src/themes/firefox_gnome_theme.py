@@ -22,30 +22,30 @@ from configparser import ConfigParser
 
 DEFAULT_TEMPLATE = """
 :root {{
-  --window_bg_color:   {window_bg_color};
-  --window_fg_color:   {window_fg_color};
-  --view_bg_color:     {view_bg_color};
-  --view_fg_color:     {view_fg_color};
-  --headerbar_bg_color:{headerbar_bg_color};
-  --headerbar_fg_color:{headerbar_fg_color};
-  --popover_bg_color:  {popover_bg_color};
-  --popover_fg_color:  {popover_fg_color};
-  --card_bg_color:     {card_bg_color};
-  --card_fg_color:     {card_fg_color};
-  --sidebar_bg_color:  {sidebar_bg_color};
-  --sidebar_fg_color:  {sidebar_fg_color};
-  --dark_1:            {dark_1};
-  --brown_1:           {brown_1};
-  --light_1:           {light_1};
-  --blue_1:            {blue_1};
-  --blue_2:            {blue_2};
-  --green_1:           {green_1};
-  --yellow_1:          {yellow_1};
-  --orange_1:          {orange_1};
-  --red_1:             {red_1};
-  --purple_1:          {purple_1};
-  --purple_2:          {purple_2};
-  --accent_color:      {accent_color};
+  --window_bg_color:   {window-bg-color};
+  --window_fg_color:   {window-fg-color};
+  --view_bg_color:     {view-bg-color};
+  --view_fg_color:     {view-fg-color};
+  --headerbar_bg_color:{headerbar-bg-color};
+  --headerbar_fg_color:{headerbar-fg-color};
+  --popover_bg_color:  {popover-bg-color};
+  --popover_fg_color:  {popover-fg-color};
+  --card_bg_color:     {card-bg-color};
+  --card_fg_color:     {card-fg-color};
+  --sidebar_bg_color:  {sidebar-bg-color};
+  --sidebar_fg_color:  {sidebar-fg-color};
+  --dark_1:            {dark-1};
+  --brown_1:           {brown-1};
+  --light_1:           {light-1};
+  --blue_1:            {blue-1};
+  --blue_2:            {blue-2};
+  --green_1:           {green-1};
+  --yellow_1:          {yellow-1};
+  --orange_1:          {orange-1};
+  --red_1:             {red-1};
+  --purple_1:          {purple-1};
+  --purple_2:          {purple-2};
+  --accent_color:      {accent-color};
 }}
 
 #main-window,
@@ -785,7 +785,8 @@ class FirefoxGnomeThemePlugin():
             "~/.waterfox",
             "~/.var/app/org.mozilla.firefox/.mozilla/firefox",
             "~/.var/app/io.gitlab.librewolf-community/.librewolf",
-            "~/.var/app/net.waterfox.waterfox/.waterfox"
+            "~/.var/app/net.waterfox.waterfox/.waterfox",
+            "~/.config/mozilla/firefox"
         ]:
             try:
                 directory = Path(path).expanduser()

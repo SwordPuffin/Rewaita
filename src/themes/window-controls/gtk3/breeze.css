@@ -1,19 +1,20 @@
 button.maximize.titlebutton:not(.suggested-action):not(.destructive-action),
 button.minimize.titlebutton:not(.suggested-action):not(.destructive-action),
 button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
-  color: @window_fg_color;
+  color: @window-fg-color;
 	-gtk-icon-theme: 'Adwaita';
 	margin: 1px 2px;
+	padding: 1px;
 }
 
 button.maximize.titlebutton:not(.suggested-action):not(.destructive-action):hover,
 button.minimize.titlebutton:not(.suggested-action):not(.destructive-action):hover {
-  background-color: @window_fg_color;
-  color: @window_bg_color;
+  background-color: @window-fg-color;
+  color: @window-bg-color;
 }
 
 button.close.titlebutton:not(.suggested-action):not(.destructive-action) > image {
-	-gtk-icon-transform: scale(1.15);
+	-gtk-icon-transform: scale(1.2);
 	-gtk-icon-shadow: none;
 }
 
@@ -23,9 +24,17 @@ button.close.titlebutton:not(.suggested-action):not(.destructive-action):not(:ho
   background-color: transparent;
 }
 
+button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
+	min-height: 22px;
+	min-width: 22px;
+}
+
 button.close.titlebutton:not(.suggested-action):not(.destructive-action):hover {
-  background-color: @red_1;
-  color: @window_bg_color;
+  background-color: @red-1;
+}
+
+button.close.titlebutton:not(.suggested-action):not(.destructive-action):hover > image {
+  color: @window-bg-color;
 }
 
 button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) {

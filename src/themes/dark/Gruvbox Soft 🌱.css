@@ -1,102 +1,101 @@
-/* Gruvbox Dark Soft Palette */
-@define-color window_bg_color #32302f; /* bg0_soft */
-@define-color window_fg_color #d5c4a1; /* fg */
+:root {
+  --window-bg-color: #32302f;
+  --window-fg-color: #d5c4a1;
 
-/* View styling */
-@define-color view_bg_color #32302f;
-@define-color view_fg_color #d5c4a1;
+  /* View styling */
+  --view-bg-color: #32302f;
+  --view-fg-color: #d5c4a1;
 
-/* Header bar */
-@define-color headerbar_bg_color #282828; /* bg0 */
-@define-color headerbar_backdrop_color #282828;
-@define-color headerbar_fg_color #d5c4a1;
+  /* Header bar */
+  --headerbar-bg-color: #282828;
+  --headerbar-backdrop-color: #282828;
+  --headerbar-fg-color: #d5c4a1;
 
-/* Popovers and dialogs */
-@define-color popover_bg_color #32302f;
-@define-color popover_fg_color #d5c4a1;
+  /* Popovers and dialogs */
+  --popover-bg-color: #32302f;
+  --popover-fg-color: #d5c4a1;
 
-@define-color dialog_bg_color @popover_bg_color;
-@define-color dialog_fg_color @popover_fg_color;
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
 
-/* Cards and sidebars */
-@define-color card_bg_color #423f3a;
-@define-color card_fg_color #d5c4a1;
+  /* Cards and sidebars */
+  --card-bg-color: #423f3a;
+  --card-fg-color: #d5c4a1;
 
-@define-color sidebar_bg_color #32302f;
-@define-color sidebar_fg_color #d5c4a1;
-@define-color sidebar_backdrop_color @sidebar_bg_color;
-@define-color sidebar_border_color #504945; /* bg3 */
+  --sidebar-bg-color: #32302f;
+  --sidebar-fg-color: #d5c4a1;
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: #504945;
 
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
-@define-color secondary_sidebar_fg_color @sidebar_fg_color;
-@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
-@define-color secondary_sidebar_border_color @sidebar_border_color;
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
 
-/* Gruvbox Dark Soft accent colors */
-@define-color blue_1 #83a598; /* blue */
-@define-color blue_2 #8ec07c; /* aqua */
-@define-color blue_3 #b8bb26; /* green */
-@define-color blue_4 #98971a; /* dark green */
-@define-color blue_5 #d3869b; /* purple */
+  /* Gruvbox accent colors */
+  --blue-1: #83a598;
+  --blue-2: #8ec07c;
+  --blue-3: #b8bb26;
+  --blue-4: #98971a;
+  --blue-5: #d3869b;
 
-@define-color green_1 #b8bb26; /* green */
-@define-color green_2 #98971a; /* dark green */
-@define-color green_3 #fabd2f; /* yellow */
-@define-color green_4 #fe8019; /* orange */
-@define-color green_5 #d65d0e; /* bright orange */
+  --green-1: #b8bb26;
+  --green-2: #98971a;
+  --green-3: #fabd2f;
+  --green-4: #fe8019;
+  --green-5: #d65d0e;
 
-@define-color yellow_1 #fabd2f; /* yellow */
-@define-color yellow_2 #fe8019; /* orange */
-@define-color yellow_3 #fb4934; /* red */
-@define-color yellow_4 #d3869b; /* purple */
-@define-color yellow_5 #458588; /* dark aqua */
+  --yellow-1: #fabd2f;
+  --yellow-2: #fe8019;
+  --yellow-3: #fb4934;
+  --yellow-4: #d3869b;
+  --yellow-5: #458588;
 
-@define-color orange_1 #fe8019; /* orange */
-@define-color orange_2 #fb4934; /* red */
-@define-color orange_3 #d3869b; /* purple */
-@define-color orange_4 #fabd2f; /* yellow */
-@define-color orange_5 #b8bb26; /* green */
+  --orange-1: #fe8019;
+  --orange-2: #fb4934;
+  --orange-3: #d3869b;
+  --orange-4: #fabd2f;
+  --orange-5: #b8bb26;
 
-@define-color red_1 #fb4934; /* red */
-@define-color red_2 #d3869b; /* purple */
-@define-color red_3 #83a598; /* blue */
-@define-color red_4 #458588; /* dark aqua */
-@define-color red_5 #98971a; /* dark green */
+  --red-1: #fb4934;
+  --red-2: #d3869b;
+  --red-3: #83a598;
+  --red-4: #458588;
+  --red-5: #98971a;
 
-@define-color purple_1 #d3869b; /* purple */
-@define-color purple_2 #b16286; /* bright purple */
-@define-color purple_3 #83a598; /* blue */
-@define-color purple_4 #fabd2f; /* yellow */
-@define-color purple_5 #8ec07c; /* aqua */
+  --purple-1: #d3869b;
+  --purple-2: #b16286;
+  --purple-3: #83a598;
+  --purple-4: #fabd2f;
+  --purple-5: #8ec07c;
 
-@define-color brown_1 #504945; /* bg3 */
-@define-color brown_2 #665c54; /* bg4 */
-@define-color brown_3 #7c6f64; /* gray */
-@define-color brown_4 #928374; /* dark gray */
-@define-color brown_5 #a89984; /* light gray */
+  --brown-1: #504945;
+  --brown-2: #665c54;
+  --brown-3: #7c6f64;
+  --brown-4: #928374;
+  --brown-5: #a89984;
 
-@define-color light_1 #d5c4a1; /* fg */
-@define-color light_2 #bdae93; /* fg1 */
-@define-color light_3 #a89984; /* fg2 */
-@define-color light_4 #83a598; /* blue */
-@define-color light_5 #665c54; /* bg4 */
+  --light-1: #d5c4a1;
+  --light-2: #bdae93;
+  --light-3: #a89984;
+  --light-4: #83a598;
+  --light-5: #665c54;
 
-@define-color dark_1 #504945; /* bg3 */
-@define-color dark_2 #3c3836; /* bg2 */
-@define-color dark_3 #282828; /* bg0 */
-@define-color dark_4 #1d2021; /* bg0_hard */
-@define-color dark_5 #32302f; /* bg0_soft */
+  --dark-1: #504945;
+  --dark-2: #3c3836;
+  --dark-3: #282828;
+  --dark-4: #1d2021;
+  --dark-5: #32302f;
 
-toast {
-  background-color: @window_bg_color;
-  color: @window_fg_color;
+  --active-toggle-bg-color: var(--window-fg-color);
+  --active-toggle-fg-color: var(--window-bg-color);
 }
 
-toggle:checked {
-  background-color: @card_bg_color;
-  color: @window_fg_color;
+toast {
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
 
 .inline {
-	background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
 }

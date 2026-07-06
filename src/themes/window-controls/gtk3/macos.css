@@ -1,59 +1,65 @@
+button.minimize.titlebutton:not(.suggested-action):not(.destructive-action):not(:hover) > image,
+button.maximize.titlebutton:not(.suggested-action):not(.destructive-action):not(:hover) > image,
+button.close.titlebutton:not(.suggested-action):not(.destructive-action):not(:hover) > image {
+  background-image: none;
+  color: transparent;
+}
+
 button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) {
-  background-color: @yellow_1;
+  background-color: @yellow-1;
   min-width: 16px;
   min-height: 16px;
   color: transparent;
+  padding: 1px;
 }
 
 button.minimize.titlebutton:active:not(.suggested-action):not(.destructive-action) {
-  background-color: shade(@yellow_1, 0.8);
+  background-color: shade(@yellow-1, 0.8);
 }
 
 button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
-  background-color: @green_1;
+  background-color: @green-1;
   min-width: 16px;
   min-height: 16px;
   color: transparent;
+  padding: 1px;
 }
 
 button.maximize.titlebutton:active:not(.suggested-action):not(.destructive-action) {
-  background-color: shade(@green_1, 0.8);
+  background-color: shade(@green-1, 0.8);
 }
 
 button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
-  background-color: @red_1;
+  background-color: @red-1;
   min-width: 16px;
   min-height: 16px;
   color: transparent;
+  padding: 1px;
 }
 
 button.close.titlebutton:active:not(.suggested-action):not(.destructive-action) {
-  background-color: shade(@red_1, 0.8);
+  background-color: shade(@red-1, 0.8);
 }
 
 button.minimize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action), button.maximize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action), button.close.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
   color: transparent;
 }
 
-button.maximize.titlebutton:hover:not(.suggested-action):not(.destructive-action),
-button.close.titlebutton:hover:not(.suggested-action):not(.destructive-action),
-button.minimize.titlebutton:hover:not(.suggested-action):not(.destructive-action) {
-  color: @window_bg_color;
+button.maximize.titlebutton:hover:not(.suggested-action):not(.destructive-action) > image,
+button.close.titlebutton:hover:not(.suggested-action):not(.destructive-action) > image,
+button.minimize.titlebutton:hover:not(.suggested-action):not(.destructive-action) > image {
+  color: @window-bg-color;
 }
 
 button.minimize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action),
 button.maximize.titlebutton:backdrop:not(.suggested-action):not(.destructive-action),
 button.close.titlebutton:backdrop:not(.suggested-action):not(.destructive-action) {
-  background-color: @card_bg_color;
-  filter: brightness(150%);
+  background-color: @card-bg-color;
 }
 
-button.minimize.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action),
-button.minimize.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action),
-button.maximize.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action),
-button.maximize.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action),
-button.close.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action),
-button.close.titlebutton:backdrop:active:not(.suggested-action):not(.destructive-action) {
-  color: @window_fg_color;
+button.minimize.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action) > image,
+button.maximize.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action) > image,
+button.close.titlebutton:backdrop:hover:not(.suggested-action):not(.destructive-action) > image {
+  color: @window-fg-color;
 }
 
