@@ -4,5 +4,14 @@ data/io.github.swordpuffin.rewaita.desktop.in
 data/io.github.swordpuffin.rewaita.metainfo.xml.in
 data/io.github.swordpuffin.rewaita.gschema.xml
 src/main.py
+src/widgets/accent_box.py
+src/widgets/custom_theme_page.py
+src/widgets/extra_options_box.py
+src/widgets/guide_dialog.ui
+src/widgets/loading_dialog.py
+src/widgets/pref_page.py
+src/widgets/theme_page.py
+src/widgets/wallpaper_dialog.py
+src/widgets/window_control_box.py
 src/window.py
 src/window.ui

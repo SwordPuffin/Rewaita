@@ -112,7 +112,7 @@ msgstr ""
 msgid "Mint"
 msgstr ""
 
-#: src/widgets/custom_theme_page.py:140
+#: src/widgets/custom_theme_page.py:140 src/widgets/accent_box.py:77
 msgid "Accent Colors"
 msgstr ""
 
@@ -202,6 +202,18 @@ msgstr ""
 
 #: src/widgets/extra_options_box.py:86
 msgid "Might be useful for Blur my Shell users"
+msgstr ""
+
+#: src/widgets/extra_options_box.py:115
+msgid "The bar will stay dark regardless of theme"
+msgstr ""
+
+#: src/widgets/extra_options_box.py:121
+msgid "Makes the Top Panel Background Transparent"
+msgstr ""
+
+#: src/widgets/extra_options_box.py:127
+msgid "Smoothens all pill button on the top panel"
 msgstr ""
 
 #: src/widgets/pref_page.py:27
@@ -358,7 +370,8 @@ msgstr ""
 
 #: src/widgets/guide_dialog.ui:87
 #: src/widgets/guide_dialog.ui:113
-#: src/widgets/guide_dialog.ui:203
+#: src/widgets/guide_dialog.ui:267
+#: src/widgets/guide_dialog.ui:299
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -394,12 +407,6 @@ msgstr ""
 msgid "Get it"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:234
-#: src/widgets/guide_dialog.ui:277
-#: src/widgets/guide_dialog.ui:295
-msgid "Install"
-msgstr ""
-
 #: src/widgets/guide_dialog.ui:165
 msgid "Step 3 — Restart Firefox"
 msgstr ""
@@ -408,70 +415,109 @@ msgstr ""
 msgid "Fully quit and relaunch Firefox for the changes to take effect."
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:221
-msgid "GNOME Shell"
+#: src/widgets/guide_dialog.ui:178
+msgid "GNOME"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:225
+#: src/widgets/guide_dialog.ui:182
 msgid "Apply the Shell Theme"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:226
+#: src/widgets/guide_dialog.ui:183
 msgid "Rewaita includes a matching GNOME Shell theme. Follow these steps to enable it."
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:231
+#: src/widgets/guide_dialog.ui:187
 msgid "Step 1 — Install the User Themes extension"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:232
+#: src/widgets/guide_dialog.ui:188
 msgid "GNOME Shell requires the User Themes extension to load custom shell themes."
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:249
+#: src/widgets/guide_dialog.ui:192
+#: src/widgets/guide_dialog.ui:230
+#: src/widgets/guide_dialog.ui:333
+#: src/widgets/guide_dialog.ui:351
+msgid "Install"
+msgstr ""
+
+#: src/widgets/guide_dialog.ui:204
 msgid "Step 2 — Set any theme"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:250
+#: src/widgets/guide_dialog.ui:205
 msgid "Rewaita will generate the theme automatically and place it in ~/.local/share/themes. This can be disabled in preferences."
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:257
+#: src/widgets/guide_dialog.ui:211
 msgid "Step 3 — Select it in GNOME Tweaks"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:258
+#: src/widgets/guide_dialog.ui:212
 msgid "Open GNOME Tweaks → Appearance → Shell and choose Rewaita from the dropdown."
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:266
+#: src/widgets/guide_dialog.ui:220
+msgid "Apply GDM Theme"
+msgstr ""
+
+#: src/widgets/guide_dialog.ui:221
+msgid "While Rewaita's theme is compatible with GDM, this process must be done manually. Step 3 needs to be repeated anytime you change themes."
+msgstr ""
+
+#: src/widgets/guide_dialog.ui:225
+msgid "Step 1 — Install GDM Settings"
+msgstr ""
+
+#: src/widgets/guide_dialog.ui:226
+msgid "This is required to activate the theme safely."
+msgstr ""
+
+#: src/widgets/guide_dialog.ui:242
+msgid "Step 2 — Overrides"
+msgstr ""
+
+#: src/widgets/guide_dialog.ui:243
+msgid "After setting any theme, run these commands to give GDM Settings access to it:"
+msgstr ""
+
+#: src/widgets/guide_dialog.ui:313
+msgid "Step 3 — Choose the theme in GDM Settings"
+msgstr ""
+
+#: src/widgets/guide_dialog.ui:314
+msgid "Open GDM Settings → Appearance → Shell and choose Rewaita from the dropdown."
+msgstr ""
+
+#: src/widgets/guide_dialog.ui:322
 msgid "Useful Extensions"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:267
+#: src/widgets/guide_dialog.ui:323
 msgid "These extensions pair well with Rewaita."
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:273
+#: src/widgets/guide_dialog.ui:329
 msgid "Application menu for GNOME Shell."
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:291
+#: src/widgets/guide_dialog.ui:347
 msgid "Moves the overview dash into a persistent, themeable dock."
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:312
+#: src/widgets/guide_dialog.ui:368
 msgid "Get Involved"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:338
+#: src/widgets/guide_dialog.ui:394
 msgid "Contribute to Rewaita"
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:350
+#: src/widgets/guide_dialog.ui:406
 msgid "Anyone, regardless of experience or background, is welcome to join. Open an issue to report bugs or suggest themes, or submit a pull request to contribute directly."
 msgstr ""
 
-#: src/widgets/guide_dialog.ui:360
+#: src/widgets/guide_dialog.ui:416
 msgid "Open in Browser"
 msgstr ""
