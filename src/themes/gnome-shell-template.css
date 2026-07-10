@@ -10,7 +10,7 @@
 
 /* Top Bar */
 #panel {
-  background-color: @panel-bg-color !important;
+  background-color: @panel-bg-color;
   color: @panel-fg-color !important;
   font-feature-settings: "tnum";
 }
@@ -441,7 +441,7 @@ StEntry:focus {
 }
 
 .slider {
-  color: @window-fg-color;
+  color: @window-fg-color !important;
   -barlevel-background-color: @card-bg-color;
   -barlevel-active-background-color: @accent-color;
 }
@@ -477,8 +477,8 @@ StEntry:focus {
 }
 
 .icon-button {
-  background-color: @card-bg-color;
-  color: @window-fg-color;
+  background-color: @card-bg-color !important;
+  color: @window-fg-color !important;
 }
 
 .icon-button:hover {
@@ -486,7 +486,11 @@ StEntry:focus {
 }
 
 .icon-button:active {
-  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.2) !important;
+}
+
+.title, .popup-menu-item {
+  color: @window-fg-color !important;
 }
 
 .quick-toggle-menu {
@@ -508,6 +512,10 @@ StEntry:focus {
   color: @window-fg-color;
 }
 
+.power-item {
+  color: @window-fg-color !important;
+}
+
 .quick-settings-system-item .power-item:insensitive {
   background-color: transparent;
 }
@@ -515,6 +523,47 @@ StEntry:focus {
 .icon {
   background-color: @accent-color !important;
   color: @accent-fg-color !important;
+}
+
+/* On-Screen Keyboard */
+#keyboard {
+  background-color: @window-bg-color !important;
+  color: @window-fg-color !important;
+}
+
+.keyboard-key  {
+  background-color: @card-bg-color !important;
+  color: @window-fg-color !important;
+}
+
+.keyboard-subkeys-boxpointer {
+  -arrow-background-color: @window-bg-color !important;
+  -arrow-border-width: 0;
+}
+
+.keyboard-key:focus, .keyboard-key:hover {
+  background-color: @headerbar-bg-color !important;
+}
+
+.keyboard-key:active {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1) !important;
+}
+
+.keyboard-key.shift-key-uppercase,
+.keyboard-key.shift-key-uppercase:focus,
+.keyboard-key.shift-key-uppercase:hover,
+.keyboard-key.shift-key-uppercase:checked,
+.keyboard-key.shift-key-uppercase:active {
+  color: @accent-color !important;
+}
+
+.word-suggestions {
+  color: @window-fg-color !important;
+}
+
+.word-suggestions > StButton:hover {
+  background-color: @headerbar-bg-color !important;
+  color: @window-fg-color !important;
 }
 
 /* Calendar */
@@ -961,7 +1010,10 @@ StEntry:focus {
   background-color: @headerbar-bg-color !important;
 }
 
-.login-dialog-prompt-label {
+.login-dialog-message-hint,
+.login-dialog-prompt-label,
+.caps-lock-warning-label {
   color: @window-fg-color !important;
 }
+
 

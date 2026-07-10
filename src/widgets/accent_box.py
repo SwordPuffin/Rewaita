@@ -74,7 +74,7 @@ class AccentBox(Gtk.Box):
         prefs = Preferences()
         accent = prefs.get("accent")
 
-        title = Gtk.Label(label=_("Accent Color"), xalign=0.0)
+        title = Gtk.Label(label=_("Accent Colors"), xalign=0.0)
         title.add_css_class("heading")
         self.append(title)
 
