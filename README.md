@@ -78,6 +78,24 @@ flatpak --user override --filesystem=xdg-config/gtk-3.0:rw
 flatpak --user override --filesystem=xdg-config/gtk-4.0:rw
 ```
 
+# 🐧 CLI Usage
+
+>
+> Note: These commands will be different for non-Flatpak installations, but the flags should work the same.
+
+#### To set a theme:
+```bash
+flatpak run io.github.swordpuffin.rewaita --theme={theme name}
+```
+For 'theme name': it is the name in the app without any emojis, spaces are converted to dashes, and it is all in lowercase.
+
+So 'Dracula 🧛🏻‍♂️' would be 'dracula' and 'Material Palenight 🌙' would be 'material-palenight.
+
+#### To get all available themes:
+```bash
+flatpak run io.github.swordpuffin.rewaita --list
+```
+
 ---
 
 # 🐛 Known Bugs
