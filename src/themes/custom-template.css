@@ -1,71 +1,58 @@
-@define-color window_bg_color @window_bg_color;
-@define-color window_fg_color @window_fg_color;
-
-@define-color view_bg_color @view_bg_color;
-@define-color view_fg_color @view_fg_color;
-
-@define-color success_color @success_color;
-@define-color success_bg_color @success_bg_color;
-@define-color success_fg_color @success_fg_color;
-
-@define-color warning_color @warning_color;
-@define-color warning_bg_color @warning_bg_color;
-@define-color warning_fg_color @warning_fg_color;
-
-@define-color destructive_color @destructive_color;
-@define-color destructive_bg_color @destructive_bg_color;
-@define-color destructive_fg_color @destructive_fg_color;
-
-@define-color error_color @destructive_color;
-@define-color error_bg_color @destructive_bg_color;
-@define-color error_fg_color @destructive_fg_color;
-
-@define-color headerbar_bg_color @headerbar_bg_color;
-@define-color headerbar_fg_color @headerbar_fg_color;
-
-@define-color popover_bg_color @view_bg_color;
-@define-color popover_fg_color @view_fg_color;
-
-@define-color dialog_bg_color @view_bg_color;
-@define-color dialog_fg_color @view_fg_color;
-
-@define-color card_bg_color @card_bg_color;
-@define-color card_fg_color @card_fg_color;
-
-@define-color sidebar_bg_color @view_bg_color;
-@define-color sidebar_fg_color @view_fg_color;
-@define-color sidebar_backdrop_color @view_bg_color;
-@define-color sidebar_border_color @card_bg_color;
-
-@define-color secondary_sidebar_bg_color @sidebar_bg_color;
-@define-color secondary_sidebar_fg_color @sidebar_fg_color;
-@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
-@define-color secondary_sidebar_border_color @sidebar_border_color;
-
-@define-color blue_1 @blue_1;
-@define-color blue_2 @blue_2;
-@define-color green_1 @green_1;
-@define-color yellow_1 @yellow_1;
-@define-color red_1 @red_1;
-@define-color purple_1 @purple_1;
-@define-color purple_2 @purple_2;
-@define-color orange_1 @orange_1;
-@define-color brown_1 @brown_1;
-@define-color light_1 @light_1;
-@define-color light_5 @light_5;
-@define-color dark_1 @dark_1;
-
-@define-color accent_color @accent_color;
-@define-color accent_bg_color @accent_bg_color;
-@define-color accent_fg_color @accent_fg_color;
+:root {
+  --window-bg-color: var(--window-bg-color);
+  --window-fg-color: var(--window-fg-color);
+  --view-bg-color: var(--view-bg-color);
+  --view-fg-color: var(--view-fg-color);
+  --success-color: var(--success-color);
+  --success-bg-color: var(--success-bg-color);
+  --success-fg-color: var(--success-fg-color);
+  --warning-color: var(--warning-color);
+  --warning-bg-color: var(--warning-bg-color);
+  --warning-fg-color: var(--warning-fg-color);
+  --destructive-color: var(--destructive-color);
+  --destructive-bg-color: var(--destructive-bg-color);
+  --destructive-fg-color: var(--destructive-fg-color);
+  --error-color: var(--destructive-color);
+  --error-bg-color: var(--destructive-bg-color);
+  --error-fg-color: var(--destructive-fg-color);
+  --headerbar-bg-color: var(--headerbar-bg-color);
+  --headerbar-fg-color: var(--headerbar-fg-color);
+  --popover-bg-color: var(--view-bg-color);
+  --popover-fg-color: var(--view-fg-color);
+  --dialog-bg-color: var(--view-bg-color);
+  --dialog-fg-color: var(--view-fg-color);
+  --card-bg-color: var(--card-bg-color);
+  --card-fg-color: var(--card-fg-color);
+  --sidebar-bg-color: var(--view-bg-color);
+  --sidebar-fg-color: var(--view-fg-color);
+  --sidebar-backdrop-color: var(--view-bg-color);
+  --sidebar-border-color: var(--card-bg-color);
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
+  --blue-1: var(--blue-1);
+  --blue-2: var(--blue-2);
+  --green-1: var(--green-1);
+  --yellow-1: var(--yellow-1);
+  --red-1: var(--red-1);
+  --purple-1: var(--purple-1);
+  --purple-2: var(--purple-2);
+  --orange-1: var(--orange-1);
+  --brown-1: var(--brown-1);
+  --light-1: var(--light-1);
+  --light-5: var(--light-5);
+  --dark-1: var(--dark-1);
+  --accent-color: var(--accent-color);
+  --accent-bg-color: var(--accent-bg-color);
+  --accent-fg-color: var(--accent-fg-color);
+}
 
 toast {
-  background-color: @window_bg_color;
-  color: @window_fg_color;
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
 }
-
 toggle:checked {
-  background-color: @card_bg_color;
-  color: @window_fg_color;
+  background-color: var(--card-bg-color);
+  color: var(--window-fg-color);
 }
-

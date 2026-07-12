@@ -54,7 +54,11 @@ def kmeans_plus_plus(sample: np.ndarray, k: int) -> np.ndarray:
     for _ in range(1, k):
         diff = sample[:, None, :] - np.array(centroids)[None, :, :]
         dists = np.einsum('ijk,ijk->ij', diff, diff).min(axis=1)
-        probs = dists / dists.sum()
+        total = dists.sum()
+        if(total > 0):
+            probs = dists / total
+        else:
+            probs = np.full(len(sample), 1.0 / len(sample))
         centroids.append(sample[np.random.choice(len(sample), p=probs)])
     return np.array(centroids, dtype=np.float32)
 

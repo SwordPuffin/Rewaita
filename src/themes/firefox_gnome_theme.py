@@ -328,8 +328,8 @@ scrollbar thumb:hover {{
 .urlbar-background,
 .urlbarView-body-inner,
 .urlbarView-body-outer {{
-  background-color: var(--window_bg_color) !important;
-  border-color: var(--window_bg_color) !important;
+  background-color: var(--card_bg_color) !important;
+  border-color: var(--card_bg_color) !important;
 }}
 
 .urlbarView-row {{
@@ -803,10 +803,16 @@ class FirefoxGnomeThemePlugin():
                 for result in results:
                     try:
                         if result.resolve().is_dir():
+                            extra_css = ""
+                            if(prefs.get("sharp")):
+                                extra_css += "* { border-radius: 0px !important; }"
+                            if(prefs.get("transparency")):
+                                extra_css += "* { opacity: 96% !important; }"
+
                             if(Path(f"{result}/chrome/firefox-gnome-theme").exists()):
                                 Path(f"{result}/chrome/firefox-gnome-theme").mkdir(mode=0o755, parents=True, exist_ok=True)
                                 with open(f"{result}/chrome/firefox-gnome-theme/customChrome.css", "w") as f:
-                                    f.write(FFG_TEMPLATE.format(**self.variables))
+                                    f.write(FFG_TEMPLATE.format(**self.variables) + f"\n{extra_css}")
                             else:
                                 Path(f"{result}/chrome").mkdir(mode=0o755, parents=True, exist_ok=True)
                                 Path(f"{result}/chrome/userChrome.css").touch()
@@ -818,10 +824,7 @@ class FirefoxGnomeThemePlugin():
                                             f.write(pref_text)
 
                                 with open(f"{result}/chrome/rewaitaChrome.css", "w") as f:
-                                    sharp_css = ""
-                                    if(prefs.get("sharp")):
-                                        sharp_css += "* { border-radius: 0px !important; }"
-                                    f.write(DEFAULT_TEMPLATE.format(**self.variables) + f"\n{window_control_map[self.window_controls].format(**self.variables)}\n{sharp_css}")
+                                    f.write(DEFAULT_TEMPLATE.format(**self.variables) + f"\n{window_control_map[self.window_controls].format(**self.variables)}\n{extra_css}")
 
                                 with open(f"{result}/chrome/userChrome.css", "r") as rf:
                                     if("@import \"rewaitaChrome.css\";" not in rf.read()):

@@ -147,7 +147,13 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
         theme_file = os.path.join(self.data_dir, theme_type, theme_name)
         self.controls.set_css_classes([self.window_control])
-        gtk_css = open(theme_file).read()
+
+        try: # I'd rather it just not do anything than fail, it's this stupid symlink system I have going on
+            gtk_css = open(theme_file).read()
+        except FileNotFoundError:
+            print(f"Could not find: {theme_file}")
+            return
+
         self.toast_overlay.dismiss_all()
         self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Change GNOME shell theme to 'Rewaita' and reboot for full changes"))))
 

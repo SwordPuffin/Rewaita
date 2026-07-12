@@ -4,89 +4,86 @@ gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, Gdk, Adw, GLib, GtkSource, Gio
 from .theme_page import load_colors_from_css, create_color_thumbnail_button
 
-#Stripped down colors for the time being
 gnome_colors = {
     "Main Colors": {
         "description": "Used as the main window colors",
-        "@window_bg_color": "#222226",
-        "@window_fg_color": "#ffffff",
+        "--window-bg-color": "#222226",
+        "--window-fg-color": "#ffffff",
     },
     "Success Colors": {
         "description": "Used to indicate successful actions or high levels",
-        "@success_color": "#78e9ab",
-        "@success_bg_color": "#26a269",
-        "@success_fg_color": "#ffffff",
+        "--success-color": "#78e9ab",
+        "--success-bg-color": "#26a269",
+        "--success-fg-color": "#ffffff",
     },
     "Destructive Colors": {
         "description": "Used on buttons to indicate destruction or dangerous actions like deleting files",
-        "@destructive_color": "#ff938c",
-        "@destructive_bg_color": "#c01c28",
-        "@destructive_fg_color": "#ffffff",
+        "--destructive-color": "#ff938c",
+        "--destructive-bg-color": "#c01c28",
+        "--destructive-fg-color": "#ffffff",
     },
     "Warning Colors": {
         "description": "Used on a variety of widgets to indicate warnings or caution",
-        "@warning_color": "#ffc252",
-        "@warning_bg_color": "#cd9309",
-        "@warning_fg_color": "#000000",
+        "--warning-color": "#ffc252",
+        "--warning-bg-color": "#cd9309",
+        "--warning-fg-color": "#000000",
     },
     "Interface Colors": {
         "description": "Used on most background UI elements like text-views, buttons, and headerbars",
-        "@view_bg_color": "#1d1d20",
-        "@view_fg_color": "#ffffff",
-        "@headerbar_bg_color": "#2e2e32",
-        "@headerbar_fg_color": "#ffffff",
-        "@card_bg_color": "#252525",
-        "@card_fg_color": "#ffffff",
+        "--view-bg-color": "#1d1d20",
+        "--view-fg-color": "#ffffff",
+        "--headerbar-bg-color": "#2e2e32",
+        "--headerbar-fg-color": "#ffffff",
+        "--card-bg-color": "#252525",
+        "--card-fg-color": "#ffffff",
     },
     "Named Colors": {
         "description": "Array of palette colors, used to separate UI elements and to give your theme some character",
-        "@blue_1": "#99c1f1",
-        "@blue_2": "#62a0ea",
-        "@green_1": "#8ff0a4",
-        "@yellow_1": "#f9f06b",
-        "@orange_1": "#ffbe6f",
-        "@red_1": "#f66151",
-        "@purple_1": "#dc8add",
-        "@purple_2": "#c061cb",
-        "@brown_1": "#cdab8f",
-        "@light_1": "#ffffff",
-        "@light_5": "#9a9996",
-        "@dark_1": "#77767b",
+        "--blue-1": "#99c1f1",
+        "--blue-2": "#62a0ea",
+        "--green-1": "#8ff0a4",
+        "--yellow-1": "#f9f06b",
+        "--orange-1": "#ffbe6f",
+        "--red-1": "#f66151",
+        "--purple-1": "#dc8add",
+        "--purple-2": "#c061cb",
+        "--brown-1": "#cdab8f",
+        "--light-1": "#ffffff",
+        "--light-5": "#9a9996",
+        "--dark-1": "#77767b",
     }
 }
-
 titles = {
-    "@window_bg_color": "Window Background Color",
-    "@window_fg_color": "Window Text Color",
-    "@success_color": "Standalone Color",
-    "@success_bg_color": "Background Color",
-    "@success_fg_color": "Text Color",
-    "@destructive_color": "Standalone Color",
-    "@destructive_bg_color": "Background Color",
-    "@destructive_fg_color": "Text Color",
-    "@warning_color": "Standalone",
-    "@warning_bg_color": "Background Color",
-    "@warning_fg_color": "Text Color",
-    "@view_bg_color": "Text View Background Color",
-    "@view_fg_color": "Text Color",
-    "@headerbar_bg_color": "Headerbar Background Color",
-    "@headerbar_fg_color": "Text Color",
-    "@card_bg_color": "Button/Frame Background Color",
-    "@card_fg_color": "Text Color",
-    "@blue_1": "Blue",
-    "@blue_2": "Teal",
-    "@green_1": "Green",
-    "@yellow_1": "Yellow",
-    "@orange_1": "Orange",
-    "@red_1": "Red",
-    "@purple_1": "Pink",
-    "@purple_2": "Purple",
-    "@brown_1": "Brown",
-    "@light_1": "Light",
-    "@light_5": "Slate",
-    "@dark_1": "Dark",
+    "--window-bg-color": "Window Background Color",
+    "--window-fg-color": "Window Text Color",
+    "--success-color": "Standalone Color",
+    "--success-bg-color": "Background Color",
+    "--success-fg-color": "Text Color",
+    "--destructive-color": "Standalone Color",
+    "--destructive-bg-color": "Background Color",
+    "--destructive-fg-color": "Text Color",
+    "--warning-color": "Standalone",
+    "--warning-bg-color": "Background Color",
+    "--warning-fg-color": "Text Color",
+    "--view-bg-color": "Text View Background Color",
+    "--view-fg-color": "Text Color",
+    "--headerbar-bg-color": "Headerbar Background Color",
+    "--headerbar-fg-color": "Text Color",
+    "--card-bg-color": "Button/Frame Background Color",
+    "--card-fg-color": "Text Color",
+    "--blue-1": "Blue",
+    "--blue-2": "Teal",
+    "--green-1": "Green",
+    "--yellow-1": "Yellow",
+    "--orange-1": "Orange",
+    "--red-1": "Red",
+    "--purple-1": "Pink",
+    "--purple-2": "Purple",
+    "--brown-1": "Brown",
+    "--light-1": "Light",
+    "--light-5": "Slate",
+    "--dark-1": "Dark",
 }
-
 rgba_pickers = []
 
 class ColorRow(Adw.ActionRow):
@@ -161,7 +158,7 @@ class CustomPage(Gtk.Box):
         folder = Gio.File.new_for_path(GLib.get_user_data_dir())
         open_folder_button.connect("clicked", lambda d : Gio.AppInfo.launch_default_for_uri(folder.get_uri(), None))
         self.save_button = Gtk.Button(label=_("Save"), sensitive=False, margin_bottom=12, margin_start=12, margin_end=12)
-        self.save_button.connect("clicked", self.save_theme, parent, name_entry, light_radio)
+        self.save_button.connect("clicked", self.save_theme, parent, name_entry, group)
 
         GtkSource.init()
         css_entry = GtkSource.View(auto_indent=True, indent_width=2, show_line_numbers=True)
@@ -193,13 +190,10 @@ class CustomPage(Gtk.Box):
     def on_emoji_picked(self, emojipicker, emoji, entry):
         entry.set_label(emoji)
 
-    def save_theme(self, button, parent, entry, light_radio):
+    def save_theme(self, button, parent, entry, radio_group):
         parent.toast_overlay.add_toast(Adw.Toast(timeout=3, title=entry.get_text() + _(" has been saved")))
 
-        if(light_radio.get_active()):
-            theme_type = "light"
-        else:
-            theme_type = "dark"
+        theme_type = ["light", "dark"][radio_group.get_active()]
 
         src_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "custom-template.css")
         src_file_text = open(src_file).read()
@@ -210,7 +204,7 @@ class CustomPage(Gtk.Box):
                 int(rgb.green * 255),
                 int(rgb.blue * 255)
             )
-            src_file_text = src_file_text.replace(color.variable, hex_color)
+            src_file_text = src_file_text.replace(f"var({color.variable})", hex_color)
         src_file_text += self.buffer.get_text(self.buffer.get_start_iter(), self.buffer.get_end_iter(), True)
         os.makedirs(os.path.join(parent.data_dir, theme_type), exist_ok=True)
         theme_file = os.path.join(parent.data_dir, theme_type, entry.get_text() + ".css")

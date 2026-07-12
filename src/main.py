@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import sys, gi, os
+import sys, gi, os, re
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
@@ -51,6 +51,15 @@ class RewaitaApplication(Adw.Application):
             GLib.OptionFlags.NONE,
             GLib.OptionArg.NONE,
             "Sets the theme through CLI",
+            None,
+        )
+
+        self.add_main_option(
+            "list",
+            ord("l"),
+            GLib.OptionFlags.NONE,
+            GLib.OptionArg.NONE,
+            "Lists all available themes",
             None,
         )
 
@@ -151,12 +160,34 @@ class RewaitaApplication(Adw.Application):
         if("background" in options):
             win.emit("close-request")
 
+        theme_type = "light" if win.pref in [0, 2] else "dark"
+
         if("theme" in options):
             for arg in sys.argv: # For whatever reason, options doesn't include the value of --theme=, just that it is a flag'
                 if("--theme=" in arg):
                     theme = arg.split("=")[1]
-                    print(theme)
-                    break
+                    self.set_theme(win, theme, theme_type)
+                    sys.exit(0)
+
+        if("list" in options):
+            print(list(map(self.adjust_theme_name, os.listdir(os.path.join(win.data_dir, theme_type)))))
+            sys.exit(0)
+
+    def adjust_theme_name(self, theme_name):
+        emoji_pattern = re.compile(r"[\s\u200d\ufe0f]*[\U00010000-\U0010FFFF\u2600-\u2B55]+[\s\u200d\ufe0f]*", flags=re.UNICODE)
+        new_theme_name = emoji_pattern.sub('', theme_name).replace(" ", "-").replace(".css", "").lower()
+        return new_theme_name
+
+    def set_theme(self, win, theme_name, theme_type):
+        theme_files = os.listdir(os.path.join(win.data_dir, theme_type))
+        comparison_name = theme_name
+
+        for theme in theme_files:
+            adjusted_name = self.adjust_theme_name(theme)
+            if(adjusted_name == comparison_name):
+                win.on_theme_button_clicked(None, theme, theme_type)
+                return
+        print(f"Theme: {theme_name}, was not found\nUse --list to get all available themes")
 
     def on_about_action(self, *args):
         about = Adw.AboutDialog(application_name='Rewaita',

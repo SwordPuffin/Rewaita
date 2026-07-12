@@ -35,13 +35,13 @@
 
   --sidebar-bg-color: #2b3269;
   --sidebar-fg-color: #99c1f1;
-  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-backdrop-color: #2b3269;
   --sidebar-border-color: #2b3258;
 
-  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
-  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
-  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
-  --secondary-sidebar-border-color: var(--sidebar-border-color);
+  --secondary-sidebar-bg-color: #2b3269;
+  --secondary-sidebar-fg-color: #99c1f1;
+  --secondary-sidebar-backdrop-color: #2b3269;
+  --secondary-sidebar-border-color: #2b3269;
 
   --blue-1: #3584e4;
   --blue-2: #99c1f1;

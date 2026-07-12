@@ -37,13 +37,15 @@ def flowbox_sort_func(child1: Gtk.FlowBoxChild, child2: Gtk.FlowBoxChild, _):
 
 def load_colors_from_css(file_path):
     colors = {}
-    color_pattern = re.compile(r'--([a-z0-9-]+)\s*:\s*(#[a-fA-F0-9]+|[a-z0-9_-]+(?:\([^)]*\))?)\s*;')
+    color_pattern = re.compile(r'--([a-z0-9-]+)\s*:\s*(#[a-fA-F0-9]+|(?!var\()[a-z0-9_-]+(?:\([^)]*\))?)\s*;')
 
     with open(file_path, "r") as f:
         for line in f:
             match = color_pattern.search(line)
             if(match):
                 name, color = match.groups()
+                if(color.startswith('var')):
+                    continue
                 colors[name] = color.strip()
     return colors
 
@@ -143,7 +145,12 @@ class ThemePage(Gtk.Box):
 
             flowbox.snippet = snippet
             for theme in sorted(themes):
-                colors = load_colors_from_css(os.path.join(parent.data_dir, theme_type, theme))
+                file_path = os.path.join(parent.data_dir, theme_type, theme)
+
+                if(not os.path.exists(file_path)):
+                    continue
+
+                colors = load_colors_from_css(file_path)
                 btn = create_color_thumbnail_button(colors, theme.replace(".css", ""), flowbox.snippet)
                 btn.connect("clicked", parent.on_theme_button_clicked, theme, theme_type)
 
