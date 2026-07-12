@@ -39,6 +39,62 @@
   --panel-button-bg-color: transparent;
   --panel-hover-bg-color: var(--card-bg-color);
 
+
+  /* Everforest Light accent colors */
+  --blue-1: #7fbbb3;
+  --blue-2: #83c092;
+  --blue-3: #8da101;
+  --blue-4: #d699b6;
+  --blue-5: #e69875;
+
+  --green-1: #83c092;
+  --green-2: #7fbbb3;
+  --green-3: #dbbc7f;
+  --green-4: #e69875;
+  --green-5: #e67e80;
+
+  --yellow-1: #dbbc7f;
+  --yellow-2: #e69875;
+  --yellow-3: #e67e80;
+  --yellow-4: #d699b6;
+  --yellow-5: #7fbbb3;
+
+  --orange-1: #e69875;
+  --orange-2: #e67e80;
+  --orange-3: #d699b6;
+  --orange-4: #dbbc7f;
+  --orange-5: #83c092;
+
+  --red-1: #e67e80;
+  --red-2: #d699b6;
+  --red-3: #7fbbb3;
+  --red-4: #83c092;
+  --red-5: #dbbc7f;
+
+  --purple-1: #d699b6;
+  --purple-2: #e67e80;
+  --purple-3: #e69875;
+  --purple-4: #dbbc7f;
+  --purple-5: #83c092;
+
+  --brown-1: #374145;
+  --brown-2: #404c51;
+  --brown-3: #4a555b;
+  --brown-4: #53605d;
+  --brown-5: #5d6b66;
+
+  --light-1: #d5c9a1;
+  --light-2: #c9b99a;
+  --light-3: #bdae93;
+  --light-4: #7fbbb3;
+  --light-5: #404c51;
+
+  --dark-1: #374145;
+  --dark-2: #232a2e;
+  --dark-3: #2b3339;
+  --dark-4: #1e2326;
+  --dark-5: #343f44;
+
   /* Active toggle */
   --active-toggle-fg-color: var(--window-bg-color);
   --active-toggle-bg-color: var(--window-fg-color);

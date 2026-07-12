@@ -38,9 +38,72 @@
   --panel-button-bg-color: transparent;
   --panel-hover-bg-color: var(--card-bg-color);
 
-  /* Active toggle */
-  --active-toggle-fg-color: var(--window-bg-color);
-  --active-toggle-bg-color: var(--window-fg-color);
+  /* Blue */
+  --blue-1: #7aa2f7;
+  --blue-2: #7dcfff;
+  --blue-3: #2ac3de;
+  --blue-4: #0db9d7;
+  --blue-5: #89ddff;
+
+  /* Green */
+  --green-1: #9ece6a;
+  --green-2: #b9f27c;
+  --green-3: #73daca;
+  --green-4: #41a6b5;
+  --green-5: #1abc9c;
+
+  /* Yellow */
+  --yellow-1: #e0af68;
+  --yellow-2: #ff9e64;
+  --yellow-3: #f6c177;
+  --yellow-4: #dca561;
+  --yellow-5: #c0a36e;
+
+  /* Orange */
+  --orange-1: #ff9e64;
+  --orange-2: #ffad87;
+  --orange-3: #f7768e;
+  --orange-4: #ff7a93;
+  --orange-5: #ff5370;
+
+  /* Red */
+  --red-1: #f7768e;
+  --red-2: #db4b4b;
+  --red-3: #c53b53;
+  --red-4: #bf616a;
+  --red-5: #a54242;
+
+  /* Purple */
+  --purple-1: #bb9af7;
+  --purple-2: #cfc9ff;
+  --purple-3: #9d7cd8;
+  --purple-4: #7e9cd8;
+  --purple-5: #a9a1e1;
+
+  /* Brown */
+  --brown-1: #cfc9c2;
+  --brown-2: #ab7967;
+  --brown-3: #986c6c;
+  --brown-4: #836060;
+  --brown-5: #5c4033;
+
+  /* Light */
+  --light-1: #a9b1d6;
+  --light-2: #c0caf5;
+  --light-3: #9aa5ce;
+  --light-4: #7aa2f7;
+  --light-5: #565f89;
+
+  /* Dark */
+  --dark-1: #414868;
+  --dark-2: #2f334d;
+  --dark-3: #24283b;
+  --dark-4: #16161e;
+  --dark-5: #101012;
+
+  /* Toggle state */
+  --active-toggle-bg-color: var(--window-bg-color);
+  --active-toggle-fg-color: var(--window-fg-color);
 }
 
 /* Component styling */
