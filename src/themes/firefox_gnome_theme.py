@@ -374,6 +374,11 @@ popupnotification {{
   background-color: var(--accent-color) !important;
   color: var(--window-bg-color) !important;
 }}
+
+#PopupAutoComplete {{
+  --panel-background-color: var(--window-bg-color) !important;
+  --panel-border-color: transparent !important;
+}}
 """
 
 FFG_TEMPLATE = """
