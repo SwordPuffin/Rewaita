@@ -69,7 +69,7 @@
   </screenshots>
 
   <releases>
-    <release version="1.1.4" date="2026-07-12">
+    <release version="1.1.4" date="2026-07-18">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.1.4</url>
         <description translate="no">
           <p>Rewaita v1.1.4</p>
@@ -79,6 +79,7 @@
             <li>Added many more extra customization options</li>
             <li>Changed how accent colours work so non-GNOME users should get better fine-tuning</li>
             <li>Removed integrated Adw-gtk3 support and replaced it with more simplified theming</li>
+            <li>Improved the palette swapping feature for images</li>
             <li>General theming improvements for GTK4, Firefox, and GNOME Shell</li>
           </ul>
       </description>

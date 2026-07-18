@@ -88,7 +88,7 @@
 }
 
 .icon-grid .overview-tile:hover, .grid-search-result:hover, .overview-tile:focus, .grid-search-result:focus, .overview-tile:selected, .grid-search-result:selected {
-  color: @window-fg-color;
+  color: @search-fg-color;
   background-color: @card-bg-color;
   background-image: none;
 }
@@ -1016,4 +1016,10 @@ StEntry:focus {
   color: @window-fg-color !important;
 }
 
+.audio-selection-device-box {
+  color: @window-fg-color !important;
+}
 
+.audio-selection-device:hover {
+  background-color: @card-bg-color !important;
+}

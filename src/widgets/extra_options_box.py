@@ -100,7 +100,7 @@ options = [
     (
         "accent-tabs",
         _("Use Accent Color for Selected Tabs"),
-        _("Only applies to GTK4 application"),
+        _("Only applies to GTK4 application and GNOME Shell"),
         accent_tab_css_gtk4,
     ),
     (

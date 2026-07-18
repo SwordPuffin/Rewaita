@@ -1,5 +1,5 @@
 project('rewaita',
-          version: '1.1.3',
+          version: '1.1.4',
     meson_version: '>= 1.0.0',
   default_options: [ 'warning_level=2', 'werror=false', ],
 )

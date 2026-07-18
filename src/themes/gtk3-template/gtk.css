@@ -187,7 +187,7 @@ headerbar, .titlebar, toolbar {
 }
 
 headerbar:backdrop, .titlebar:backdrop {
-  background-color: @headerbar-backdrop-color;
+  background-color: @headerbar-bg-color;
   color: mix(@headerbar-fg-color, @headerbar-bg-color, 0.5);
 }
 
@@ -220,6 +220,10 @@ button:hover:not(.suggested-action):not(.destructive-action) {
 button:disabled {
   background-color: @insensitive-bg-color;
   color: @insensitive-fg-color;
+}
+
+.close-button {
+	margin: 5px 0 5px 0;
 }
 
 .suggested-action {
@@ -285,7 +289,7 @@ entry:disabled, spinbutton:disabled, textview:disabled {
 }
 
 spinbutton > entry {
-	background: transparent;
+	background-color: transparent;
 }
 
 /* Menus / popovers / comboboxes */
@@ -331,7 +335,7 @@ notebook {
 }
 
 stack {
-	background-color: @window-bg-color;
+	background-color: transparent;
 }
 
 tab:hover {
@@ -356,6 +360,15 @@ notebook > header tab:hover {
   color: @headerbar-fg-color;
 }
 
+tab {
+	background-color: mix(@window-bg-color, @card-bg-color, 0.5);
+	border: none;
+}
+
+tab:checked {
+	background-color: mix(@accent-bg-color, @card-bg-color, 0.9);
+}
+
 /* Scrollbars */
 scrollbar {
 	background-color: @headerbar-bg-color;
@@ -374,6 +387,11 @@ scrollbar slider:hover {
 
 scrollbar trough {
   background-color: transparent;
+}
+
+.floating-bar {
+	background-color: @card-bg-color;
+	border: none;
 }
 
 /* Lists */
@@ -475,6 +493,11 @@ tooltip, tooltip.background {
   border-color: @border-color;
 }
 
+tooltip decoration,
+window.background.tooltip decoration {
+  box-shadow: none;
+}
+
 separator {
   background-color: @borders;
   min-width: 1px;
@@ -518,3 +541,9 @@ separator {
   min-width: 1px;
   min-height: 1px;
 }
+
+/* Other */
+.welcome, actionbar, .table-header {
+  background-color: @window-bg-color;
+}
+
