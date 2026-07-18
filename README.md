@@ -4,7 +4,7 @@
 
 <h1 align="center">Rewaita</h1>
 
-#### <p align="center">Rewaita brings a fresh look to Adwaita apps using popular color schemes.</p>
+#### <p align="center">Change the look of Adwaita, without the hassle.</p>
 
 <br>
 <div align="center">
