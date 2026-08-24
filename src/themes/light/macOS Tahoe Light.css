@@ -1,0 +1,112 @@
+:root {
+  /* Window */
+  --window-bg-color: #ececec;
+  --window-fg-color: #1d1d1f;
+
+  /* View */
+  --view-bg-color: #ffffff;
+  --view-fg-color: #1d1d1f;
+
+  /* Header bar */
+  --headerbar-bg-color: #f6f6f6;
+  --headerbar-backdrop-color: #ececec;
+  --headerbar-fg-color: #1d1d1f;
+
+  /* Popovers / dialogs */
+  --popover-bg-color: #ffffff;
+  --popover-fg-color: #1d1d1f;
+
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
+
+  /* Cards / sidebars */
+  --card-bg-color: #ffffff;
+  --card-fg-color: #1d1d1f;
+
+  --sidebar-bg-color: #f2f2f7;
+  --sidebar-fg-color: #1d1d1f;
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: #d1d1d6;
+
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
+
+  /* Blue */
+  --blue-1: #007aff;
+  --blue-2: #5ac8fa;
+  --blue-3: #64d2ff;
+  --blue-4: #409cff;
+  --blue-5: #c7e8ff;
+
+  /* Green */
+  --green-1: #34c759;
+  --green-2: #30b0c7;
+  --green-3: #40c8e0;
+  --green-4: #64d2ff;
+  --green-5: #a7f0ba;
+
+  /* Yellow */
+  --yellow-1: #ffcc00;
+  --yellow-2: #ffcc00;
+  --yellow-3: #ffd426;
+  --yellow-4: #ffe169;
+  --yellow-5: #ffef9f;
+
+  /* Orange */
+  --orange-1: #ff9500;
+  --orange-2: #ffb340;
+  --orange-3: #ffc266;
+  --orange-4: #ffd699;
+  --orange-5: #ffeacc;
+
+  /* Red */
+  --red-1: #ff3b30;
+  --red-2: #ff6961;
+  --red-3: #ff8a80;
+  --red-4: #d70015;
+  --red-5: #ffb3b0;
+
+  /* Purple */
+  --purple-1: #ff2d55;
+  --purple-2: #af52de;
+  --purple-3: #da8fff;
+  --purple-4: #8944ab;
+  --purple-5: #e5c1fb;
+
+  /* Brown */
+  --brown-1: #a2845e;
+  --brown-2: #b79a72;
+  --brown-3: #c2a57d;
+  --brown-4: #cdb187;
+  --brown-5: #d8bc92;
+
+  /* Light */
+  --light-1: #ffffff;
+  --light-2: #f2f2f7;
+  --light-3: #e5e5ea;
+  --light-4: #d1d1d6;
+  --light-5: #aeaeb2;
+
+  /* Dark */
+  --dark-1: #8e8e93;
+  --dark-2: #636366;
+  --dark-3: #48484a;
+  --dark-4: #3a3a3c;
+  --dark-5: #2c2c2e;
+
+  /* Toggle state */
+  --active-toggle-bg-color: var(--window-bg-color);
+  --active-toggle-fg-color: var(--window-fg-color);
+}
+
+/* Toast */
+toast {
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
+}
+
+.inline {
+  background-color: rgba(0, 0, 0, 0);
+}
