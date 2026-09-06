@@ -552,8 +552,8 @@ msgstr ""
 "Änderungen zu übernehmen"
 
 #: src/window.ui:19
-msgid "Delete themes"
-msgstr "Themes löschen"
+msgid "Delete Themes"
+msgstr "Themes Löschen"
 
 #: src/window.ui:27
 msgid "Main Menu"

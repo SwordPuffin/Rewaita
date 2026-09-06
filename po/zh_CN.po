@@ -277,7 +277,7 @@ msgid "Main Menu"
 msgstr "主菜单"
 
 #: src/window.ui:19
-msgid "Delete themes"
+msgid "Delete Themes"
 msgstr "删除主题"
 
 #: src/window.ui:71

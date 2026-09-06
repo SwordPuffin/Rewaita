@@ -512,7 +512,7 @@ msgid "Change GNOME shell theme to 'Rewaita' and reboot for full changes"
 msgstr ""
 
 #: src/window.ui:19
-msgid "Delete themes"
+msgid "Delete Themes"
 msgstr ""
 
 #: src/window.ui:27

@@ -291,8 +291,8 @@ msgid "Main Menu"
 msgstr "Hoofdmenu"
 
 #: src/window.ui:19
-msgid "Delete themes"
-msgstr "Thema's verwĳderen"
+msgid "Delete Themes"
+msgstr "Thema's Verwĳderen"
 
 #: src/window.ui:71
 msgid "_Keyboard Shortcuts"
