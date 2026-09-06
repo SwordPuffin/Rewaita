@@ -128,7 +128,6 @@ class ThemePage(Gtk.Box):
             self.append(Adw.Clamp(maximum_size=600, child=Gtk.Separator(margin_start=20, margin_end=20, margin_top=25)))
 
             default_theme_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), theme_type)
-            default_themes = os.listdir(default_theme_path)
             symlink_all_in_dir(default_theme_path, os.path.join(GLib.get_user_data_dir(), theme_type))
             themes = os.listdir(os.path.join(parent.data_dir, theme_type))
 
@@ -184,7 +183,7 @@ class ThemePage(Gtk.Box):
 
                 if(theme == parent.dark_theme and theme_type == "dark" or theme == parent.light_theme and theme_type == "light"):
                     btn.add_css_class("active-scheme")
-                if(theme in default_themes):
+                if(os.path.islink(file_path)):
                     btn.default = True
                 else:
                     btn.default = False
