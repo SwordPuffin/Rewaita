@@ -100,6 +100,10 @@ def symlink_all_in_dir(src, out):
 
             os.symlink(src_path, out_path)
 
+def open_wallpaper_dialog(button, window, run_function):
+    wallpaper_dialog = WallpaperDialog(window, run_function)
+    wallpaper_dialog.present(window)
+
 class ThemePage(Gtk.Box):
     def __init__(self, parent):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=12)
@@ -109,14 +113,12 @@ class ThemePage(Gtk.Box):
         help_button.set_action_name("app.guide")
         top_box.append(help_button)
 
-        tint_wallpaper_dialog = WallpaperDialog(parent, "make_new_image")
         image_button = Gtk.Button(label=_("Tint Wallpaper"), valign=Gtk.Align.CENTER, vexpand=True, css_classes=["pill", "suggested-action"])
-        image_button.connect("clicked", lambda d : tint_wallpaper_dialog.present(parent))
+        image_button.connect("clicked", open_wallpaper_dialog, parent, "make_new_image")
         top_box.append(image_button)
 
-        theme_wallpaper_dialog = WallpaperDialog(parent, "make_new_theme")
         image_button = Gtk.Button(label=_("Generate Theme From Image"), halign=Gtk.Align.CENTER, css_classes=["pill", "suggested-action"])
-        image_button.connect("clicked", lambda d : theme_wallpaper_dialog.present(parent))
+        image_button.connect("clicked", open_wallpaper_dialog, parent, "make_new_theme")
 
         self.append(top_box)
         self.append(image_button)

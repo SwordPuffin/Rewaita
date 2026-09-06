@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import gi, os, colorsys, asyncio
+import gi, os, colorsys
 import numpy as np
 from PIL import Image
 from gi.repository import GLib
@@ -87,10 +87,6 @@ def kmeans_palette(pixels, n_colors, max_iter=50):
         centers[i] = pixels[idx]
         dist_sq = np.sum((pixels - centers[i]) ** 2, axis=1)
         closest_sq = np.minimum(closest_sq, dist_sq)
-        
-        centers[i] = pixels[idx]
-        dist_sq = np.sum((pixels - centers[i]) ** 2, axis=1)
-        closest_sq = np.minimum(closest_sq, dist_sq)
 
     labels = np.zeros(n, dtype=np.int64)
     for _ in range(max_iter):
@@ -114,7 +110,7 @@ def kmeans_palette(pixels, n_colors, max_iter=50):
 
 def extract_palette(image_path, n_colors=24, sample_size=20000, max_iter=50):
     img = Image.open(image_path).convert("RGB")
-    arr = np.asarray(img).reshape(-1, 3).astype(np.float64)
+    arr = np.asarray(img).reshape(-1, 3)
 
     if(arr.shape[0] > sample_size):
         rng = np.random.default_rng(0)

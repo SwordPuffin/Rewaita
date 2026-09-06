@@ -22,7 +22,7 @@
 }
 
 .edit-button {
-    outline: 4px dashed var(--accent-color);
+    outline: 4px dashed var(--yellow-1);
     outline-offset: -1px;
 }
 
