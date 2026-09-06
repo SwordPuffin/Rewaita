@@ -66,9 +66,9 @@ def ensure_contrast(fg_rgb, bg_rgb, min_ratio=4.5):
         rgb = hsl_to_rgb(h, s, l)
         tries += 1
     return rgb
-
-def kmeans_palette(pixels, n_colors, max_iter=50):
-    rng = np.random.default_rng(0)
+    
+def _kmeans_once(pixels, n_colors, max_iter, seed):
+    rng = np.random.default_rng(seed)
     n = pixels.shape[0]
     n_colors = min(n_colors, n)
 
@@ -76,7 +76,7 @@ def kmeans_palette(pixels, n_colors, max_iter=50):
     first = rng.integers(0, n)
     centers[0] = pixels[first]
     closest_sq = np.sum((pixels - centers[0]) ** 2, axis=1)
-    
+
     for i in range(1, n_colors):
         total = closest_sq.sum()
         if(total <= 0):
@@ -89,10 +89,10 @@ def kmeans_palette(pixels, n_colors, max_iter=50):
         closest_sq = np.minimum(closest_sq, dist_sq)
 
     labels = np.zeros(n, dtype=np.int64)
-    for _ in range(max_iter):
+    for it in range(max_iter):
         dists = np.sum((pixels[:, None, :] - centers[None, :, :]) ** 2, axis=2)
         new_labels = np.argmin(dists, axis=1)
-        if(np.array_equal(new_labels, labels) and _ > 0):
+        if(np.array_equal(new_labels, labels) and it > 0):
             labels = new_labels
             break
         labels = new_labels
@@ -104,20 +104,30 @@ def kmeans_palette(pixels, n_colors, max_iter=50):
                 dist_sq = np.sum((pixels - centers[i]) ** 2, axis=1)
                 centers[i] = pixels[np.argmax(dist_sq)]
 
+    inertia = np.sum((pixels - centers[labels]) ** 2)
     counts = np.array([(labels == i).sum() for i in range(n_colors)])
+    return centers, counts, inertia
+
+def kmeans_palette(pixels, n_colors, max_iter=50, n_init=5):
+    best = None
+    for seed in range(n_init):
+        centers, counts, inertia = _kmeans_once(pixels, n_colors, max_iter, seed)
+        if(best is None or inertia < best[2]):
+            best = (centers, counts, inertia)
+    centers, counts, _ = best
     order = np.argsort(-counts)
     return centers[order], counts[order]
 
 def extract_palette(image_path, n_colors=24, sample_size=20000, max_iter=50):
     img = Image.open(image_path).convert("RGB")
-    arr = np.asarray(img).reshape(-1, 3)
+    arr = np.asarray(img).reshape(-1, 3).astype(np.float64)
 
     if(arr.shape[0] > sample_size):
         rng = np.random.default_rng(0)
         idx = rng.choice(arr.shape[0], size=sample_size, replace=False)
-        sample = arr[idx]
+        sample = arr[idx].astype(np.float64)
     else:
-        sample = arr
+        sample = arr.astype(np.float64)
 
     centers, counts = kmeans_palette(sample, n_colors, max_iter=max_iter)
     return centers, counts
