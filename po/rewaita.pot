@@ -81,6 +81,10 @@ msgstr ""
 msgid "Palette swapping dialog for wallpapers"
 msgstr ""
 
+#: data/io.github.swordpuffin.rewaita.metainfo.xml.in:71
+msgid "Browsing extra customization options"
+msgstr ""
+
 #: data/io.github.swordpuffin.rewaita.metainfo.xml.in:159
 msgid "See v1.1.0"
 msgstr ""
@@ -91,6 +95,14 @@ msgstr ""
 
 #: src/widgets/accent_box.py:77
 msgid "Accent Colors"
+msgstr ""
+
+#: src/utils.py:127
+msgid " Has Been Deleted"
+msgstr ""
+
+#: src/utils.py:251
+msgid "Delete"
 msgstr ""
 
 #: src/widgets/custom_theme_page.py:129
@@ -142,7 +154,7 @@ msgid "/* Enter any extra CSS here */"
 msgstr ""
 
 #: src/widgets/custom_theme_page.py:195
-msgid " has been saved"
+msgid " Has Been Saved"
 msgstr ""
 
 #: src/widgets/extra_options_box.py:78
@@ -478,7 +490,6 @@ msgstr ""
 msgid "Reset to default"
 msgstr ""
 
-
 #: src/widgets/theme_page.py:141
 msgid "Show More"
 msgstr ""
@@ -508,7 +519,15 @@ msgid "Fine Tune"
 msgstr ""
 
 #: src/window.py:158
-msgid "Change GNOME shell theme to 'Rewaita' and reboot for full changes"
+msgid "Active Theme Set To: "
+msgstr ""
+
+#: src/window.py:158
+msgid "Light Theme Set To: "
+msgstr ""
+
+#: src/window.py:158
+msgid "Dark Theme Set To: "
 msgstr ""
 
 #: src/window.ui:19

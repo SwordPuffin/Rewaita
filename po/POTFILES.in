@@ -4,6 +4,7 @@ data/io.github.swordpuffin.rewaita.desktop.in
 data/io.github.swordpuffin.rewaita.metainfo.xml.in
 data/io.github.swordpuffin.rewaita.gschema.xml
 src/main.py
+src/utils.py
 src/widgets/accent_box.py
 src/widgets/custom_theme_page.py
 src/widgets/extra_options_box.py

@@ -57,11 +57,11 @@ msgid "translator-credits"
 msgstr "秦宇"
 
 #: src/utils.py:127
-msgid " has been deleted"
+msgid " Has Been Deleted"
 msgstr " 已删除"
 
 #: src/widgets/custom_theme_page.py:210
-msgid " has been saved"
+msgid " Has Been Saved"
 msgstr " 已保存"
 
 #: src/utils.py:137

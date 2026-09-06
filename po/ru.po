@@ -56,7 +56,7 @@ msgid "translator-credits"
 msgstr "Aleksandr Melman"
 
 #: src/utils.py:92
-msgid " has been deleted"
+msgid " Has Been Deleted"
 msgstr " была удалена"
 
 #: src/utils.py:98

@@ -145,8 +145,8 @@ msgid "/* Enter any extra CSS here */"
 msgstr "/* Hier zusätzliches CSS eingeben */"
 
 #: src/widgets/custom_theme_page.py:195
-msgid " has been saved"
-msgstr " wurde gespeichert"
+msgid " Has Been Saved"
+msgstr " Wurde Gespeichert"
 
 #: src/widgets/extra_options_box.py:78
 msgid "Transparency"

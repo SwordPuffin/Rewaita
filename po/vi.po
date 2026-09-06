@@ -57,7 +57,7 @@ msgid "translator-credits"
 msgstr "Loc Huynh <huynhloc.contact@gmail.com>"
 
 #: src/utils.py:92
-msgid " has been deleted"
+msgid " Has Been Deleted"
 msgstr " đã bị xóa"
 
 #: src/utils.py:98

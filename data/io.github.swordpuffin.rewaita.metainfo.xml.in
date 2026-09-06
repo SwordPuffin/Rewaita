@@ -11,7 +11,7 @@
     <p>Features:</p>
     <ul>
       <li>Modify application window controls</li>
-      <li>Make custom themes</li>
+      <li>Make/edit custom themes</li>
       <li>Palette swap/tint wallpapers</li>
       <li>Add effects like transparency, window borders, or sharp corners</li>
     </ul>
@@ -66,6 +66,10 @@
       <image>https://raw.githubusercontent.com/SwordPuffin/Rewaita/main/data/screenshots/Screenshot5.png</image>
       <caption>Palette swapping dialog for wallpapers</caption>
     </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/SwordPuffin/Rewaita/main/data/screenshots/Screenshot6.png</image>
+      <caption>Browsing extra customization options</caption>
+    </screenshot>
   </screenshots>
 
   <releases>
@@ -76,7 +80,7 @@
           <ul>
             <li>Users can now edit existing themes</li>
             <li>Added the ability to generate themes from wallpapers</li>
-            <li>Minor theming fixes</li>
+            <li>Minor theming fixes and more polish</li>
           </ul>
       </description>
     </release>

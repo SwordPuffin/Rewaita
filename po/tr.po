@@ -58,7 +58,7 @@ msgid "translator-credits"
 msgstr "Furkan Akçay https://github.com/akcaymd"
 
 #: src/utils.py:92
-msgid " has been deleted"
+msgid " Has Been Deleted"
 msgstr " silindi"
 
 #: src/utils.py:98

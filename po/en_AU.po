@@ -57,12 +57,12 @@ msgid "translator-credits"
 msgstr "translator-credits"
 
 #: src/utils.py:127
-msgid " has been deleted"
-msgstr " has been deleted"
+msgid " Has Been Deleted"
+msgstr " Has Been Deleted"
 
 #: src/widgets/custom_theme_page.py:210
-msgid " has been saved"
-msgstr " has been saved"
+msgid " Has Been Saved"
+msgstr " Has Been Saved"
 
 #: src/utils.py:137
 msgid "Cancel"
