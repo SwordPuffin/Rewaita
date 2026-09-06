@@ -38,7 +38,7 @@
   background-color: @headerbar-bg-color;
 }
 
-#dashtodockContainer #dash .dash-background, .dash-background:overview {
+#dashtodockContainer #dash .dash-background, .dash-background {
   color: @window-fg-color;
   background-color: @card-bg-color;
   border: 2px solid @border-color;
