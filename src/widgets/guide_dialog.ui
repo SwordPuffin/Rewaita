@@ -13,7 +13,7 @@
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Getting Started</property>
-            <property name="description" translatable="yes">After setting a color scheme, go to GNOME Tweaks and set 'Rewaita' as the Shell theme. It will match the active scheme for visual continuity. This can be disabled in preferences.</property>
+            <!-- <property name="description" translatable="yes">After setting a color scheme, go to GNOME Tweaks and set 'Rewaita' as the Shell theme. It will match the active scheme for visual continuity. This can be disabled in preferences.</property> -->
 
             <child>
               <object class="AdwActionRow">

@@ -22,7 +22,7 @@ import numpy as np
 
 import gi, os, asyncio, random
 gi.require_version('XdpGtk4', '1.0')
-from gi.repository import Gtk, GLib, Xdp, XdpGtk4, Adw, Gdk
+from gi.repository import Gtk, GLib, Xdp, XdpGtk4, Adw, Gio
 from .utils import run_loading_task, hex_to_rgb
 
 picture_path = os.path.join(GLib.get_user_data_dir(), "wallpapers")
@@ -147,14 +147,20 @@ def make_new_image(parent, file_path):
         return output_path
 
     def on_wallpaper_ready(output_path):
-        top = XdpGtk4.parent_new_gtk(parent)
-        portal.set_wallpaper(
-            top,
-            f"file://{output_path}",
-            Xdp.WallpaperFlags.PREVIEW
-            | Xdp.WallpaperFlags.BACKGROUND
-            | Xdp.WallpaperFlags.LOCKSCREEN,
-        )
+        if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP" or "")):
+            top = XdpGtk4.parent_new_gtk(parent)
+            portal.set_wallpaper(
+                top,
+                f"file://{output_path}",
+                Xdp.WallpaperFlags.PREVIEW
+                | Xdp.WallpaperFlags.BACKGROUND
+                | Xdp.WallpaperFlags.LOCKSCREEN,
+            )
+        else:
+            # Presumably this should work on any other DE,
+            # Not sure what happens if the user doesn't have an image viewer though
+            folder = Gio.File.new_for_path(output_path)
+            Gio.AppInfo.launch_default_for_uri(folder.get_uri(), None)
         
     run_loading_task(parent, do_remap_and_set_wallpaper, on_wallpaper_ready)
 

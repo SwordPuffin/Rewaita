@@ -70,6 +70,7 @@ class WallpaperDialog(Adw.Dialog):
                 make_new_image(parent, file_path)
             else:
                 make_new_theme(parent, file_path, self.name_entry.get_text(), self.toggle_group.get_active() == 0)
+            self.close()
 
         def on_drop_file(target, value, x, y):
             file_path = value.get_path() or value.get_uri()

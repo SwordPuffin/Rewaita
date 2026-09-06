@@ -234,11 +234,14 @@ def set_to_default(gtk4_config_dir, theme_type, reset_func, extras, modify_gtk3_
     if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
         reset_func()
 
+def open_toast(window, message):
+    window.toast_overlay.dismiss_all()
+    window.toast_overlay.add_toast(Adw.Toast(timeout=3, title=message))
+    
 def confirm_delete(dialog, response, button, window):
     if(response == "confirm"):
-        window.toast_overlay.dismiss_all()
+        open_toast(window, button.theme + _(" Has Been Deleted"))
         # Bear with me through this
-        window.toast_overlay.add_toast(Adw.Toast(timeout=3, title=button.theme + _(" has been deleted")))
         button.get_parent().get_parent().remove(button.get_parent())
         os.remove(button.path)
 
@@ -332,7 +335,7 @@ def add_new_theme_button(theme_file, flowbox, on_theme_button_clicked, theme_typ
     if(not already_exists):
         flowbox.insert(new_button, -1)
         flowbox.invalidate_sort()
-            
+
 def run_loading_task(parent, task_function, on_success=None):
     spinner = LoadingDialog()
     spinner.present(parent)

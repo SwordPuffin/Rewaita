@@ -21,7 +21,7 @@ import gi, os, colorsys, asyncio
 import numpy as np
 from PIL import Image
 from gi.repository import GLib
-from .utils import run_loading_task, add_new_theme_button, hex_to_rgb, rgb_to_hex
+from .utils import run_loading_task, add_new_theme_button, open_toast, hex_to_rgb, rgb_to_hex
 from .css_templates import CSS_TEMPLATE
 
 def relative_luminance(rgb):
@@ -216,7 +216,7 @@ def build_theme(image_path, n_colors=24, sample_size=20000, max_iter=50, blend=1
     step = 1.0 if dark_theme else -1.0
     headerbar_rgb = adjust_lightness(bg_rgb, step)
     card_rgb = adjust_lightness(bg_rgb, step * 1.6)
-    sidebar_rgb = bg_rgb
+    sidebar_rgb = adjust_lightness(bg_rgb, step * -1.6)
     sidebar_border_rgb = adjust_lightness(bg_rgb, step)
 
     fg_rgb = ensure_contrast(fg_rgb, bg_rgb, min_ratio=7.0)
@@ -300,5 +300,6 @@ def make_new_theme(parent, image_path, output, light):
             flowbox = parent.dark_flowbox
         
         add_new_theme_button(theme_file, flowbox, parent.on_theme_button_clicked, folder)
+        open_toast(parent, output + _(" Has Been Saved"))
         
     run_loading_task(parent, do_create_theme, on_css_ready)

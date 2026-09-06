@@ -118,6 +118,8 @@ class FirefoxGnomeThemePlugin():
                                 Path(f"{result}/chrome/firefox-gnome-theme").mkdir(mode=0o755, parents=True, exist_ok=True)
                                 with open(f"{result}/chrome/firefox-gnome-theme/customChrome.css", "w") as f:
                                     f.write(FFG_TEMPLATE.format(**self.variables) + f"\n{extra_css}")
+                                if(Path(f"{result}/chrome/rewaitaChrome.css").exists()):
+                                    Path(f"{result}/chrome/rewaitaChrome.css").unlink()
                             else:
                                 Path(f"{result}/chrome").mkdir(mode=0o755, parents=True, exist_ok=True)
                                 Path(f"{result}/chrome/userChrome.css").touch()

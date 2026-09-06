@@ -21,7 +21,7 @@ import os, shutil, gi, re
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
 from collections import defaultdict
-from .utils import parse_gtk_theme, set_to_default, delete_items, edit_items, get_accent_color, add_gtk3_window_controls, add_css_provider, Preferences
+from .utils import parse_gtk_theme, set_to_default, delete_items, edit_items, open_toast, get_accent_color, add_gtk3_window_controls, add_css_provider, Preferences
 from .custom_theme_page import CustomPage
 from .theme_page import ThemePage
 from .pref_page import PrefPage
@@ -160,10 +160,9 @@ class RewaitaWindow(Adw.ApplicationWindow):
         except FileNotFoundError:
             print(f"Could not find: {theme_file}")
             return
-
-        self.toast_overlay.dismiss_all()
-        self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_("Change GNOME shell theme to 'Rewaita' and reboot for full changes"))))
-
+        
+        open_toast(self, _("Active Theme Set To: ") + theme_name.replace(".css", ""))
+    
         color_pattern = r'--([a-z0-9-]+)\s*:\s*(#[a-fA-F0-9]+|[a-z0-9_-]+(?:\([^)]*\))?)\s*;'
         references = defaultdict(list)
         colors = dict()
@@ -230,8 +229,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
             self.on_theme_selected()
         else:
             self.save_prefs()
-            self.toast_overlay.dismiss_all()
-            self.toast_overlay.add_toast(Adw.Toast(timeout=3, title=(_(f"{theme_type.capitalize()} theme set to: {theme_name.replace('.css', '')}"))))
+            open_toast(self, (_(f"{theme_type.capitalize()} Theme Set To: " + theme_name.replace('.css', ''))))
 
         if(theme_type == "dark"):
             flowbox_type = self.dark_flowbox

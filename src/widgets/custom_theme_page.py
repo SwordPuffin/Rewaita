@@ -22,7 +22,7 @@ gi.require_version("Gtk", "4.0")
 gi.require_version('GtkSource', '5')
 from gi.repository import Gtk, Gdk, Adw, GLib, GtkSource, Gio
 from .theme_page import load_colors_from_css, create_color_thumbnail_button
-from .utils import add_new_theme_button, rgb_to_hex
+from .utils import add_new_theme_button, open_toast, rgb_to_hex
 from .css_templates import gnome_colors, titles
 
 class ColorRow(Adw.ActionRow):
@@ -60,7 +60,7 @@ class CustomBundle(Gtk.Box):
             listbox.append(row)
         self.append(listbox)
 
-EXTRA_CSS_MARKER = "/* --- custom css below (do not remove this line) --- */"
+EXTRA_CSS_MARKER = "/* Enter any extra CSS here */"
 
 class CustomPage(Gtk.Box):
     def __init__(self, parent):
@@ -172,8 +172,8 @@ class CustomPage(Gtk.Box):
             else:
                 flowbox = parent.light_flowbox if theme_type == "light" else parent.dark_flowbox
                 self.remove_button_for(flowbox, old_name)
-
-        parent.toast_overlay.add_toast(Adw.Toast(timeout=3, title=new_name + _(" has been saved")))
+        
+        open_toast(parent, new_name + _(" Has Been Saved"))
 
         src_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "custom-template.css")
         src_file_text = open(src_file).read()
