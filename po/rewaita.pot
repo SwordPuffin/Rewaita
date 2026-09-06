@@ -470,6 +470,10 @@ msgstr ""
 msgid "Tint Wallpaper"
 msgstr ""
 
+#: src/widgets/theme_page.py:118
+msgid "Generate Theme From Image"
+msgstr ""
+
 #: src/widgets/theme_page.py:122
 msgid "Reset to default"
 msgstr ""
