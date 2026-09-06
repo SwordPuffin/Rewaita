@@ -14,9 +14,16 @@
               <child type="end">
                 <object class="GtkBox" id="endbox">
                   <child>
+                    <object class="GtkButton" id="edit_button">
+                      <property name="icon-name">adw-entry-edit-symbolic</property>
+                      <property name="tooltip-text" translatable="yes">Edit Themes</property>
+                      <property name="action-name">win.edit</property>
+                    </object>
+                  </child>
+                  <child>
                     <object class="GtkButton" id="delete_button">
                       <property name="icon-name">user-trash-symbolic</property>
-                      <property name="tooltip-text" translatable="yes">Delete themes</property>
+                      <property name="tooltip-text" translatable="yes">Delete Themes</property>
                       <property name="action-name">win.trash</property>
                     </object>
                   </child>

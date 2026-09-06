@@ -21,6 +21,11 @@
   color: var(--window-fg-color);
 }
 
+.edit-button {
+    outline: 4px dashed var(--accent-color);
+    outline-offset: -1px;
+}
+
 textview {
   background-color: var(--card-bg-color);
   color: var(--window-fg-color);

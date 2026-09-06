@@ -20,8 +20,8 @@
 from gi.repository import Adw, Gtk, GLib
 
 class LoadingDialog(Adw.Dialog):
-    def __init__(self, parent):
-        super().__init__(can_close=False)
+    def __init__(self):
+        super().__init__(can_close=True)
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12, margin_top=24, margin_bottom=24, margin_start=24, margin_end=24, valign=Gtk.Align.CENTER, halign=Gtk.Align.CENTER)
 

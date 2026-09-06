@@ -93,7 +93,9 @@ def symlink_all_in_dir(src, out):
         out_path = os.path.join(out, name)
 
         if(os.path.isfile(src_path)):
-            if(os.path.exists(out_path)):
+            if(os.path.exists(out_path) and not os.path.islink(out_path)):
+                continue
+            if(os.path.islink(out_path)):
                 os.remove(out_path)
 
             os.symlink(src_path, out_path)
@@ -103,18 +105,21 @@ class ThemePage(Gtk.Box):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=12)
 
         top_box = Gtk.Box(hexpand=True, halign=Gtk.Align.CENTER, margin_top=12, spacing=8)
-        help_button = Gtk.Button(label=_("User Guide"), valign=Gtk.Align.CENTER, vexpand=True)
-        help_button.set_css_classes(["pill", "suggested-action"])
+        help_button = Gtk.Button(label=_("User Guide"), valign=Gtk.Align.CENTER, vexpand=True, css_classes=["pill", "suggested-action"])
         help_button.set_action_name("app.guide")
         top_box.append(help_button)
 
-        wallpaper_dialog = WallpaperDialog(parent)
-        image_button = Gtk.Button(label=_("Tint Wallpaper"), valign=Gtk.Align.CENTER, vexpand=True)
-        image_button.connect("clicked", lambda d : wallpaper_dialog.present(parent))
-        image_button.set_css_classes(["pill", "suggested-action"])
+        tint_wallpaper_dialog = WallpaperDialog(parent, "make_new_image")
+        image_button = Gtk.Button(label=_("Tint Wallpaper"), valign=Gtk.Align.CENTER, vexpand=True, css_classes=["pill", "suggested-action"])
+        image_button.connect("clicked", lambda d : tint_wallpaper_dialog.present(parent))
         top_box.append(image_button)
 
+        theme_wallpaper_dialog = WallpaperDialog(parent, "make_new_theme")
+        image_button = Gtk.Button(label=_("Generate Theme From Image"), halign=Gtk.Align.CENTER, css_classes=["pill", "suggested-action"])
+        image_button.connect("clicked", lambda d : theme_wallpaper_dialog.present(parent))
+
         self.append(top_box)
+        self.append(image_button)
 
         snippet = self.get_example_text()
         for theme_type in ["light", "dark"]:

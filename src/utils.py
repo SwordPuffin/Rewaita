@@ -18,10 +18,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import gi, os, shutil, json
-from gi.repository import Gtk, Gdk, GLib, Xdp, Adw
+from gi.repository import Gtk, Gdk, Gio, GLib, Xdp, Adw
 from .css_templates import no_pill_css, accent_tab_css_gs
-from .image_modifier import hex_to_rgb
 from .firefox_gnome_theme import FirefoxGnomeThemePlugin
+from .loading_dialog import LoadingDialog
 
 settings = Xdp.Portal().get_settings()
 css_provider = Gtk.CssProvider()
@@ -127,6 +127,14 @@ def add_gtk3_window_controls(window_controls, gtk_css):
     with open(os.path.join(os.path.expanduser("~/.config"), "gtk-3.0", "gtk.css"), "a") as file:
         file.write(gtk_css + css)
 
+def rgb_to_hex(rgb):
+    r, g, b = (int(round(max(0, min(255, c)))) for c in rgb)
+    return f"#{r:02x}{g:02x}{b:02x}"
+    
+def hex_to_rgb(hex_color):
+    hex_color = hex_color.lstrip('#')
+    return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+    
 def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
     prefs = Preferences()
     all_prefs = prefs.get_all()
@@ -247,6 +255,33 @@ def delete_theme(button, window):
     dialog.connect("response", confirm_delete, button, window)
     dialog.present(window)
     
+def edit_items(action, _, button, window, stack):
+    if(button.has_css_class("success")):
+        button.remove_css_class("success")
+        for flowbox in [window.light_flowbox, window.dark_flowbox]:
+            for theme in flowbox:
+                child = theme.get_first_child()
+                if(not child.has_css_class("success")):
+                    child.set_sensitive(True)
+                    window.light_button.set_sensitive(True); window.dark_button.set_sensitive(True);
+                    continue
+                child.remove_css_class("success"); child.remove_css_class("edit-button")
+                child.disconnect_by_func(window.custom_page.edit_theme)
+                child.connect("clicked", window.on_theme_button_clicked, child.theme, child.theme_type)
+    else:
+        button.add_css_class("success")
+        for flowbox in [window.light_flowbox, window.dark_flowbox]:
+            for theme in flowbox:
+                child = theme.get_first_child()
+                if(child.has_css_class("active-scheme")):
+                    child.set_sensitive(False)
+                    window.light_button.set_sensitive(False); window.dark_button.set_sensitive(False);
+                    continue
+                child.add_css_class("success")
+                child.add_css_class("edit-button")
+                child.disconnect_by_func(child.func)
+                child.connect("clicked", window.custom_page.edit_theme, child.path, child.theme, child.theme_type, stack, button)
+
 def delete_items(action, _, button, window):
     if(button.has_css_class("destructive-action")):
         button.remove_css_class("destructive-action")
@@ -274,6 +309,46 @@ def delete_items(action, _, button, window):
                 child.disconnect_by_func(child.func)
                 child.connect("clicked", delete_theme, window)
 
+def add_new_theme_button(theme_file, flowbox, on_theme_button_clicked, theme_type):
+    from .theme_page import load_colors_from_css, create_color_thumbnail_button
+    
+    colors = load_colors_from_css(theme_file)
+    new_name = os.path.basename(theme_file).replace(".css", "")
+    new_button = create_color_thumbnail_button(colors, new_name, flowbox.snippet)
+    new_button.connect("clicked", on_theme_button_clicked, new_name + ".css", theme_type)
+
+    # Attributes
+    new_button.func = on_theme_button_clicked
+    new_button.path = os.path.join(GLib.get_user_data_dir(), theme_type, new_name + ".css")
+    new_button.theme_type = theme_type
+    new_button.theme = new_name
+    new_button.default = False
+
+    already_exists = False
+    for existing in flowbox:
+        if(existing.get_first_child().theme == new_button.theme):
+            already_exists = True
+
+    if(not already_exists):
+        flowbox.insert(new_button, -1)
+        flowbox.invalidate_sort()
+            
+def run_loading_task(parent, task_function, on_success=None):
+    spinner = LoadingDialog()
+    spinner.present(parent)
+
+    def task_func(task, source_object, task_data, cancellable):
+        success_val = task_function()
+        if(on_success):
+            on_success(success_val)
+        task.return_value(success_val)
+        
+    def on_done(task, _):
+        spinner.close()
+
+    task = Gio.Task.new(None, None, on_done)
+    task.run_in_thread(task_func)
+    
 def change_autostart(state):
     if(state == False):
         path = os.path.join(GLib.getenv("HOME"), ".config", "autostart", "rewaita.desktop")

@@ -43,9 +43,6 @@
   --light-1: var(--light-1);
   --light-5: var(--light-5);
   --dark-1: var(--dark-1);
-  --accent-color: var(--accent-color);
-  --accent-bg-color: var(--accent-bg-color);
-  --accent-fg-color: var(--accent-fg-color);
 }
 
 toast {

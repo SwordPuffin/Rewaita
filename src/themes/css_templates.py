@@ -67,6 +67,92 @@ accent_tab_css_gs = """
 
 ############################################
 
+# Used in custom_theme_page.py
+
+gnome_colors = {
+    "Main Colors": {
+        "description": "Used as the main window colors",
+        "--window-bg-color": "#222226",
+        "--window-fg-color": "#ffffff",
+    },
+    "Success Colors": {
+        "description": "Used to indicate successful actions or high levels",
+        "--success-color": "#78e9ab",
+        "--success-bg-color": "#26a269",
+        "--success-fg-color": "#ffffff",
+    },
+    "Destructive Colors": {
+        "description": "Used on buttons to indicate destruction or dangerous actions like deleting files",
+        "--destructive-color": "#ff938c",
+        "--destructive-bg-color": "#c01c28",
+        "--destructive-fg-color": "#ffffff",
+    },
+    "Warning Colors": {
+        "description": "Used on a variety of widgets to indicate warnings or caution",
+        "--warning-color": "#ffc252",
+        "--warning-bg-color": "#cd9309",
+        "--warning-fg-color": "#000000",
+    },
+    "Interface Colors": {
+        "description": "Used on most background UI elements like text-views, buttons, and headerbars",
+        "--view-bg-color": "#1d1d20",
+        "--view-fg-color": "#ffffff",
+        "--headerbar-bg-color": "#2e2e32",
+        "--headerbar-fg-color": "#ffffff",
+        "--card-bg-color": "#34343a",
+        "--card-fg-color": "#ffffff",
+    },
+    "Named Colors": {
+        "description": "Array of palette colors, used to separate UI elements and to give your theme some character",
+        "--blue-1": "#99c1f1",
+        "--blue-2": "#62a0ea",
+        "--green-1": "#8ff0a4",
+        "--yellow-1": "#f9f06b",
+        "--orange-1": "#ffbe6f",
+        "--red-1": "#f66151",
+        "--purple-1": "#dc8add",
+        "--purple-2": "#c061cb",
+        "--brown-1": "#cdab8f",
+        "--light-1": "#ffffff",
+        "--light-5": "#9a9996",
+        "--dark-1": "#77767b",
+    }
+}
+
+titles = {
+    "--window-bg-color": "Window Background Color",
+    "--window-fg-color": "Window Text Color",
+    "--success-color": "Standalone Color",
+    "--success-bg-color": "Background Color",
+    "--success-fg-color": "Text Color",
+    "--destructive-color": "Standalone Color",
+    "--destructive-bg-color": "Background Color",
+    "--destructive-fg-color": "Text Color",
+    "--warning-color": "Standalone",
+    "--warning-bg-color": "Background Color",
+    "--warning-fg-color": "Text Color",
+    "--view-bg-color": "Text View Background Color",
+    "--view-fg-color": "Text Color",
+    "--headerbar-bg-color": "Headerbar Background Color",
+    "--headerbar-fg-color": "Text Color",
+    "--card-bg-color": "Button/Frame Background Color",
+    "--card-fg-color": "Text Color",
+    "--blue-1": "Blue",
+    "--blue-2": "Teal",
+    "--green-1": "Green",
+    "--yellow-1": "Yellow",
+    "--orange-1": "Orange",
+    "--red-1": "Red",
+    "--purple-1": "Pink",
+    "--purple-2": "Purple",
+    "--brown-1": "Brown",
+    "--light-1": "Light",
+    "--light-5": "Slate",
+    "--dark-1": "Dark",
+}
+
+############################################
+
 # Used in extra_options_box.py
 transparency_css = """
 .background {
@@ -122,7 +208,6 @@ accent_tab_css_gtk4 = """
 ###############################################
 
 # Used in firefox_gnome_theme.py
-
 
 DEFAULT_TEMPLATE = """
 :root {{
@@ -355,13 +440,11 @@ panel:not([remote]) {{
 
 .menupopup-arrowscrollbox:not(#tabgroup-panel-content) {{
   background: var(--window-bg-color) !important;
-  border-color: var(--window-bg-color) !important;
 }}
 
 menuitem,
 menu {{
   color: var(--window-fg-color) !important;
-  background-color: transparent !important;
 }}
 
 menuitem:hover,
@@ -834,5 +917,42 @@ BREEZE_TEMPLATE = """
   &:not([disabled]):hover > image {{
       color: transparent !important;
   }}
+}}
+"""
+
+###############################################
+
+# Used in image_to_css.py
+
+CSS_TEMPLATE = """:root {{
+  --window-bg-color: {window_bg};
+  --window-fg-color: {window_fg};
+  --view-bg-color: {view_bg};
+  --view-fg-color: {view_fg};
+  --headerbar-bg-color: {headerbar_bg};
+  --headerbar-backdrop-color: {headerbar_backdrop};
+  --headerbar-fg-color: {headerbar_fg};
+  --popover-bg-color: {popover_bg};
+  --popover-fg-color: {popover_fg};
+  --dialog-bg-color: var(--popover-bg-color);
+  --dialog-fg-color: var(--popover-fg-color);
+  --card-bg-color: {card_bg};
+  --card-fg-color: {card_fg};
+  --sidebar-bg-color: {sidebar_bg};
+  --sidebar-fg-color: {sidebar_fg};
+  --sidebar-backdrop-color: var(--sidebar-bg-color);
+  --sidebar-border-color: {sidebar_border};
+  --secondary-sidebar-bg-color: var(--sidebar-bg-color);
+  --secondary-sidebar-fg-color: var(--sidebar-fg-color);
+  --secondary-sidebar-backdrop-color: var(--sidebar-backdrop-color);
+  --secondary-sidebar-border-color: var(--sidebar-border-color);
+{accent_lines}
+}}
+toast {{
+  background-color: var(--window-bg-color);
+  color: var(--window-fg-color);
+}}
+.inline {{
+  background-color: rgba(0, 0, 0, 0);
 }}
 """

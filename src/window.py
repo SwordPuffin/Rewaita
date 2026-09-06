@@ -21,7 +21,7 @@ import os, shutil, gi, re
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
 from collections import defaultdict
-from .utils import parse_gtk_theme, set_to_default, delete_items, get_accent_color, add_gtk3_window_controls, add_css_provider, Preferences
+from .utils import parse_gtk_theme, set_to_default, delete_items, edit_items, get_accent_color, add_gtk3_window_controls, add_css_provider, Preferences
 from .custom_theme_page import CustomPage
 from .theme_page import ThemePage
 from .pref_page import PrefPage
@@ -66,6 +66,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
     switcher = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     delete_button = Gtk.Template.Child()
+    edit_button = Gtk.Template.Child()
     endbox = Gtk.Template.Child()
     extra_css = set()
 
@@ -88,10 +89,6 @@ class RewaitaWindow(Adw.ApplicationWindow):
         for path in [gtk3_config_dir, gtk4_config_dir, gnome_shell_dir]:
             os.makedirs(path, exist_ok=True)
 
-        delete = Gio.SimpleAction.new(name="trash")
-        delete.connect("activate", delete_items, self.delete_button, self)
-        self.add_action(delete)
-
         if(self.window_control != "default"):
             self.window_control_css = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", "gtk4", f"{self.window_control}.css")).read()
         self.portal = Xdp.Portal()
@@ -106,7 +103,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
         self.theme_page.append(WindowControlBox(self, self.window_control))
         self.custom_page = CustomPage(self)
 
-        stack = Adw.ViewStack(transition_duration=200, vhomogeneous=False)
+        stack = Adw.ViewStack(enable_transitions=True, vhomogeneous=False)
         stack.connect("notify::visible-child", self.on_page_changed)
         self.switcher.set_stack(stack)
         stack.add_titled_with_icon(self.theme_page, "theming", _("Theming"), "brush-symbolic")
@@ -117,11 +114,21 @@ class RewaitaWindow(Adw.ApplicationWindow):
         box.append(stack)
         scroll_box.set_child(box)
 
+        delete = Gio.SimpleAction.new(name="trash")
+        delete.connect("activate", delete_items, self.delete_button, self)
+        self.add_action(delete)
+
+        edit = Gio.SimpleAction.new(name="edit")
+        edit.connect("activate", edit_items, self.edit_button, self, stack)
+        self.add_action(edit)
+
     def on_page_changed(self, stack, _):
         if(stack.get_visible_child_name() != "theming"):
             self.delete_button.set_visible(False)
+            self.edit_button.set_visible(False)
         else:
             self.delete_button.set_visible(True)
+            self.edit_button.set_visible(True)
 
     template_file_content = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css")).read()
     gtk3_template_file_content = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "gtk3-template", "gtk.css")).read()
