@@ -1,4 +1,4 @@
-_Please remove all this text for actual submission._
+_Please remove all this text when you submit the PR._
 
 ### If you are submitting a new theme, please make sure it meets the following requirements:
 
