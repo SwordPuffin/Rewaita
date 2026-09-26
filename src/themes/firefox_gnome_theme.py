@@ -121,6 +121,8 @@ class FirefoxGnomeThemePlugin():
                                 if(Path(f"{result}/chrome/rewaitaChrome.css").exists()):
                                     Path(f"{result}/chrome/rewaitaChrome.css").unlink()
                             else:
+                                from .utils import create_companion_file
+
                                 Path(f"{result}/chrome").mkdir(mode=0o755, parents=True, exist_ok=True)
                                 Path(f"{result}/chrome/userChrome.css").touch()
                                 Path(f"{result}/user.js").touch()
@@ -130,13 +132,8 @@ class FirefoxGnomeThemePlugin():
                                         with open(f"{result}/user.js", "a") as f:
                                             f.write(pref_text)
 
-                                with open(f"{result}/chrome/rewaitaChrome.css", "w") as f:
-                                    f.write(DEFAULT_TEMPLATE.format(**self.variables) + f"\n{window_control_map[self.window_controls].format(**self.variables)}\n{extra_css}")
-
-                                with open(f"{result}/chrome/userChrome.css", "r") as rf:
-                                    if("@import \"rewaitaChrome.css\";" not in rf.read()):
-                                        with open(f"{result}/chrome/userChrome.css", "a") as f:
-                                            f.write("@import \"rewaitaChrome.css\";")
+                                companion_text = DEFAULT_TEMPLATE.format(**self.variables) + f"\n{window_control_map[self.window_controls].format(**self.variables)}\n{extra_css}"
+                                create_companion_file(f"{result}/chrome/rewaitaChrome.css", f"{result}/chrome/userChrome.css", companion_text)
                     except OSError:
                         pass
             except OSError:

@@ -34,12 +34,13 @@ class Preferences:
         "window-controls": "default",
         "modify-gtk3-theme": True,
         "modify-gnome-shell": True,
+        "modify-cinnamon-shell": True,
         "run-in-background": True,
         "transparency": False,
         "window": False,
         "sharp": False,
         "firefox-theme": False,
-        "accent-fg": False,
+        "accent-fg": 0,
         "accent-tabs": False,
         "light-text": False,
         "dark-panel": False,
@@ -89,13 +90,22 @@ class Preferences:
             self.make_file()
             return dict(self.DEFAULTS)
 
+def create_companion_file(companion, main_file, companion_content):
+    with open(companion, "w") as file:
+        file.write(companion_content)
+    companion_name = os.path.basename(companion)
+    with open(main_file, "a+") as rf:
+        if(f"@import \"{companion_name}\";" not in rf.read()):
+            with open(main_file, "a") as f:
+                f.write(f"\n@import \"{companion_name}\";")
+
 def get_accent_color(palette, win):
     accent_map = {
         "'blue'": "blue-1", "'teal'": "blue-2", "'green'": "green-1", "'yellow'": "yellow-1",
         "'orange'": "orange-1", "'red'": "red-1", "'pink'": "purple-1", "'purple'": "purple-2", "'slate'": "dark-1"
     }
 
-    if(win.accent_fg):
+    if(win.accent_fg == 3 or win.pref == 1 and win.accent_fg == 1 or win.pref in [0, 2] and win.accent_fg == 2):
         accent_fg = "#EEEEEE"
     else:
         accent_fg = "#222222"
@@ -119,12 +129,12 @@ def add_css_provider(css, accent_colors):
 
 def add_gtk3_window_controls(window_controls, gtk_css):
     if(window_controls != "default"):
-        window_control_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", "gtk3", window_controls + ".css")
+        window_control_file = os.path.join(dir, "window-controls", "gtk3", window_controls + ".css")
         with open(window_control_file, "r") as wcf:
             css = wcf.read()
     else:
         css = ""
-    with open(os.path.join(os.path.expanduser("~/.config"), "gtk-3.0", "gtk.css"), "a") as file:
+    with open(os.path.join(os.path.expanduser("~/.config"), "gtk-3.0", "rewaita.css"), "a") as file:
         file.write(gtk_css + css)
 
 def rgb_to_hex(rgb):
@@ -135,7 +145,14 @@ def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
     
-def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
+def parse_gtk_theme(colors, reset_func):
+    dir = os.path.dirname(os.path.abspath(__file__))
+    gnome_theme_file = os.path.join(dir, "gnome-shell-template.css")
+    cinnamon_theme_file = os.path.join(dir, "cinnamon-template.css")
+    gnome_shell_css = open(gnome_theme_file).read()
+    cinnamon_css = open(cinnamon_theme_file).read()
+    gtk3_template_file = open(os.path.join(dir, "gtk3-template", "gtk.css")).read()
+
     prefs = Preferences()
     all_prefs = prefs.get_all()
 
@@ -149,7 +166,7 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
         for color_to_replace in ["window-bg-color", "headerbar-bg-color", "card-bg-color"]:
             rgb = hex_to_rgb(colors[color_to_replace])
             colors[color_to_replace] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.82)"
-        gtk3_file += ".background:not(.nautilus-desktop):not(.desktopwindow) { opacity: 0.95; }"
+        gtk3_template_file += ".background:not(.nautilus-desktop):not(.desktopwindow) { opacity: 0.95; }"
 
     if(all_prefs["light-text"]):
         colors["search-fg-color"] = "white"
@@ -187,14 +204,14 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
 
     if(all_prefs["modify-gtk3-theme"]):
         for color in colors.keys():
-            gtk3_file = gtk3_file.replace(f"@{color}", colors[color])
+            gtk3_template_file = gtk3_template_file.replace(f"@{color}", colors[color])
 
         if(all_prefs["sharp"]):
-            gtk3_file += f"\n\n* {{border-radius: 0px;}}\n\n"
+            gtk3_template_file += f"\n\n* {{border-radius: 0px;}}\n\n"
 
         gtk3_theme_file = os.path.join(GLib.getenv("HOME"), ".config", "gtk-3.0", "gtk.css")
-        with open(gtk3_theme_file, "w") as file:
-            file.write(gtk3_file)
+        companion_file = os.path.join(GLib.getenv("HOME"), ".config", "gtk-3.0", "rewaita.css")
+        create_companion_file(companion_file, gtk3_theme_file, gtk3_template_file)
 
     if(all_prefs["modify-gnome-shell"] and "GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
         for item in items_to_replace:
@@ -202,7 +219,7 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
 
         gnome_shell_theme_dir = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
         os.makedirs(gnome_shell_theme_dir, exist_ok=True)
-        file = shutil.copyfile(theme_file, os.path.join(gnome_shell_theme_dir, "gnome-shell.css"))
+        g_file = shutil.copyfile(gnome_theme_file, os.path.join(gnome_shell_theme_dir, "gnome-shell.css"))
 
         if(all_prefs["sharp"]):
             gnome_shell_css += f"\n\n* {{border-radius: 0px !important;}}"
@@ -210,10 +227,35 @@ def parse_gtk_theme(colors, gnome_shell_css, theme_file, gtk3_file, reset_func):
         if(all_prefs["no-pills"]):
             gnome_shell_css += no_pill_css
 
-        with open(file, "w") as f:
+        with open(g_file, "w") as f:
             f.write(gnome_shell_css)
 
         reset_func()
+
+    if(all_prefs["modify-cinnamon-shell"] and "CINNAMON" not in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+        cinnamon_theme_dir = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "cinnamon")
+        os.makedirs(cinnamon_theme_dir, exist_ok=True)
+        c_file = shutil.copyfile(cinnamon_theme_file, os.path.join(cinnamon_theme_dir, "cinnamon.css"))
+        for item in items_to_replace:
+            color = colors[item]
+            try:
+                if(color.startswith("#")):
+                    r, g, b = hex_to_rgb(color)
+                elif(color == "transparent"):
+                    r, g, b = (0, 0, 0)
+                else:
+                    r, g, b = color
+            except:
+                continue
+
+            cinnamon_css = cinnamon_css.replace(f"@{item}-rgb", f"{r}, {g}, {b}")
+            cinnamon_css = cinnamon_css.replace(f"@{item}", color)
+
+        if(all_prefs["sharp"]):
+            cinnamon_css += f"\n\n* {{border-radius: 0px !important;}}"
+
+        with open(c_file, "w") as f:
+            f.write(cinnamon_css)
 
 def set_to_default(gtk4_config_dir, theme_type, reset_func, extras, modify_gtk3_theme):
     with open(os.path.join(gtk4_config_dir, "gtk.css"), "w") as file:
@@ -223,7 +265,7 @@ def set_to_default(gtk4_config_dir, theme_type, reset_func, extras, modify_gtk3_
     if(os.path.exists(os.path.join(gnome_shell_path, "gnome-shell.css"))):
         os.remove(os.path.join(gnome_shell_path, "gnome-shell.css"))
 
-    gtk_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"default-{theme_type}.css")
+    gtk_file = os.path.join(dir, f"default-{theme_type}.css")
     gtk_css = open(gtk_file).read()
     add_css_provider(gtk_css + extras[0], None)
     firefox_theme_plugin.reset()

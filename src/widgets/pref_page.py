@@ -20,6 +20,7 @@ class PrefPage(Gtk.Box):
         for title in [
             ("Generate GTK-3.0 Theme", "Highly recommended for all users"),
             ("Generate GNOME Shell Theme", "For GNOME users"),
+            ("Generate Cinnamon Theme", "For Cinnamon users"),
             ("Generate Firefox CSS Theme", "May conflict with existing theme"),
             ("Run in background", "For users who swap between light/dark mode")
         ]:
@@ -29,6 +30,9 @@ class PrefPage(Gtk.Box):
             elif(title[0] == "Generate GNOME Shell Theme"):
                 state = win.modify_gnome_shell
                 def state_function(value): win.modify_gnome_shell = value
+            elif(title[0] == "Generate Cinnamon Theme"):
+                state = win.modify_gnome_shell
+                def state_function(value): win.modify_cinnamon_shell = value
             elif(title[0] == "Generate Firefox CSS Theme"):
                 state = win.firefox_theme
                 def state_function(value): win.firefox_theme = value

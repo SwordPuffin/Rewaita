@@ -48,7 +48,13 @@ rewaita_sources = [
 
 install_data(rewaita_sources, install_dir: moduledir)
 
-template_source = [ 'themes/gnome-shell-template.css', 'themes/default-light.css', 'themes/default-dark.css', 'themes/custom-template.css' ]
+template_source = [
+	'themes/gnome-shell-template.css',
+	'themes/cinnamon-template.css',
+	'themes/default-light.css',
+	'themes/default-dark.css',
+	'themes/custom-template.css'
+]
 
 install_data(template_source, install_dir: moduledir)
 

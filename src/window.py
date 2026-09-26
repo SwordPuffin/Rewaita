@@ -17,11 +17,12 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import os, shutil, gi, re
+import os, gi, re
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
 from collections import defaultdict
-from .utils import parse_gtk_theme, set_to_default, delete_items, edit_items, open_toast, get_accent_color, add_gtk3_window_controls, add_css_provider, Preferences
+from pathlib import Path
+from .utils import *
 from .custom_theme_page import CustomPage
 from .theme_page import ThemePage
 from .pref_page import PrefPage
@@ -130,9 +131,6 @@ class RewaitaWindow(Adw.ApplicationWindow):
             self.delete_button.set_visible(True)
             self.edit_button.set_visible(True)
 
-    template_file_content = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css")).read()
-    gtk3_template_file_content = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "gtk3-template", "gtk.css")).read()
-
     def on_theme_selected(self):
         self.pref = read_color_scheme(self.settings)
         if(self.pref == 1):
@@ -186,18 +184,21 @@ class RewaitaWindow(Adw.ApplicationWindow):
         extras = "\n" + extras + f"\n@define-color accent_bg_color {accent_color};\n@define-color accent_fg_color {accent_fg};"
 
         try:
-            shutil.copy(theme_file, os.path.join(gtk4_config_dir, "gtk.css"))
-            with open(os.path.join(gtk4_config_dir, "gtk.css"), "a") as file:
-                file.write(extras)
+            # Uses a companion file
+            companion = os.path.join(gtk4_config_dir, "rewaita.css")
+            main_file = os.path.join(gtk4_config_dir, "gtk.css")
+            create_companion_file(companion, main_file, gtk_css + extras)
+
+            # Resolves a conflict with the window controls not changing with the companion file
+            main_file_text = Path(main_file).read_text()
+            new_text = main_file_text.replace(".rewaita-display", "windowcontrols")
+            Path(main_file).write_text(new_text)
         except Exception as e:
             print(f"Error moving file: {e}")
 
         add_css_provider(open(theme_file).read() + extras, (accent_color, accent_fg))
         parse_gtk_theme(
             colors,
-            self.template_file_content,
-            os.path.join(os.path.dirname(os.path.abspath(__file__)), "gnome-shell-template.css"),
-            self.gtk3_template_file_content,
             reset_shell
         )
         add_gtk3_window_controls(self.window_control, "")
@@ -252,6 +253,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
             "window-controls": self.window_control,
             "modify-gtk3-theme": self.modify_gtk3_theme,
             "modify-gnome-shell": self.modify_gnome_shell,
+            "modify-cinnamon-shell": self.modify_gnome_shell,
             "run-in-background": self.run_in_background,
             "transparency": self.transparency,
             "window": self.borders,

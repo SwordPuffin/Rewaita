@@ -91,6 +91,12 @@ keys = {
     "no-pills": "no_pills"
 }
 
+accent_fg_options = Gtk.StringList()
+accent_fg_options.append(_("In Neither"))
+accent_fg_options.append(_("In Dark Mode"))
+accent_fg_options.append(_("In Light Mode"))
+accent_fg_options.append(_("In Both"))
+
 class OptionsBox(Adw.PreferencesGroup):
     def __init__(self, parent):
         super().__init__(
@@ -104,15 +110,24 @@ class OptionsBox(Adw.PreferencesGroup):
                 break
 
             active = pref.get(key)
-            row = Adw.SwitchRow(title=label, subtitle=subtitle, active=active)
-            row.connect("notify::active", self.on_row_toggled, css, key)
+            if(key == "accent-fg"):
+                row = Adw.ComboRow(title=label, subtitle=subtitle, model=accent_fg_options, selected=active)
+                row.connect("notify::selected", self.on_row_selected, css, key)
+            else:
+                row = Adw.SwitchRow(title=label, subtitle=subtitle, active=active)
+                row.connect("notify::active", self.on_row_selected, css, key)
+
             self.add(row)
 
             if(active):
                 self.parent.extra_css.add(css)
 
-    def on_row_toggled(self, row, _pspec, css, key):
-        is_active = row.get_active()
+    def on_row_selected(self, row, _pspec, css, key):
+        try:
+            is_active = row.get_active()
+        except: # For 'accent_fg, uses a comborow'
+            is_active = row.get_selected()
+            print(is_active)
 
         attr = keys.get(key)
         if(attr):
