@@ -318,7 +318,7 @@ StEntry:focus {
   color: @window-fg-color !important;
 }
 
-.popup-menu .popup-sub-menu, .popup-menu .popup-sub-menu .popup-menu-item:open {
+.popup-menu .popup-sub-menu, .popup-sub-menu, .popup-submenu-menu-item:open, .popup-menu .popup-sub-menu .popup-menu-item:open {
   background-color: @card-bg-color !important;
   color: @window-fg-color !important;
 }
