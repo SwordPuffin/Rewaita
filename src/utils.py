@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import gi, os, subprocess,  shutil, json
+import gi, os,  shutil, json
 from gi.repository import Gtk, Gdk, Gio, GLib, Xdp, Adw
 from .css_templates import no_pill_css, accent_tab_css_gs
 from .firefox_gnome_theme import FirefoxGnomeThemePlugin
