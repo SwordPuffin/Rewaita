@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-import gi, os, shutil, json
+import gi, os, subprocess,  shutil, json
 from gi.repository import Gtk, Gdk, Gio, GLib, Xdp, Adw
 from .css_templates import no_pill_css, accent_tab_css_gs
 from .firefox_gnome_theme import FirefoxGnomeThemePlugin
@@ -232,7 +232,7 @@ def parse_gtk_theme(colors, reset_func):
 
         reset_func()
 
-    if(all_prefs["modify-cinnamon-shell"] and "CINNAMON" not in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+    if(all_prefs["modify-cinnamon-shell"] and "Cinnamon" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
         cinnamon_theme_dir = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "cinnamon")
         os.makedirs(cinnamon_theme_dir, exist_ok=True)
         c_file = shutil.copyfile(cinnamon_theme_file, os.path.join(cinnamon_theme_dir, "cinnamon.css"))

@@ -692,7 +692,7 @@ StScrollBar {
   padding: 6px;
   border-radius: 6px; }
   .calendar-today-home-button-enabled:hover {
-    background-color: @border-color; }
+    background-color: @card-bg-color; }
     .calendar-today-home-button-enabled:hover .calendar-today-day-label {
       color: @window-fg-color; }
     .calendar-today-home-button-enabled:hover .calendar-today-date-label {
@@ -776,9 +776,9 @@ StScrollBar {
   background-color: transparent;
   font-weight: bold; }
 
-.calendar-today {
-  color: @window-fg-color;
-  background-color: rgba(@border-color-rgb, 0.4);
+.calendar-today, .calendar-today:hover {
+  color: @accent-fg-color;
+  background-color: @accent-color;
   border-width: 0;
   border-radius: 6px; }
   .calendar-today:selected {
@@ -1178,10 +1178,10 @@ StScrollBar {
     background-color: @card-bg-color; }
   .window-list-item-box:active, .window-list-item-box:checked, .window-list-item-box:focus, .window-list-item-box:running {
     color: @window-fg-color;
-    border-color: @border-color;
+    border-color: @accent-color;
     background-color: @card-bg-color; }
   .window-list-item-box .progress {
-    background-color: rgba(@border-color-rgb, 0.8); }
+    background-color: rgba(@accent-color-rgb, 0.8); }
 
 .window-list-item-demands-attention {
   background-gradient-direction: vertical;
@@ -1225,14 +1225,16 @@ StScrollBar {
     border-left-width: 2px; }
     .grouped-window-list-item-box.left StBin {
       padding-left: 1px; }
+  .grouped-window-list-item-box:active {
+    border-color: @card-bg-color; }
   .grouped-window-list-item-box:hover, .grouped-window-list-item-box:focus {
     color: @window-fg-color;
     background-color: @card-bg-color; }
-  .grouped-window-list-item-box:active, .grouped-window-list-item-box:checked {
+  .grouped-window-list-item-box:focus, .grouped-window-list-item-box:checked {
     color: @window-fg-color;
-    border-color: @border-color; }
+    border-color: @accent-color; }
   .grouped-window-list-item-box .progress {
-    background-color: rgba(@border-color-rgb, 0.8); }
+    background-color: rgba(@accent-color-rgb, 0.8); }
 
 .grouped-window-list-item-demands-attention {
   background-gradient-direction: vertical;
@@ -1248,10 +1250,14 @@ StScrollBar {
 
 .grouped-window-list-badge {
   border-radius: 99px;
-  background-color: @border-color;
+  background-color: @accent-color;
   margin: 0; }
 
+.grouped-window-list-badge > StLabel {
+  color: @accent-fg-color;
+}
 .grouped-window-list-notifications-badge-label {
+  color: @accent-fg-color;
   font-size: 12px; }
 
 .grouped-window-list-button-label {
@@ -1274,9 +1280,9 @@ StScrollBar {
     spacing: 4px; }
     .grouped-window-list-thumbnail-menu .item-box:outlined {
       padding: 8px;
-      border: 1px solid @border-color; }
+      border: 1px solid @accent-bg-color; }
     .grouped-window-list-thumbnail-menu .item-box:selected {
-      border: 1px solid @border-color; }
+      border: 1px solid @accent-color; }
   .grouped-window-list-thumbnail-menu .thumbnail {
     width: 256px; }
   .grouped-window-list-thumbnail-menu .separator {
