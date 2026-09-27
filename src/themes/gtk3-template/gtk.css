@@ -138,7 +138,7 @@ window {
   color: @theme-fg-color;
 }
 
-.background:not(.nautilus-desktop):not(.desktopwindow) {
+.background:not(.nautilus-desktop):not(.desktopwindow):not(.nemo-desktop-window) {
   background-color: @window-bg-color;
   color: @window-fg-color;
 }
@@ -319,8 +319,8 @@ combobox window.background.popup menu {
   color: @popover-fg-color;
 }
 
-menubar:backdrop {
-	background-color: @window-bg-color;
+menubar, menubar:backdrop {
+	background-color: @headerbar-bg-color;
 }
 
 /* Dialogs */
