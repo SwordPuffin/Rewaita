@@ -152,9 +152,15 @@ def parse_gtk_theme(colors, reset_func):
     gnome_shell_css = open(gnome_theme_file).read()
     cinnamon_css = open(cinnamon_theme_file).read()
     gtk3_template_file = open(os.path.join(dir, "gtk3-template", "gtk.css")).read()
+    gedit_template_file = open(os.path.join(dir, "gedit-template.xml")).read()
 
     prefs = Preferences()
     all_prefs = prefs.get_all()
+
+    gtksourceview_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "gtksourceview-5", "styles")
+    os.makedirs(gtksourceview_path, exist_ok=True)
+    with open(os.path.join(gtksourceview_path, "rewaita.xml"), "w") as f:
+        f.write(gedit_template_file.format(**colors))
 
     if(all_prefs["window"]):
         colors["border-color"] = colors["accent-color"]
@@ -190,6 +196,7 @@ def parse_gtk_theme(colors, reset_func):
 
     rgb = hex_to_rgb(colors["accent-color"])
     colors["accent-transparent"] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.5)"
+
 
     if(all_prefs["firefox-theme"]):
         firefox_theme_plugin.variables = colors

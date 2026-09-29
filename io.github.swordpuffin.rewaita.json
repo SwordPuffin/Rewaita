@@ -14,6 +14,7 @@
         "--filesystem=~/.config/gtk-4.0:create",
         "--filesystem=~/.local/share/themes:create",
         "--talk-name=org.gnome.Shell.Extensions",
+        "--filesystem=~/.local/share/gtksourceview-5:create",
         "--filesystem=~/.mozilla/firefox",
         "--filesystem=~/.librewolf",
         "--filesystem=~/.waterfox",

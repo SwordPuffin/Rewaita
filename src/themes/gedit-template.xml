@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2026 Nathan Perlman
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<style-scheme id="rewaita" _name="Rewaita" version="1.0">
+  <author>Nathan Perlman</author>
+  <_description>Color scheme following Rewaita</_description>
+
+  <color name="base03"  value="{accent-fg-color}"/>
+  <color name="base02"  value="{accent-color}"/>
+  <color name="base01"  value="{window-fg-color}"/>
+  <color name="base00"  value="{card-bg-color}"/>
+  <color name="base0"   value="{card-bg-color}"/>
+  <color name="base1"   value="{card-bg-color}"/>
+  <color name="base2"   value="{window-bg-color}"/>
+  <color name="base3"   value="{window-bg-color}"/>
+  <color name="base4"   value="{headerbar-bg-color}"/>
+  <color name="yellow"  value="{yellow-1}"/>
+  <color name="orange"  value="{orange-1}"/>
+  <color name="red"     value="{red-1}"/>
+  <color name="magenta" value="{purple-1}"/>
+  <color name="violet"  value="{purple-2}"/>
+  <color name="blue"    value="{blue-1}"/>
+  <color name="cyan"    value="{blue-2}"/>
+  <color name="green"   value="{green-1}"/>
+
+  <color name="base3-2-blend" value="{light-1}"/>
+
+  <!-- Global Settings -->
+  <style name="text"                        foreground="base01" background="base3"/>
+  <!-- <style name="selection"                   foreground="base00" background="base03"/> -->
+  <style name="cursor"                      foreground="base01"/>
+  <style name="current-line"                background="base2"/>
+  <style name="line-numbers"                foreground="base01" background="base4"/>
+  <style name="background-pattern"          background="base3-2-blend"/>
+  <style name="draw-spaces"                 foreground="base4"/>
+
+  <!-- Bracket Matching -->
+  <style name="bracket-match"               foreground="base02" background="base00"/>
+  <style name="bracket-mismatch"            foreground="red" background="base1"/>
+
+  <!-- Right Margin -->
+  <style name="right-margin"                foreground="base01" background="base01"/>
+
+  <!-- Search Matching -->
+  <style name="search-match"                foreground="base3" background="yellow"/>
+
+  <!-- Links -->
+  <style name="def:link-text"               foreground="base02"/>
+  <style name="def:link-symbol"             foreground="base02" bold="true"/>
+  <style name="def:link-destination"        foreground="base02" italic="true" underline="single"/>
+
+  <!-- Comments -->
+  <style name="def:comment"                 foreground="base3-2-blend"/>
+  <style name="def:shebang"                 foreground="base3-2-blend" bold="true"/>
+  <style name="def:doc-comment-element"     italic="true"/>
+
+  <!-- Constants -->
+  <style name="def:constant"                foreground="cyan"/>
+  <style name="def:special-char"            foreground="red"/>
+
+  <!-- Functions -->
+  <style name="def:function"                foreground="blue"/>
+
+  <!-- Identifiers -->
+  <style name="def:identifier"              foreground="blue"/>
+
+  <!-- Keywords -->
+  <style name="def:keyword"                 foreground="green"/>
+
+  <!-- Statements -->
+  <style name="def:statement"               foreground="orange"/>
+
+  <!-- Types -->
+  <style name="def:type"                    foreground="yellow"/>
+
+  <!-- Markup -->
+  <style name="def:emphasis"                italic="true"/>
+  <style name="def:strong-emphasis"         foreground="orange"/>
+  <style name="def:inline-code"             foreground="blue"/>
+  <style name="def:insertion"               underline="single"/>
+  <style name="def:deletion"                strikethrough="true"/>
+  <style name="def:heading"                 foreground="yellow"/>
+  <style name="def:thematic-break"          foreground="yellow"/>
+  <style name="def:preformatted-section"    foreground="blue"/>
+  <style name="def:list-marker"             foreground="orange"/>
+
+  <!-- Operators -->
+  <style name="def:operator"                foreground="green"/>
+
+  <!-- Others -->
+  <style name="def:preprocessor"            foreground="violet"/>
+  <style name="def:error"                   foreground="red" bold="true"/>
+  <style name="def:note"                    foreground="magenta" bold="true"/>
+  <style name="def:net-address"             italic="true" underline="single"/>
+
+  <!-- C Overrides -->
+  <style name="c:preprocessor"              foreground="orange"/>
+  <style name="c:type-keyword"              foreground="yellow"/>
+
+  <!-- GTK-DOC Overrides -->
+  <style name="gtk-doc:type"                foreground="yellow"/>
+  <style name="gtk-doc:function"            foreground="blue"/>
+  <style name="gtk-doc:function-name"       bold="true"/>
+  <style name="gtk-doc:property-name"       bold="true"/>
+  <style name="gtk-doc:signal-name"         bold="true"/>
+  <style name="gtk-doc:parameter"           bold="true"/>
+  <style name="gtk-doc:constant"            foreground="cyan"/>
+  <style name="gtk-doc:return"              bold="true"/>
+  <style name="gtk-doc:since"               bold="true"/>
+  <style name="gtk-doc:deprecated"          bold="true"/>
+</style-scheme>

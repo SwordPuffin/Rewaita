@@ -53,7 +53,8 @@ template_source = [
 	'themes/cinnamon-template.css',
 	'themes/default-light.css',
 	'themes/default-dark.css',
-	'themes/custom-template.css'
+	'themes/custom-template.css',
+	'themes/gedit-template.xml'
 ]
 
 install_data(template_source, install_dir: moduledir)
