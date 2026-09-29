@@ -3,8 +3,8 @@ button.minimize.titlebutton:not(.suggested-action):not(.destructive-action),
 button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
   color: @window-fg-color;
 	-gtk-icon-theme: 'Adwaita';
-	margin: 1px 2px;
-	padding: 1px;
+	margin: 0px 1px;
+	padding: 0px;
 }
 
 button.maximize.titlebutton:not(.suggested-action):not(.destructive-action):hover,
@@ -25,8 +25,9 @@ button.close.titlebutton:not(.suggested-action):not(.destructive-action):not(:ho
 }
 
 button.close.titlebutton:not(.suggested-action):not(.destructive-action) {
-	min-height: 22px;
-	min-width: 22px;
+	background-size: 14px 14px;
+	min-height: 20px;
+	min-width: 20px;
 }
 
 button.close.titlebutton:not(.suggested-action):not(.destructive-action):hover {
@@ -40,35 +41,31 @@ button.close.titlebutton:not(.suggested-action):not(.destructive-action):hover >
 button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) {
 	background-image: -gtk-icontheme("go-down-symbolic");
 	background-repeat: no-repeat no-repeat;
-	background-size: 16px 16px;
+	background-size: 14px 14px;
   background-position: center;
 	min-height: 22px;
 	min-width: 22px;
 }
 
-button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
+window:not(.maximized) button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
 	background-image: -gtk-icontheme("go-up-symbolic");
 	background-repeat: no-repeat no-repeat;
-	background-size: 16px 16px;
+	background-size: 14px 14px;
   background-position: center;
 	min-height: 22px;
 	min-width: 22px;
 }
 
-button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) > image,
+window:not(.maximized) button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) > image,
 button.minimize.titlebutton:not(.suggested-action):not(.destructive-action) > image {
   color: transparent;
 }
 
-window.maximized button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) {
-	background-size: 50% 50%;
-	min-height: 18px;
-	min-width: 18px;
-  background-image:
-    linear-gradient(to bottom right, transparent 40%, currentColor 40%, currentColor 60%, transparent 60%),
-    linear-gradient(to bottom left,  transparent 40%, currentColor 40%, currentColor 60%, transparent 60%),
-    linear-gradient(to top right,    transparent 40%, currentColor 40%, currentColor 60%, transparent 60%),
-    linear-gradient(to top left,     transparent 40%, currentColor 40%, currentColor 60%, transparent 60%);
-  background-position: top left, top right, bottom left, bottom right;
-  background-repeat: no-repeat;
+window.maximized button.maximize.titlebutton:not(.suggested-action):not(.destructive-action) > image {
+	-gtk-icon-transform: rotate(45deg) scale(1.8);
+	-gtk-icon-shadow: none;
+}
+
+window.maximized button.maximize.titlebutton:not(.suggested-action):not(.destructive-action):hover > image {
+  color: @window-bg-color;
 }

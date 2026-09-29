@@ -19,6 +19,7 @@
 
 import gi, os,  shutil, json
 from gi.repository import Gtk, Gdk, Gio, GLib, Xdp, Adw
+from pathlib import Path
 from .css_templates import no_pill_css, accent_tab_css_gs
 from .firefox_gnome_theme import FirefoxGnomeThemePlugin
 from .loading_dialog import LoadingDialog
@@ -26,6 +27,7 @@ from .loading_dialog import LoadingDialog
 settings = Xdp.Portal().get_settings()
 css_provider = Gtk.CssProvider()
 firefox_theme_plugin = FirefoxGnomeThemePlugin()
+dir = os.path.dirname(os.path.abspath(__file__))
 
 class Preferences:
     DEFAULTS = {
@@ -95,6 +97,7 @@ def create_companion_file(companion, main_file, companion_content):
         file.write(companion_content)
     companion_name = os.path.basename(companion)
     with open(main_file, "a+") as rf:
+        rf.seek(0) # Not really sure why I need this, it doesn't read correctly otherwise
         if(f"@import \"{companion_name}\";" not in rf.read()):
             with open(main_file, "a") as f:
                 f.write(f"\n@import \"{companion_name}\";")
@@ -146,7 +149,6 @@ def hex_to_rgb(hex_color):
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
     
 def parse_gtk_theme(colors, reset_func):
-    dir = os.path.dirname(os.path.abspath(__file__))
     gnome_theme_file = os.path.join(dir, "gnome-shell-template.css")
     cinnamon_theme_file = os.path.join(dir, "cinnamon-template.css")
     gnome_shell_css = open(gnome_theme_file).read()
@@ -197,7 +199,6 @@ def parse_gtk_theme(colors, reset_func):
     rgb = hex_to_rgb(colors["accent-color"])
     colors["accent-transparent"] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.5)"
 
-
     if(all_prefs["firefox-theme"]):
         firefox_theme_plugin.variables = colors
         firefox_theme_plugin.window_controls = all_prefs["window-controls"]
@@ -219,6 +220,10 @@ def parse_gtk_theme(colors, reset_func):
         gtk3_theme_file = os.path.join(GLib.getenv("HOME"), ".config", "gtk-3.0", "gtk.css")
         companion_file = os.path.join(GLib.getenv("HOME"), ".config", "gtk-3.0", "rewaita.css")
         create_companion_file(companion_file, gtk3_theme_file, gtk3_template_file)
+
+        main_file_text = Path(gtk3_theme_file).read_text()
+        new_text = main_file_text.replace(".titlebutton:", ".break-this-class:")
+        Path(gtk3_theme_file).write_text(new_text)
 
     if(all_prefs["modify-gnome-shell"] and "GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
         for item in items_to_replace:
