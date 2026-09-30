@@ -46,7 +46,19 @@ if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP" or "")):
         None
     )
 
-def reset_shell():
+if("Cinnamon" in GLib.getenv("XDG_CURRENT_DESKTOP" or "")):
+    bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
+    proxy = Gio.DBusProxy.new_sync(
+        bus,
+        Gio.DBusProxyFlags.NONE,
+        None,
+        'org.Cinnamon',
+        '/org/Cinnamon',
+        'org.Cinnamon',
+        None
+    )
+
+def reset_gnome_shell():
     proxy.call_sync("DisableExtension",
         GLib.Variant("(s)", ("user-theme@gnome-shell-extensions.gcampax.github.com",)),
         Gio.DBusCallFlags.NONE, -1, None)
@@ -54,6 +66,16 @@ def reset_shell():
     proxy.call_sync("EnableExtension",
         GLib.Variant("(s)", ("user-theme@gnome-shell-extensions.gcampax.github.com",)),
         Gio.DBusCallFlags.NONE, -1, None)
+
+def reset_cinnamon():
+    # Dummy function, likely doesn't work rn
+    proxy.call_sync(
+        "RestartCinnamon",
+        GLib.Variant("(b)", (True,)),
+        Gio.DBusCallFlags.NONE,
+        -1,
+        None
+    )
 
 gtk3_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-3.0")
 gtk4_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-4.0")
@@ -147,7 +169,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
             extra_css_string += item
         extras = self.window_control_css + extra_css_string
         if(theme_name == "default"):
-            set_to_default(gtk4_config_dir, theme_type, reset_shell, [extras, self.window_control], self.modify_gtk3_theme)
+            set_to_default(gtk4_config_dir, theme_type, reset_gnome_shell, reset_cinnamon, [extras, self.window_control], self.modify_gtk3_theme)
             return
 
         theme_file = os.path.join(self.data_dir, theme_type, theme_name)
@@ -199,7 +221,8 @@ class RewaitaWindow(Adw.ApplicationWindow):
         add_css_provider(open(theme_file).read() + extras, (accent_color, accent_fg))
         parse_gtk_theme(
             colors,
-            reset_shell
+            reset_gnome_shell,
+            reset_cinnamon
         )
         add_gtk3_window_controls(self.window_control, "")
 

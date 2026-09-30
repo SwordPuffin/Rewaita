@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import gi, os, re
-from gi.repository import Gtk, Adw, Gdk, GLib
+from gi.repository import Gtk, Adw, Gdk, Gio, GLib
 from fortune import fortune
 from .wallpaper_dialog import WallpaperDialog
 
@@ -110,7 +110,8 @@ class ThemePage(Gtk.Box):
 
         top_box = Gtk.Box(hexpand=True, halign=Gtk.Align.CENTER, margin_top=12, spacing=8)
         help_button = Gtk.Button(label=_("User Guide"), valign=Gtk.Align.CENTER, vexpand=True, css_classes=["pill", "suggested-action"])
-        help_button.set_action_name("app.guide")
+        # help_button.set_action_name("app.guide")
+        help_button.connect("clicked", lambda d: Gio.AppInfo.launch_default_for_uri("https://github.com/SwordPuffin/Rewaita/wiki", None))
         top_box.append(help_button)
 
         image_button = Gtk.Button(label=_("Tint Wallpaper"), valign=Gtk.Align.CENTER, vexpand=True, css_classes=["pill", "suggested-action"])

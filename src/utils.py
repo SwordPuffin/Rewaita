@@ -148,7 +148,7 @@ def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
     
-def parse_gtk_theme(colors, reset_func):
+def parse_gtk_theme(colors, reset_gnome, reset_cinnamon):
     gnome_theme_file = os.path.join(dir, "gnome-shell-template.css")
     cinnamon_theme_file = os.path.join(dir, "cinnamon-template.css")
     gnome_shell_css = open(gnome_theme_file).read()
@@ -242,7 +242,7 @@ def parse_gtk_theme(colors, reset_func):
         with open(g_file, "w") as f:
             f.write(gnome_shell_css)
 
-        reset_func()
+        reset_gnome()
 
     if(all_prefs["modify-cinnamon-shell"] and "Cinnamon" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
         cinnamon_theme_dir = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "cinnamon")
@@ -269,7 +269,9 @@ def parse_gtk_theme(colors, reset_func):
         with open(c_file, "w") as f:
             f.write(cinnamon_css)
 
-def set_to_default(gtk4_config_dir, theme_type, reset_func, extras, modify_gtk3_theme):
+        reset_cinnamon()
+
+def set_to_default(gtk4_config_dir, theme_type, reset_gnome, extras, modify_gtk3_theme):
     with open(os.path.join(gtk4_config_dir, "gtk.css"), "w") as file:
         file.write(extras[0])
 
@@ -286,7 +288,7 @@ def set_to_default(gtk4_config_dir, theme_type, reset_func, extras, modify_gtk3_
         add_gtk3_window_controls(extras[1], gtk_css)
         
     if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
-        reset_func()
+        reset_gnome()
 
 def open_toast(window, message):
     window.toast_overlay.dismiss_all()
