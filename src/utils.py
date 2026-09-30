@@ -271,13 +271,17 @@ def parse_gtk_theme(colors, reset_gnome, reset_cinnamon):
 
         reset_cinnamon()
 
-def set_to_default(gtk4_config_dir, theme_type, reset_gnome, extras, modify_gtk3_theme):
+def set_to_default(gtk4_config_dir, theme_type, reset_gnome, reset_cinnamon, extras, modify_gtk3_theme):
     with open(os.path.join(gtk4_config_dir, "gtk.css"), "w") as file:
         file.write(extras[0])
 
     gnome_shell_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
     if(os.path.exists(os.path.join(gnome_shell_path, "gnome-shell.css"))):
         os.remove(os.path.join(gnome_shell_path, "gnome-shell.css"))
+
+    cinnamon_shell_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "cinnamon")
+    if(os.path.exists(os.path.join(cinnamon_shell_path, "cinnamon.css"))):
+        os.remove(os.path.join(cinnamon_shell_path, "cinnamon.css"))
 
     gtk_file = os.path.join(dir, f"default-{theme_type}.css")
     gtk_css = open(gtk_file).read()
@@ -289,6 +293,9 @@ def set_to_default(gtk4_config_dir, theme_type, reset_gnome, extras, modify_gtk3
         
     if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
         reset_gnome()
+
+    if("Cinnamon" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+        reset_cinnamon()
 
 def open_toast(window, message):
     window.toast_overlay.dismiss_all()
