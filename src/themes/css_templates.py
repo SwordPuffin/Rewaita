@@ -210,7 +210,7 @@ accent_tab_css_gtk4 = """
 # Used in firefox_gnome_theme.py
 
 DEFAULT_TEMPLATE = """
-:root {{
+:root, window {{
   --window-bg-color:   {window-bg-color};
   --window-fg-color:   {window-fg-color};
   --view-bg-color:     {view-bg-color};
@@ -235,6 +235,11 @@ DEFAULT_TEMPLATE = """
   --purple-1:          {purple-1};
   --purple-2:          {purple-2};
   --accent-color:      {accent-color};
+  --accent-fg-color:   {accent-fg-color};
+}}
+
+*:not(.footer-button, .footer-button *, .text-link, .titlebar-button *) {{
+    color: var(--window-fg-color) !important;
 }}
 
 #main-window,
@@ -330,6 +335,10 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 #sidebar-main > * #tabs-newtab-button:hover,
 #sidebar-main > * .tabs-newtab-button:hover {{
   background-color: var(--dark-1) !important;
+}}
+
+.button-background.labelled {{
+    background-color: var(--headerbar-bg-color) !important;
 }}
 
 #urlbar,
@@ -510,11 +519,8 @@ scrollbar thumb:hover {{
   background-color: var(--card_fg_color) !important;
 }}
 
-#urlbar-results,
-.urlbarView,
 .urlbar-background,
-.urlbarView-body-inner,
-.urlbarView-body-outer {{
+.urlbarView-background {{
   background-color: var(--card-bg-color) !important;
   border-color: var(--card-bg-color) !important;
 }}
@@ -565,6 +571,52 @@ popupnotification {{
 #PopupAutoComplete {{
   --panel-background-color: var(--window-bg-color) !important;
   --panel-border-color: transparent !important;
+}}
+
+#tab-preview-panel {{
+  --panel-background-color: var(--window-bg-color) !important;
+  color: var(--window-fg-color) !important;
+}}
+
+#editBMPanel_namePicker,
+#editBMPanel_tagsField {{
+  border: none !important;
+  background-color: var(--card-bg-color) !important;
+}}
+
+#editBMPanel_folderMenuList,
+#editBMPanel_foldersExpander,
+#editBMPanel_tagsSelectorExpander {{
+  background-color: var(--card-bg-color) !important;
+  border: none !important;
+}}
+
+#editBMPanel_folderTree,
+#editBMPanel_tagsSelector {{
+  appearance: none !important;
+  background-color: var(--card-bg-color) !important;
+  border: none !important;
+}}
+
+#customization-content-container {{
+    background-color: var(--window-bg-color) !important;
+}}
+
+#customization-panel-container .panel-arrowcontent, #customization-footer {{
+    background-color: var(--card-bg-color) !important;
+}}
+
+.footer-button, .footer-button * {{
+   &:not([disabled]) {{
+     &[default], &.primary {{
+        background-color: var(--accent-color) !important;
+        color: var(--accent-fg-color) !important;
+     }}
+  }}
+}}
+
+.text-link {{
+    color: var(--accent-color) !important;
 }}
 """
 
@@ -821,8 +873,8 @@ BREEZE_TEMPLATE = """
     border-radius: 100% !important;
     margin: 0 3px !important;
     padding: 0 !important;
-    height: 24px !important;
-    width: 24px !important;
+    height: 20px !important;
+    width: 20px !important;
     align-items: center !important;
     justify-content: center !important;
     transition: background-color 0.15s ease !important;
@@ -878,8 +930,8 @@ BREEZE_TEMPLATE = """
     -moz-context-properties: fill, fill-opacity, stroke, stroke-width !important;
     fill: var(--window-fg-color) !important;
     color: transparent !important;
-    width: 13px !important;
-    height: 13px !important;
+    width: 14px !important;
+    height: 14px !important;
   }}
 
     &:not([disabled]):hover > image {{

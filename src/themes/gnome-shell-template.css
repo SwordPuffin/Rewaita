@@ -806,10 +806,34 @@ StEntry:focus {
   background-color: @card-bg-color;
 }
 
-.modal-dialog .modal-dialog-button-box .modal-dialog-button:hover, .lg-obj-inspector-button:hover, #LookingGlassDialog > #Toolbar .lg-toolbar-button:hover, .candidate-page-button:hover, .icon-button.flat:hover, .message .message-header .flat.message-expand-button:hover,
+.modal-dialog .modal-dialog-button-box .modal-dialog-button:hover, .lg-obj-inspector-button:hover, #LookingGlassDialog > #Toolbar .lg-toolbar-button:hover, .icon-button.flat:hover, .message .message-header .flat.message-expand-button:hover,
 .message .message-header .flat.message-close-button:hover, .message-notification-group .flat.message-collapse-button:hover, .button.flat:hover, .popup-menu .button:hover {
   color: @accent-fg-color;
   background-color: @accent-color;
+}
+
+.candidate-popup-text, .candidate-index {
+  color: @window-fg-color;
+}
+
+.candidate-popup-content {
+  color: @window-fg-color;
+  background-color: @window-bg-color;
+  border: 2px solid @border-color;
+}
+
+.candidate-box:hover {
+  color: @window-fg-color;
+  background-color: @card-bg-color;
+}
+
+.candidate-box:selected, .candidate-box:selected > .candidate-index {
+  color: @accent-fg-color;
+  background-color: @accent-color;
+}
+
+.candidate-page-button:hover {
+  background-color: @headerbar-bg-color;
 }
 
 .modal-dialog {

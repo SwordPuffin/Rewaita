@@ -322,6 +322,7 @@ def delete_theme(button, window):
     dialog.present(window)
     
 def edit_items(action, _, button, window, stack):
+    window.delete_button.set_sensitive(button.has_css_class("success"))
     if(button.has_css_class("success")):
         button.remove_css_class("success")
         for flowbox in [window.light_flowbox, window.dark_flowbox]:
@@ -349,6 +350,7 @@ def edit_items(action, _, button, window, stack):
                 child.connect("clicked", window.custom_page.edit_theme, child.path, child.theme, child.theme_type, stack, button)
 
 def delete_items(action, _, button, window):
+    window.edit_button.set_sensitive(button.has_css_class("destructive-action"))
     if(button.has_css_class("destructive-action")):
         button.remove_css_class("destructive-action")
         for flowbox in [window.light_flowbox, window.dark_flowbox]:
