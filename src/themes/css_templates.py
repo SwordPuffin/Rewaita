@@ -337,10 +337,6 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
   background-color: var(--dark-1) !important;
 }}
 
-.button-background.labelled {{
-    background-color: var(--headerbar-bg-color) !important;
-}}
-
 #urlbar,
 #urlbar-background {{
   background-color: var(--card-bg-color) !important;
