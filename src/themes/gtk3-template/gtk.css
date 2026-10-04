@@ -418,6 +418,10 @@ row:selected label {
   color: @card-fg-color;
 }
 
+row {
+	background-color: @card-bg-color;
+}
+
 /* Sidebars */
 .sidebar, list.sidebar, .navigation-sidebar {
   background-color: @sidebar-bg-color;
