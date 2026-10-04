@@ -147,7 +147,23 @@ def rgb_to_hex(rgb):
 def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
-    
+
+def hot_reload(win):
+    settings = Gio.Settings.new("org.gnome.desktop.interface")
+    current = "prefer-dark" if win.pref == 1 else "prefer-light"
+    opposite = "prefer-light" if win.pref == 1 else "prefer-dark"
+
+    settings.set_string("color-scheme", opposite)
+    Gio.Settings.sync()
+    settings.set_string("color-scheme", current)
+    Gio.Settings.sync()
+
+    def finish():
+        win.reloading = False
+        return False
+
+    GLib.timeout_add(3000, finish)
+
 def parse_gtk_theme(colors, reset_gnome, reset_cinnamon):
     gnome_theme_file = os.path.join(dir, "gnome-shell-template.css")
     cinnamon_theme_file = os.path.join(dir, "cinnamon-template.css")

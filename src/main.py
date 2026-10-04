@@ -118,6 +118,8 @@ class RewaitaApplication(Adw.Application):
         self.settings.connect("changed", self.on_settings_changed, win)
 
     def on_settings_changed(self, settings, namespace, key, value, win):
+        if(win.reloading):
+            return
         if(namespace == "org.freedesktop.appearance" and key == "color-scheme" or namespace == "org.gnome.desktop.interface" and key == "accent-color"):
             win.on_theme_selected()
 

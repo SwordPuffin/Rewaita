@@ -238,8 +238,12 @@ DEFAULT_TEMPLATE = """
   --accent-fg-color:   {accent-fg-color};
 }}
 
-*:not(.footer-button, .footer-button *, .text-link, .titlebar-button *) {{
+*:not(.footer-button, .footer-button *, .text-link, .titlebar-button *, separator) {{
     color: var(--window-fg-color) !important;
+}}
+
+separator {{
+    color: var(--card-bg-color) !important;
 }}
 
 #main-window,
@@ -255,7 +259,7 @@ DEFAULT_TEMPLATE = """
 }}
 
 #input:not([type="checkbox"]) {{
-  background-color: var(--card-bg-color) !important;
+  background-color: var(--headerbar-bg-color) !important;
   border: none !important;
   outline: none !important;
 }}
@@ -563,11 +567,6 @@ popupnotification {{
   outline-color: var(--card-bg-color) !important;
 }}
 
-.popup-notification-primary-button {{
-  background-color: var(--accent-color) !important;
-  color: var(--window-bg-color) !important;
-}}
-
 #PopupAutoComplete {{
   --panel-background-color: var(--window-bg-color) !important;
   --panel-border-color: transparent !important;
@@ -606,12 +605,17 @@ popupnotification {{
     background-color: var(--card-bg-color) !important;
 }}
 
-.footer-button, .footer-button * {{
-   &:not([disabled]) {{
-     &[default], &.primary {{
-        background-color: var(--accent-color) !important;
-        color: var(--accent-fg-color) !important;
-     }}
+.footer-button:not([disabled]) {{
+  &[default], &.primary {{
+    background-color: var(--accent-color) !important;
+    color: var(--accent-fg-color) !important;
+    border-radius: 999px !important;
+    border-color: transparent !important;
+
+    * {{
+      background: transparent !important;
+      color: inherit !important;
+    }}
   }}
 }}
 

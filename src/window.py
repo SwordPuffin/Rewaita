@@ -42,8 +42,7 @@ if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP" or "")):
         None,
         'org.gnome.Shell.Extensions',
         '/org/gnome/Shell/Extensions',
-        'org.gnome.Shell.Extensions',
-        None
+        'org.gnome.Shell.Extensions'
     )
 
 if("Cinnamon" in GLib.getenv("XDG_CURRENT_DESKTOP" or "")):
@@ -54,8 +53,7 @@ if("Cinnamon" in GLib.getenv("XDG_CURRENT_DESKTOP" or "")):
         None,
         'org.Cinnamon',
         '/org/Cinnamon',
-        'org.Cinnamon',
-        None
+        'org.Cinnamon'
     )
 
 def reset_gnome_shell():
@@ -68,7 +66,6 @@ def reset_gnome_shell():
         Gio.DBusCallFlags.NONE, -1, None)
 
 def reset_cinnamon():
-    # Dummy function, likely doesn't work rn
     proxy.call_sync(
         "RestartCinnamon",
         GLib.Variant("(b)", (True,)),
@@ -97,6 +94,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
     light_theme = ""
     dark_theme = ""
     pref = 0
+    reloading = False
     data_dir = GLib.get_user_data_dir()
 
     def __init__(self, **kwargs):
@@ -154,6 +152,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
             self.edit_button.set_visible(True)
 
     def on_theme_selected(self):
+        self.reloading = True
         self.pref = read_color_scheme(self.settings)
         if(self.pref == 1):
             theme_name = self.dark_theme
@@ -225,6 +224,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
             reset_cinnamon
         )
         add_gtk3_window_controls(self.window_control, "")
+        hot_reload(self)
 
     def on_window_control_clicked(self, button, control_file, window, flowbox):
         if(control_file != "default"):
