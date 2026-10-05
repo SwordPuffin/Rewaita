@@ -1047,3 +1047,8 @@ StEntry:focus {
 .audio-selection-device:hover {
   background-color: @card-bg-color !important;
 }
+
+.tiling-menu-container > StBoxLayout {
+  background-color: @card-bg-color !important;
+  color: @window-fg-color !important;
+}
