@@ -241,7 +241,12 @@ def parse_gtk_theme(colors, reset_gnome, reset_cinnamon):
         new_text = main_file_text.replace(".titlebutton:", ".break-this-class:")
         Path(gtk3_theme_file).write_text(new_text)
 
+    card_rgb = hex_to_rgb(colors["card-bg-color"])
+    window_fg_rgb = hex_to_rgb(colors["card-bg-color"])
+    colors["headerbar-bg-color"] = f"rgb({(card_rgb[0] + window_fg_rgb[0]) / 2}, {(card_rgb[1] + window_fg_rgb[1]) / 2}, {(card_rgb[2] + window_fg_rgb[2]) / 2})"
+
     if(all_prefs["modify-gnome-shell"] and "GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+        colors["card-bg-color"] = f"rgba({card_rgb[0]}, {card_rgb[1]}, {card_rgb[2]}, 0.6)"
         for item in items_to_replace:
             gnome_shell_css = gnome_shell_css.replace(f"@{item}", colors[item])
 

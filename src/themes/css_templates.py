@@ -238,8 +238,9 @@ DEFAULT_TEMPLATE = """
   --accent-fg-color:   {accent-fg-color};
 }}
 
-*:not(.footer-button, .footer-button *, .text-link, .titlebar-button *, separator) {{
+*:not(.footer-button, .footer-button *, .text-link, .titlebar-button *, separator, input[type="checkbox"]) {{
     color: var(--window-fg-color) !important;
+    --toolbar-field-text-color-focus: var(window-fg-color) !important;
 }}
 
 separator {{
@@ -273,7 +274,7 @@ checkbox:not(.treenode-checkbox) > .checkbox-check {{
   appearance: none !important;
 	border: 0 !important;
 	border-radius: 6px !important;
-	background-color: var(--window-bg-color) !important;
+	background-color: var(--headerbar-bg-color) !important;
 	color: var(--window-fg-color) !important;
 	height: 20px !important;
 	width: 20px !important;
@@ -364,6 +365,15 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 
 #urlbar-input,
 .urlbar-input {{
+  color: var(--window-fg-color) !important;
+}}
+
+.urlbarView-row:hover > .urlbarView-row-inner {{
+    background-color: var(--headerbar-bg-color) !important;
+    border-radius: 12px !important;
+}}
+
+.urlbarView-row[label]::before {{
   color: var(--window-fg-color) !important;
 }}
 
@@ -621,6 +631,23 @@ popupnotification {{
 
 .text-link {{
     color: var(--accent-color) !important;
+}}
+
+#commonDialog, #commonDialogWindow {{
+    --background-color-canvas: var(--window-bg-color) !important;
+}}
+button {{
+  --button-background-color-primary: var(--card-bg-color) !important;
+  --button-background-color-primary-hover: var(--headerbar-bg-color) !important;
+  --button-background-color-hover: var(--card-bg-color) !important;
+  --button-background-color-primary-active: var(--card-bg-color) !important;
+  --button-background-color-active: var(--headerbar-bg-color) !important;
+  --button-text-color-primary-active: var(--window-fg-color) !important;
+  --button-border-color-primary: var(--accent-color) !important;
+  --button-border: var(--card-bg-color) !important;
+  --button-border-color-hover: var(--headerbar-bg-color) !important;
+  --button-text-color-primary: var(--window-fg-color) !important;
+  --focus-outline-color: var(--accent-color) !important;
 }}
 """
 

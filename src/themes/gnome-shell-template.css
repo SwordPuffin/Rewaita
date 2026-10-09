@@ -102,7 +102,8 @@
   font-weight: 300;
 }
 
-.list-search-result:hover, .list-search-result:selected, .search-provider-icon:hover, .search-section *:hover {
+.list-search-result:hover, .list-search-result:selected, .list-search-result:focus,
+.search-provider-icon:hover, .search-provider-icon:focus, .search-section *:hover {
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
   background-color: @card-bg-color;
 }
@@ -402,9 +403,9 @@ StEntry:focus {
   color: @accent-fg-color !important;
 }
 
-.quick-toggle-has-menu .quick-toggle-separator {
-  background-color: @headerbar-bg-color !important;
-  opacity: 0.1 !important;
+.quick-toggle-has-menu, .quick-toggle-has-menu .quick-toggle-separator {
+  background-color: transparent !important;
+  /* opacity: 0.1 !important; */
 }
 
 .quick-toggle-has-menu .quick-toggle-menu-button {
@@ -703,6 +704,7 @@ StEntry:focus {
 .events-button {
   color: @window-fg-color;
   background-color: @card-bg-color;
+  border: none !important;
 }
 
 .world-clocks-button:hover,
@@ -768,6 +770,7 @@ StEntry:focus {
 
 .message {
   background-color: @card-bg-color;
+  border: none !important;
 }
 
 .message:second-in-stack {
