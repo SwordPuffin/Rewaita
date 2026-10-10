@@ -8,7 +8,7 @@ class PrefPage(Gtk.Box):
     def __init__(self, win):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, valign=Gtk.Align.CENTER, spacing=32, margin_start=12, margin_end=12)
 
-        if(not "GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+        if not ("GNOME" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
             self.append(Adw.Clamp(maximum_size=800, child=AccentBox(win)))
         self.append(OptionsBox(win))
         prefs_page = Adw.PreferencesGroup()
@@ -82,3 +82,4 @@ class PrefPage(Gtk.Box):
                 reset_shell()
         else:
             win.on_theme_selected()
+
