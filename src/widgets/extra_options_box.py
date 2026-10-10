@@ -106,7 +106,7 @@ class OptionsBox(Adw.PreferencesGroup):
 
         pref = Preferences()
         for key, label, subtitle, css in options:
-            if(key == "light-text" and not "GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+            if key == "light-text" and not ("GNOME" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
                 break
 
             active = pref.get(key)

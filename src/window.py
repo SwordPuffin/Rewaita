@@ -34,7 +34,7 @@ def read_color_scheme(settings):
     except:
         return 1
 
-if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP" or "")):
+if "GNOME" in (GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
     bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
     proxy = Gio.DBusProxy.new_sync(
         bus,
@@ -45,7 +45,7 @@ if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP" or "")):
         'org.gnome.Shell.Extensions'
     )
 
-if("Cinnamon" in GLib.getenv("XDG_CURRENT_DESKTOP" or "")):
+if "Cinnamon" in (GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
     bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
     proxy = Gio.DBusProxy.new_sync(
         bus,
