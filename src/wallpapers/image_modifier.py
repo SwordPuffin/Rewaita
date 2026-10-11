@@ -147,7 +147,7 @@ def make_new_image(parent, file_path):
         return output_path
 
     def on_wallpaper_ready(output_path):
-        if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP" or "")):
+        if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
             top = XdpGtk4.parent_new_gtk(parent)
             portal.set_wallpaper(
                 top,
