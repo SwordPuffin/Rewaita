@@ -15,7 +15,8 @@ install_data(
 actions_dir = 'hicolor' / 'scalable' / 'actions'
 actions_icons = [
   actions_dir / 'hammer-symbolic.svg',
-  actions_dir / 'brush-symbolic.svg'
+  actions_dir / 'brush-symbolic.svg',
+  actions_dir / 'reload-symbolic.svg'
 ]
 
 install_data(
