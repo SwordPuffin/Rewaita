@@ -34,7 +34,7 @@ def read_color_scheme(settings):
     except:
         return 1
 
-if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+if("GNOME" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
     bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
     proxy = Gio.DBusProxy.new_sync(
         bus,
@@ -45,7 +45,7 @@ if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
         'org.gnome.Shell.Extensions'
     )
 
-if("Cinnamon" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+if("Cinnamon" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
     bus = Gio.bus_get_sync(Gio.BusType.SESSION, None)
     proxy = Gio.DBusProxy.new_sync(
         bus,
@@ -74,8 +74,6 @@ def reset_cinnamon():
         None
     )
 
-gtk3_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-3.0")
-gtk4_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-4.0")
 gnome_shell_dir = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes")
 
 @Gtk.Template(resource_path='/io/github/swordpuffin/rewaita/window.ui')
@@ -100,10 +98,10 @@ class RewaitaWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        css_provider = Gtk.CssProvider()
-        css_provider.load_from_data(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "styles.css")).read())
+        base_css_provider = Gtk.CssProvider()
+        base_css_provider.load_from_data(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "styles.css")).read())
         Gtk.StyleContext.add_provider_for_display(
-            Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
+            Gdk.Display.get_default(), base_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
         )
 
         #Makes necessary directories
@@ -168,16 +166,17 @@ class RewaitaWindow(Adw.ApplicationWindow):
             extra_css_string += item
         extras = self.window_control_css + extra_css_string
         if(theme_name == "default"):
-            set_to_default(gtk4_config_dir, theme_type, reset_gnome_shell, reset_cinnamon, [extras, self.window_control], self.modify_gtk3_theme)
+            set_to_default(reset_gnome_shell, reset_cinnamon)
+            open_toast(self, _("Theme has been reset to default"))
             return
 
         theme_file = os.path.join(self.data_dir, theme_type, theme_name)
         self.controls.set_css_classes([self.window_control])
 
-        try: # I'd rather it just not do anything than fail, it's this stupid symlink system I have going on
+        try:
             gtk_css = open(theme_file).read()
         except FileNotFoundError:
-            print(f"Could not find: {theme_file}")
+            print("Theme not found")
             return
         
         open_toast(self, _("Active Theme Set To: ") + theme_name.replace(".css", ""))
@@ -206,9 +205,8 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
         try:
             # Uses a companion file
-            companion = os.path.join(gtk4_config_dir, "rewaita.css")
             main_file = os.path.join(gtk4_config_dir, "gtk.css")
-            create_companion_file(companion, main_file, gtk_css + extras)
+            create_companion_file(main_file, gtk_css + extras)
 
             # Resolves a conflict with the window controls not changing with the companion file
             main_file_text = Path(main_file).read_text()
@@ -217,13 +215,13 @@ class RewaitaWindow(Adw.ApplicationWindow):
         except Exception as e:
             print(f"Error moving file: {e}")
 
-        add_css_provider(open(theme_file).read() + extras, (accent_color, accent_fg))
+        add_css_provider(gtk_css + extras, (accent_color, accent_fg))
         parse_gtk_theme(
             colors,
+            self.window_control,
             reset_gnome_shell,
             reset_cinnamon
         )
-        add_gtk3_window_controls(self.window_control, "")
         hot_reload(self)
 
     def on_window_control_clicked(self, button, control_file, window, flowbox):

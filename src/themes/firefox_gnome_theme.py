@@ -133,7 +133,7 @@ class FirefoxGnomeThemePlugin():
                                             f.write(pref_text)
 
                                 companion_text = DEFAULT_TEMPLATE.format(**self.variables) + f"\n{window_control_map[self.window_controls].format(**self.variables)}\n{extra_css}"
-                                create_companion_file(f"{result}/chrome/rewaitaChrome.css", f"{result}/chrome/userChrome.css", companion_text)
+                                create_companion_file(f"{result}/chrome/userChrome.css", companion_text)
                     except OSError:
                         pass
             except OSError:

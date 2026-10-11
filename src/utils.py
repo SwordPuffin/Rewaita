@@ -28,6 +28,8 @@ settings = Xdp.Portal().get_settings()
 css_provider = Gtk.CssProvider()
 firefox_theme_plugin = FirefoxGnomeThemePlugin()
 dir = os.path.dirname(os.path.abspath(__file__))
+gtk3_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-3.0")
+gtk4_config_dir = os.path.join(os.path.expanduser("~/.config"), "gtk-4.0")
 
 class Preferences:
     DEFAULTS = {
@@ -92,15 +94,27 @@ class Preferences:
             self.make_file()
             return dict(self.DEFAULTS)
 
-def create_companion_file(companion, main_file, companion_content):
-    with open(companion, "w") as file:
-        file.write(companion_content)
-    companion_name = os.path.basename(companion)
-    with open(main_file, "a+") as rf:
-        rf.seek(0) # Not really sure why I need this, it doesn't read correctly otherwise
-        if(f"@import \"{companion_name}\";" not in rf.read()):
-            with open(main_file, "a") as f:
-                f.write(f"\n@import \"{companion_name}\";")
+def create_companion_file(main_file, companion_content):
+    start = "/* REWAITA CSS BEGINS HERE, ANYTHING IN THIS SECTION WILL BE OVERWRITTEN*/"
+    end = "/* REWAITA CSS ENDS HERE, ANYTHING AFTER THIS WILL NOT BE OVERWRITTEN*/"
+
+    # Touch the file if it doesn't exist
+    open(main_file, "a").close()
+
+    with open(main_file, "w+") as file:
+        content = file.read()
+        section = f"{start}\n{companion_content}\n{end}"
+
+        if(start in content and end in content):
+            before, rest = content.split(start, 1)
+            _, after = rest.split(end, 1)
+            content = before + section + after
+        else:
+            content = content.rstrip() + f"\n\n{section}\n"
+
+        file.seek(0)
+        file.write(content)
+        file.truncate()
 
 def get_accent_color(palette, win):
     accent_map = {
@@ -113,11 +127,18 @@ def get_accent_color(palette, win):
     else:
         accent_fg = "#222222"
 
-    if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+    if("GNOME" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
         accent = settings.read_value("org.gnome.desktop.interface", "accent-color")
-        return (palette[accent_map[str(accent)]], accent_fg)
+        return_val = str(accent)
     else:
-        return (palette[accent_map[win.accent]], accent_fg)
+        return_val = win.accent
+
+    try:
+        return (palette[accent_map[return_val]], accent_fg)
+    except:
+        return (f"var(--{return_val})", accent_fg)
+
+
 
 def add_css_provider(css, accent_colors):
     Gtk.StyleContext.remove_provider_for_display(Gdk.Display.get_default(), css_provider)
@@ -129,16 +150,6 @@ def add_css_provider(css, accent_colors):
     Gtk.StyleContext.add_provider_for_display(
         Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
     )
-
-def add_gtk3_window_controls(window_controls, gtk_css):
-    if(window_controls != "default"):
-        window_control_file = os.path.join(dir, "window-controls", "gtk3", window_controls + ".css")
-        with open(window_control_file, "r") as wcf:
-            css = wcf.read()
-    else:
-        css = ""
-    with open(os.path.join(os.path.expanduser("~/.config"), "gtk-3.0", "rewaita.css"), "a") as file:
-        file.write(gtk_css + css)
 
 def rgb_to_hex(rgb):
     r, g, b = (int(round(max(0, min(255, c)))) for c in rgb)
@@ -164,7 +175,7 @@ def hot_reload(win):
 
     GLib.timeout_add(3000, finish)
 
-def parse_gtk_theme(colors, reset_gnome, reset_cinnamon):
+def parse_gtk_theme(colors, window_control, reset_gnome, reset_cinnamon):
     gnome_theme_file = os.path.join(dir, "gnome-shell-template.css")
     cinnamon_theme_file = os.path.join(dir, "cinnamon-template.css")
     gnome_shell_css = open(gnome_theme_file).read()
@@ -230,12 +241,16 @@ def parse_gtk_theme(colors, reset_gnome, reset_cinnamon):
         for color in colors.keys():
             gtk3_template_file = gtk3_template_file.replace(f"@{color}", colors[color])
 
+        if(window_control != "default"):
+            window_control_file = os.path.join(dir, "window-controls", "gtk3", window_control + ".css")
+            with open(window_control_file, "r") as wcf:
+                gtk3_template_file += wcf.read()
+
         if(all_prefs["sharp"]):
             gtk3_template_file += f"\n\n* {{border-radius: 0px;}}\n\n"
 
         gtk3_theme_file = os.path.join(GLib.getenv("HOME"), ".config", "gtk-3.0", "gtk.css")
-        companion_file = os.path.join(GLib.getenv("HOME"), ".config", "gtk-3.0", "rewaita.css")
-        create_companion_file(companion_file, gtk3_theme_file, gtk3_template_file)
+        create_companion_file(gtk3_theme_file, gtk3_template_file)
 
         main_file_text = Path(gtk3_theme_file).read_text()
         new_text = main_file_text.replace(".titlebutton:", ".break-this-class:")
@@ -245,7 +260,7 @@ def parse_gtk_theme(colors, reset_gnome, reset_cinnamon):
     window_fg_rgb = hex_to_rgb(colors["card-bg-color"])
     colors["headerbar-bg-color"] = f"rgb({(card_rgb[0] + window_fg_rgb[0]) / 2}, {(card_rgb[1] + window_fg_rgb[1]) / 2}, {(card_rgb[2] + window_fg_rgb[2]) / 2})"
 
-    if(all_prefs["modify-gnome-shell"] and "GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+    if(all_prefs["modify-gnome-shell"] and "GNOME" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
         colors["card-bg-color"] = f"rgba({card_rgb[0]}, {card_rgb[1]}, {card_rgb[2]}, 0.6)"
         for item in items_to_replace:
             gnome_shell_css = gnome_shell_css.replace(f"@{item}", colors[item])
@@ -265,7 +280,7 @@ def parse_gtk_theme(colors, reset_gnome, reset_cinnamon):
 
         reset_gnome()
 
-    if(all_prefs["modify-cinnamon-shell"] and "Cinnamon" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+    if(all_prefs["modify-cinnamon-shell"] and "Cinnamon" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
         cinnamon_theme_dir = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "cinnamon")
         os.makedirs(cinnamon_theme_dir, exist_ok=True)
         c_file = shutil.copyfile(cinnamon_theme_file, os.path.join(cinnamon_theme_dir, "cinnamon.css"))
@@ -292,30 +307,46 @@ def parse_gtk_theme(colors, reset_gnome, reset_cinnamon):
 
         reset_cinnamon()
 
-def set_to_default(gtk4_config_dir, theme_type, reset_gnome, reset_cinnamon, extras, modify_gtk3_theme):
-    with open(os.path.join(gtk4_config_dir, "gtk.css"), "w") as file:
-        file.write(extras[0])
+def clear_gtk_theme(folder):
+    folder_path = os.path.join(GLib.getenv("HOME"), ".config", folder)
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+        try:
+            if(os.path.isfile(file_path) or os.path.islink(file_path)):
+                _, ext = os.path.splitext(file_path)
+                if(ext == '.css'):
+                    os.unlink(file_path)
+            elif(os.path.isdir(file_path)):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to clear folder: ' + e)
 
-    gnome_shell_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "gnome-shell")
-    if(os.path.exists(os.path.join(gnome_shell_path, "gnome-shell.css"))):
-        os.remove(os.path.join(gnome_shell_path, "gnome-shell.css"))
+def clear_shell_theme(folder):
+    folder_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", folder)
+    if(os.path.exists(folder_path)):
+        shutil.rmtree(folder_path)
 
-    cinnamon_shell_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", "cinnamon")
-    if(os.path.exists(os.path.join(cinnamon_shell_path, "cinnamon.css"))):
-        os.remove(os.path.join(cinnamon_shell_path, "cinnamon.css"))
+def set_to_default(reset_gnome, reset_cinnamon):
+    clear_gtk_theme("gtk-3.0")
+    clear_gtk_theme("gtk-4.0")
+    clear_shell_theme("gnome-shell")
+    clear_shell_theme("cinnamon")
 
-    gtk_file = os.path.join(dir, f"default-{theme_type}.css")
-    gtk_css = open(gtk_file).read()
-    add_css_provider(gtk_css + extras[0], None)
+    # create_companion_file(os.path.join(gtk3_config_dir, "gtk.css"), extras)
+    # create_companion_file(os.path.join(gtk4_config_dir, "gtk.css"), extras)
+    # if(window_control != "default"):
+    #     window_control_file = os.path.join(dir, "window-controls", "gtk3", window_control + ".css")
+    #     with open(window_control_file, "r") as wcf:
+    #         create_companion_file(os.path.join(gtk3_config_dir, "gtk.css"), wcf.read())
+
+
+    add_css_provider("", None)
     firefox_theme_plugin.reset()
 
-    if(modify_gtk3_theme):
-        add_gtk3_window_controls(extras[1], gtk_css)
-        
-    if("GNOME" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+    if("GNOME" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
         reset_gnome()
 
-    if("Cinnamon" in GLib.getenv("XDG_CURRENT_DESKTOP") or ""):
+    if("Cinnamon" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
         reset_cinnamon()
 
 def open_toast(window, message):
