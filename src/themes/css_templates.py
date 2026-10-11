@@ -238,12 +238,14 @@ DEFAULT_TEMPLATE = """
   --accent-fg-color:   {accent-fg-color};
 }}
 
-*:not(.footer-button, .footer-button *, .text-link, .titlebar-button *, separator, input[type="checkbox"]) {{
+*:not(.footer-button, .footer-button *, .text-link,
+      .titlebar-button *, separator, input[type="checkbox"],
+      menuseparator, toolbarseparator, .urlbarView-url) {{
     color: var(--window-fg-color) !important;
     --toolbar-field-text-color-focus: var(window-fg-color) !important;
 }}
 
-separator {{
+separator, toolbarseparator, menuseparator {{
     color: var(--card-bg-color) !important;
 }}
 
@@ -366,11 +368,6 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 #urlbar-input,
 .urlbar-input {{
   color: var(--window-fg-color) !important;
-}}
-
-.urlbarView-row:hover > .urlbarView-row-inner {{
-    background-color: var(--headerbar-bg-color) !important;
-    border-radius: 12px !important;
 }}
 
 .urlbarView-row[label]::before {{
@@ -545,7 +542,12 @@ scrollbar thumb:hover {{
 
 .urlbarView-row[selected],
 .urlbarView-row:hover {{
-  background-color: var(--dark-1) !important;
+  background-color: var(--headerbar-bg-color) !important;
+}}
+
+.urlbarView-button:hover {{
+    background-color: var(--window-fg-color) !important;
+    color: var(--window-bg-color) !important;
 }}
 
 .urlbarView-url,
