@@ -6,17 +6,25 @@
 
 #### <p align="center">Change the look of Adwaita, without the hassle.</p>
 
+
 <br>
+
+<h2 align="center">
+  <a href="https://github.com/SwordPuffin/Rewaita/wiki">Wiki</a>
+</h2>
 <div align="center">
   <a href="https://flathub.org/apps/io.github.swordpuffin.rewaita">
     <img width="200" alt="Get it on Flathub" src="https://flathub.org/api/badge?svg&locale=en"/>
-  </a>&nbsp;&nbsp;
+  </a>
+  <br/>
   <a href="https://aur.archlinux.org/packages/rewaita">
     <img width="280" alt="Unofficial AUR build" src="https://img.shields.io/aur/version/rewaita?style=for-the-badge">
-  </a>&nbsp;&nbsp;
+  </a>
+  <br/>
   <a href="https://build.opensuse.org/package/show/home:ericfrs/rewaita">
     <img width="250" alt="Zypper Package" src="https://img.shields.io/badge/openSUSE-73BA25?logo=opensuse&logoColor=white">
-  </a>&nbsp;&nbsp;
+  </a>
+  <br/>
   <a href="https://search.nixos.org/packages?channel=unstable&show=rewaita&query=adwaita">
     <img width="180" alt="NixOS Package" src="https://img.shields.io/badge/NixOS-5277C3?logo=nixos&logoColor=fff">
   </a>
