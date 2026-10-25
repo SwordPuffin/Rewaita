@@ -153,6 +153,16 @@ sudo pacman -S xdg-desktop-portal-gnome
 ```
 Then reboot.
 
+
+# 🖋️ ADW-GTK3 Support
+
+1. [Install](https://github.com/lassekongo83/adw-gtk3#how-to-use) adw-gtk3 onto your system.
+2. Set 'Adw-gtk3' as the 'legacy applications' style in GNOME Tweaks:
+<img width="835" height="624" alt="image" src="https://github.com/user-attachments/assets/a5cb212b-ceba-4186-bfe6-1f8d49c59029" />
+<br/>
+3. It should just work from there.
+
+
 # 🤝 Contributing
 
 ## Flatpak
@@ -182,4 +192,5 @@ NixOS maintainer: [Seth Flynn](https://github.com/getchoo)
 
 ## License
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
 

@@ -9,12 +9,12 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
+	"--talk-name=ca.desrt.dconf",
+	"--env=GIO_EXTRA_MODULES=/app/lib/gio/modules/",
         "--filesystem=~/.config/autostart:create",
         "--filesystem=~/.config/gtk-3.0:create",
         "--filesystem=~/.config/gtk-4.0:create",
         "--filesystem=~/.local/share/themes:create",
-        "--talk-name=ca.desrt.dconf",
-        "--env=GIO_EXTRA_MODULES=/app/lib/gio/modules/",
         "--talk-name=org.gnome.Shell.Extensions",
         "--talk-name=org.Cinnamon",
         "--filesystem=~/.local/share/gtksourceview-5:create",
@@ -37,24 +37,7 @@
         "/share/vala"
     ],
     "modules": [
-        "python3-modules.json",
-        {
-            "name": "libportal",
-            "buildsystem": "meson",
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://github.com/flatpak/libportal.git",
-                    "tag": "0.11.0",
-                    "commit": "e2e2b9545ed9464b00d5a5fd77d49d687ae4edbc",
-                    "x-checker-data": {
-                        "type": "git",
-                        "tag-pattern": "semantic"
-                    }
-                }
-            ]
-        },
-        {
+    	{
 	    "name": "dconf",
 	    "buildsystem": "meson",
 	    "config-opts": [
@@ -79,6 +62,23 @@
 		}
 	    ]
 	},
+        "python3-modules.json",
+        {
+            "name": "libportal",
+            "buildsystem": "meson",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/flatpak/libportal.git",
+                    "tag": "0.11.0",
+                    "commit": "e2e2b9545ed9464b00d5a5fd77d49d687ae4edbc",
+                    "x-checker-data": {
+                        "type": "git",
+                        "tag-pattern": "semantic"
+                    }
+                }
+            ]
+        },
         {
             "name": "rewaita",
             "builddir": true,
