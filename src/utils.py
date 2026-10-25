@@ -19,7 +19,6 @@
 
 import gi, os,  shutil, json
 from gi.repository import Gtk, Gdk, Gio, GLib, Xdp, Adw
-from pathlib import Path
 from .css_templates import no_pill_css, accent_tab_css_gs
 from .firefox_gnome_theme import FirefoxGnomeThemePlugin
 from .loading_dialog import LoadingDialog
@@ -95,26 +94,31 @@ class Preferences:
             return dict(self.DEFAULTS)
 
 def create_companion_file(main_file, companion_content):
-    start = "/* REWAITA CSS BEGINS HERE, ANYTHING IN THIS SECTION WILL BE OVERWRITTEN*/"
-    end = "/* REWAITA CSS ENDS HERE, ANYTHING AFTER THIS WILL NOT BE OVERWRITTEN*/"
+    directory = os.path.dirname(main_file) or "."
+    base, ext = os.path.splitext(main_file)
 
-    # Touch the file if it doesn't exist
-    open(main_file, "a").close()
+    persistent_file = f"{base}-persistant{ext}"
+    persistent_name = os.path.basename(persistent_file)
+    generated_file = os.path.join(directory, "rewaita.css")
+    generated_name = os.path.basename(generated_file)
 
-    with open(main_file, "w+") as file:
-        content = file.read()
-        section = f"{start}\n{companion_content}\n{end}"
+    os.makedirs(directory, exist_ok=True)
 
-        if(start in content and end in content):
-            before, rest = content.split(start, 1)
-            _, after = rest.split(end, 1)
-            content = before + section + after
-        else:
-            content = content.rstrip() + f"\n\n{section}\n"
+    if(not os.path.exists(persistent_file)):
+        with open(persistent_file, "w") as f:
+            f.write(
+                "/* Your persistent customizations go here.\n"
+                "This file is imported by the generated stylesheet and is never overwritten. */\n"
+            )
 
-        file.seek(0)
-        file.write(content)
-        file.truncate()
+    with open(generated_file, "w") as f:
+        f.write(f"{companion_content.rstrip()}\n")
+
+    with open(main_file, "w") as f:
+        f.write(
+            f'@import url("{generated_name}");\n'
+            f'@import url("{persistent_name}");\n'
+        )
 
 def get_accent_color(palette, win):
     accent_map = {
@@ -138,8 +142,6 @@ def get_accent_color(palette, win):
     except:
         return (f"var(--{return_val})", accent_fg)
 
-
-
 def add_css_provider(css, accent_colors):
     Gtk.StyleContext.remove_provider_for_display(Gdk.Display.get_default(), css_provider)
     if(accent_colors is not None):
@@ -159,21 +161,12 @@ def hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
-def hot_reload(win):
-    settings = Gio.Settings.new("org.gnome.desktop.interface")
-    current = "prefer-dark" if win.pref == 1 else "prefer-light"
-    opposite = "prefer-light" if win.pref == 1 else "prefer-dark"
-
-    settings.set_string("color-scheme", opposite)
+def hot_reload():
+    s = Gio.Settings.new("org.gnome.desktop.a11y.interface")
+    s.set_boolean("high-contrast", True)
     Gio.Settings.sync()
-    settings.set_string("color-scheme", current)
+    s.set_boolean("high-contrast", False)
     Gio.Settings.sync()
-
-    def finish():
-        win.reloading = False
-        return False
-
-    GLib.timeout_add(3000, finish)
 
 def parse_gtk_theme(colors, window_control, reset_gnome, reset_cinnamon):
     gnome_theme_file = os.path.join(dir, "gnome-shell-template.css")
@@ -235,7 +228,8 @@ def parse_gtk_theme(colors, window_control, reset_gnome, reset_cinnamon):
 
     items_to_replace = ["window-bg-color", "window-fg-color", "card-bg-color", "headerbar-bg-color",
                         "accent-color", "border-color", "red-1", "panel-bg-color", "panel-fg-color",
-                        "overview-bg-color", "search-fg-color", "accent-transparent", "accent-fg-color"]
+                        "panel-button-bg-color", "overview-bg-color", "search-fg-color",
+                        "accent-transparent", "accent-fg-color"]
 
     if(all_prefs["modify-gtk3-theme"]):
         for color in colors.keys():
@@ -252,16 +246,13 @@ def parse_gtk_theme(colors, window_control, reset_gnome, reset_cinnamon):
         gtk3_theme_file = os.path.join(GLib.getenv("HOME"), ".config", "gtk-3.0", "gtk.css")
         create_companion_file(gtk3_theme_file, gtk3_template_file)
 
-        main_file_text = Path(gtk3_theme_file).read_text()
-        new_text = main_file_text.replace(".titlebutton:", ".break-this-class:")
-        Path(gtk3_theme_file).write_text(new_text)
-
     card_rgb = hex_to_rgb(colors["card-bg-color"])
-    window_fg_rgb = hex_to_rgb(colors["card-bg-color"])
-    colors["headerbar-bg-color"] = f"rgb({(card_rgb[0] + window_fg_rgb[0]) / 2}, {(card_rgb[1] + window_fg_rgb[1]) / 2}, {(card_rgb[2] + window_fg_rgb[2]) / 2})"
+    window_fg_rgb = hex_to_rgb(colors["window-fg-color"])
+    colors["headerbar-bg-color"] = f"rgba({int((card_rgb[0] + window_fg_rgb[0]) / 2)}, {int((card_rgb[1] + window_fg_rgb[1]) / 2)}, {int((card_rgb[2] + window_fg_rgb[2]) / 2)}, 0.2)"
 
     if(all_prefs["modify-gnome-shell"] and "GNOME" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
-        colors["card-bg-color"] = f"rgba({card_rgb[0]}, {card_rgb[1]}, {card_rgb[2]}, 0.6)"
+        # colors["card-bg-color"] = f"rgba({card_rgb[0]}, {card_rgb[1]}, {card_rgb[2]}, 0.6)"
+        colors["panel-button-bg-color"] = f"rgba({window_fg_rgb[0]}, {window_fg_rgb[1]}, {window_fg_rgb[2]}, 0.13)"
         for item in items_to_replace:
             gnome_shell_css = gnome_shell_css.replace(f"@{item}", colors[item])
 
@@ -308,18 +299,9 @@ def parse_gtk_theme(colors, window_control, reset_gnome, reset_cinnamon):
         reset_cinnamon()
 
 def clear_gtk_theme(folder):
-    folder_path = os.path.join(GLib.getenv("HOME"), ".config", folder)
-    for filename in os.listdir(folder_path):
-        file_path = os.path.join(folder_path, filename)
-        try:
-            if(os.path.isfile(file_path) or os.path.islink(file_path)):
-                _, ext = os.path.splitext(file_path)
-                if(ext == '.css'):
-                    os.unlink(file_path)
-            elif(os.path.isdir(file_path)):
-                shutil.rmtree(file_path)
-        except Exception as e:
-            print('Failed to clear folder: ' + e)
+    file_path = os.path.join(GLib.getenv("HOME"), ".config", folder, "gtk.css")
+    with open(file_path, "w") as f:
+        f.write(f"@import url(\"gtk-persistant.css\");\n")
 
 def clear_shell_theme(folder):
     folder_path = os.path.join(GLib.getenv("HOME"), ".local", "share", "themes", "rewaita", folder)
@@ -331,14 +313,6 @@ def set_to_default(reset_gnome, reset_cinnamon):
     clear_gtk_theme("gtk-4.0")
     clear_shell_theme("gnome-shell")
     clear_shell_theme("cinnamon")
-
-    # create_companion_file(os.path.join(gtk3_config_dir, "gtk.css"), extras)
-    # create_companion_file(os.path.join(gtk4_config_dir, "gtk.css"), extras)
-    # if(window_control != "default"):
-    #     window_control_file = os.path.join(dir, "window-controls", "gtk3", window_control + ".css")
-    #     with open(window_control_file, "r") as wcf:
-    #         create_companion_file(os.path.join(gtk3_config_dir, "gtk.css"), wcf.read())
-
 
     add_css_provider("", None)
     firefox_theme_plugin.reset()

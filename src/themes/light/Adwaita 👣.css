@@ -1,67 +1,67 @@
 
 :root {
   --window-bg-color: #FAFAFB;
-  --window-fg-color: #000006CC;
-  --view-bg-color: #FFFFFF;
-  --view-fg-color: #000006CC;
-  --headerbar-bg-color: #FFFFFF;
+  --window-fg-color: #000006;
+  --view-bg-color: #EBEBED;
+  --view-fg-color: #000006;
+  --headerbar-bg-color: #EBEBED;
   --headerbar-backdrop-color: var(--window-bg-color);
-  --headerbar-fg-color: #000006CC;
-  --popover-bg-color: #FFFFFF;
-  --popover-fg-color: #000006CC;
+  --headerbar-fg-color: #000006;
+  --popover-bg-color: #EBEBED;
+  --popover-fg-color: #000006;
   --dialog-bg-color: var(--window-bg-color);
-  --dialog-fg-color: #000006CC;
-  --card-bg-color: #FFFFFF;
-  --card-fg-color: #000006CC;
+  --dialog-fg-color: #000006;
+  --card-bg-color: #EBEBED;
+  --card-fg-color: #000006;
   --sidebar-bg-color: #EBEBED;
-  --sidebar-fg-color: #000006CC;
+  --sidebar-fg-color: #000006;
   --sidebar-backdrop-color: #F2F2F4;
-  --sidebar-border-color: #00000612;
+  --sidebar-border-color: #000006;
   --secondary-sidebar-bg-color: #F3F3F5;
-  --secondary-sidebar-fg-color: #000006CC;
+  --secondary-sidebar-fg-color: #000006;
   --secondary-sidebar-backdrop-color: #F6F6FA;
-  --secondary-sidebar-border-color: #00000612;
+  --secondary-sidebar-border-color: #000006;
 
-  --blue-1: #99C1F1;
-  --blue-2: #62A0EA;
+  --blue-1: #3584e4;
+  --blue-2: #2190a4;
   --blue-3: #3584E4;
   --blue-4: #1C71D8;
   --blue-5: #1A5FB4;
 
-  --green-1: #8FF0A4;
+  --green-1: #3a944a;
   --green-2: #57E389;
   --green-3: #33D17A;
   --green-4: #2EC27E;
   --green-5: #26A269;
 
-  --yellow-1: #F9F06B;
+  --yellow-1: #c88800;
   --yellow-2: #F8E45C;
   --yellow-3: #F6D32D;
   --yellow-4: #F5C211;
   --yellow-5: #E5A50A;
 
-  --red-1: #F66151;
+  --red-1: #e62d42;
   --red-2: #ED333B;
   --red-3: #E01B24;
   --red-4: #C01C28;
   --red-5: #A51D2D;
 
-  --purple-1: #DC8ADD;
-  --purple-2: #C061CB;
+  --purple-1: #d56199;
+  --purple-2: #9141ac;
   --purple-3: #9141AC;
   --purple-4: #813D9C;
   --purple-5: #613583;
 
-  --orange-1: #FFBE6F;
+  --orange-1: #ed5b00;
   --orange-2: #FFA348;
   --orange-3: #E66100;
   --orange-4: #C64600;
   --orange-5: #A64200;
 
-  --light-1: #FFFFFF;
+  --light-1: #EBEBED;
   --light-5: #DEDDDA;
 
-  --dark-1: #77767B;
+  --dark-1: #6f8396;
   --brown-1: #CDAB8F;
 }
 

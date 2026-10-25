@@ -92,7 +92,6 @@ class RewaitaWindow(Adw.ApplicationWindow):
     light_theme = ""
     dark_theme = ""
     pref = 0
-    reloading = False
     data_dir = GLib.get_user_data_dir()
 
     def __init__(self, **kwargs):
@@ -150,7 +149,6 @@ class RewaitaWindow(Adw.ApplicationWindow):
             self.edit_button.set_visible(True)
 
     def on_theme_selected(self):
-        self.reloading = True
         self.pref = read_color_scheme(self.settings)
         if(self.pref == 1):
             theme_name = self.dark_theme
@@ -204,14 +202,8 @@ class RewaitaWindow(Adw.ApplicationWindow):
         extras = "\n" + extras + f"\n@define-color accent_bg_color {accent_color};\n@define-color accent_fg_color {accent_fg};"
 
         try:
-            # Uses a companion file
             main_file = os.path.join(gtk4_config_dir, "gtk.css")
             create_companion_file(main_file, gtk_css + extras)
-
-            # Resolves a conflict with the window controls not changing with the companion file
-            main_file_text = Path(main_file).read_text()
-            new_text = main_file_text.replace(".rewaita-display", "windowcontrols")
-            Path(main_file).write_text(new_text)
         except Exception as e:
             print(f"Error moving file: {e}")
 
@@ -222,7 +214,8 @@ class RewaitaWindow(Adw.ApplicationWindow):
             reset_gnome_shell,
             reset_cinnamon
         )
-        hot_reload(self)
+
+        hot_reload()
 
     def on_window_control_clicked(self, button, control_file, window, flowbox):
         if(control_file != "default"):

@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import gi, os, re
-from gi.repository import Gtk, Adw, Gdk, Gio, GLib
+from gi.repository import Gtk, Adw, Gdk, Gio, GLib, Pango
 from fortune import fortune
 from .wallpaper_dialog import WallpaperDialog
 
@@ -49,40 +49,94 @@ def load_colors_from_css(file_path):
                 colors[name] = color.strip()
     return colors
 
-def create_color_thumbnail_button(colors, name, example_text):
-    button = Gtk.Button()
-    box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-    dots = Gtk.Label(vexpand=True, valign=Gtk.Align.END, use_markup=True)
-    dot_txt = ""
+SWATCH_KEYS = ["red-1", "orange-1", "yellow-1", "green-1", "blue-1", "dark-1", "light-1"]
 
-    keys_to_show = ["red-1", "orange-1", "yellow-1", "green-1", "blue-1", "dark-1", "light-1"]
-    for key in keys_to_show:
-        color = colors.get(key)
-        if(color):
-            dot_txt += f"<span font_size='20pt' foreground='{color}'> ● </span>"
-
-    dots.set_label(dot_txt)
-    rand = os.urandom(15).hex()
-    css_provider = Gtk.CssProvider()
-    css_provider.load_from_data(f"""
-        .background-{rand} {{
-            background-color: {colors.get("window-bg-color")};
-            color: {colors.get("window-fg-color")};
-        }}
-    """.encode())
+def add_css(css):
+    provider = Gtk.CssProvider()
+    provider.load_from_data(css.encode())
     Gtk.StyleContext.add_provider_for_display(
-        Gdk.Display.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        Gdk.Display.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
     )
-    button.add_css_class(f'background-{rand}')
 
-    example = Gtk.Label(wrap=True, margin_top=12, margin_bottom=12, hexpand=True, vexpand=True, valign=Gtk.Align.CENTER, halign=Gtk.Align.CENTER, max_width_chars=12)
-    example.set_markup(f"<i><b>{example_text}</b></i>")
-    box.prepend(example)
-    title = Gtk.Label(margin_bottom=12, margin_top=12, label=name)
-    title.set_css_classes(["monospace", "title-2"])
-    box.prepend(title)
-    box.append(dots)
-    button.set_child(box)
+def add_box(css_class, width=-1, height=-1):
+    b = Gtk.Box(halign=Gtk.Align.START, valign=Gtk.Align.CENTER)
+    b.add_css_class(css_class)
+    b.set_size_request(width, height)
+    return b
+
+
+def theme_button_css(key, colors):
+    bg = colors.get("window-bg-color", "#ffffff")
+    fg = colors.get("window-fg-color", "#000000")
+    mock = colors.get("card-bg-color", bg)
+    # accent = colors.get("accent-bg-color") or colors.get("blue-1") or fg
+    c = f"button.card-{key}"
+
+    css = f"""
+    {c}, {c}:hover, {c}:active {{ background-color: {bg}; color: {fg}; }}
+    {c} .preview {{
+        background-color: {mock};
+        border-radius: 12px;
+    }}
+    """
+    for i, k in enumerate(SWATCH_KEYS):
+        color = colors.get(k)
+        if color:
+            css += f"{c} .s{i} {{ background-color: {color}; }}\n"
+    return css
+
+def create_color_thumbnail_button(colors, name, example_text):
+    registered = set()
+    key = os.urandom(15).hex()
+    if(key not in registered):
+        add_css(theme_button_css(key, colors))
+        registered.add(key)
+
+    button = Gtk.Button()
+    button.add_css_class("theme-card")
+    button.add_css_class(f"card-{key}")
+
+    root = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+    for side in ("top", "bottom", "start", "end"):
+        getattr(root, f"set_margin_{side}")(14)
+
+    preview = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+    preview.add_css_class("preview")
+    preview.set_overflow(Gtk.Overflow.HIDDEN)
+
+    body = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=9, margin_top=11, margin_bottom=11, margin_start=12, margin_end=12)
+    quote = Gtk.Label(label=example_text, wrap=True, halign=Gtk.Align.START, max_width_chars=18)
+    body.append(quote)
+    preview.append(body)
+    root.append(preview)
+
+    title = Gtk.Label(label=name, halign=Gtk.Align.START, ellipsize=Pango.EllipsizeMode.END)
+    root.append(title)
+
+    dots = Gtk.Label(use_markup=True, halign=Gtk.Align.START)
+    dots_text = ""
+    for i, k in enumerate(SWATCH_KEYS):
+        if(colors.get(k)):
+            if(k != "red-1"):
+                dots_text += " "
+            dots_text += f"<span font_size='12pt' foreground='{colors.get(k)}'>● </span>"
+
+    dots.set_label(dots_text)
+    # bar = Gtk.Separator(height_request=4)
+    # bar.add_css_class("bar")
+    root.append(dots)
+    # root.append(bar)
+
+    button.set_child(root)
+
+    def set_selected(selected):
+        if(selected):
+            button.add_css_class("selected")
+        else:
+            button.remove_css_class("selected")
+        indicator.set_visible_child_name("picked" if selected else "idle")
+
+    button.set_selected = set_selected
     return button
 
 def symlink_all_in_dir(src, out):
@@ -108,19 +162,19 @@ class ThemePage(Gtk.Box):
     def __init__(self, parent):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=12)
 
-        top_box = Gtk.Box(hexpand=True, halign=Gtk.Align.CENTER, margin_top=12, spacing=8)
-        help_button = Gtk.Button(label=_("User Guide"), valign=Gtk.Align.CENTER, vexpand=True, css_classes=["pill", "suggested-action"])
+        topadd_box = Gtk.Box(hexpand=True, halign=Gtk.Align.CENTER, margin_top=12, spacing=8)
+        help_button = Gtk.Button(label=_("Wiki"), valign=Gtk.Align.CENTER, vexpand=True, css_classes=["pill", "suggested-action"])
         help_button.connect("clicked", lambda d: Gio.AppInfo.launch_default_for_uri("https://github.com/SwordPuffin/Rewaita/wiki", None))
-        top_box.append(help_button)
+        topadd_box.append(help_button)
 
         image_button = Gtk.Button(label=_("Tint Wallpaper"), valign=Gtk.Align.CENTER, vexpand=True, css_classes=["pill", "suggested-action"])
         image_button.connect("clicked", open_wallpaper_dialog, parent, "make_new_image")
-        top_box.append(image_button)
+        topadd_box.append(image_button)
 
         image_button = Gtk.Button(label=_("Generate Theme From Image"), halign=Gtk.Align.CENTER, css_classes=["pill", "suggested-action"])
         image_button.connect("clicked", open_wallpaper_dialog, parent, "make_new_theme")
 
-        self.append(top_box)
+        self.append(topadd_box)
         self.append(image_button)
 
         snippet = self.get_example_text()
@@ -148,11 +202,11 @@ class ThemePage(Gtk.Box):
             toggle_button.add_css_class("flat")
             toggle_button.add_css_class("circular")
 
-            title_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER, spacing=25)
+            titleadd_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER, spacing=25)
             title = Gtk.Label(label=_(theme_type.capitalize()))
             title.add_css_class("title-2")
-            title_box.append(title); title_box.append(reset_button); title_box.append(toggle_button)
-            self.append(title_box)
+            titleadd_box.append(title); titleadd_box.append(reset_button); titleadd_box.append(toggle_button)
+            self.append(titleadd_box)
 
             revealer = Gtk.Revealer(transition_type=Gtk.RevealerTransitionType.SLIDE_DOWN, transition_duration=200)
             revealer.set_reveal_child(True)
