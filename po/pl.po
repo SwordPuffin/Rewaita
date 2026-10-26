@@ -137,7 +137,7 @@ msgid "For Flatpak application support, run:"
 msgstr "Dla programów z repozytorium Flatpak uruchom:"
 
 #: src/window.py:201
-msgid "User Guide"
+msgid "Wiki"
 msgstr "Przewodnik użytkownika"
 
 #: src/window.py:260

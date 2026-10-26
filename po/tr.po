@@ -127,7 +127,7 @@ msgid "For Flatpak application support, run:"
 msgstr "Flatpak uygulama desteği için şu komutu çalıştırın:"
 
 #: src/window.py:201
-msgid "User Guide"
+msgid "Wiki"
 msgstr "Kullanım Kılavuzu"
 
 #: src/window.py:260

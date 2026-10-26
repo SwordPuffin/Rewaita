@@ -237,7 +237,7 @@ msgid "For users who swap between light/dark mode"
 msgstr "适合在浅色/深色模式之间切换的用户"
 
 #: src/widgets/theme_page.py:104 src/widgets/guide_dialog.ui:11
-msgid "User Guide"
+msgid "Wiki"
 msgstr "用户指南"
 
 #: src/widgets/theme_page.py:110

@@ -234,7 +234,7 @@ msgid "Extra Options"
 msgstr ""
 
 #: src/widgets/guide_dialog.ui:11 src/widgets/theme_page.py:106
-msgid "User Guide"
+msgid "Wiki"
 msgstr ""
 
 #: src/widgets/guide_dialog.ui:15

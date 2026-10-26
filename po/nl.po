@@ -251,7 +251,7 @@ msgid "May conflict with existing theme"
 msgstr "Let op: dit kan botsen met het bestaande thema"
 
 #: src/widgets/theme_page.py:104 src/widgets/guide_dialog.ui:11
-msgid "User Guide"
+msgid "Wiki"
 msgstr "Gebruikershandleiding"
 
 #: src/widgets/theme_page.py:110
