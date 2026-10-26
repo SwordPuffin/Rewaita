@@ -1758,20 +1758,20 @@ StScrollBar {
 .dialog .dialog-button:default {
   color: @window-fg-color; }
   .dialog .dialog-button:focus:default {
-    color: @window-fg-color;
+    color: @accent-fg-color;
     background-color: @accent-color;
     border: 1px solid @accent-color; }
   .dialog .dialog-button:hover:default {
     border: 1px solid @accent-color;
-    color: @window-fg-color;
+    color: @accent-fg-color;
     background-color: @accent-color; }
   .dialog .dialog-button:active:default {
     border: 1px solid @accent-color;
-    color: @window-fg-color;
+    color: @accent-fg-color;
     background-color: @accent-color; }
   .dialog .dialog-button:checked:default {
     border: 1px solid @accent-color;
-    color: @window-fg-color;
+    color: @accent-fg-color;
     background-color: @accent-color; }
   .dialog .dialog-button:insensitive:default {
     border-color: @card-bg-color;

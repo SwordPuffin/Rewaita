@@ -133,7 +133,7 @@
   text-shadow: none;
 }
 
-window {
+window:not(.nemo-desktop-window) {
   background-color: @theme-bg-color;
   color: @theme-fg-color;
 }
@@ -153,7 +153,8 @@ NautilusWindow.nautilus-desktop {
   background-color: transparent;
 }
 
-window.desktopwindow {
+window.desktopwindow,
+window.nemo-desktop-window {
     background-color: rgba(0, 0, 0, 0);
 }
 
@@ -186,6 +187,10 @@ headerbar, .titlebar, toolbar {
   border-bottom-color: transparent;
 }
 
+.toolbar {
+	background-color: @window-bg-color;
+}
+
 headerbar:backdrop, .titlebar:backdrop {
   background-color: @headerbar-bg-color;
   color: mix(@headerbar-fg-color, @headerbar-bg-color, 0.5);
@@ -193,6 +198,7 @@ headerbar:backdrop, .titlebar:backdrop {
 
 .titlebutton {
   border: none;
+  border-radius: 99px;
 	background-color: @card-bg-color;
 }
 

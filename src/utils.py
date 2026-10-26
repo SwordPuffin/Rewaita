@@ -249,10 +249,10 @@ def parse_gtk_theme(colors, window_control, reset_gnome, reset_cinnamon):
     card_rgb = hex_to_rgb(colors["card-bg-color"])
     window_fg_rgb = hex_to_rgb(colors["window-fg-color"])
     colors["headerbar-bg-color"] = f"rgba({int((card_rgb[0] + window_fg_rgb[0]) / 2)}, {int((card_rgb[1] + window_fg_rgb[1]) / 2)}, {int((card_rgb[2] + window_fg_rgb[2]) / 2)}, 0.2)"
+    colors["panel-button-bg-color"] = f"rgba({window_fg_rgb[0]}, {window_fg_rgb[1]}, {window_fg_rgb[2]}, 0.13)"
 
     if(all_prefs["modify-gnome-shell"] and "GNOME" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
         # colors["card-bg-color"] = f"rgba({card_rgb[0]}, {card_rgb[1]}, {card_rgb[2]}, 0.6)"
-        colors["panel-button-bg-color"] = f"rgba({window_fg_rgb[0]}, {window_fg_rgb[1]}, {window_fg_rgb[2]}, 0.13)"
         for item in items_to_replace:
             gnome_shell_css = gnome_shell_css.replace(f"@{item}", colors[item])
 

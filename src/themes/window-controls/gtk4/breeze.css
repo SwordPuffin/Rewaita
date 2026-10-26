@@ -1,5 +1,5 @@
 windowcontrols:not(.rewaita-display) > button {
-  padding: 2px;
+  padding: 1px;
 }
 
 windowcontrols:not(.rewaita-display) image:not(:hover) {
@@ -12,18 +12,18 @@ windowcontrols:not(.rewaita-display) image:hover {
 }
 
 windowcontrols:not(.rewaita-display) > button.minimize > image {
-	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
-	transform: rotate(180deg);
+	background-image: -gtk-recolor(url("minimize-symbolic.svg"));
+	/* transform: rotate(180deg); */
 	-gtk-icon-transform: scale(0);
-  background-size: 16px;
+  background-size: 19px;
 	background-position: center;
 	background-repeat: no-repeat;
 }
 
 windowcontrols:not(.rewaita-display) > button.maximize > image {
-	background-image: -gtk-icontheme("adw-expander-arrow-symbolic");
+	background-image: -gtk-recolor(url("maximize-symbolic.svg"));
 	-gtk-icon-transform: scale(0);
-  background-size: 16px;
+  background-size: 19px;
   background-position: center;
   background-repeat: no-repeat;
 }

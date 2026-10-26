@@ -22,6 +22,7 @@
   --error-fg-color: #ffffff;
 
   --headerbar-bg-color: #31363b;
+  --headerbar-backdrop-color: var(--headerbar-bg-color);
   --headerbar-fg-color: #fcfcfc;
 
   --popover-bg-color: #1b1e20;

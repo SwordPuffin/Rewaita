@@ -26,6 +26,12 @@ def flowbox_sort_func(child1: Gtk.FlowBoxChild, child2: Gtk.FlowBoxChild, _):
     button1 = child1.get_first_child()
     button2 = child2.get_first_child()
 
+    default1 = bool(getattr(button1, "default", False))
+    default2 = bool(getattr(button2, "default", False))
+
+    if(default1 != default2):
+        return 1 if default1 else -1
+
     theme1 = button1.theme.lower()
     theme2 = button2.theme.lower()
 
@@ -162,19 +168,19 @@ class ThemePage(Gtk.Box):
     def __init__(self, parent):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=12)
 
-        topadd_box = Gtk.Box(hexpand=True, halign=Gtk.Align.CENTER, margin_top=12, spacing=8)
+        top_box = Gtk.Box(hexpand=True, halign=Gtk.Align.CENTER, margin_top=12, spacing=8)
         help_button = Gtk.Button(label=_("Wiki"), valign=Gtk.Align.CENTER, vexpand=True, css_classes=["pill", "suggested-action"])
         help_button.connect("clicked", lambda d: Gio.AppInfo.launch_default_for_uri("https://github.com/SwordPuffin/Rewaita/wiki", None))
-        topadd_box.append(help_button)
+        top_box.append(help_button)
 
         image_button = Gtk.Button(label=_("Tint Wallpaper"), valign=Gtk.Align.CENTER, vexpand=True, css_classes=["pill", "suggested-action"])
         image_button.connect("clicked", open_wallpaper_dialog, parent, "make_new_image")
-        topadd_box.append(image_button)
+        top_box.append(image_button)
 
         image_button = Gtk.Button(label=_("Generate Theme From Image"), halign=Gtk.Align.CENTER, css_classes=["pill", "suggested-action"])
         image_button.connect("clicked", open_wallpaper_dialog, parent, "make_new_theme")
 
-        self.append(topadd_box)
+        self.append(top_box)
         self.append(image_button)
 
         snippet = self.get_example_text()

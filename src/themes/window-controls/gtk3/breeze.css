@@ -69,3 +69,4 @@ window.maximized button.maximize.titlebutton:not(.suggested-action):not(.destruc
 window.maximized button.maximize.titlebutton:not(.suggested-action):not(.destructive-action):hover > image {
   color: @window-bg-color;
 }
+

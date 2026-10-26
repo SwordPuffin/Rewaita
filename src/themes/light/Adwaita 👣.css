@@ -5,7 +5,7 @@
   --view-bg-color: #EBEBED;
   --view-fg-color: #000006;
   --headerbar-bg-color: #EBEBED;
-  --headerbar-backdrop-color: var(--window-bg-color);
+  --headerbar-backdrop-color: var(--headerbar-bg-color);
   --headerbar-fg-color: #000006;
   --popover-bg-color: #EBEBED;
   --popover-fg-color: #000006;

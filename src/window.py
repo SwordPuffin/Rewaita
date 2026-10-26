@@ -21,7 +21,6 @@ import os, gi, re
 gi.require_version('Xdp', '1.0')
 from gi.repository import Adw, Gdk, Gio, GLib, Gtk, Xdp
 from collections import defaultdict
-from pathlib import Path
 from .utils import *
 from .custom_theme_page import CustomPage
 from .theme_page import ThemePage
@@ -109,6 +108,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
 
         if(self.window_control != "default"):
             self.window_control_css = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", "gtk4", f"{self.window_control}.css")).read()
+
         self.portal = Xdp.Portal()
         self.settings = self.portal.get_settings()
         self.pref = read_color_scheme(self.settings)
@@ -200,6 +200,12 @@ class RewaitaWindow(Adw.ApplicationWindow):
         colors["accent-color"] = accent_color
         colors["accent-fg-color"] = accent_fg
         extras = "\n" + extras + f"\n@define-color accent_bg_color {accent_color};\n@define-color accent_fg_color {accent_fg};"
+
+        if(self.window_control == "breeze"):
+            with open(os.path.join(gtk4_config_dir, "minimize-symbolic.svg"), "w") as f:
+                f.write("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\"> <path fill=\"#bebebe\" d=\"M2.8 6.4 3.9 5.3 8 9.4 12.1 5.3 13.2 6.4 8 11.6z\"/></svg>")
+            with open(os.path.join(gtk4_config_dir, "maximize-symbolic.svg"), "w") as f:
+                f.write("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\"> <path fill=\"#bebebe\" d=\"M2.8 9.6 3.9 10.7 8 6.6 12.1 10.7 13.2 9.6 8 4.4z\"/></svg>")
 
         try:
             main_file = os.path.join(gtk4_config_dir, "gtk.css")
