@@ -34,7 +34,6 @@ class RewaitaApplication(Adw.Application):
                          resource_base_path='/io/github/swordpuffin/rewaita')
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.create_action('guide', self.on_guide_clicked)
 
         self.add_main_option(
             "background",
@@ -120,26 +119,6 @@ class RewaitaApplication(Adw.Application):
     def on_settings_changed(self, settings, namespace, key, value, win):
         if(namespace == "org.freedesktop.appearance" and key == "color-scheme" or namespace == "org.gnome.desktop.interface" and key == "accent-color"):
             win.on_theme_selected()
-
-    def on_guide_clicked(self, action, _):
-        builder = Gtk.Builder().new_from_resource('/io/github/swordpuffin/rewaita/widgets/guide_dialog.ui')
-        guide_dialog = builder.get_object("GuideDialog")
-        guide_dialog.present(parent=self.props.active_window)
-        self.clipboard = Gdk.Display.get_default().get_clipboard()
-
-        def on_copy(button, entry):
-            text = entry.get_text()
-            self.clipboard.set(text)
-
-            button.add_css_class("suggested-action")
-            def remove_success():
-                button.remove_css_class("suggested-action")
-            GLib.timeout_add(1000, remove_success)
-
-        builder.get_object("copy_button_gtk3").connect("clicked", on_copy, builder.get_object("gtk3_entry"))
-        builder.get_object("copy_button_gtk4").connect("clicked", on_copy, builder.get_object("gtk4_entry"))
-        builder.get_object("copy_button_fp").connect("clicked", on_copy, builder.get_object("fp_entry"))
-        builder.get_object("copy_button_ln").connect("clicked", on_copy, builder.get_object("ln_entry"))
 
     def on_background_response(self, portal, result):
         success = portal.request_background_finish(result)

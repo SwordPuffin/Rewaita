@@ -71,7 +71,7 @@ class FirefoxGnomeThemePlugin():
                             if result.resolve().is_dir():
                                 Path(f"{result}/chrome/firefox-gnome-theme/customChrome.css").unlink()
                         else:
-                            Path(f"{result}/chrome/rewaitaChrome.css").unlink()
+                            Path(f"{result}/chrome/rewaita.css").unlink()
                     except OSError:
                         pass
             except OSError:

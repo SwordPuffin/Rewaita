@@ -158,6 +158,8 @@ def rgb_to_hex(rgb):
     return f"#{r:02x}{g:02x}{b:02x}"
     
 def hex_to_rgb(hex_color):
+    if(hex_color.startswith("rgba")):
+        return tuple(int(x.strip()) for x in hex_color.strip("rgba()").split(",")[:3])
     hex_color = hex_color.lstrip('#')
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
