@@ -9,8 +9,8 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-	"--talk-name=ca.desrt.dconf",
-	"--env=GIO_EXTRA_MODULES=/app/lib/gio/modules/",
+		"--talk-name=ca.desrt.dconf",
+		"--env=GIO_EXTRA_MODULES=/app/lib/gio/modules/",
         "--filesystem=~/.config/autostart:create",
         "--filesystem=~/.config/gtk-3.0:create",
         "--filesystem=~/.config/gtk-4.0:create",
@@ -74,7 +74,7 @@
                     "commit": "e2e2b9545ed9464b00d5a5fd77d49d687ae4edbc",
                     "x-checker-data": {
                         "type": "git",
-                        "tag-pattern": "semantic"
+                        "tag-pattern": "^([\\d.]+)$"
                     }
                 }
             ]
