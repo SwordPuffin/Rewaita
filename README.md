@@ -25,7 +25,7 @@
     <img width="250" alt="Zypper Package" src="https://img.shields.io/badge/openSUSE-73BA25?logo=opensuse&logoColor=white">
   </a>
   <br/>
-  <a href="https://search.nixos.org/packages?channel=unstable&show=rewaita&query=adwaita">
+  <a href="https://search.nixos.org/packages?channel=unstable&show=rewaita">
     <img width="180" alt="NixOS Package" src="https://img.shields.io/badge/NixOS-5277C3?logo=nixos&logoColor=fff">
   </a>
 </div>
