@@ -175,7 +175,7 @@ def parse_gtk_theme(colors, window_control, reset_gnome, reset_cinnamon):
     cinnamon_theme_file = os.path.join(dir, "cinnamon-template.css")
     gnome_shell_css = open(gnome_theme_file).read()
     cinnamon_css = open(cinnamon_theme_file).read()
-    gtk3_template_file = open(os.path.join(dir, "gtk3-template", "gtk.css")).read()
+    gtk3_template_file = open(os.path.join(dir, "gtk3-template.css")).read()
     gedit_template_file = open(os.path.join(dir, "gedit-template.xml")).read()
 
     prefs = Preferences()

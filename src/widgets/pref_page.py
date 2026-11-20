@@ -25,7 +25,7 @@ from .utils import change_autostart, clear_gtk_theme, clear_shell_theme
 
 class PrefPage(Gtk.Box):
     def __init__(self, win):
-        super().__init__(orientation=Gtk.Orientation.VERTICAL, valign=Gtk.Align.CENTER, spacing=32, margin_start=12, margin_end=12)
+        super().__init__(orientation=Gtk.Orientation.VERTICAL, valign=Gtk.Align.CENTER, spacing=32, margin_start=12, margin_end=12, margin_bottom=12)
 
         if(not "GNOME" in (GLib.getenv("XDG_CURRENT_DESKTOP") or "")):
             self.append(Adw.Clamp(maximum_size=800, child=AccentBox(win)))
