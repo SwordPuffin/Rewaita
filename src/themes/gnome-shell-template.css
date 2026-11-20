@@ -84,7 +84,7 @@
 
 /* Tiled window previews */
 .tile-preview {
-  background-color: @accent-transparent;
+  background-color: st-transparentize(@accent-color, 55%);
   border: 1px solid @accent-color;
 }
 
@@ -165,7 +165,7 @@
 }
 
 .arcmenu-button, .arcmenu-alphabet-button {
-  background-color: @card-bg-color;
+  background-color: st-transparentize(@card-bg-color, 36%);
   color: @window-fg-color;
 }
 
@@ -253,7 +253,7 @@
 
 .search-entry,
 StEntry {
-  background-color: @card-bg-color;
+  background-color: st-transparentize(@card-bg-color, 36%);
   color: @window-fg-color;
 }
 
@@ -296,7 +296,7 @@ StEntry:focus {
 
 .popup-menu .popup-menu-item:checked, .popup-menu-item:active {
   color: @window-fg-color !important;
-  background-color: @card-bg-color;
+  background-color: st-transparentize(@card-bg-color, 36%);
 }
 
 .popup-menu .popup-menu-item:checked:focus, .popup-menu .popup-menu-item:checked:hover, .popup-menu .popup-menu-item:checked.selected {
@@ -314,7 +314,7 @@ StEntry:focus {
 
 .popup-menu .popup-menu-item:focus, .popup-menu .popup-menu-item:hover, .popup-menu .popup-menu-item.selected {
   color: @window-fg-color !important;
-  background-color: @card-bg-color !important;
+  background-color: st-transparentize(@card-bg-color, 36%) !important;
 }
 
 .popup-menu .popup-menu-item:active, .popup-menu .popup-menu-item.selected:active {
@@ -326,7 +326,7 @@ StEntry:focus {
 }
 
 .popup-menu .popup-sub-menu, .popup-sub-menu, .popup-submenu-menu-item:open, .popup-menu .popup-sub-menu .popup-menu-item:open {
-  background-color: @card-bg-color !important;
+  background-color: st-transparentize(@card-bg-color, 36%) !important;
   color: @window-fg-color !important;
 }
 
@@ -336,7 +336,7 @@ StEntry:focus {
 
 .popup-menu .popup-sub-menu .popup-menu-item:active, .popup-menu .popup-sub-menu .popup-menu-item.selected:active {
    color: @window-fg-color !important;
-   background-color: @card-bg-color !important;
+   background-color: st-transparentize(@card-bg-color, 36%) !important;
 }
 
 .popup-menu .popup-sub-menu .popup-menu-item:insensitive {
@@ -354,7 +354,7 @@ StEntry:focus {
 .quick-settings .icon-button, .quick-settings .message-notification-group .message-collapse-button, .message-notification-group .quick-settings .message-collapse-button, .quick-settings .message .message-header .message-expand-button, .message .message-header .quick-settings .message-expand-button,
 .quick-settings .message .message-header .message-close-button,
 .message .message-header .quick-settings .message-close-button, .quick-settings .button {
-  background-color: @card-bg-color;
+  background-color: st-transparentize(@card-bg-color, 36%);
   color: @window-fg-color;
 }
 
@@ -365,13 +365,9 @@ StEntry:focus {
 }
 
 .quick-toggle, .quick-toggle-has-menu {
-  background-color: @card-bg-color !important;
+  background-color: st-transparentize(@card-bg-color, 35%) !important;
   border: none;
   outline: none;
-}
-
-.quick-toggle {
-  background-color: @card-bg-color !important;
 }
 
 .quick-toggle:hover {
@@ -486,7 +482,7 @@ StEntry:focus {
 }
 
 .icon-button {
-  background-color: @card-bg-color !important;
+  background-color: st-transparentize(@card-bg-color, 36%) !important;
   color: @window-fg-color !important;
 }
 
@@ -645,7 +641,7 @@ StEntry:focus {
 }
 
 .calendar .calendar-week-number {
-  background-color: @card-bg-color;
+  background-color: st-transparentize(@card-bg-color, 45%);
   color: @window-fg-color;
   font-feature-settings: "tnum";
 }
@@ -687,7 +683,7 @@ StEntry:focus {
 
 .message-list-clear-button {
     color: @window-fg-color;
-    background-color: @card-bg-color;
+    background-color: st-transparentize(@card-bg-color, 36%);
 }
 
 .message-expand-button {
@@ -709,7 +705,7 @@ StEntry:focus {
 .weather-button,
 .events-button {
   color: @window-fg-color;
-  background-color: @card-bg-color;
+  background-color: st-transparentize(@card-bg-color, 35%);
   border: none !important;
 }
 
@@ -719,14 +715,14 @@ StEntry:focus {
 .weather-button:focus,
 .events-button:focus {
   color: @window-fg-color;
-  background-color: @card-bg-color;
+  background-color: st-transparentize(@card-bg-color, 35%);
 }
 
 .world-clocks-button:active,
 .weather-button:active,
 .events-button:active {
   color: @window-fg-color;
-  background-color: @card-bg-color;
+  background-color: st-transparentize(@card-bg-color, 35%);
 }
 
 .screenshot-ui-panel, .workspace-switcher-container, .switcher-list, .resize-popup, .osd-window {
@@ -856,7 +852,7 @@ StEntry:focus {
 
 .icon-button:last-child {
   color: @window-fg-color;
-  background-color: @card-bg-color;
+  background-color: st-transparentize(@card-bg-color, 36%);
 }
 
 .icon-button:last-child:hover {

@@ -218,9 +218,6 @@ def parse_gtk_theme(colors, window_control, reset_gnome, reset_cinnamon):
         colors["panel-bg-color"] = "black"
         colors["panel-fg-color"] = "white"
 
-    rgb = hex_to_rgb(colors["accent-color"])
-    colors["accent-transparent"] = f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.5)"
-
     if(all_prefs["firefox-theme"]):
         firefox_theme_plugin.variables = colors
         firefox_theme_plugin.window_controls = all_prefs["window-controls"]
@@ -230,8 +227,7 @@ def parse_gtk_theme(colors, window_control, reset_gnome, reset_cinnamon):
 
     items_to_replace = ["window-bg-color", "window-fg-color", "card-bg-color", "headerbar-bg-color",
                         "accent-color", "border-color", "red-1", "panel-bg-color", "panel-fg-color",
-                        "panel-button-bg-color", "overview-bg-color", "search-fg-color",
-                        "accent-transparent", "accent-fg-color"]
+                        "panel-button-bg-color", "overview-bg-color", "search-fg-color", "accent-fg-color"]
 
     if(all_prefs["modify-gtk3-theme"]):
         for color in colors.keys():
