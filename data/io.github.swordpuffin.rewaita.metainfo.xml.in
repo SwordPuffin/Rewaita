@@ -27,8 +27,10 @@
     <internet>offline-only</internet>
   </requires>
   <supports>
-    <control>pointing</control>
-    <control>touch</control>
+   <control>pointing</control>
+   <control>keyboard</control>
+   <control>touch</control>
+   <control>tablet</control>
   </supports>
 
   <url type="homepage">https://github.com/SwordPuffin/Rewaita</url>
@@ -73,6 +75,18 @@
   </screenshots>
 
   <releases>
+    <release version="1.1.8b" date="2026-11-20">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.1.8b</url>
+        <description translate="no">
+          <p>Rewaita v1.1.8b</p>
+          <ul>
+            <li>Fixed issue with Firefox CSS theme not working with Firefox Flatpak</li>
+            <li>Improved support with Blur my Shell</li>
+            <li>New app icon</li>
+            <li>Miscellaneous theming fixes</li>
+          </ul>
+      </description>
+    </release>
     <release version="1.1.8" date="2026-10-25">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.1.8</url>
         <description translate="no">
