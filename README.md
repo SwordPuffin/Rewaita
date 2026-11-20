@@ -31,8 +31,8 @@
 </div>
 
 <p align="center">
-  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/screenshots/Screenshot1.png" width="450"/>
-  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/data/screenshots/Screenshot2.png" width="425"/>
+  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/.github/screenshots/Screenshot1.png" width="425"/>
+  <img src="https://github.com/SwordPuffin/Rewaita/blob/main/.github/screenshots/Screenshot2.png" width="425"/>
 </p>
 
 # ⬇️ Installation 
