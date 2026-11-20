@@ -30,6 +30,18 @@ window_control_map = {
     "mint": MINT_TEMPLATE
 }
 
+config_paths = [
+    "~/.mozilla/firefox",
+    "~/.librewolf",
+    "~/.waterfox",
+    "~/.var/app/org.mozilla.firefox/.mozilla/firefox",
+    "~/.var/app/org.mozilla.firefox/config/mozilla/firefox",
+    "~/.var/app/io.gitlab.librewolf-community/.librewolf",
+    "~/snap/firefox/common/.mozilla/firefox",
+    "~/.var/app/net.waterfox.waterfox/.waterfox",
+    "~/.config/mozilla/firefox"
+]
+
 # This code is taken from the Gradience Project, with adjustments for Rewaita
 # Specifically: https://github.com/GradienceTeam/Plugins/blob/main/firefox_gnome_theme.py
 class FirefoxGnomeThemePlugin():
@@ -44,15 +56,7 @@ class FirefoxGnomeThemePlugin():
         return False
 
     def reset(self):
-        for path in [
-            "~/.mozilla/firefox",
-            "~/.librewolf",
-            "~/.waterfox",
-            "~/.var/app/org.mozilla.firefox/.mozilla/firefox",
-            "~/.var/app/io.gitlab.librewolf-community/.librewolf",
-            "~/.var/app/net.waterfox.waterfox/.waterfox",
-            "~/.config/mozilla/firefox"
-        ]:
+        for path in config_paths:
             try:
                 directory = Path(path).expanduser()
                 cp = ConfigParser()
@@ -84,15 +88,7 @@ class FirefoxGnomeThemePlugin():
     def apply(self):
         from .utils import Preferences
         prefs = Preferences()
-        for path in [
-            "~/.mozilla/firefox",
-            "~/.librewolf",
-            "~/.waterfox",
-            "~/.var/app/org.mozilla.firefox/.mozilla/firefox",
-            "~/.var/app/io.gitlab.librewolf-community/.librewolf",
-            "~/.var/app/net.waterfox.waterfox/.waterfox",
-            "~/.config/mozilla/firefox"
-        ]:
+        for path in config_paths:
             try:
                 directory = Path(path).expanduser()
                 cp = ConfigParser()

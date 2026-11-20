@@ -164,7 +164,7 @@
   background-color: @accent-color;
 }
 
-.arcmenu-button {
+.arcmenu-button, .arcmenu-alphabet-button {
   background-color: @card-bg-color;
   color: @window-fg-color;
 }
@@ -809,8 +809,12 @@ StEntry:focus {
   color: @accent-fg-color;
 }
 
+.message-collapse-button:hover {
+  box-shadow: inset 0 0 100px 100px @panel-button-bg-color !important;
+}
+
 .modal-dialog .modal-dialog-button-box .modal-dialog-button, .lg-obj-inspector-button, #LookingGlassDialog > #Toolbar .lg-toolbar-button, .candidate-page-button, .message .message-header .flat.message-expand-button,
-.message .message-header .flat.message-close-button, .message-notification-group .flat.message-collapse-button {
+.message .message-header .flat.message-close-button, .message-notification-group .flat.message-collapse-button, .message-collapse-button {
   color: @window-fg-color;
   background-color: @card-bg-color;
 }
@@ -1060,4 +1064,9 @@ StEntry:focus {
 .tiling-menu-container > StBoxLayout {
   background-color: @card-bg-color !important;
   color: @window-fg-color !important;
+}
+
+.prompt-dialog-info-label {
+  background-color: @card-bg-color;
+  color: @window-fg-color;
 }

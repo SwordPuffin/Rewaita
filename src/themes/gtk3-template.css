@@ -1,0 +1,571 @@
+@define-color blue-1 @blue-1;
+@define-color blue-2 @blue-2;
+@define-color blue-3 @blue-3;
+@define-color blue-4 @blue-4;
+@define-color blue-5 @blue-5;
+@define-color green-1 @green-1;
+@define-color green-2 @green-2;
+@define-color green-3 @green-3;
+@define-color green-4 @green-4;
+@define-color green-5 @green-5;
+@define-color yellow-1 @yellow-1;
+@define-color yellow-2 @yellow-2;
+@define-color yellow-3 @yellow-3;
+@define-color yellow-4 @yellow-4;
+@define-color yellow-5 @yellow-5;
+@define-color orange-1 @orange-1;
+@define-color orange-2 @orange-2;
+@define-color orange-3 @orange-3;
+@define-color orange-4 @orange-4;
+@define-color orange-5 @orange-5;
+@define-color red-1 @red-1;
+@define-color red-2 @red-2;
+@define-color red-3 @red-3;
+@define-color red-4 @red-4;
+@define-color red-5 @red-5;
+@define-color purple-1 @purple-1;
+@define-color purple-2 @purple-2;
+@define-color purple-3 @purple-3;
+@define-color purple-4 @purple-4;
+@define-color purple-5 @purple-5;
+@define-color brown-1 @brown-1;
+@define-color brown-2 @brown-2;
+@define-color brown-3 @brown-3;
+@define-color brown-4 @brown-4;
+@define-color brown-5 @brown-5;
+@define-color light-1 @light-1;
+@define-color light-2 @light-2;
+@define-color light-3 @light-3;
+@define-color light-4 @light-4;
+@define-color light-5 @light-5;
+@define-color dark-1 @dark-1;
+@define-color dark-2 @dark-2;
+@define-color dark-3 @dark-3;
+@define-color dark-4 @dark-4;
+@define-color dark-5 @dark-5;
+@define-color accent-bg-color @accent-color;
+@define-color accent-color @accent-color;
+@define-color accent-fg-color @accent-fg-color;
+@define-color destructive-bg-color @red-1;
+@define-color destructive-color @red-1;
+@define-color destructive-fg-color @window-bg-color;
+@define-color success-bg-color @green-1;
+@define-color success-fg-color @window-bg-color;
+@define-color warning-color @red-1;
+@define-color warning-bg-color @red-1;
+@define-color warning-fg-color @window-bg-color;
+@define-color error-bg-color @red-1;
+@define-color error-fg-color @window-bg-color;
+@define-color success-color mix(@success-bg-color,white,0.4);
+@define-color error-color mix(@error-bg-color,white,0.4);
+@define-color window-bg-color @window-bg-color;
+@define-color window-fg-color @window-fg-color;
+@define-color view-bg-color @view-bg-color;
+@define-color view-fg-color @view-fg-color;
+@define-color headerbar-bg-color @headerbar-bg-color;
+@define-color headerbar-fg-color @headerbar-fg-color;
+@define-color headerbar-border-color @headerbar-bg-color;
+@define-color headerbar-backdrop-color @window-bg-color;
+@define-color headerbar-shade-color rgba(0, 0, 6, 0.36);
+@define-color headerbar-darker-shade-color rgba(0, 0, 12, 0.9);
+@define-color sidebar-bg-color @sidebar-bg-color;
+@define-color sidebar-fg-color @sidebar-fg-color;
+@define-color sidebar-backdrop-color @sidebar-bg-color;
+@define-color sidebar-shade-color rgba(0, 0, 6, 0.25);
+@define-color sidebar-border-color rgba(0, 0, 6, 0.36);
+@define-color card-bg-color @card-bg-color;
+@define-color card-fg-color @card-fg-color;
+@define-color card-shade-color rgba(0, 0, 6, 0.36);
+@define-color dialog-bg-color mix(@window-bg-color, black, 0.8);
+@define-color dialog-fg-color @window-fg-color;
+@define-color popover-bg-color mix(@window-bg-color, black, 0.8);
+@define-color popover-fg-color @window-fg-color;
+@define-color popover-shade-color rgba(0, 0, 6, 0.25);
+@define-color thumbnail-bg-color @card-bg-color;
+@define-color thumbnail-fg-color @card-fg-color;
+@define-color shade-color rgba(0, 0, 6, 0.25);
+@define-color scrollbar-outline-color rgba(0, 0, 12, 0.95);
+@define-color panel-bg-color @window-bg-color;
+@define-color panel-fg-color @window-fg-color;
+@define-color theme-fg-color @window-fg-color;
+@define-color theme-text-color @view-fg-color;
+@define-color theme-bg-color @window-bg-color;
+@define-color theme-base-color @view-bg-color;
+@define-color theme-selected-bg-color @accent-bg-color;
+@define-color theme-selected-fg-color @accent-fg-color;
+@define-color insensitive-bg-color mix(@window-bg-color,@view-bg-color,0.4);
+@define-color insensitive-fg-color alpha(@window-fg-color,0.5);
+@define-color insensitive-base-color @view-bg-color;
+@define-color theme-unfocused-fg-color mix(@window-fg-color,@window-bg-color,0.5);
+@define-color theme-unfocused-text-color @view-fg-color;
+@define-color theme-unfocused-bg-color @window-bg-color;
+@define-color theme-unfocused-base-color @window-bg-color;
+@define-color theme-unfocused-selected-bg-color @accent-bg-color;
+@define-color theme-unfocused-selected-fg-color @accent-fg-color;
+@define-color unfocused-insensitive-color mix(mix(@window-fg-color,@window-bg-color,0.5),@window-bg-color,0.5);
+@define-color borders mix(currentColor,@window-bg-color,0.85);
+@define-color unfocused-borders mix(currentColor,@window-bg-color,0.73);
+@define-color warning-color @warning-color;
+@define-color error-color @error-color;
+@define-color success-color @success-color;
+@define-color wm-title shade(@window-fg-color, 1.8);
+@define-color wm-unfocused-title mix(@window-fg-color,@window-bg-color,0.5);
+@define-color wm-highlight black;
+@define-color wm-borders-edge alpha(@window-fg-color,0.07);
+@define-color wm-bg-a shade(@window-bg-color, 1.2);
+@define-color wm-bg-b @window-bg-color;
+@define-color wm-shadow alpha(black, 0.35);
+@define-color wm-border alpha(black, 0.18);
+@define-color wm-button-hover-color-a shade(@window-bg-color, 1.3);
+@define-color wm-button-hover-color-b @window-bg-color;
+@define-color wm-button-active-color-a shade(@window-bg-color, 0.85);
+@define-color wm-button-active-color-b shade(@window-bg-color, 0.89);
+@define-color wm-button-active-color-c shade(@window-bg-color, 0.9);
+@define-color content-view-bg @view-bg-color;
+@define-color text-view-bg shade(@view-bg-color,0.94);
+
+
+/* Windows */
+* {
+  color: @theme-fg-color;
+  background-image: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+window:not(.nemo-desktop-window) {
+  background-color: @theme-bg-color;
+  color: @theme-fg-color;
+}
+
+.background:not(.nautilus-desktop):not(.desktopwindow):not(.nemo-desktop-window) {
+  background-color: @window-bg-color;
+  color: @window-fg-color;
+}
+
+.background.nemo-window, .nemo-desktop {
+  background-color: transparent;
+	color: @window-fg-color;
+}
+
+.nautilus-desktop,
+NautilusWindow.nautilus-desktop {
+  background-color: transparent;
+}
+
+window.desktopwindow,
+window.nemo-desktop-window {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.backgnd-passive {
+  background-color: @window-bg-color;
+}
+
+window:backdrop {
+  color: @theme-unfocused-fg-color;
+}
+
+.content-view  {
+	background-color: @view-bg-color;
+}
+
+iconview {
+	background-color: @window-bg-color;
+}
+
+iconview > *:hover {
+	background-color: @card-bg-color;
+}
+
+decoration {
+  box-shadow: 0 3px 8px 1px rgba(0, 0, 0, 0.3), 0 0 0 2px shade(@border-color, 0.86);
+}
+
+/* Headerbar / titlebar */
+headerbar, .titlebar, toolbar {
+  background-color: @headerbar-bg-color;
+  color: @headerbar-fg-color;
+  border-color: @borders-color;
+  box-shadow: none;
+  border-bottom-color: transparent;
+}
+
+.toolbar {
+	background-color: @window-bg-color;
+}
+
+headerbar:backdrop, .titlebar:backdrop {
+  background-color: @headerbar-bg-color;
+  color: mix(@headerbar-fg-color, @headerbar-bg-color, 0.5);
+}
+
+.titlebutton {
+  border: none;
+  border-radius: 99px;
+	background-color: @card-bg-color;
+}
+
+revealer > box  {
+	background-color: @card-bg-color;
+	color: @window-fg-color;
+	border: none;
+}
+
+
+/* Buttons */
+button:not(.close):not(.minimize):not(.maximize):not(.suggested-action):not(.destructive-action) {
+  color: @card-fg-color;
+  border-color: transparent;
+}
+
+button:not(.close):not(.minimize):not(.maximize):not(.suggested-action):not(.destructive-action):not(:checked):not(:hover):not(.flat) {
+  background-color: @card-bg-color;
+}
+
+button:hover:not(.suggested-action):not(.destructive-action) {
+  background-color: shade(@card-bg-color, 0.85);
+}
+
+button:disabled {
+  background-color: @insensitive-bg-color;
+  color: @insensitive-fg-color;
+}
+
+.close-button {
+	margin: 5px 0 5px 0;
+}
+
+.suggested-action {
+  background-color: @accent-bg-color;
+  color: @accent-fg-color;
+}
+
+.suggested-action > label {
+	color: @accent-fg-color;
+}
+
+.suggested-action:hover {
+  background-color: shade(@accent-bg-color, 1.2);
+}
+
+
+.destructive-action {
+  background-color: @red-1;
+  border-color: transparent;
+  color: @dark-1;
+}
+
+.destructive-action > label,
+.destructive-action > image {
+  color: @dark-1;
+}
+
+.destructive-action:hover {
+  background-color: shade(@red-1, 0.8);
+}
+
+.flat {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.flat:hover {
+  background-color: alpha(@window-fg-color, 0.08);
+}
+
+.radio:checked, .radio:active, button:checked {
+	background-color: mix(@card-bg-color, white, 0.1);
+}
+
+.frame {
+	border-color: mix(@dark-1, white, 0.05);
+}
+
+.view {
+  background-color: @window-bg-color;
+}
+
+list {
+  border: none;
+}
+
+/* Text entries, spinbuttons, textviews */
+entry, spinbutton, textview, textview text {
+  background-color: @view-bg-color;
+  color: @view-fg-color;
+  border-color: @borders;
+}
+
+entry:focus, spinbutton:focus, textview:focus {
+  border-color: @accent-bg-color;
+}
+
+entry:disabled, spinbutton:disabled, textview:disabled {
+  background-color: @insensitive-base-color;
+  color: @insensitive-fg-color;
+}
+
+spinbutton > entry {
+	background-color: transparent;
+}
+
+/* Menus / popovers / comboboxes */
+menu, .menu, popover, popover.background {
+  background-color: @popover-bg-color;
+  color: @popover-fg-color;
+  border-color: @border-color;
+}
+
+modelbutton:hover, menuitem:hover {
+	background-color: @card-bg-color;
+	color: @card-fg-color;
+	box-shadow: none;
+}
+
+combobox window.background.popup,
+combobox window.background.popup menu {
+  background-color: @popover-bg-color;
+  color: @popover-fg-color;
+}
+
+menubar, menubar:backdrop {
+	background-color: @headerbar-bg-color;
+}
+
+/* Dialogs */
+window.background.dialog, messagedialog, .dialog {
+  background-color: @dialog-bg-color;
+  color: @dialog-fg-color;
+}
+
+.keycap {
+	background-color: @card-bg-color;
+	border: none;
+	color: @window-fg-color;
+}
+
+/* Notebook / tabs */
+
+notebook {
+	border: none;
+	background-image: none;
+}
+
+stack {
+	background-color: transparent;
+}
+
+tab:hover {
+	background-color: @card-bg-color;
+}
+
+notebook > header, notebook:disabled > header {
+  background-color: @headerbar-bg-color;
+  border-color: @borders;
+}
+
+notebook > header tab {
+  color: mix(@headerbar-fg-color, @headerbar-bg-color, 0.5);
+}
+
+notebook > header tab:checked {
+  background-color: @window-bg-color;
+  color: @window-fg-color;
+}
+
+notebook > header tab:hover {
+  color: @headerbar-fg-color;
+}
+
+tab {
+	background-color: mix(@window-bg-color, @card-bg-color, 0.5);
+	border: none;
+}
+
+tab:checked {
+	background-color: mix(@accent-bg-color, @card-bg-color, 0.9);
+}
+
+/* Scrollbars */
+scrollbar {
+	background-color: @headerbar-bg-color;
+	border: none;
+}
+
+scrollbar slider {
+  background-color: mix(@window-fg-color, @window-bg-color, 0.4);
+  min-width: 6px;
+  min-height: 6px;
+}
+
+scrollbar slider:hover {
+  background-color: @accent-bg-color;
+}
+
+scrollbar trough {
+  background-color: transparent;
+}
+
+.floating-bar {
+	background-color: @card-bg-color;
+	border: none;
+}
+
+/* Lists */
+treeview, list, listview {
+  color: @view-fg-color;
+	background-color: mix(@window-bg-color, black, 0.1);
+}
+
+treeview:selected, row:selected, list row:selected {
+  background-color: @card-bg-color;
+  color: @card-fg-color;
+}
+
+treeview.view.cell:selected:focus label,
+row:selected label {
+  color: @card-fg-color;
+}
+
+row {
+	background-color: @card-bg-color;
+}
+
+/* Sidebars */
+.sidebar, list.sidebar, .navigation-sidebar {
+  background-color: @sidebar-bg-color;
+  color: @sidebar-fg-color;
+  border-color: @sidebar-border-color;
+}
+
+.sidebar:backdrop, list.sidebar:backdrop {
+  background-color: @sidebar-backdrop-color;
+}
+
+.sidebar row:selected, .navigation-sidebar row:selected {
+  background-color: @card-bg-color;
+  color: @card-fg-color;
+}
+
+/* Cards */
+.card, frame.card {
+  background-color: @card-bg-color;
+  color: @card-fg-color;
+}
+
+viewport {
+  background-color: @window-bg-color;
+  color: @window-fg-color;
+}
+
+/* Checkbuttons / radios / switches */
+checkbutton check, radiobutton radio {
+  background-color: @view-bg-color;
+  border-color: @borders;
+}
+
+checkbutton check:checked, radiobutton radio:checked {
+  background-color: @accent-bg-color;
+  border-color: @accent-bg-color;
+  color: @accent-fg-color;
+}
+
+switch {
+  background-color: @sidebar-border-color;
+  border-color: transparent;
+}
+
+switch:checked {
+  background-color: @accent-bg-color;
+}
+
+switch slider {
+  background-color: white;
+  border-color: transparent;
+}
+
+/* Sliders / progress bars */
+scale trough {
+  background-color: @card-bg-color;
+  border: none;
+}
+
+scale highlight {
+  background-color: @accent-bg-color;
+}
+
+scale slider {
+  background-color: @window-fg-color;
+  border-color: @borders;
+  border-radius: 999px;
+}
+
+progressbar trough {
+  background-color: @sidebar-border-color;
+}
+
+progressbar progress {
+  background-color: @accent-bg-color;
+}
+
+/* Tooltips / separators / frames / statusbar */
+tooltip, tooltip.background {
+  background-color: @popover-bg-color;
+  color: @popover-fg-color;
+  border-color: @border-color;
+}
+
+tooltip decoration,
+window.background.tooltip decoration {
+  box-shadow: none;
+}
+
+separator {
+  background-color: @borders;
+  min-width: 1px;
+  min-height: 1px;
+}
+
+frame > border, frame border {
+  border-color: @borders;
+}
+
+statusbar {
+  background-color: @window-bg-color;
+  color: @window-fg-color;
+}
+
+/* Links, spinners, selection */
+label.link, link {
+  color: @accent-bg-color;
+}
+
+label.link:visited, link:visited {
+  color: mix(@accent-bg-color, black, 0.9);
+}
+
+spinner {
+  color: @accent-bg-color;
+}
+
+selection, *:selected {
+  background-color: @accent-bg-color;
+  color: @accent-fg-color;
+}
+
+/* 19. Info bars / state colors  */
+infobar.info, infobar.question { background-color: @accent-bg-color; color: @accent-fg-color; }
+infobar.warning                { background-color: @warning-color;  color: @dark-5; }
+infobar.error                  { background-color: @error-color;    color: @accent-fg-color; }
+
+separator {
+  background: mix(currentColor,@window-bg-color,0.85);
+  min-width: 1px;
+  min-height: 1px;
+}
+
+/* Other */
+.welcome, actionbar, .table-header {
+  background-color: @window-bg-color;
+}

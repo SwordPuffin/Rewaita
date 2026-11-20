@@ -115,7 +115,7 @@ gnome_colors = {
         "--brown-1": "#cdab8f",
         "--light-1": "#ffffff",
         "--light-5": "#9a9996",
-        "--dark-1": "#77767b",
+        "--card-bg-color": "#77767b",
     }
 }
 
@@ -148,7 +148,7 @@ titles = {
     "--brown-1": "Brown",
     "--light-1": "Light",
     "--light-5": "Slate",
-    "--dark-1": "Dark",
+    "--card-bg-color": "Dark",
 }
 
 ############################################
@@ -220,20 +220,12 @@ DEFAULT_TEMPLATE = """
   --popover-bg-color:  {popover-bg-color};
   --popover-fg-color:  {popover-fg-color};
   --card-bg-color:     {card-bg-color};
-  --card_fg_color:     {card-fg-color};
+  --card-fg-color:     {card-fg-color};
   --sidebar-bg-color:  {sidebar-bg-color};
   --sidebar-fg-color:  {sidebar-fg-color};
-  --dark-1:            {dark-1};
-  --brown-1:           {brown-1};
-  --light-1:           {light-1};
-  --blue-1:            {blue-1};
-  --blue-2:            {blue-2};
   --green-1:           {green-1};
   --yellow-1:          {yellow-1};
-  --orange-1:          {orange-1};
   --red-1:             {red-1};
-  --purple-1:          {purple-1};
-  --purple-2:          {purple-2};
   --accent-color:      {accent-color};
   --accent-fg-color:   {accent-fg-color};
 }}
@@ -299,7 +291,7 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 .browser-toolbar {{
   background-color: var(--headerbar-bg-color) !important;
   color: var(--headerbar-fg-color) !important;
-  border-color: var(--dark-1) !important;
+  border-color: var(--card-bg-color) !important;
 }}
 
 #TabsToolbar,
@@ -316,11 +308,11 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 }}
 
 .tabbrowser-tab:not([selected]):hover .tab-background {{
-  background-color: var(--dark-1) !important;
+  background-color: var(--card-bg-color) !important;
 }}
 
 .tabbrowser-tab .tab-label {{
-  color: var(--card_fg_color) !important;
+  color: var(--card-fg-color) !important;
 }}
 
 .tabbrowser-tab[selected] .tab-label,
@@ -329,34 +321,47 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 }}
 
 .tab-close-button {{
-  color: var(--card_fg_color) !important;
-  fill: var(--card_fg_color) !important;
+  color: var(--window-fg-color) !important;
+  fill: var(--card-fg-color) !important;
 }}
 
 #tabs-newtab-button,
 .tabs-newtab-button {{
-  color: var(--card_fg_color) !important;
-  fill: var(--card_fg_color) !important;
+  color: var(--card-fg-color) !important;
+  fill: var(--card-fg-color) !important;
 }}
 
 #sidebar-main > * #tabs-newtab-button:hover,
 #sidebar-main > * .tabs-newtab-button:hover {{
-  background-color: var(--dark-1) !important;
+  background-color: var(--card-bg-color) !important;
+}}
+
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([selected]):not([multiselected]) .tab-background {{
+  background-color: transparent !important;
+}}
+
+/* keep the hover highlight */
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab:not([selected]):not([multiselected]):hover .tab-background {{
+  background-color: var(--card-bg-color) !important;
 }}
 
 .button-background.labelled {{
     background-color: var(--headerbar-bg-color) !important;
 }}
 
+.button-background.labelled:hover {{
+    filter: brightness(110%) !important;
+}}
+
 #urlbar,
 #urlbar-background {{
   background-color: var(--card-bg-color) !important;
   color: var(--window-fg-color) !important;
-  border-color: var(--dark-1) !important;
+  border-color: var(--card-bg-color) !important;
 }}
 
 #urlbar {{
-    border-radius: 8px;
+    border-radius: 999px !important;
 }}
 
 #urlbar:focus-within,
@@ -376,8 +381,8 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
 
 #identity-box,
 #identity-icon {{
-  color: var(--card_fg_color) !important;
-  fill: var(--card_fg_color) !important;
+  color: var(--card-fg-color) !important;
+  fill: var(--card-fg-color) !important;
 }}
 
 #tracking-protection-icon-container {{
@@ -385,10 +390,9 @@ checkbox:not(.treenode-checkbox) > .checkbox-check[checked] {{
   fill: var(--accent-color) !important;
 }}
 
-toolbar toolbarbutton,
-.toolbarbutton-1 {{
-  color: var(--card_fg_color) !important;
-  fill: var(--card_fg_color) !important;
+toolbar toolbarbutton, .toolbarbutton-1 {{
+  color: var(--card-fg-color) !important;
+  fill: var(--card-fg-color) !important;
   background-color: transparent !important;
 }}
 
@@ -407,9 +411,13 @@ toolbar toolbarbutton:not([disabled]):hover,
   fill: var(--window-fg-color) !important;
 }}
 
-toolbar toolbarbutton:hover,
-.toolbarbutton-1:hover {{
+toolbar toolbarbutton:hover {{
   background-color: transparent !important;
+}}
+
+#tabbrowser-tabs[orient="vertical"] #tabs-newtab-button:hover,
+#vertical-tabs-newtab-button:hover {{
+    background-color: var(--card-bg-color) !important;
 }}
 
 .toolbarbutton-1:not([disabled]):hover > .toolbarbutton-icon {{
@@ -427,13 +435,13 @@ toolbar toolbarbutton[open="true"] {{
 #PersonalToolbar,
 #bookmarks-toolbar {{
   background-color: var(--headerbar-bg-color) !important;
-  border-color: var(--dark-1) !important;
+  border-color: var(--card-bg-color) !important;
 }}
 
 .bookmark-item,
 #PersonalToolbar toolbarbutton {{
-  color: var(--card_fg_color) !important;
-  fill: var(--card_fg_color) !important;
+  color: var(--card-fg-color) !important;
+  fill: var(--card-fg-color) !important;
 }}
 
 .bookmark-item:hover,
@@ -448,12 +456,22 @@ panel,
   color: var(--window-fg-color) !important;
 }}
 
+panel,
+#mainPopupSet,
+.panel-viewcontainer,
+panelmultiview {{
+  --panel-background: var(--window-bg-color) !important;
+  --panel-border-color: var(--window-bg-color) !important;
+  --arrowpanel-background: var(--window-bg-color) !important;
+  --arrowpanel-color: var(--window-fg-color) !important;
+}}
+
 panel > * {{
     background-color: var(--window-bg-color) !important;
     color: var(--window-fg-color) !important;
 }}
 
-panel:not([remote]) {{
+panel, panel[remote] {{
 	--arrowpanel-background: var(--window-bg-color) !important;
 	--arrowpanel-color: var(--window-fg-color) !important;
 }}
@@ -471,7 +489,7 @@ menuitem:hover,
 menu:hover,
 menuitem[_moz-menuactive="true"],
 menu[_moz-menuactive="true"] {{
-  background-color: var(--dark-1) !important;
+  background-color: var(--card-bg-color) !important;
   color: var(--window-fg-color) !important;
 }}
 
@@ -479,17 +497,35 @@ menuseparator {{
   border-color: var(--window-fg-color) !important;
 }}
 
+.popup-notification-secondary-button {{
+  background-color: var(--headerbar-bg-color) !important;
+  border-color: transparent !important;
+  border-radius: 999px !important;
+}}
+
+.popup-notification-secondary-button:not([disabled]):hover {{
+    filter: brightness(110%) !important;
+}}
+
+.popup-notification-dropmarker {{
+  background-color: var(--headerbar-bg-color) !important;
+}}
+
+.popup-notification-primary-button.footer-button:not([disabled]):hover {{
+    filter: brightness(110%) !important;
+}}
+
 #sidebar-box,
 #sidebar {{
   background-color: var(--sidebar-bg-color) !important;
   color: var(--sidebar-fg-color) !important;
-  border-color: var(--dark-1) !important;
+  border-color: var(--card-bg-color) !important;
 }}
 
 #sidebar-header {{
   background-color: var(--headerbar-bg-color) !important;
   color: var(--headerbar-fg-color) !important;
-  border-color: var(--dark-1) !important;
+  border-color: var(--card-bg-color) !important;
 }}
 
 findbar,
@@ -497,13 +533,13 @@ findbar,
 .findbar-container {{
   background-color: var(--card-bg-color) !important;
   color: var(--window-fg-color) !important;
-  border-color: var(--dark-1) !important;
+  border-color: var(--card-bg-color) !important;
 }}
 
 .findbar-textbox {{
   background-color: var(--view-bg-color) !important;
   color: var(--view-fg-color) !important;
-  border-color: var(--dark-1) !important;
+  border-color: var(--card-bg-color) !important;
 }}
 
 .found-matches {{
@@ -514,7 +550,7 @@ notification,
 .notificationbox-stack {{
   background-color: var(--card-bg-color) !important;
   color: var(--window-fg-color) !important;
-  border-color: var(--dark-1) !important;
+  border-color: var(--card-bg-color) !important;
 }}
 
 scrollbar {{
@@ -523,11 +559,11 @@ scrollbar {{
 
 scrollbar thumb,
 scrollbarbutton {{
-  background-color: var(--dark-1) !important;
+  background-color: var(--card-bg-color) !important;
 }}
 
 scrollbar thumb:hover {{
-  background-color: var(--card_fg_color) !important;
+  background-color: var(--card-fg-color) !important;
 }}
 
 .urlbar-background,
@@ -557,13 +593,13 @@ scrollbar thumb:hover {{
 
 .urlbarView-tags,
 .urlbarView-title-separator {{
-  color: var(--card_fg_color) !important;
+  color: var(--card-fg-color) !important;
 }}
 
 #statuspanel-label {{
   background-color: var(--card-bg-color) !important;
   color: var(--window-fg-color) !important;
-  border-color: var(--dark-1) !important;
+  border-color: var(--card-bg-color) !important;
 }}
 
 #downloads-button[attention],
@@ -573,10 +609,8 @@ scrollbar thumb:hover {{
 }}
 
 popupnotification {{
-  background-color: var(--card-bg-color) !important;
-  color: var(--card_fg_color) !important;
-  border-color: var(--card-bg-color) !important;
-  outline-color: var(--card-bg-color) !important;
+  background-color: var(--window-bg-color) !important;
+  color: var(--window-fg-color) !important;
 }}
 
 #PopupAutoComplete {{

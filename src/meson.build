@@ -52,6 +52,7 @@ template_source = [
 	'themes/gnome-shell-template.css',
 	'themes/cinnamon-template.css',
 	'themes/custom-template.css',
+	'themes/gtk3-template.css',
 	'themes/gedit-template.xml'
 ]
 
@@ -69,10 +70,5 @@ install_subdir(
 
 install_subdir(
   'themes/light',
-  install_dir: moduledir
-)
-
-install_subdir(
-  'themes/gtk3-template',
   install_dir: moduledir
 )
