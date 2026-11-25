@@ -45,7 +45,7 @@ class Preferences:
         "firefox-theme": False,
         "accent-fg": 0,
         "accent-tabs": False,
-        "blur": False,
+        "blur": 0,
         "light-text": False,
         "dark-panel": False,
         "trans-panel": False,
