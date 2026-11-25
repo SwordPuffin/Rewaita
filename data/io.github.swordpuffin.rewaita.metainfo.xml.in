@@ -75,6 +75,16 @@
   </screenshots>
 
   <releases>
+    <release version="1.1.8c" date="2026-11-24">
+      <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.1.8c</url>
+        <description translate="no">
+          <p>Rewaita v1.1.8c</p>
+          <ul>
+            <li>Fixed bug with hot reloading for non-GNOME users</li>
+            <li>Added window blur support for GTK-4.21.1</li>
+          </ul>
+      </description>
+    </release>
     <release version="1.1.8b" date="2026-11-20">
       <url type="details">https://github.com/SwordPuffin/Rewaita/releases/tag/v1.1.8b</url>
         <description translate="no">
