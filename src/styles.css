@@ -176,7 +176,7 @@ windowcontrols.breeze image:hover {
 windowcontrols.breeze > button.minimize > image {
 	background-image: -gtk-icontheme("minimize-symbolic");
 	/* transform: rotate(180deg); */
-	-gtk-icon-transform: scale(0);
+	-gtk-icon-transform: scale(0.01);
   background-size: 19px;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -184,7 +184,7 @@ windowcontrols.breeze > button.minimize > image {
 
 windowcontrols.breeze > button.maximize > image {
 	background-image: -gtk-icontheme("maximize-symbolic");
-	-gtk-icon-transform: scale(0);
+	-gtk-icon-transform: scale(0.01);
   background-size: 19px;
   background-position: center;
   background-repeat: no-repeat;
@@ -242,4 +242,5 @@ windowcontrols.mint > button.close > image {
 	background-color: var(--accent-bg-color);
 	color: var(--accent-fg-color);
 }
+
 

@@ -96,18 +96,20 @@ class RewaitaWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        base_css_provider = Gtk.CssProvider()
-        base_css_provider.load_from_data(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "styles.css")).read())
-        Gtk.StyleContext.add_provider_for_display(
-            Gdk.Display.get_default(), base_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
-        )
+        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "styles.css"), "r") as f:
+            base_css_provider = Gtk.CssProvider()
+            base_css_provider.load_from_data(f.read())
+            Gtk.StyleContext.add_provider_for_display(
+                Gdk.Display.get_default(), base_css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
+            )
 
-        #Makes necessary directories
+        # Makes necessary directories
         for path in [gtk3_config_dir, gtk4_config_dir, gnome_shell_dir]:
             os.makedirs(path, exist_ok=True)
 
         if(self.window_control != "default"):
-            self.window_control_css = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", "gtk4", f"{self.window_control}.css")).read()
+            with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "window-controls", "gtk4", f"{self.window_control}.css"), "r") as f:
+                self.window_control_css = f.read()
 
         self.portal = Xdp.Portal()
         self.settings = self.portal.get_settings()
@@ -281,6 +283,7 @@ class RewaitaWindow(Adw.ApplicationWindow):
             "accent-fg": self.accent_fg,
             "accent-tabs": self.accent_tabs,
             "firefox-theme": self.firefox_theme,
+            "blur": self.blur,
             "light-text": self.light_text,
             "dark-panel": self.dark_panel,
             "trans-panel": self.trans_panel,

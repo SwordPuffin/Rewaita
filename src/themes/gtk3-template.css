@@ -238,6 +238,7 @@ button:disabled {
 
 .suggested-action {
   background-color: @accent-bg-color;
+  border: none;
   color: @accent-fg-color;
 }
 
@@ -246,7 +247,7 @@ button:disabled {
 }
 
 .suggested-action:hover {
-  background-color: shade(@accent-bg-color, 1.2);
+  background-color: shade(@accent-bg-color, 1.04);
 }
 
 

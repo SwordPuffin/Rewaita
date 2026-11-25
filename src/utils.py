@@ -45,6 +45,7 @@ class Preferences:
         "firefox-theme": False,
         "accent-fg": 0,
         "accent-tabs": False,
+        "blur": False,
         "light-text": False,
         "dark-panel": False,
         "trans-panel": False,
@@ -164,11 +165,18 @@ def hex_to_rgb(hex_color):
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
 def hot_reload():
-    s = Gio.Settings.new("org.gnome.desktop.a11y.interface")
+    schema_id = "org.gnome.desktop.a11y.interface"
+    source = Gio.SettingsSchemaSource.get_default()
+
+    if(source is None or source.lookup(schema_id, True) is None):
+        return # Hot reload is not available
+
+    s = Gio.Settings.new(schema_id)
     s.set_boolean("high-contrast", True)
     Gio.Settings.sync()
     s.set_boolean("high-contrast", False)
     Gio.Settings.sync()
+
 
 def parse_gtk_theme(colors, window_control, reset_gnome, reset_cinnamon):
     gnome_theme_file = os.path.join(dir, "gnome-shell-template.css")

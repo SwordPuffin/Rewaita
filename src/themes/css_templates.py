@@ -205,6 +205,35 @@ accent_tab_css_gtk4 = """
 }
 """
 
+window_blur = """
+window { opacity: 0.76; backdrop-filter: blur(12px); }
+
+.shortcuts,
+popover > contents,
+popover > arrow,
+sheet {
+  background-color: color-mix(in srgb, var(--window-bg-color) 55%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+sheet > * {
+	opacity: 0.72;
+}
+"""
+
+dialog_blur = """
+.shortcuts,
+popover > contents,
+popover > arrow,
+sheet {
+  background-color: color-mix(in srgb, var(--window-bg-color) 50%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+sheet > * {
+	opacity: 0.72;
+}
+"""
 ###############################################
 
 # Used in firefox_gnome_theme.py
@@ -228,6 +257,7 @@ DEFAULT_TEMPLATE = """
   --red-1:             {red-1};
   --accent-color:      {accent-color};
   --accent-fg-color:   {accent-fg-color};
+  --window-border-color: {border-color};
 }}
 
 *:not(.footer-button, .footer-button *, .text-link,
@@ -454,6 +484,7 @@ menupopup,
 panel,
 .panel-arrowcontent {{
   color: var(--window-fg-color) !important;
+  --panel-border-color: var(--window-border-color) !important;
 }}
 
 panel,
@@ -461,9 +492,15 @@ panel,
 .panel-viewcontainer,
 panelmultiview {{
   --panel-background: var(--window-bg-color) !important;
-  --panel-border-color: var(--window-bg-color) !important;
+  --panel-border-color: var(--window-border-color) !important;
   --arrowpanel-background: var(--window-bg-color) !important;
+  --arrowpanel-border-color: var(--window-border-color) !important;
   --arrowpanel-color: var(--window-fg-color) !important;
+}}
+
+panel::part(content),
+.panel-arrowcontent {{
+  border-color: var(--window-border-color) !important;
 }}
 
 panel > * {{
@@ -615,11 +652,12 @@ popupnotification {{
 
 #PopupAutoComplete {{
   --panel-background-color: var(--window-bg-color) !important;
-  --panel-border-color: transparent !important;
+  --panel-border-color: var(--window-border-color) !important;
 }}
 
 #tab-preview-panel {{
   --panel-background-color: var(--window-bg-color) !important;
+  --panel-border-color: var(--window-border-color) !important;
   color: var(--window-fg-color) !important;
 }}
 
@@ -684,6 +722,23 @@ button {{
   --button-border-color-hover: var(--headerbar-bg-color) !important;
   --button-text-color-primary: var(--window-fg-color) !important;
   --focus-outline-color: var(--accent-color) !important;
+}}
+
+menupopup {{
+  --panel-border-color: var(--window-border-color) !important;
+}}
+
+menupopup::part(content),
+.panel-arrowcontent {{
+  border: 1px solid var(--window-border-color) !important;
+}}
+
+#commonDialog,
+#commonDialogWindow,
+dialog,
+.dialogBox,
+.dialogFrame {{
+  border: 1px solid var(--window-border-color) !important;
 }}
 """
 
